@@ -11,9 +11,9 @@ export default defineConfig({
   build: { format: "directory" },
   integrations: [
     sitemap({
-      // Rechtsseiten und Danke-Seite gehören nicht in die Sitemap.
+      // Rechtsseiten sowie Danke- und Download-Seite gehören nicht in die Sitemap.
       filter: (page) =>
-        !page.includes("/danke") && !page.includes("/impressum") && !page.includes("/datenschutz"),
+        !["/danke", "/guide", "/impressum", "/datenschutz"].some((p) => page.includes(p)),
     }),
   ],
 });

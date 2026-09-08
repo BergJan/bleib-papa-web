@@ -1,0 +1,72 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const title = "Dein Guide | BLEIB PAPA";
+const description = "Die 21 Wege als PDF zum Herunterladen.";
+const pdf = "/downloads/21-wege-bleib-papa.pdf";
+---
+
+<Base title={title} description={description} path="/guide/" noindex>
+  <Header variant="landing" ctaHref="/blog/" />
+
+  <main>
+    <section class="section bg-creme">
+      <div class="wrap">
+        <div class="split" style="margin-top:0;align-items:center">
+          <div>
+            <p class="label">Dein Guide</p>
+            <h1 class="h1">Da ist er.</h1>
+            <div class="prose" style="margin-top:clamp(20px,2.4vw,28px)">
+              <p>
+                Danke fürs Bestätigen. Hier sind die 21 Wege, mit denen du eure Verbindung auch
+                zwischen euren gemeinsamen Tagen stärken kannst.
+              </p>
+            </div>
+
+            <p style="margin-top:clamp(24px,2.8vw,32px)">
+              <a class="btn" href={pdf} download>21 Wege als PDF herunterladen</a>
+            </p>
+            <p class="small" style="margin-top:12px">
+              Den Link findest du auch in deinem Postfach. Du kannst den Guide also jederzeit
+              wieder öffnen.
+            </p>
+          </div>
+
+          <figure class="fig">
+            <img
+              src="/assets/guide-mockup-devices.jpg"
+              width="1000"
+              height="1000"
+              alt="Der Guide „21 Wege, deinem Kind nach der Trennung nah zu bleiben“ auf Tablet und Smartphone."
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-white">
+      <div class="wrap">
+        <p class="label">Nicht nur lesen</p>
+        <h2 class="h2 measure-wide">Such dir zwei oder drei Ideen aus. Mehr braucht es nicht.</h2>
+
+        <ol class="steps">
+          <li class="step"><span class="num">01</span><p>Einmal komplett durchlesen</p></li>
+          <li class="step"><span class="num">02</span><p>Zwei oder drei passende Ideen auswählen</p></li>
+          <li class="step"><span class="num">03</span><p>14 Tage ausprobieren</p></li>
+        </ol>
+
+        <div class="measure" style="margin-top:clamp(34px,4vw,48px)">
+          <p>
+            Du musst nicht alle 21 umsetzen. Beobachte, was sich für dich und dein Kind natürlich
+            anfühlt, und entwickle daraus eure eigene Form von Verbindung.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
