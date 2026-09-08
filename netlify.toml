@@ -6,6 +6,33 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Die Zweitdomain leitet dauerhaft auf die Hauptdomain um.
+# Netlify tut das bei Domain-Aliassen nicht von selbst, nur bei der www-Variante
+# der Hauptdomain. Ohne diese Regeln waere die Seite unter zwei Adressen erreichbar.
+[[redirects]]
+  from = "https://bleib-papa.de/*"
+  to = "https://bleibpapa.de/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://bleib-papa.de/*"
+  to = "https://bleibpapa.de/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.bleib-papa.de/*"
+  to = "https://bleibpapa.de/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.bleib-papa.de/*"
+  to = "https://bleibpapa.de/:splat"
+  status = 301
+  force = true
+
 # Sicherheits-Header
 [[headers]]
   for = "/*"
