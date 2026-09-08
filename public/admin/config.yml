@@ -3,7 +3,7 @@
 
 backend:
   name: github
-  repo: BENUTZER/bleib-papa-web # <- wird beim Anlegen des Repos eingetragen
+  repo: JanBerg/bleib-papa-web
   branch: main
   # Netlify übernimmt den GitHub-Login (Site settings -> Access control -> OAuth)
   base_url: https://api.netlify.com
