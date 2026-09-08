@@ -91,7 +91,14 @@ export default async (req) => {
     }
 
     console.error(`[optin] Brevo ${res.status}: ${detail}`);
-    return json(502, { error: "versand_fehlgeschlagen" });
+    /* Brevos technische Meldung wird mitgeschickt: Sie enthaelt keine Zugangsdaten
+       und hilft bei der Fehlersuche. Der Besucher sieht sie nicht, das Formular
+       zeigt ihm eine allgemeine Meldung. */
+    return json(502, {
+      error: "versand_fehlgeschlagen",
+      brevo_status: res.status,
+      brevo_detail: detail.slice(0, 400),
+    });
   } catch (err) {
     console.error("[optin] Netzwerkfehler:", err);
     return json(502, { error: "versand_fehlgeschlagen" });
