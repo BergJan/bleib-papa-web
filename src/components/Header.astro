@@ -1,0 +1,39 @@
+---
+interface Props {
+  /**
+   * "landing" = nur Wortmarke und ein CTA, keine Navigation (fokussierte Opt-in-Seite).
+   * "site"    = Wortmarke mit Navigation, für Blog und Rechtsseiten.
+   */
+  variant?: "landing" | "site";
+  /** Ziel des CTA in der Landing-Variante. */
+  ctaHref?: string;
+}
+const { variant = "site", ctaHref = "#hero-form" } = Astro.props;
+const here = Astro.url.pathname;
+---
+
+<header class="header">
+  <div class="header-in">
+    <a class="brand" href="/">Bleib Papa<span class="dot">.</span></a>
+
+    {
+      variant === "landing" ? (
+        <a class="btn btn-sm" href={ctaHref}>
+          Guide kostenlos
+        </a>
+      ) : (
+        <nav class="nav" aria-label="Hauptnavigation">
+          <a href="/blog/" aria-current={here.startsWith("/blog") ? "page" : undefined}>
+            Blog
+          </a>
+          <a href="/kontakt/" aria-current={here.startsWith("/kontakt") ? "page" : undefined}>
+            Kontakt
+          </a>
+          <a class="btn btn-sm" href="/">
+            Guide kostenlos
+          </a>
+        </nav>
+      )
+    }
+  </div>
+</header>

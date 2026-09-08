@@ -1,0 +1,96 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE } from "../site";
+
+const title = "Impressum | BLEIB PAPA";
+const description = "Anbieterkennzeichnung nach § 5 DDG.";
+const b = SITE.betreiber;
+const fehlt = !b.strasse || !b.plz || !b.ort;
+---
+
+<Base title={title} description={description} path="/impressum/" noindex>
+  <Header />
+
+  <main>
+    <section class="page-head bg-creme">
+      <div class="wrap-narrow">
+        <p class="label">Rechtliches</p>
+        <h1 class="h1">Impressum</h1>
+      </div>
+    </section>
+
+    <section class="section bg-white" style="padding-top:clamp(28px,3.4vw,44px)">
+      <div class="wrap-narrow prose">
+        {
+          fehlt && (
+            <p
+              style="background:#FEF3E9;border-left:3px solid var(--rost);padding:16px 18px;font-size:15px"
+            >
+              <strong>Noch zu ergänzen:</strong> Anschrift und Telefonnummer fehlen. Trag sie in
+              <code>src/site.ts</code> unter <code>betreiber</code> ein, dann erscheinen sie hier
+              automatisch. Ohne ladungsfähige Anschrift ist das Impressum nicht vollständig.
+            </p>
+          )
+        }
+
+        <h2>Angaben gemäß § 5 DDG</h2>
+        <p>
+          {b.name}<br />
+          {b.strasse || "[Straße und Hausnummer]"}<br />
+          {b.plz || "[PLZ]"} {b.ort || "[Ort]"}<br />
+          Deutschland
+        </p>
+
+        <h2>Kontakt</h2>
+        <p>
+          E-Mail: <a href={`mailto:${b.email}`}>{b.email}</a><br />
+          {b.telefon && <>Telefon: {b.telefon}</>}
+        </p>
+
+        {
+          b.ustId && (
+            <>
+              <h2>Umsatzsteuer-Identifikationsnummer</h2>
+              <p>{b.ustId}</p>
+            </>
+          )
+        }
+
+        <h2>Verantwortlich für den Inhalt</h2>
+        <p>
+          {b.name}, Anschrift wie oben.
+        </p>
+
+        <h2>Streitschlichtung</h2>
+        <p>
+          Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer
+          Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+
+        <h2>Haftung für Inhalte</h2>
+        <p>
+          Die Inhalte dieser Seiten wurden mit Sorgfalt erstellt. Für die Richtigkeit,
+          Vollständigkeit und Aktualität der Inhalte kann ich jedoch keine Gewähr übernehmen. Die
+          Inhalte ersetzen keine rechtliche, medizinische oder therapeutische Beratung.
+        </p>
+
+        <h2>Haftung für Links</h2>
+        <p>
+          Diese Seite enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen
+          Einfluss habe. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter
+          verantwortlich.
+        </p>
+
+        <h2>Urheberrecht</h2>
+        <p>
+          Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen
+          dem deutschen Urheberrecht. Beiträge Dritter sind als solche gekennzeichnet.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>

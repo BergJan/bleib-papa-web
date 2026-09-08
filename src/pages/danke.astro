@@ -1,0 +1,75 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const title = "Fast geschafft | BLEIB PAPA";
+const description = "Bestätige kurz deine E-Mail-Adresse, dann kommt der Guide sofort zu dir.";
+---
+
+<Base title={title} description={description} path="/danke/" noindex>
+  <Header variant="landing" ctaHref="/" />
+
+  <main>
+    <section class="section bg-creme">
+      <div class="wrap">
+        <div class="split" style="margin-top:0;align-items:center">
+          <div>
+            <p class="label">Fast geschafft</p>
+            <h1 class="h1">Ein Klick fehlt noch.</h1>
+            <div class="prose" style="margin-top:clamp(22px,2.6vw,30px)">
+              <p>
+                Ich habe dir gerade eine E-Mail geschickt. Klick auf den Bestätigungslink darin,
+                dann bekommst du die 21 Wege sofort als PDF.
+              </p>
+              <p>
+                Diese Bestätigung ist vorgeschrieben. Sie stellt sicher, dass wirklich nur du
+                E-Mails von mir bekommst.
+              </p>
+            </div>
+
+            <div class="post-cta" style="margin-top:clamp(30px,3.4vw,44px)">
+              <h2>Nichts angekommen?</h2>
+              <p>
+                Schau bitte im Spam- oder Werbeordner nach. Die Mail kommt von
+                <strong>BLEIB PAPA</strong>. Wenn sie auch dort nicht liegt, schreib mir kurz
+                über die <a href="/kontakt/">Kontaktseite</a>, dann schicke ich dir den Guide
+                direkt.
+              </p>
+            </div>
+          </div>
+
+          <figure class="fig">
+            <img
+              src="/assets/guide-mockup-devices.jpg"
+              width="1000"
+              height="1000"
+              alt="Der Guide „21 Wege, deinem Kind nach der Trennung nah zu bleiben“ auf Tablet und Smartphone."
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-white">
+      <div class="wrap">
+        <p class="label">Wie es weitergeht</p>
+        <h2 class="h2 measure-wide">Such dir zwei oder drei Ideen aus. Mehr braucht es nicht.</h2>
+        <div class="measure" style="margin-top:clamp(22px,2.6vw,30px)">
+          <p>
+            Lies den Guide einmal in Ruhe durch. Wähle die Ideen aus, die zu dir, deinem Kind und
+            eurer Situation passen. Probier sie zwei Wochen lang aus und schau, was sich natürlich
+            anfühlt.
+          </p>
+          <p>
+            Ab und zu schicke ich dir eine E-Mail mit Gedanken und praktischen Impulsen rund um
+            Vatersein nach der Trennung. Kein Pflichtprogramm, keine Verkaufsschleifen.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>

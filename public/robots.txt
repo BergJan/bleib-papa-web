@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /danke/
+
+Sitemap: https://bleibpapa.de/sitemap-index.xml

@@ -1,0 +1,69 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.entwurf);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+type Props = { post: CollectionEntry<"blog"> };
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmt = new Intl.DateTimeFormat("de-DE", { day: "2-digit", month: "long", year: "numeric" });
+---
+
+<Base
+  title={`${post.data.titel} | BLEIB PAPA`}
+  description={post.data.beschreibung}
+  path={`/blog/${post.id}/`}
+  image={post.data.bild ?? "/assets/guide-mockup.jpg"}
+>
+  <Header />
+
+  <main>
+    <article>
+      <section class="page-head bg-creme">
+        <div class="wrap-narrow post-head">
+          <p class="meta">
+            <time datetime={post.data.datum.toISOString()}>{fmt.format(post.data.datum)}</time>
+          </p>
+          <h1 class="h1">{post.data.titel}</h1>
+        </div>
+      </section>
+
+      <section class="section bg-white" style="padding-top:clamp(28px,3.4vw,44px)">
+        <div class="wrap-narrow">
+          {
+            post.data.bild && (
+              <img
+                src={post.data.bild}
+                alt={post.data.bildAlt ?? ""}
+                style="border-radius:2px;margin-bottom:clamp(30px,3.6vw,46px)"
+                decoding="async"
+              />
+            )
+          }
+
+          <div class="prose">
+            <Content />
+          </div>
+
+          <div class="post-cta">
+            <h2>Der kostenlose Guide</h2>
+            <p>
+              21 einfache Wege, wie du eure Verbindung auch zwischen euren gemeinsamen Tagen
+              stärkst. Kostenlos als PDF, direkt per E-Mail.
+            </p>
+            <a class="btn" href="/">21 Wege ansehen</a>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <Footer />
+</Base>

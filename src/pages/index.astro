@@ -1,0 +1,396 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import OptInForm from "../components/OptInForm.astro";
+
+const title = "21 Wege, deinem Kind nach der Trennung nah zu bleiben | BLEIB PAPA";
+const description =
+  "Kostenloser Guide für getrennte Väter: 21 einfache Wege, wie du auch zwischen euren gemeinsamen Tagen Verbindung, Nähe und Verlässlichkeit stärken kannst.";
+
+const themen = [
+  {
+    num: "01",
+    titel: "Kontakt ohne Druck",
+    text: "Wie kleine Nachrichten oder gemeinsame Gedanken Verbindung schaffen können, ohne dass daraus ein Pflichtprogramm wird.",
+  },
+  {
+    num: "02",
+    titel: "Rituale, die bleiben",
+    text: "Wie wiederkehrende Kleinigkeiten Orientierung und gemeinsame Geschichte entstehen lassen.",
+  },
+  {
+    num: "03",
+    titel: "Gemeinsame Zeit ohne Event-Stress",
+    text: "Warum dein Kind nicht jedes Papa-Wochenende ein Freizeitprogramm braucht.",
+  },
+  {
+    num: "04",
+    titel: "Verlässlichkeit",
+    text: "Wie dein Kind erlebt: Papa interessiert sich für mein Leben und bleibt da.",
+  },
+  {
+    num: "05",
+    titel: "Nähe statt Kompensation",
+    text: "Wie du Beziehung stärkst, ohne verlorene Zeit ständig ausgleichen zu müssen.",
+  },
+];
+
+const dafuer = [
+  "Beziehung zwischen Vater und Kind",
+  "Nähe",
+  "Verlässlichkeit",
+  "bewusstes Vatersein",
+  "gemeinsame Zeit",
+  "Verbindung zwischen gemeinsamen Tagen",
+  "Verantwortung für den eigenen Einflussbereich",
+];
+
+const dafuerNicht = [
+  "Kampf gegen die Mutter",
+  "Schuldzuweisungen",
+  "juristische Beratung",
+  "Psychotherapie",
+  "Konflikteskalation",
+  "Versprechen, die Reaktionen eines Kindes kontrollieren zu können",
+];
+---
+
+<Base title={title} description={description} path="/">
+  <a class="skip" href="#hero-form">Direkt zum Anmeldeformular</a>
+  <Header variant="landing" />
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero bg-creme">
+      <div class="wrap hero-grid">
+        <div class="hero-col">
+          <div class="hero-text">
+            <p class="label">Kostenloser Guide für getrennte Väter</p>
+            <h1 class="h1">
+              Du siehst dein Kind nicht mehr jeden Tag.<br />
+              <span class="accent">Wie bleibt ihr trotzdem verbunden?</span>
+            </h1>
+            <p class="lead">
+              21 einfache Wege, wie du eure Verbindung auch zwischen euren gemeinsamen Tagen
+              stärkst – ohne Dauertelefonate, WhatsApp-Druck oder jedes Papa-Wochenende zum Event
+              machen zu müssen.
+            </p>
+            <ul class="points">
+              <li>Kleine Kontaktpunkte ohne Druck</li>
+              <li>Rituale, die Verbindung schaffen</li>
+              <li>Ideen für mehr Normalität statt Event-Papa</li>
+            </ul>
+          </div>
+
+          <div class="hero-form">
+            <OptInForm id="hero-form" quelle="lp-21-wege-hero" />
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <figure class="mockup">
+            <img
+              src="/assets/guide-mockup.jpg"
+              width="1000"
+              height="1000"
+              alt="Der kostenlose Guide „21 Wege, deinem Kind nach der Trennung nah zu bleiben“ von BLEIB PAPA, aufgeschlagen mit mehreren Innenseiten."
+              fetchpriority="high"
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WIEDERERKENNUNG ============ -->
+    <section class="section bg-white">
+      <div class="wrap">
+        <p class="label">Vielleicht kennst du das</p>
+        <h2 class="h2 measure-wide">
+          Es sind oft nicht die großen Dinge, die fehlen. Sondern der ganz normale Alltag.
+        </h2>
+
+        <div class="split">
+          <div class="scenes">
+            <p>
+              Sonntagabend. Dein Kind ist wieder weg. Die Tasche ist gepackt, die Tür fällt zu, und
+              die Wohnung ist plötzlich still.
+            </p>
+            <p>
+              Ein paar Tage später hörst du von einem neuen Freund, einem Schulprojekt oder einem
+              Training und merkst: Ein Teil des normalen Alltags passiert inzwischen ohne dich.
+            </p>
+            <p>
+              Du schreibst eine Nachricht oder rufst an. Gleichzeitig fragst du dich manchmal, ob
+              das gerade echte Verbindung ist – oder ob du versuchst, die verlorene gemeinsame Zeit
+              irgendwie auszugleichen.
+            </p>
+          </div>
+          <figure class="fig">
+            <img
+              src="/assets/szene-abend.jpg"
+              width="1000"
+              height="563"
+              alt="Ein Vater sitzt abends allein am Esstisch, auf dem noch eine Kinderzeichnung und ein Spielzeugauto liegen."
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+
+        <div class="pull">
+          <p class="serif">
+            Und irgendwo bleibt diese Frage: Was, wenn aus weniger gemeinsamer Zeit irgendwann
+            weniger Beziehung wird?
+          </p>
+          <p class="small">Genau an diesem Punkt setzt der Guide an.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PERSPEKTIVE ============ -->
+    <section class="section bg-navy">
+      <div class="wrap">
+        <h2 class="h2 measure-wide">
+          Weniger Zeit muss nicht automatisch weniger Beziehung bedeuten.
+        </h2>
+        <div class="measure" style="margin-top:clamp(26px,3.2vw,40px)">
+          <p>
+            Du kannst nicht jeden Teil des Alltags deines Kindes miterleben. Du kannst nicht alles
+            kontrollieren, was im anderen Zuhause passiert. Und du kannst nicht jede äußere
+            Bedingung verändern.
+          </p>
+          <p>
+            Aber du kannst beeinflussen, wie dein Kind dich erlebt: wie interessiert du bleibst, wie
+            verlässlich du bist, wie ihr eure gemeinsame Zeit gestaltet und wie Verbindung auch
+            zwischen euren gemeinsamen Tagen entstehen kann.
+          </p>
+        </div>
+        <div class="closing">
+          <p class="serif">
+            Die Frage ist nicht nur, wie oft ihr euch seht. Sondern
+            <span class="accent">wie ihr euch miteinander erlebt.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <figure class="band">
+      <img
+        src="/assets/band-spaziergang.jpg"
+        width="1800"
+        height="600"
+        alt="Ein Vater und sein Kind gehen an einem Herbsttag Hand in Hand einen Weg am Wasser entlang."
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+
+    <!-- ============ WAS DER GUIDE ENTHÄLT ============ -->
+    <section class="section bg-creme">
+      <div class="wrap">
+        <div class="split" style="margin-top:0">
+          <div>
+            <p class="label">21 kleine Möglichkeiten</p>
+            <h2 class="h2">
+              Kein theoretischer Trennungsratgeber. Sondern Dinge, die du ausprobieren kannst.
+            </h2>
+            <p class="lead" style="margin-top:clamp(20px,2.4vw,28px)">
+              Der Guide enthält 21 konkrete Möglichkeiten, mit denen du auch nach der Trennung
+              kleine Momente von Verbindung, Verlässlichkeit und gemeinsamer Geschichte schaffen
+              kannst.
+            </p>
+          </div>
+          <figure class="fig">
+            <img
+              src="/assets/szene-sprachnachricht.jpg"
+              width="1000"
+              height="563"
+              alt="Ein Vater sitzt am Abend auf dem Sofa und spricht eine Sprachnachricht auf sein Telefon."
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+
+        <div class="topics">
+          {
+            themen.map((t) => (
+              <div class="topic">
+                <div class="num">{t.num}</div>
+                <h3 class="h3">{t.titel}</h3>
+                <p>{t.text}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MARKENSTATEMENT ============ -->
+    <section class="quote bg-white">
+      <div class="wrap">
+        <blockquote>„Dein Kind braucht keinen Event-Papa. Es braucht einen Vater.“</blockquote>
+        <p class="sig">Bleib Papa<span class="dot">.</span></p>
+      </div>
+    </section>
+
+    <!-- ============ SO NUTZT DU DEN GUIDE ============ -->
+    <section class="section bg-creme">
+      <div class="wrap">
+        <p class="label">Nicht nur lesen</p>
+        <h2 class="h2 measure-wide">
+          Kein PDF für den Download-Ordner. Ein Guide zum Ausprobieren.
+        </h2>
+        <div class="measure" style="margin-top:clamp(24px,2.8vw,32px)">
+          <p>Du musst nicht alle 21 Ideen umsetzen.</p>
+          <p>
+            Lies sie einmal durch. Wähle zwei oder drei aus, die zu dir, deinem Kind und eurer
+            Situation passen. Probier sie aus. Beobachte, was sich natürlich anfühlt. Und entwickle
+            daraus Schritt für Schritt eure eigene Form von Verbindung.
+          </p>
+        </div>
+
+        <ol class="steps">
+          <li class="step"><span class="num">01</span><p>Einmal komplett durchlesen</p></li>
+          <li class="step"><span class="num">02</span><p>Zwei oder drei passende Ideen auswählen</p></li>
+          <li class="step"><span class="num">03</span><p>14 Tage ausprobieren</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ JAN ============ -->
+    <section class="section bg-white">
+      <div class="wrap about">
+        <div class="about-photo">
+          <img
+            src="/assets/jan-portrait.jpg"
+            width="860"
+            height="954"
+            alt="Porträt von Jan, Papa und Gründer von BLEIB PAPA."
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="about-name">
+            <strong>Jan</strong>
+            <span>Papa &amp; Gründer von BLEIB PAPA</span>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <p class="label">Warum Bleib Papa</p>
+          <h2 class="h2">
+            Wie bleiben mein Sohn und ich verbunden, wenn wir uns nicht jeden Tag sehen?
+          </h2>
+          <div style="margin-top:clamp(24px,2.8vw,32px);max-width:600px">
+            <p>
+              Diese Frage kenne ich nicht aus der Theorie. Ich bin selbst Vater nach einer Trennung
+              und kenne die Situation, wenn gemeinsamer Alltag plötzlich nicht mehr
+              selbstverständlich ist.
+            </p>
+            <p>
+              Ich habe für mich einen Weg gefunden, trotz Trennung und Entfernung eine stabile
+              Beziehung zu meinem Sohn zu erhalten. Aus genau dieser Erfahrung ist BLEIB PAPA
+              entstanden.
+            </p>
+            <p>
+              Nicht, weil ich jede Trennung erklären oder lösen kann. Sondern weil ich weiß, wie
+              sich dieser Weg anfühlt.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABGRENZUNG ============ -->
+    <section class="section bg-creme">
+      <div class="wrap">
+        <h2 class="h2 measure-wide">Worum es bei BLEIB PAPA geht und worum nicht.</h2>
+
+        <div class="cols">
+          <div class="col is-for">
+            <h3>Dafür steht BLEIB PAPA</h3>
+            <div class="col-body">
+              <ul>{dafuer.map((item) => <li>{item}</li>)}</ul>
+            </div>
+          </div>
+          <div class="col is-not">
+            <h3>Dafür steht BLEIB PAPA <em>nicht</em></h3>
+            <div class="col-body">
+              <ul>{dafuerNicht.map((item) => <li>{item}</li>)}</ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MANIFEST ============ -->
+    <section class="section bg-navy manifest">
+      <div class="wrap">
+        <p class="serif lead-line">
+          BLEIB PAPA ist nicht gegen die Mutter.<br />Nicht gegen die Trennung.<br />Nicht gegen das
+          neue Leben.
+        </p>
+        <p class="turn">
+          BLEIB PAPA ist <span class="accent">für die Beziehung</span> zwischen Vater und Kind.
+        </p>
+        <div class="tail">
+          <p>
+            Wir helfen Vätern dabei, ihrem Kind näher zu bleiben – ohne das Kind fester halten zu
+            müssen.
+          </p>
+          <p>
+            Du bleibst nicht Papa, indem du an deinem Kind festhältst. Du bleibst Papa, indem du
+            verlässlich Teil seines Lebens bleibst, während es sein eigenes Leben entwickelt.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <figure class="band band-sofa">
+      <img
+        src="/assets/band-sofa.jpg"
+        width="1600"
+        height="900"
+        alt="Ein Vater und sein Kind sitzen lachend nebeneinander auf dem Sofa."
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+
+    <!-- ============ FINALER OPT-IN ============ -->
+    <section class="section bg-creme">
+      <div class="wrap final-grid">
+        <div class="final-visual">
+          <figure class="mockup">
+            <img
+              src="/assets/guide-mockup-devices.jpg"
+              width="1000"
+              height="1000"
+              alt="Der Guide „21 Wege, deinem Kind nach der Trennung nah zu bleiben“ als PDF auf Tablet und Smartphone."
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
+
+        <div class="final-col">
+          <div class="final-text">
+            <p class="label">21 kleine Möglichkeiten</p>
+            <h2 class="h2">Fang mit dem an, was du selbst beeinflussen kannst.</h2>
+            <p class="lead" style="margin-top:clamp(20px,2.4vw,28px);max-width:520px">
+              Hol dir die 21 Wege und such dir heute die ersten Ideen aus, die zu dir und deinem
+              Kind passen.
+            </p>
+          </div>
+          <div class="final-form" style="margin-top:clamp(26px,3vw,36px)">
+            <OptInForm id="final-form" quelle="lp-21-wege-final" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer minimal />
+</Base>

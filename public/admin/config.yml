@@ -1,0 +1,73 @@
+# Konfiguration der Editor-Oberfläche (Decap CMS)
+# Erreichbar unter /admin/ nach dem Login mit GitHub.
+
+backend:
+  name: github
+  repo: BENUTZER/bleib-papa-web # <- wird beim Anlegen des Repos eingetragen
+  branch: main
+  # Netlify übernimmt den GitHub-Login (Site settings -> Access control -> OAuth)
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+# Beiträge lassen sich im Browser testen, ohne dass etwas veröffentlicht wird
+publish_mode: editorial_workflow
+
+locale: de
+media_folder: public/uploads
+public_folder: /uploads
+
+collections:
+  - name: blog
+    label: Blogbeiträge
+    label_singular: Blogbeitrag
+    folder: src/content/blog
+    create: true
+    slug: "{{slug}}"
+    extension: md
+    format: frontmatter
+    summary: "{{titel}} ({{datum | date('DD.MM.YYYY')}})"
+    sortable_fields: [datum, titel]
+    view_filters:
+      - label: Nur Entwürfe
+        field: entwurf
+        pattern: true
+    fields:
+      - label: Titel
+        name: titel
+        widget: string
+        hint: Erscheint als Überschrift und im Google-Ergebnis.
+
+      - label: Kurzbeschreibung
+        name: beschreibung
+        widget: text
+        hint: Ein bis zwei Sätze. Stehen in der Übersicht und bei Google unter dem Titel.
+
+      - label: Datum
+        name: datum
+        widget: datetime
+        date_format: DD.MM.YYYY
+        time_format: false
+        picker_utc: false
+
+      - label: Titelbild
+        name: bild
+        widget: image
+        required: false
+        hint: Optional. Querformat wirkt am besten.
+
+      - label: Bildbeschreibung
+        name: bildAlt
+        widget: string
+        required: false
+        hint: Kurz beschreiben, was auf dem Bild zu sehen ist (für Screenreader und Google).
+
+      - label: Entwurf
+        name: entwurf
+        widget: boolean
+        default: false
+        hint: Solange angehakt, erscheint der Beitrag nicht auf der Website.
+
+      - label: Text
+        name: body
+        widget: markdown
+        hint: "Überschriften mit ## , Fettung mit **Text**, Zitate mit >"

@@ -1,0 +1,48 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE } from "../site";
+
+const title = "Kontakt | BLEIB PAPA";
+const description = "Schreib mir. Ich lese jede Nachricht selbst.";
+---
+
+<Base title={title} description={description} path="/kontakt/">
+  <Header />
+
+  <main>
+    <section class="page-head bg-creme">
+      <div class="wrap-narrow">
+        <p class="label">Kontakt</p>
+        <h1 class="h1">Schreib mir.</h1>
+      </div>
+    </section>
+
+    <section class="section bg-white" style="padding-top:clamp(28px,3.4vw,44px)">
+      <div class="wrap-narrow prose">
+        <p>
+          Wenn du eine Frage zum Guide hast, etwas nicht angekommen ist oder du mir einfach
+          schreiben möchtest: Ich lese jede Nachricht selbst.
+        </p>
+        <p>
+          <a href={`mailto:${SITE.betreiber.email}`}>{SITE.betreiber.email}</a>
+        </p>
+
+        <h2>Was ich nicht leisten kann</h2>
+        <p>
+          BLEIB PAPA ist keine Rechtsberatung und keine Therapie. Bei rechtlichen Fragen rund um
+          Umgang und Sorge wende dich bitte an eine Anwältin oder einen Anwalt für Familienrecht.
+          Wenn es dir seelisch schlecht geht, sprich mit deiner Hausärztin oder deinem Hausarzt
+          oder such dir therapeutische Unterstützung.
+        </p>
+        <p>
+          In akuten Krisen ist die Telefonseelsorge rund um die Uhr kostenlos erreichbar:
+          <strong>0800 111 0 111</strong> oder <strong>0800 111 0 222</strong>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>

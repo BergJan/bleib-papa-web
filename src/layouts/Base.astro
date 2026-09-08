@@ -1,0 +1,70 @@
+---
+import "../styles/global.css";
+import { SITE } from "../site";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Pfad ohne Domain, z. B. "/blog/". Für die Canonical-URL. */
+  path?: string;
+  /** Vorschaubild für Social Media, Pfad ab Domainwurzel. */
+  image?: string;
+  /** Auf true setzen, um eine Seite aus Google herauszuhalten (z. B. Danke-Seite). */
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  path = Astro.url.pathname,
+  image = "/assets/guide-mockup.jpg",
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(path, SITE.url).href;
+const imageUrl = new URL(image, SITE.url).href;
+---
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#FBF7F1" />
+
+    <!-- Schriften liegen lokal unter /assets/fonts/. Kein Google-Fonts-Aufruf. -->
+    <link
+      rel="preload"
+      href="/assets/fonts/newsreader-normal-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/karla-normal-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <!-- Platz für Meta-Pixel / GA4. Erst nach Cookie-Einwilligung laden. -->
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

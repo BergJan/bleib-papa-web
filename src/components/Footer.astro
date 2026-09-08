@@ -1,0 +1,24 @@
+---
+import { SITE } from "../site";
+
+interface Props {
+  /** Auf der Landingpage bleibt der Blog-Link weg, damit nichts vom Opt-in ablenkt. */
+  minimal?: boolean;
+}
+const { minimal = false } = Astro.props;
+---
+
+<footer class="footer">
+  <div class="wrap footer-in">
+    <div>
+      <span class="brand">Bleib Papa<span class="dot">.</span></span>
+      <p class="tag">{SITE.claim}</p>
+    </div>
+    <nav aria-label="Rechtliches">
+      {!minimal && <a href="/blog/">Blog</a>}
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+      <a href="/kontakt/">Kontakt</a>
+    </nav>
+  </div>
+</footer>

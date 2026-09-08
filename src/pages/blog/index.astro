@@ -1,0 +1,67 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.entwurf)).sort(
+  (a, b) => b.data.datum.getTime() - a.data.datum.getTime()
+);
+
+const fmt = new Intl.DateTimeFormat("de-DE", { day: "2-digit", month: "long", year: "numeric" });
+
+const title = "Blog | BLEIB PAPA";
+const description =
+  "Gedanken und praktische Impulse rund um Vatersein nach der Trennung: Nähe, Verlässlichkeit und gemeinsame Zeit.";
+---
+
+<Base title={title} description={description} path="/blog/">
+  <Header />
+
+  <main>
+    <section class="page-head bg-creme">
+      <div class="wrap">
+        <p class="label">Blog</p>
+        <h1 class="h1 measure-wide">Gedanken für Väter zwischen den gemeinsamen Tagen.</h1>
+      </div>
+    </section>
+
+    <section class="section bg-white" style="padding-top:clamp(20px,2.6vw,36px)">
+      <div class="wrap">
+        {
+          posts.length === 0 ? (
+            <p class="lead measure">
+              Hier erscheinen bald die ersten Beiträge.
+            </p>
+          ) : (
+            <div class="post-list">
+              {posts.map((post) => (
+                <a class="post-card" href={`/blog/${post.id}/`}>
+                  {post.data.bild ? (
+                    <img
+                      src={post.data.bild}
+                      alt={post.data.bildAlt ?? ""}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div />
+                  )}
+                  <div>
+                    <p class="meta">
+                      <time datetime={post.data.datum.toISOString()}>{fmt.format(post.data.datum)}</time>
+                    </p>
+                    <h2>{post.data.titel}</h2>
+                    <p>{post.data.beschreibung}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>

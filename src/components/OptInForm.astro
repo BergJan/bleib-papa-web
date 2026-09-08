@@ -1,0 +1,148 @@
+---
+import { SITE } from "../site";
+
+interface Props {
+  /** Eindeutige ID, weil das Formular mehrfach auf einer Seite vorkommt. */
+  id: string;
+  /** Wird als Quelle an Brevo übergeben, damit du siehst, wo der Lead herkommt. */
+  quelle?: string;
+}
+const { id, quelle = "landingpage-21-wege" } = Astro.props;
+---
+
+<form
+  class="form-card"
+  id={id}
+  data-optin
+  data-endpoint={SITE.optinEndpoint}
+  data-danke={SITE.dankeUrl}
+  data-quelle={quelle}
+  novalidate
+>
+  <div class="field">
+    <label for={`${id}-name`}>Vorname</label>
+    <input
+      type="text"
+      id={`${id}-name`}
+      name="vorname"
+      autocomplete="given-name"
+      placeholder="Dein Vorname"
+      aria-describedby={`${id}-name-err`}
+    />
+    <p class="err" id={`${id}-name-err`} role="alert">Bitte trag deinen Vornamen ein.</p>
+  </div>
+
+  <div class="field">
+    <label for={`${id}-mail`}>E-Mail-Adresse</label>
+    <input
+      type="email"
+      id={`${id}-mail`}
+      name="email"
+      autocomplete="email"
+      inputmode="email"
+      placeholder="deine@e-mail.de"
+      aria-describedby={`${id}-mail-err`}
+    />
+    <p class="err" id={`${id}-mail-err`} role="alert">
+      Bitte prüf deine E-Mail-Adresse, so kommt der Guide nicht an.
+    </p>
+  </div>
+
+  <div class="hp" aria-hidden="true">
+    <label for={`${id}-hp`}>Bitte leer lassen</label>
+    <input type="text" id={`${id}-hp`} name="website" tabindex="-1" autocomplete="off" />
+  </div>
+
+  <button type="submit" class="btn btn-full">21 Wege kostenlos herunterladen</button>
+  <p class="form-note">Kostenlos als PDF. Direkt per E-Mail.</p>
+  <p class="consent">
+    Mit der Anmeldung erhältst du den kostenlosen Guide sowie gelegentlich E-Mails von BLEIB PAPA
+    mit Gedanken und praktischen Impulsen rund um Vatersein nach der Trennung. Du kannst dich
+    jederzeit mit einem Klick wieder abmelden. Mehr dazu in der
+    <a href="/datenschutz/">Datenschutzerklärung</a>.
+  </p>
+</form>
+
+<script>
+  /* Wird von Astro einmal gebündelt, auch wenn das Formular mehrfach vorkommt. */
+  const MAIL = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+  const BUTTON_TEXT = "21 Wege kostenlos herunterladen";
+
+  function setError(input: HTMLInputElement, on: boolean) {
+    input.closest(".field")?.classList.toggle("has-error", on);
+    input.setAttribute("aria-invalid", on ? "true" : "false");
+  }
+
+  /** Meldet ein erfolgreiches Opt-in an Tracking-Tools, sofern vorhanden. */
+  function trackLead(formId: string) {
+    try {
+      const w = window as any;
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({ event: "lead_optin", form_id: formId, lead_magnet: "21-wege" });
+      if (typeof w.fbq === "function") w.fbq("track", "Lead", { content_name: "21 Wege Guide" });
+      if (typeof w.gtag === "function") w.gtag("event", "generate_lead", { method: formId });
+    } catch {
+      /* Tracking darf das Opt-in nie blockieren */
+    }
+  }
+
+  document.querySelectorAll<HTMLFormElement>("form[data-optin]").forEach((form) => {
+    const name = form.querySelector<HTMLInputElement>('input[name="vorname"]')!;
+    const mail = form.querySelector<HTMLInputElement>('input[name="email"]')!;
+    const trap = form.querySelector<HTMLInputElement>('input[name="website"]')!;
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+
+    [name, mail].forEach((input) =>
+      input.addEventListener("input", () => {
+        if (input.closest(".field")?.classList.contains("has-error")) setError(input, false);
+      })
+    );
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const nameBad = name.value.trim().length < 2;
+      const mailBad = !MAIL.test(mail.value.trim());
+      setError(name, nameBad);
+      setError(mail, mailBad);
+      if (nameBad) return name.focus();
+      if (mailBad) return mail.focus();
+      if (trap.value !== "") return; /* Bot */
+
+      btn.disabled = true;
+      btn.textContent = "Wird gesendet ...";
+
+      const danke = form.dataset.danke || "/danke/";
+
+      try {
+        const res = await fetch(form.dataset.endpoint!, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            vorname: name.value.trim(),
+            email: mail.value.trim(),
+            quelle: form.dataset.quelle,
+          }),
+        });
+
+        /* Beim lokalen `astro dev` gibt es die Funktion nicht. Dann nur weiterleiten. */
+        if (!res.ok && res.status === 404 && location.hostname === "localhost") {
+          console.warn("[optin] Funktion lokal nicht verfügbar, Demo-Weiterleitung.");
+          trackLead(form.id);
+          location.href = danke;
+          return;
+        }
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        trackLead(form.id);
+        location.href = danke;
+      } catch {
+        btn.disabled = false;
+        btn.textContent = BUTTON_TEXT;
+        setError(mail, true);
+        const errBox = document.getElementById(mail.getAttribute("aria-describedby")!);
+        if (errBox) errBox.textContent = "Das hat gerade nicht geklappt. Bitte versuch es noch einmal.";
+      }
+    });
+  });
+</script>
