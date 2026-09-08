@@ -17,9 +17,9 @@ export const SITE = {
   /** Impressumsangaben – bitte prüfen und ergänzen. */
   betreiber: {
     name: "Jan Philip Berg",
-    strasse: "",
-    plz: "",
-    ort: "",
+    strasse: "Am Vogelsang 13d",
+    plz: "57076",
+    ort: "Siegen",
     email: "hallo@bleibpapa.de",
     telefon: "",
     ustId: "",
