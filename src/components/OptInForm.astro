@@ -135,6 +135,9 @@ const { id, quelle = "landingpage-21-wege" } = Astro.props;
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
         trackLead(form.id);
+        /* Kurz warten, damit Pixel und Tag-Manager das Event noch senden koennen,
+           bevor die Seite wechselt. Ohne das gehen Conversions verloren. */
+        await new Promise((r) => setTimeout(r, 300));
         location.href = danke;
       } catch {
         btn.disabled = false;
