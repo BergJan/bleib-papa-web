@@ -20,7 +20,7 @@ export const SITE = {
     strasse: "",
     plz: "",
     ort: "",
-    email: "office@janphilipberg.com",
+    email: "hallo@bleibpapa.de",
     telefon: "",
     ustId: "",
   },
