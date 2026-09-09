@@ -39,6 +39,28 @@ export function metaBeschreibung(p: Beitrag): string {
   return p.data.seo.beschreibung?.trim() || p.data.teaser;
 }
 
+/**
+ * Sieht der Wert wie eine Adresse aus? Im Redaktionssystem landet in URL-Feldern
+ * gelegentlich beschreibender Text statt einer Adresse. Ungeprueft uebernommen
+ * zeigt dann zum Beispiel die Canonical auf eine Seite, die es nicht gibt.
+ */
+function istAdresse(wert: string): boolean {
+  return /^(https?:\/\/|\/|#|mailto:|tel:)/i.test(wert);
+}
+
+/** Canonical des Beitrags. Unbrauchbare Eingaben werden verworfen. */
+export function canonicalVon(p: Beitrag, eigeneUrl: string): string {
+  const eingabe = p.data.seo.canonical?.trim();
+  if (!eingabe) return eigeneUrl;
+  if (!istAdresse(eingabe)) {
+    console.warn(
+      `[blog] ${p.id}: "${eingabe}" ist keine Adresse. Canonical bleibt die eigene URL.`,
+    );
+    return eigeneUrl;
+  }
+  return new URL(eingabe, SITE.url).href;
+}
+
 export type Cta = {
   ueberschrift: string;
   text: string;
@@ -60,10 +82,17 @@ export function cta(p: Beitrag): Cta | null {
     ueberschrift: eigen?.ueberschrift?.trim() || s.ueberschrift,
     text: eigen?.text?.trim() || s.text,
     buttonText: eigen?.buttonText?.trim() || s.buttonText,
-    buttonUrl: eigen?.buttonUrl?.trim() || s.buttonUrl,
+    buttonUrl: pruefeButtonUrl(eigen?.buttonUrl?.trim(), s.buttonUrl),
     bild: s.bild,
     bildAlt: s.bildAlt,
   };
+}
+
+function pruefeButtonUrl(eingabe: string | undefined, standard: string): string {
+  if (!eingabe) return standard;
+  if (istAdresse(eingabe)) return eingabe;
+  console.warn(`[blog] "${eingabe}" ist kein Buttonziel. Es gilt ${standard}.`);
+  return standard;
 }
 
 /** Autorprofil aus src/content/autoren/. Fehlt es, gibt es null. */

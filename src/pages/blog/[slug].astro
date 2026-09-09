@@ -10,6 +10,7 @@ import {
   seoTitel,
   metaBeschreibung,
   cta as ctaVon,
+  canonicalVon,
   autorVon,
   alsDatum,
   alsDatumKurz,
@@ -53,7 +54,7 @@ const quellen = (d.quellen ?? [])
   .filter((q) => q.text);
 
 const seite = new URL(pfad(post), SITE.url).href;
-const canonical = d.seo.canonical?.trim() || seite;
+const canonical = canonicalVon(post, seite);
 const teilbild = d.ogBild?.trim() || d.bild?.trim() || SITE.blogCta.bild;
 const bildAbsolut = new URL(teilbild, SITE.url).href;
 
