@@ -3,5 +3,6 @@ Allow: /
 Disallow: /admin/
 Disallow: /danke/
 Disallow: /guide/
+Disallow: /66-tage/
 
 Sitemap: https://bleibpapa.de/sitemap-index.xml

@@ -1,0 +1,76 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import OptInForm from "../components/OptInForm.astro";
+
+const title = "Das 66-Tage-Programm | BLEIB PAPA";
+const description =
+  "66 kleine Schritte für eine Vaterrolle, die nicht davon abhängt, wie viele Tage ihr euch seht. Trag dich ein und erfahre, wenn es startet.";
+---
+
+<!-- noindex, solange das Programm noch nicht startet. Sobald es live geht,
+     das noindex hier entfernen und die Seite in die Sitemap aufnehmen
+     (Filter in astro.config.mjs). -->
+<Base title={title} description={description} path="/66-tage/" noindex>
+  <Header variant="landing" ctaHref="#warteliste" />
+
+  <main>
+    <section class="section bg-creme">
+      <div class="wrap">
+        <div class="split" style="margin-top:0;align-items:center">
+          <div>
+            <p class="label">In Arbeit</p>
+            <h1 class="h1">Das 66-Tage-Programm.</h1>
+            <div class="prose" style="margin-top:clamp(20px,2.4vw,28px)">
+              <p>
+                66 kleine Schritte für eine Vaterrolle, die nicht davon abhängt, wie viele Tage
+                ihr euch seht. Jeden Tag ein Impuls, der in deinen Alltag passt.
+              </p>
+              <p>
+                Ich baue das Programm gerade auf. Wenn du wissen willst, wann es losgeht, trag
+                dich unten ein.
+              </p>
+            </div>
+          </div>
+
+          <figure class="fig">
+            <img
+              src="/assets/programm-mockup.jpg"
+              width="1000"
+              height="750"
+              alt="Das 66-Tage-Programm von BLEIB PAPA: Workbook, Kursoberfläche am Bildschirm sowie auf Tablet und Smartphone."
+              decoding="async"
+            />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-white">
+      <div class="wrap" id="warteliste" style="scroll-margin-top:96px">
+        <div class="split" style="margin-top:0;align-items:start">
+          <div>
+            <p class="label">Als Erster erfahren</p>
+            <h2 class="h2">Ich sage dir Bescheid, wenn es startet.</h2>
+            <div class="prose" style="margin-top:clamp(20px,2.4vw,28px)">
+              <p>
+                Trag dich ein, dann meldest du dich nicht umsonst: Du bekommst sofort den
+                kostenlosen Guide mit 21 Wegen, wie du deinem Kind auch zwischen euren
+                gemeinsamen Tagen nah bleibst. Und du erfährst als Erster, wenn das Programm
+                startet.
+              </p>
+              <p>Kein Verkaufsdruck. Wenn es nicht passt, meldest du dich mit einem Klick ab.</p>
+            </div>
+          </div>
+
+          <div>
+            <OptInForm id="warteliste-form" quelle="warteliste-66-tage" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
