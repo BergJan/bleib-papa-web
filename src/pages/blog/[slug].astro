@@ -32,6 +32,7 @@ const { Content } = await render(post);
 
 const autor = await autorVon(post);
 const weitere = await weitereBeitraege(post);
+const spalte = await weitereBeitraege(post, 5);
 const autorPfad = autor ? `/autor/${autor.id}/` : null;
 const cta = ctaVon(post);
 /* Halb ausgefuellte Zeilen aus dem Redaktionssystem werden still uebersprungen,
@@ -157,7 +158,8 @@ const teile = cta ? teileFuerEinschub(post.rendered?.html ?? "", d.ctaImText) : 
       </section>
 
       <section class="section bg-white" style="padding-top:clamp(28px,3.4vw,44px)">
-        <div class="wrap-narrow">
+        <div class="wrap artikel-raster">
+        <div class="artikel-haupt">
           {
             d.bild && (
               <figure class="post-bild">
@@ -307,6 +309,42 @@ const teile = cta ? teileFuerEinschub(post.rendered?.html ?? "", d.ctaImText) : 
               </aside>
             )
           }
+        </div>
+
+        {/* Nur ab 1100 px sichtbar. Auf schmalen Geräten stehen Aufruf und
+            weitere Beiträge ohnehin schon im Lesefluss. */}
+        <aside class="artikel-spalte" aria-label="Mehr von BLEIB PAPA">
+          <div class="spalte-innen">
+            {
+              cta && (
+                <div class="spalte-cta">
+                  <img src={cta.bild} alt={cta.bildAlt} loading="lazy" decoding="async" />
+                  <p class="label">{cta.ueberschrift}</p>
+                  <p>{cta.kurztext}</p>
+                  <a class="btn btn-sm btn-full" href={cta.buttonUrl} data-cta="spalte">
+                    {cta.buttonText}
+                  </a>
+                </div>
+              )
+            }
+
+            {
+              spalte.length > 0 && (
+                <nav class="spalte-liste" aria-label="Weitere Beiträge">
+                  <p class="label">Mehr zum Thema</p>
+                  <ul>
+                    {spalte.map((w) => (
+                      <li>
+                        <a href={pfad(w)}>{w.data.titel}</a>
+                      </li>
+                    ))}
+                  </ul>
+                  <a class="spalte-alle" href="/blog/">Alle Beiträge</a>
+                </nav>
+              )
+            }
+          </div>
+        </aside>
         </div>
       </section>
     </article>
