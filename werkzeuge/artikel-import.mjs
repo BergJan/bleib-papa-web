@@ -407,10 +407,23 @@ if (!slug) {
   process.exit(1);
 }
 
-/* Ein Datum aus der Datei schlaegt nichts, --datum schlaegt alles.
-   Liegt der Tag in der Zukunft, wird der Beitrag geplant statt sofort sichtbar. */
+/**
+ * Datum aus dem Ordnernamen, etwa "#3_11092026" fuer den 11.09.2026.
+ * So steht der Erscheinungstag schon beim Ablegen fest.
+ */
+function datumAusOrdner(artikelPfad) {
+  const ordner = path.basename(path.dirname(path.resolve(artikelPfad)));
+  const m = ordner.match(/(\d{2})(\d{2})(\d{4})(?!\d)/);
+  return m ? `${m[3]}-${m[2]}-${m[1]}` : null;
+}
+
+/* Reihenfolge: --datum schlaegt alles, dann das Feld im Dokument, dann der
+   Ordnername, sonst heute. Liegt der Tag in der Zukunft, wird der Beitrag
+   geplant statt sofort sichtbar. */
 const datum =
-  alsIso(wunschDatum) ?? alsIso(felder["VERÖFFENTLICHEN AM"] ?? felder["VEROEFFENTLICHEN AM"] ?? "") ??
+  alsIso(wunschDatum) ??
+  alsIso(felder["VERÖFFENTLICHEN AM"] ?? felder["VEROEFFENTLICHEN AM"] ?? "") ??
+  datumAusOrdner(quelle) ??
   new Date().toISOString().slice(0, 10);
 const status = datum > new Date().toISOString().slice(0, 10) ? "geplant" : "veroeffentlicht";
 
