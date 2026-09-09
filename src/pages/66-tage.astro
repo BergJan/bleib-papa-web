@@ -191,23 +191,36 @@ const faq = [
           Die schwierigere Frage ist: Wie sieht das jetzt im echten Alltag aus?
         </h2>
 
-        <div class="measure scenes" style="margin-top:clamp(26px,3.2vw,40px)">
-          <p>
-            Vielleicht hast du längst verstanden, dass weniger gemeinsame Zeit nicht automatisch
-            weniger Beziehung bedeuten muss. Aber zwischen Verstehen und Leben liegt ein
-            Unterschied.
-          </p>
-          <p>
-            Du willst gelassen bleiben. Dann kommt eine Nachricht, die dich sofort wieder aufwühlt.
-          </p>
-          <p>
-            Du willst eure gemeinsame Zeit einfach genießen. Dann ertappst du dich dabei, jedes
-            Wochenende besonders machen zu wollen.
-          </p>
-          <p>
-            Du möchtest zwischen euren gemeinsamen Tagen verbunden bleiben. Dann fragst du dich, ob
-            du zu viel schreibst, zu wenig anrufst oder überhaupt das Richtige tust.
-          </p>
+        <div class="split">
+          <div class="scenes">
+            <p>
+              Vielleicht hast du längst verstanden, dass weniger gemeinsame Zeit nicht automatisch
+              weniger Beziehung bedeuten muss. Aber zwischen Verstehen und Leben liegt ein
+              Unterschied.
+            </p>
+            <p>
+              Du willst gelassen bleiben. Dann kommt eine Nachricht, die dich sofort wieder
+              aufwühlt.
+            </p>
+            <p>
+              Du willst eure gemeinsame Zeit einfach genießen. Dann ertappst du dich dabei, jedes
+              Wochenende besonders machen zu wollen.
+            </p>
+            <p>
+              Du möchtest zwischen euren gemeinsamen Tagen verbunden bleiben. Dann fragst du dich,
+              ob du zu viel schreibst, zu wenig anrufst oder überhaupt das Richtige tust.
+            </p>
+          </div>
+          <figure class="fig">
+            <img
+              src="/assets/szene-zeichnung.jpg"
+              width="1000"
+              height="667"
+              alt="Eine Kinderzeichnung liegt abends auf dem Tisch, daneben ein Telefon und ein gerahmtes Foto von Vater und Kind."
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
         </div>
 
         <div class="pull">
@@ -396,9 +409,28 @@ const faq = [
           </li>
         </ol>
 
-        <p class="small" style="margin-top:clamp(28px,3.2vw,40px)">
-          Nicht alles auf einmal. Nicht perfekt. 66 Tage lang.
-        </p>
+        <div class="split">
+          <div>
+            <p class="serif rhythmus-schluss">
+              Nicht alles auf einmal. Nicht perfekt. 66 Tage lang.
+            </p>
+            <p style="margin-top:18px">
+              Aus einzelnen Gedanken werden über die Wochen Entscheidungen, die dein Kind im Alltag
+              tatsächlich bemerkt: dass du dir Termine merkst, dass du dich meldest, wenn du es
+              gesagt hast, dass du weißt, was gerade wichtig ist.
+            </p>
+          </div>
+          <figure class="fig">
+            <img
+              src="/assets/szene-kalender.jpg"
+              width="1000"
+              height="667"
+              alt="Ein Vater markiert gemeinsam mit seinem Sohn einen Termin im Kalender an der Wand."
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        </div>
       </div>
     </section>
 
@@ -475,17 +507,27 @@ const faq = [
               Du hörst nicht nur, wie Vatersein funktionieren könnte. Du arbeitest heraus, wie es
               bei dir funktionieren soll.
             </p>
+            <ul class="check-list" style="margin-top:26px">
+              <li>tägliche Reflexionen</li>
+              <li>Schreibflächen</li>
+              <li>konkrete nächste Schritte</li>
+              <li>Zwischenreflexionen</li>
+              <li>persönliche Entscheidungen</li>
+              <li>Abschlussreflexion</li>
+              <li>30-Tage-Check-in</li>
+              <li>90-Tage-Check-in</li>
+            </ul>
           </div>
-          <ul class="check-list">
-            <li>tägliche Reflexionen</li>
-            <li>Schreibflächen</li>
-            <li>konkrete nächste Schritte</li>
-            <li>Zwischenreflexionen</li>
-            <li>persönliche Entscheidungen</li>
-            <li>Abschlussreflexion</li>
-            <li>30-Tage-Check-in</li>
-            <li>90-Tage-Check-in</li>
-          </ul>
+          <figure class="fig">
+            <img
+              src="/assets/szene-workbook.jpg"
+              width="1000"
+              height="667"
+              alt="Aufgeschlagene Workbook-Seite mit der Überschrift „Meine Tage dazwischen“ auf einem Holztisch, daneben Kaffee und ein gerahmtes Foto."
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
         </div>
       </div>
     </section>
@@ -555,6 +597,17 @@ const faq = [
         </div>
       </div>
     </section>
+
+    <figure class="band band-voll">
+      <img
+        src="/assets/band-fruehstueck.jpg"
+        width="1800"
+        height="679"
+        alt="Ein Vater und sein Sohn sitzen morgens am Frühstückstisch und schauen sich lachend an."
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
 
     <!-- ============ WAS NICHT VERLANGT WIRD ============ -->
     <section class="section bg-creme">
@@ -878,6 +931,12 @@ const faq = [
     line-height: 1.15;
     max-width: 900px;
     color: var(--creme);
+  }
+  .rhythmus-schluss {
+    font-size: clamp(20px, 2.2vw, 26px);
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0;
   }
 
   /* ---------- Schritte ---------- */
