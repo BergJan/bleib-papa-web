@@ -152,6 +152,9 @@ p:last-child{margin-bottom:0}
   text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;
 }
 .nav a:hover,.nav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--orange)}
+/* Der Button in der Navigation folgt der Button-Optik, nicht der Link-Optik. */
+.nav a.btn{color:#fff;font-size:11px;letter-spacing:.13em;border-bottom:0;padding:11px 18px}
+.nav a.btn:hover{color:#fff}
 
 /* ---------- Formular ---------- */
 .form-card{
@@ -408,6 +411,7 @@ p:last-child{margin-bottom:0}
   .header-in{height:62px}
   .brand{font-size:13.5px;letter-spacing:.17em}
   .btn-sm{padding:10px 13px;font-size:10px;letter-spacing:.1em;min-height:40px}
+  .nav a.btn{padding:10px 13px;font-size:10px;letter-spacing:.1em}
   .quote{text-align:left}
   .mockup img,.final-grid .mockup img{max-width:310px}
   .nav{gap:18px}
