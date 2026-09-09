@@ -32,8 +32,25 @@ const { Content } = await render(post);
 const autor = await autorVon(post);
 const autorPfad = autor ? `/autor/${autor.id}/` : null;
 const cta = ctaVon(post);
-const faq = d.faq ?? [];
-const quellen = (d.quellen ?? []).filter((q) => q.name?.trim());
+/* Halb ausgefuellte Zeilen aus dem Redaktionssystem werden still uebersprungen,
+   damit ein Entwurf nie zu leeren Kaesten auf der Seite fuehrt. */
+const faq = (d.faq ?? []).filter((f) => f.frage.trim() && f.antwort.trim());
+
+const quellen = (d.quellen ?? [])
+  .map((q) => {
+    const name = q.name.trim();
+    const titel = q.titel?.trim() ?? "";
+    const url = q.url?.trim() ?? "";
+    return {
+      /* Steht der Herausgeber vor dem Titel? Nur wenn beides da ist. */
+      vorspann: titel && name ? name : "",
+      text: titel || name || url,
+      url,
+      art: q.art,
+      abgerufen: q.abgerufen,
+    };
+  })
+  .filter((q) => q.text);
 
 const seite = new URL(pfad(post), SITE.url).href;
 const canonical = d.seo.canonical?.trim() || seite;
@@ -74,9 +91,9 @@ if (quellen.some((q) => q.url)) {
     .filter((q) => q.url)
     .map((q) => ({
       "@type": "CreativeWork",
-      name: q.titel?.trim() || q.name,
+      name: q.text,
       url: q.url,
-      publisher: { "@type": "Organization", name: q.name },
+      ...(q.vorspann ? { publisher: { "@type": "Organization", name: q.vorspann } } : {}),
     }));
 }
 
@@ -193,23 +210,13 @@ const aktualisiert = d.aktualisiert && d.aktualisiertZeigen ? d.aktualisiert : n
                 <ol>
                   {quellen.map((q) => (
                     <li>
-                      <span class="quelle-name">{q.name}</span>
-                      {q.titel && q.url && (
-                        <>
-                          {": "}
-                          <a href={q.url} rel="nofollow noopener" target="_blank">
-                            {q.titel}
-                          </a>
-                        </>
-                      )}
-                      {q.titel && !q.url && <span>{": "}{q.titel}</span>}
-                      {!q.titel && q.url && (
-                        <>
-                          {": "}
-                          <a href={q.url} rel="nofollow noopener" target="_blank">
-                            {q.url}
-                          </a>
-                        </>
+                      {q.vorspann && <span class="quelle-name">{q.vorspann}{": "}</span>}
+                      {q.url ? (
+                        <a href={q.url} rel="nofollow noopener" target="_blank">
+                          {q.text}
+                        </a>
+                      ) : (
+                        <span class={q.vorspann ? "" : "quelle-name"}>{q.text}</span>
                       )}
                       <span class="quelle-meta">
                         {QUELLENART_LABEL[q.art] ?? q.art}

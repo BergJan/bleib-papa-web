@@ -37,19 +37,21 @@ export const SUCHINTENTIONEN = [
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
   schema: z.object({
-    /* ---------- Inhalt ---------- */
-    titel: z.string(),
+    /* ---------- Inhalt ----------
+       Nichts ist Pflicht. Ein halb ausgefuellter Entwurf soll sich speichern
+       lassen, ohne dass der Seitenaufbau daran scheitert. */
+    titel: z.string().default(""),
     /** Ueberschreibt den Dateinamen als URL. Leer lassen = Dateiname. */
     slug: z.string().optional(),
-    teaser: z.string(),
+    teaser: z.string().default(""),
     /** Kurze Antwort auf die Hauptfrage. Steht sichtbar ganz oben im Artikel. */
     quickAnswer: z.string().optional(),
 
     faq: z
       .array(
         z.object({
-          frage: z.string(),
-          antwort: z.string(),
+          frage: z.string().default(""),
+          antwort: z.string().default(""),
         }),
       )
       .default([]),
@@ -68,10 +70,10 @@ const blog = defineCollection({
     quellen: z
       .array(
         z.object({
-          name: z.string(),
+          name: z.string().default(""),
           titel: z.string().optional(),
           url: z.string().optional(),
-          art: z.enum(QUELLENARTEN).default("sonstige"),
+          art: z.enum(QUELLENARTEN).catch("sonstige").default("sonstige"),
           abgerufen: z.coerce.date().optional(),
           /** Nur intern. Erscheint nicht auf der Website. */
           verwendung: z.string().optional(),
@@ -118,7 +120,7 @@ const blog = defineCollection({
 
     /* ---------- Veroeffentlichung ---------- */
     status: z.enum(STATUS).default("entwurf"),
-    datum: z.coerce.date(),
+    datum: z.coerce.date().default(() => new Date()),
     aktualisiert: z.coerce.date().optional(),
     aktualisiertZeigen: z.boolean().default(false),
     /** Dateiname eines Profils aus src/content/autoren/, ohne .md */
@@ -129,9 +131,9 @@ const blog = defineCollection({
 const autoren = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/autoren" }),
   schema: z.object({
-    name: z.string(),
+    name: z.string().default(""),
     rolle: z.string().optional(),
-    kurzvita: z.string(),
+    kurzvita: z.string().default(""),
     expertise: z.array(z.string()).default([]),
     foto: z.string().optional(),
     /** Externe Profilseite, z. B. LinkedIn. */

@@ -28,7 +28,10 @@ export function pfad(p: Beitrag): string {
 
 /** Titel fuer Browser-Tab und Suchergebnis. Faellt auf die H1 zurueck. */
 export function seoTitel(p: Beitrag): string {
-  return p.data.seo.titel?.trim() || `${p.data.titel} | BLEIB PAPA`;
+  const eigen = p.data.seo.titel?.trim();
+  if (eigen) return eigen;
+  const h1 = p.data.titel.trim();
+  return h1 ? `${h1} | BLEIB PAPA` : "Beitrag | BLEIB PAPA";
 }
 
 /** Meta Description. Faellt auf den Teaser zurueck. */

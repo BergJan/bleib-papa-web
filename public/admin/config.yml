@@ -52,6 +52,7 @@ collections:
       - label: "Artikeltitel (H1)"
         name: titel
         widget: string
+        required: false
         hint: >-
           Die sichtbare Überschrift des Artikels. Pro Beitrag gibt es genau eine H1,
           deshalb lässt sie sich im Text unten nicht noch einmal setzen.
@@ -68,6 +69,7 @@ collections:
       - label: Teaser / Kurzbeschreibung
         name: teaser
         widget: text
+        required: false
         hint: >-
           Ein bis zwei Sätze für die Blogübersicht. Das ist nicht automatisch die
           Meta Description, die steht weiter unten im Bereich SEO.
@@ -109,6 +111,7 @@ collections:
       - label: Artikelinhalt
         name: body
         widget: markdown
+        required: false
         buttons:
           - bold
           - italic
@@ -136,8 +139,8 @@ collections:
           Erscheint sichtbar unter dem Artikel. Daraus entsteht automatisch das
           FAQ-Markup für Suchmaschinen.
         fields:
-          - { label: Frage, name: frage, widget: string }
-          - { label: Antwort, name: antwort, widget: text }
+          - { label: Frage, name: frage, widget: string, required: false }
+          - { label: Antwort, name: antwort, widget: text, required: false }
 
       # ------------------------------------------------------------------- CTA
       - label: CTA am Artikelende
@@ -152,6 +155,7 @@ collections:
           - label: CTA anzeigen
             name: aktiv
             widget: boolean
+            required: false
             default: true
           - { label: CTA Überschrift, name: ueberschrift, widget: string, required: false }
           - { label: CTA Text, name: text, widget: text, required: false }
@@ -171,12 +175,14 @@ collections:
           - label: Quellenname
             name: name
             widget: string
+            required: false
             hint: Zum Beispiel Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend
           - { label: Titel der Quelle, name: titel, widget: string, required: false }
           - { label: URL, name: url, widget: string, required: false }
           - label: Quellenart
             name: art
             widget: select
+            required: false
             default: sonstige
             options:
               - { label: Primärquelle, value: primaerquelle }
@@ -205,6 +211,7 @@ collections:
       - label: SEO
         name: seo
         widget: object
+        required: false
         collapsed: true
         hint: Steht nur im HTML. Auf der Seite selbst ist davon nichts zu sehen.
         fields:
@@ -235,6 +242,7 @@ collections:
           - label: Indexierung
             name: robots
             widget: select
+            required: false
             default: "index, follow"
             options: ["index, follow", "noindex, follow", "noindex, nofollow"]
             hint: Bei normalen Blogartikeln bleibt hier "index, follow" stehen.
@@ -250,6 +258,7 @@ collections:
       - label: GEO & Redaktion
         name: redaktion
         widget: object
+        required: false
         collapsed: true
         hint: >-
           Nur für dich. Nichts davon erscheint auf der Website oder im HTML. Hält
@@ -284,6 +293,7 @@ collections:
       - label: Status
         name: status
         widget: select
+        required: false
         default: entwurf
         options:
           - { label: Entwurf, value: entwurf }
@@ -298,6 +308,7 @@ collections:
       - label: Veröffentlichungsdatum
         name: datum
         widget: datetime
+        required: false
         date_format: DD.MM.YYYY
         time_format: false
         picker_utc: false
@@ -322,6 +333,7 @@ collections:
       - label: Autor
         name: autor
         widget: relation
+        required: false
         collection: autoren
         search_fields: [name]
         value_field: "{{slug}}"
@@ -344,7 +356,7 @@ collections:
     format: frontmatter
     summary: "{{name}}"
     fields:
-      - { label: Name, name: name, widget: string }
+      - { label: Name, name: name, widget: string, required: false }
       - label: Rolle
         name: rolle
         widget: string
@@ -353,6 +365,7 @@ collections:
       - label: Kurzvita
         name: kurzvita
         widget: text
+        required: false
         hint: Zwei bis vier Sätze. Erscheint unter jedem Beitrag und auf der Autorenseite.
       - label: Expertise
         name: expertise
