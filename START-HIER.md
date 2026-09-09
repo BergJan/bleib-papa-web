@@ -1,130 +1,106 @@
 # BLEIB PAPA — Website
 
-Alles für bleibpapa.de: Landingpage, Danke-Seite, Rechtsseiten und Blog.
+Live unter **https://bleibpapa.de** · Repository: `BergJan/bleib-papa-web` · Hosting: Netlify (Projekt `bleibpapa`)
+
+Jede Änderung, die ins Repository geht, ist ein bis zwei Minuten später automatisch online.
 
 ```
 bleib-papa-web/
 ├─ src/
-│  ├─ site.ts              ← Domain, Impressumsdaten, Endpunkte (zentrale Stellschraube)
-│  ├─ pages/               Landingpage, Danke, Impressum, Datenschutz, Kontakt, Blog
+│  ├─ site.ts              ← Domain, Impressumsdaten, Tracking-IDs (zentrale Stellschraube)
+│  ├─ pages/               Landingpage, Danke, Guide, Impressum, Datenschutz, Kontakt, Blog
 │  ├─ content/blog/        Blogartikel als Markdown
-│  ├─ components/          Header, Footer, Opt-in-Formular
+│  ├─ components/          Header, Footer, Opt-in-Formular, Einwilligungsbanner
 │  └─ styles/global.css    komplettes Design
 ├─ public/
 │  ├─ assets/              Bilder und Schriften
+│  ├─ downloads/           das Guide-PDF
 │  ├─ admin/               Editor-Oberfläche für den Blog
 │  └─ uploads/             Bilder, die du im Editor hochlädst
-└─ netlify/functions/
-   └─ optin.mjs            übergibt Anmeldungen an Brevo
+├─ netlify/functions/
+│  └─ optin.mjs            übergibt Anmeldungen an Brevo
+└─ brevo/doi-mail.html     Vorlage der Bestätigungsmail (zum Nachschlagen)
 ```
 
 ---
 
-## Was du einmalig einrichten musst
+## Wie ein Lead entsteht
 
-Ich kann keine Konten anlegen und mich nirgends einloggen. Diese fünf Schritte machst
-du, alles andere übernehme ich danach.
+1. Besucher füllt das Formular auf `/` aus
+2. `netlify/functions/optin.mjs` meldet ihn bei Brevo an (API-Schlüssel liegt nur in Netlify)
+3. Weiterleitung auf `/danke/` — „Ein Klick fehlt noch"
+4. Brevo verschickt die Bestätigungsmail (Vorlage **#34**)
+5. Klick auf den Bestätigungslink → Kontakt landet in Liste **#14** → Weiterleitung auf `/guide/`
+6. Dort liegt das PDF zum Download
 
-### 1. GitHub-Konto und Repository (ca. 3 Minuten)
-
-Auf [github.com](https://github.com) ein kostenloses Konto anlegen, dann ein neues
-Repository erstellen: Name `bleib-papa-web`, **Private**, keine Häkchen bei README
-oder .gitignore.
-
-Danach sag mir deinen GitHub-Benutzernamen, dann lade ich das Projekt hoch.
-
-### 2. Netlify verbinden (ca. 3 Minuten)
-
-Auf [netlify.com](https://netlify.com) mit dem GitHub-Konto anmelden
-(„Sign up with GitHub"). Dann: **Add new site → Import an existing project →
-GitHub → bleib-papa-web**. Die Bau-Einstellungen erkennt Netlify selbst, weil
-`netlify.toml` im Projekt liegt. Auf **Deploy** klicken.
-
-Nach ein bis zwei Minuten läuft die Seite unter einer Adresse wie
-`zufälliger-name.netlify.app`.
-
-### 3. Brevo einrichten (ca. 10 Minuten)
-
-Auf [brevo.com](https://www.brevo.com/de/) ein Konto anlegen (kostenlos bis 300
-E-Mails pro Tag). Dort:
-
-1. **Kontakte → Listen → Neue Liste**, z. B. „BLEIB PAPA Guide". Die Listen-ID
-   steht in der Übersicht.
-2. **Kontakte → Attribute**: ein Attribut `VORNAME` (Text) und `QUELLE` (Text)
-   anlegen, falls nicht vorhanden.
-3. **Kampagnen → Vorlagen → Neue Vorlage** für die Bestätigungsmail
-   (Double-Opt-in). Text zum Beispiel: „Bestätige kurz deine Adresse, dann kommt
-   der Guide." Darin den Platzhalter für den Bestätigungslink einsetzen
-   (`{{ doubleoptin }}`). Vorlage aktivieren, die Vorlagen-ID notieren.
-4. **Rechts oben auf deinen Namen → SMTP & API → API-Schlüssel → Neuen Schlüssel
-   erstellen.** Diesen Schlüssel nur bei Netlify eintragen, nirgendwo sonst.
-
-Dann in Netlify unter **Site configuration → Environment variables** anlegen:
-
-| Name | Wert |
-|---|---|
-| `BREVO_API_KEY` | dein API-Schlüssel |
-| `BREVO_LIST_ID` | ID der Liste, z. B. `3` |
-| `BREVO_DOI_TEMPLATE_ID` | ID der Bestätigungs-Vorlage |
-| `BREVO_DOI_REDIRECT` | `https://bleibpapa.de/guide/` |
-
-Der API-Schlüssel liegt damit nur auf dem Server. Im Quelltext der Website taucht
-er nie auf.
-
-### 4. Domain verbinden (ca. 5 Minuten plus Wartezeit)
-
-In Netlify: **Domain management → Add a domain** → deine Domain eintragen.
-Netlify zeigt dir dann zwei DNS-Einträge an. Diese bei Strato unter
-**Domainverwaltung → DNS-Einstellungen** eintragen:
-
-- `A`-Eintrag für die Hauptdomain auf die von Netlify genannte IP
-- `CNAME`-Eintrag für `www` auf deine Netlify-Adresse
-
-Die Umstellung dauert je nach Anbieter ein paar Minuten bis 24 Stunden. Das
-HTTPS-Zertifikat stellt Netlify danach automatisch aus.
-
-### 5. Login für den Blog-Editor (ca. 2 Minuten)
-
-In Netlify: **Site configuration → Access control → OAuth → Install provider →
-GitHub**. Damit kannst du dich unter `deinedomain.de/admin/` mit deinem
-GitHub-Konto anmelden.
+**Brevo-Eigenheit, die viel Zeit gekostet hat:** Echte DOI-Vorlagen entstehen ausschließlich
+über *Marketing → Formulare* (Formular-Assistent) oder als Kopie einer vorhandenen DOI-Vorlage.
+Eine unter *Kampagnen → Templates* angelegte Vorlage sieht identisch aus, wird von der API aber
+mit „An active DOI template does not exist" abgelehnt.
 
 ---
 
 ## Blog schreiben
 
-Unter `deinedomain.de/admin/` anmelden. Dort: **Blogbeiträge → New Blogbeitrag**.
-Titel, Kurzbeschreibung, Datum, optional ein Bild, dann der Text.
+Unter `bleibpapa.de/admin/` mit GitHub anmelden. *Blogbeiträge → New Blogbeitrag*.
 
-- **Speichern** legt einen Entwurf an, der noch nicht öffentlich ist.
-- **Publish** veröffentlicht ihn. Die Website baut sich danach von selbst neu,
-  nach ein bis zwei Minuten ist der Beitrag online.
-- Das Häkchen **Entwurf** hält einen Beitrag zurück, auch wenn er schon
-  veröffentlicht wurde.
+- **Save** legt einen Entwurf an, den niemand sieht
+- **Publish** stellt ihn online, die Seite baut sich selbst neu
+- Das Häkchen **Entwurf** hält einen Beitrag zurück, auch wenn er schon veröffentlicht war
 
-Formatierung im Textfeld: `##` für Zwischenüberschriften, `**fett**`, `>` für ein
-hervorgehobenes Zitat.
+Formatierung: `##` für Zwischenüberschriften, `**fett**`, `>` für ein hervorgehobenes Zitat.
+
+Tipp: Mehrere Artikel sammeln und gemeinsam veröffentlichen — jedes „Publish" stößt einen
+Build an und verbraucht Netlify-Credits.
+
+---
+
+## Tracking und Einwilligung
+
+Meta-Pixel und Google Analytics stehen in `src/site.ts` unter `tracking`. Sie werden
+**erst nach Zustimmung** über das Banner geladen. Bei Ablehnung wird nichts geladen und
+nichts gespeichert — geprüft.
+
+| | |
+|---|---|
+| Meta-Pixel | `1059550730286880` |
+| Google Analytics | `G-1P7LX41Z6D` |
+| Event bei Anmeldung | Meta `Lead`, GA4 `generate_lead`, dataLayer `lead_optin` |
+
+Um das Banner abzuschalten, sobald kein Tracking mehr läuft: beide IDs leeren und
+`bannerImmerZeigen` auf `false` setzen.
+
+---
+
+## Zugänge und Einstellungen
+
+| Wo | Was |
+|---|---|
+| Netlify → Environment variables | `BREVO_API_KEY`, `BREVO_LIST_ID` (14), `BREVO_DOI_TEMPLATE_ID` (34), `BREVO_DOI_REDIRECT` |
+| Brevo → Sicherheit | IP-Beschränkung für API-Schlüssel ist **aus** (nötig, weil Netlify wechselnde IPs nutzt) |
+| Strato → DNS | A-Record auf `75.2.60.5`, `www` als CNAME, dazu SPF, DKIM und der Brevo-Code |
+| GitHub → OAuth App | `BLEIB PAPA CMS`, Callback `https://api.netlify.com/auth/done` |
+
+Beide Domains (`bleibpapa.de` und `bleib-papa.de`, jeweils mit und ohne `www`) leiten
+per 301 auf `https://bleibpapa.de`. Die Regeln stehen in `netlify.toml`.
 
 ---
 
 ## Selbst ändern
 
-**Texte und Bilder:** in den Dateien unter `src/pages/`.
-**Domain, Impressumsdaten:** in `src/site.ts` — von dort ziehen sich Impressum,
-Datenschutz und Sitemap ihre Werte.
-**Farben und Abstände:** ganz oben in `src/styles/global.css`.
+**Texte und Bilder:** in den Dateien unter `src/pages/`
+**Domain, Impressumsdaten, Tracking:** in `src/site.ts`
+**Farben und Abstände:** ganz oben in `src/styles/global.css`
 
-Lokal ansehen:
+Lokal ansehen: `npm run dev`
 
-```bash
-npm run dev
-```
+**Achtung bei Astro:** Steht ein `<a>` oder `<strong>` am Zeilenanfang, verschluckt Astro das
+Leerzeichen davor („in derDatenschutzerklärung"). Dann `{" "}` ans Ende der Zeile davor setzen.
 
 ---
 
 ## Noch offen
 
-- [ ] Anschrift und Telefonnummer in `src/site.ts` eintragen (fürs Impressum)
-- [ ] Datenschutzerklärung anwaltlich prüfen lassen
-- [ ] Seite `/guide/` anlegen, auf der nach der Bestätigung das PDF liegt
-- [ ] Meta-Pixel oder Analytics einbauen, falls gewünscht (erst nach Einwilligung)
+- [ ] Datenschutzerklärung anwaltlich prüfen lassen — besonders wegen Meta und Google
+- [ ] Guide-PDF: Original in Druckqualität liegt außerhalb des Projekts, hier liegt die
+      auf 1,1 MB komprimierte Fassung (Ghostscript, `-dPDFSETTINGS=/ebook`)

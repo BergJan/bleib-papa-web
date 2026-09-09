@@ -39,7 +39,7 @@ export const SITE = {
     plz: "57076",
     ort: "Siegen",
     email: "hallo@bleibpapa.de",
-    telefon: "",
+    telefon: "+49 151 241 81 247",
     ustId: "",
   },
 } as const;
