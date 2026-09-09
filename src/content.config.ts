@@ -34,6 +34,25 @@ export const SUCHINTENTIONEN = [
   "navigational",
 ] as const;
 
+/**
+ * Datumsfeld, das beide Schreibweisen versteht.
+ *
+ * Das Redaktionssystem speichert jetzt JJJJ-MM-TT. Aeltere Beitraege koennen
+ * noch TT.MM.JJJJ enthalten, und das versteht JavaScript nicht: aus "01.02.2026"
+ * wird der 2. Januar, aus "25.12.2026" gar nichts. Deshalb wird die deutsche
+ * Schreibweise hier vorher umgedreht.
+ */
+const datumsfeld = z.preprocess((wert) => {
+  if (typeof wert === "string") {
+    const deutsch = wert.trim().match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+    if (deutsch) {
+      const [, tag, monat, jahr] = deutsch;
+      return `${jahr}-${monat.padStart(2, "0")}-${tag.padStart(2, "0")}`;
+    }
+  }
+  return wert;
+}, z.coerce.date());
+
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
   schema: z.object({
@@ -74,7 +93,7 @@ const blog = defineCollection({
           titel: z.string().optional(),
           url: z.string().optional(),
           art: z.enum(QUELLENARTEN).catch("sonstige").default("sonstige"),
-          abgerufen: z.coerce.date().optional(),
+          abgerufen: datumsfeld.optional(),
           /** Nur intern. Erscheint nicht auf der Website. */
           verwendung: z.string().optional(),
         }),
@@ -120,8 +139,8 @@ const blog = defineCollection({
 
     /* ---------- Veroeffentlichung ---------- */
     status: z.enum(STATUS).default("entwurf"),
-    datum: z.coerce.date().default(() => new Date()),
-    aktualisiert: z.coerce.date().optional(),
+    datum: datumsfeld.default(() => new Date()),
+    aktualisiert: datumsfeld.optional(),
     aktualisiertZeigen: z.boolean().default(false),
     /** Dateiname eines Profils aus src/content/autoren/, ohne .md */
     autor: z.string().default("jan-philip-berg"),

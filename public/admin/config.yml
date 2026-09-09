@@ -198,6 +198,7 @@ collections:
             name: abgerufen
             widget: datetime
             required: false
+            format: "YYYY-MM-DD"
             date_format: DD.MM.YYYY
             time_format: false
             picker_utc: false
@@ -309,6 +310,7 @@ collections:
         name: datum
         widget: datetime
         required: false
+        format: "YYYY-MM-DD"
         date_format: DD.MM.YYYY
         time_format: false
         picker_utc: false
@@ -317,6 +319,7 @@ collections:
         name: aktualisiert
         widget: datetime
         required: false
+        format: "YYYY-MM-DD"
         date_format: DD.MM.YYYY
         time_format: false
         picker_utc: false
