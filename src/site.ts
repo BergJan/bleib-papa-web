@@ -14,6 +14,24 @@ export const SITE = {
   /** Endpunkt der Netlify-Funktion, die den Kontakt an Brevo übergibt. */
   optinEndpoint: "/.netlify/functions/optin",
 
+  /**
+   * Tracking. Solange beide Felder leer sind, wird nichts geladen und es
+   * erscheint kein Einwilligungsbanner. Sobald eine ID eingetragen ist,
+   * erscheint das Banner und das jeweilige Werkzeug wird erst nach
+   * ausdrücklicher Zustimmung geladen.
+   */
+  tracking: {
+    /* Meta-Pixel-ID (Events Manager) und GA4-Mess-ID (Format G-XXXXXXX).
+       Sobald hier etwas steht, wird es nach Zustimmung wirklich geladen. */
+    metaPixelId: "",
+    ga4Id: "",
+
+    /* Zeigt die Einwilligungs-Variante des Banners auch dann, wenn oben noch
+       keine IDs stehen. So bleibt die Seite optisch unveraendert, wenn das
+       Tracking spaeter scharf geschaltet wird. */
+    bannerImmerZeigen: true,
+  },
+
   /** Impressumsangaben – bitte prüfen und ergänzen. */
   betreiber: {
     name: "Jan Philip Berg",

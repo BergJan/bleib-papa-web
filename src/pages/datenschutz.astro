@@ -7,6 +7,9 @@ import { SITE } from "../site";
 const title = "Datenschutzerklärung | BLEIB PAPA";
 const description = "Wie ich mit deinen Daten umgehe.";
 const b = SITE.betreiber;
+
+/* Wird beim Bauen gesetzt, aktualisiert sich also bei jeder Änderung von selbst. */
+const stand = new Intl.DateTimeFormat("de-DE", { month: "long", year: "numeric" }).format(new Date());
 ---
 
 <Base title={title} description={description} path="/datenschutz/" noindex>
@@ -25,9 +28,8 @@ const b = SITE.betreiber;
         <p
           style="background:#FEF3E9;border-left:3px solid var(--rost);padding:16px 18px;font-size:15px"
         >
-          <strong>Vor dem Livegang prüfen lassen.</strong> Dieser Text beschreibt genau das, was
-          diese Seite technisch tut. Er ersetzt aber keine Rechtsberatung. Lass ihn von einer
-          Anwältin oder einem Anwalt prüfen, besonders wenn Tracking-Pixel dazukommen.
+          <strong>Bitte anwaltlich prüfen lassen.</strong> Dieser Text beschreibt genau das, was
+          diese Seite technisch tut. Er ersetzt aber keine Rechtsberatung.
         </p>
 
         <h2>Verantwortlich</h2>
@@ -44,8 +46,16 @@ const b = SITE.betreiber;
           notwendige Zugriffsdaten: IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, übertragene
           Datenmenge, Browsertyp und Betriebssystem. Diese Daten sind nötig, um die Seite
           auszuliefern und ihre Sicherheit zu gewährleisten. Rechtsgrundlage ist Art. 6 Abs. 1
-          lit. f DSGVO. Mit Netlify besteht ein Auftragsverarbeitungsvertrag; die Übermittlung in
-          die USA stützt sich auf die EU-Standardvertragsklauseln.
+          lit. f DSGVO.
+        </p>
+        <p>
+          Mit Netlify besteht ein Auftragsverarbeitungsvertrag nach Art. 28 DSGVO. Die Übermittlung
+          in die USA stützt sich auf die EU-Standardvertragsklauseln. Netlify speichert die
+          Zugriffsdaten nur so lange, wie es für Betrieb und Sicherheit der Website erforderlich
+          ist; Einzelheiten dazu findest du in der{" "}
+          <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer"
+            >Datenschutzerklärung von Netlify</a
+          >.
         </p>
 
         <h2>Schriften</h2>
@@ -55,11 +65,44 @@ const b = SITE.betreiber;
           IP-Adresse wird also nicht an Google übertragen.
         </p>
 
-        <h2>Cookies</h2>
+        <h2>Cookies und Reichweitenmessung</h2>
         <p>
-          Diese Website setzt von sich aus keine Cookies und verwendet keine Analyse-Werkzeuge, die
-          eine Einwilligung erfordern würden. Sollte sich das ändern, wirst du vorher um deine
-          Einwilligung gebeten.
+          <strong>Ohne deine Einwilligung setzt diese Website keine Cookies</strong> und bindet
+          keine Inhalte von Drittanbietern ein. Es werden dann weder Analyse-Werkzeuge noch
+          Social-Media-Plugins, Videos oder Kartendienste geladen. Sämtliche Inhalte, auch
+          Schriften und Bilder, werden von dieser Domain selbst ausgeliefert.
+        </p>
+        <p>
+          Für die Auswertung von Anzeigen setze ich die unten genannten Werkzeuge ein. Sie werden{" "}
+          <strong>ausschließlich nach deiner ausdrücklichen Einwilligung</strong> geladen, die du
+          über den Hinweis am unteren Bildschirmrand erteilst. Rechtsgrundlage ist § 25 Abs. 1
+          TDDDG in Verbindung mit Art. 6 Abs. 1 lit. a DSGVO. Lehnst du ab oder triffst du keine
+          Wahl, wird keines dieser Werkzeuge geladen, es werden keine Daten übertragen und keine
+          Informationen auf deinem Gerät gespeichert.
+        </p>
+        <p>
+          Deine Entscheidung wird lokal in deinem Browser gespeichert, damit du nicht bei jedem
+          Besuch erneut gefragt wirst. Du kannst sie jederzeit widerrufen, indem du die
+          Website-Daten dieser Seite in deinem Browser löschst. Der Widerruf wirkt für die Zukunft.
+        </p>
+
+        <h3>Meta-Pixel</h3>
+        <p>
+          Anbieter ist Meta Platforms Ireland Limited, Merrion Road, Dublin 4, Irland. Nach deiner
+          Einwilligung wird ein Zählpixel geladen, mit dem ich nachvollziehen kann, ob Besucher
+          über eine Anzeige auf Facebook oder Instagram zu mir gefunden und sich für den Guide
+          angemeldet haben. Dabei werden deine IP-Adresse, Angaben zu deinem Browser sowie die
+          aufgerufene Seite an Meta übertragen und dort einer Kennung zugeordnet. Meta verarbeitet
+          diese Daten auch in den USA; die Übermittlung stützt sich auf die
+          EU-Standardvertragsklauseln.
+        </p>
+
+        <h3>Google Analytics</h3>
+        <p>
+          Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Nach
+          deiner Einwilligung wird ein Analysewerkzeug geladen, das auswertet, wie die Seite genutzt
+          wird, etwa welche Beiträge gelesen werden. Deine IP-Adresse wird dabei gekürzt. Auch hier
+          erfolgt eine Verarbeitung in den USA auf Grundlage der EU-Standardvertragsklauseln.
         </p>
 
         <h2>Kostenloser Guide und E-Mail-Impulse</h2>
@@ -79,12 +122,18 @@ const b = SITE.betreiber;
         <p>
           Für Versand und Verwaltung nutze ich <strong>Brevo</strong> (Sendinblue GmbH,
           Köpenicker Straße 126, 10179 Berlin). Brevo verarbeitet deine Daten als
-          Auftragsverarbeiter auf Servern innerhalb der EU. Brevo wertet aus, ob E-Mails geöffnet
-          und Links angeklickt werden, um den Versand technisch auszuwerten.
+          Auftragsverarbeiter auf Servern innerhalb der EU; dazu besteht ein
+          Auftragsverarbeitungsvertrag nach Art. 28 DSGVO.
+        </p>
+        <p>
+          Im Rahmen dieses Auftrags wertet Brevo aus, ob E-Mails geöffnet und Links angeklickt
+          werden. Das dient dazu, den Versand technisch zu prüfen und die Inhalte zu verbessern.
+          Rechtsgrundlage ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO. Deine Daten
+          bleiben gespeichert, bis du deine Einwilligung widerrufst.
         </p>
         <p>
           <strong>Du kannst deine Einwilligung jederzeit widerrufen.</strong> In jeder E-Mail
-          findest du dafür einen Abmeldelink. Alternativ genügt eine kurze Nachricht an
+          findest du dafür einen Abmeldelink. Alternativ genügt eine kurze Nachricht an{" "}
           <a href={`mailto:${b.email}`}>{b.email}</a>. Nach dem Widerruf werden deine Daten aus dem
           Verteiler gelöscht; der Nachweis der Einwilligung wird aufbewahrt, solange er zur
           Rechtsverteidigung erforderlich ist.
@@ -92,9 +141,11 @@ const b = SITE.betreiber;
 
         <h2>Kontaktaufnahme per E-Mail</h2>
         <p>
-          Wenn du mir schreibst, verarbeite ich deine Angaben ausschließlich zur Bearbeitung deiner
-          Anfrage. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Die Nachrichten lösche ich,
-          sobald sie nicht mehr benötigt werden und keine Aufbewahrungspflichten entgegenstehen.
+          Wenn du mir schreibst, verarbeite ich deine Angaben ausschließlich zur Bearbeitung und
+          Beantwortung deiner Anfrage. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit es um
+          vorvertragliche Maßnahmen geht, ansonsten Art. 6 Abs. 1 lit. f DSGVO (berechtigtes
+          Interesse an der Beantwortung). Die Nachrichten lösche ich, sobald deine Anfrage
+          abschließend bearbeitet ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
         </p>
 
         <h2>Deine Rechte</h2>
@@ -117,6 +168,8 @@ const b = SITE.betreiber;
           Ich passe diese Erklärung an, wenn sich an der Website oder den eingesetzten Diensten
           etwas ändert.
         </p>
+        <hr />
+        <p class="small">Stand: {stand}</p>
       </div>
     </section>
   </main>

@@ -1,0 +1,191 @@
+---
+import { SITE } from "../site";
+
+/**
+ * Zwei Betriebsarten, je nachdem ob in site.ts Tracking hinterlegt ist:
+ *
+ * ohne Tracking-ID  -> schlichter Hinweis, dass nichts gemessen wird, ein Knopf
+ * mit Tracking-ID   -> echte Einwilligung, zwei gleichwertige Knoepfe.
+ *                      Das Werkzeug wird erst nach Zustimmung geladen.
+ */
+const hatTracking =
+  Boolean(SITE.tracking.metaPixelId || SITE.tracking.ga4Id) || SITE.tracking.bannerImmerZeigen;
+---
+
+<div id="consent" class="consent-bar" hidden>
+  <div class="consent-inner">
+    {
+      hatTracking ? (
+        <p class="consent-text">
+          Mit deiner Zustimmung werte ich über Werkzeuge von Meta und Google aus, welche Anzeigen
+          zu Anmeldungen führen. Für die Seite selbst ist das nicht nötig. Lehnst du ab, wird
+          nichts geladen und nichts gespeichert. Mehr dazu in der <a href="/datenschutz/"
+            >Datenschutzerklärung</a
+          >.
+        </p>
+      ) : (
+        <p class="consent-text">
+          Diese Seite verwendet keine Cookies und kein Tracking. Alle Inhalte, auch Schriften und
+          Bilder, kommen vom eigenen Server. Mehr dazu in der{" "}
+          <a href="/datenschutz/">Datenschutzerklärung</a>.
+        </p>
+      )
+    }
+
+    <div class="consent-actions">
+      {
+        hatTracking ? (
+          <>
+            <button type="button" class="btn btn-sm consent-no" data-consent="nein">
+              Ablehnen
+            </button>
+            <button type="button" class="btn btn-sm" data-consent="ja">
+              Einverstanden
+            </button>
+          </>
+        ) : (
+          <button type="button" class="btn btn-sm" data-consent="ok">
+            Verstanden
+          </button>
+        )
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .consent-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    background: var(--white);
+    border-top: 1px solid var(--line);
+  }
+  .consent-inner {
+    max-width: var(--wrap);
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 3vw, 40px);
+  }
+  .consent-text {
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--meta-text);
+    max-width: 760px;
+  }
+  .consent-text a {
+    color: var(--meta-text);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .consent-text a:hover {
+    color: var(--rost);
+  }
+  .consent-actions {
+    display: flex;
+    gap: 10px;
+    flex: none;
+    margin-left: auto;
+  }
+  /* Ablehnen ist gleichwertig gestaltet, nur ohne Farbfläche. */
+  .consent-no {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .consent-no:hover {
+    background: var(--creme);
+  }
+
+  @media (max-width: 720px) {
+    .consent-inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+      padding: 16px 20px;
+    }
+    .consent-actions {
+      margin-left: 0;
+    }
+    .consent-actions .btn {
+      flex: 1;
+    }
+  }
+</style>
+
+<script define:vars={{ pixelId: SITE.tracking.metaPixelId, ga4Id: SITE.tracking.ga4Id }}>
+  const SCHLUESSEL = "bp-consent";
+  const bar = document.getElementById("consent");
+  const hatTracking = Boolean(pixelId || ga4Id);
+
+  function ladeMetaPixel(id) {
+    /* Standard-Ladecode von Meta, gekuerzt. Laeuft nur nach Zustimmung. */
+    !(function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = "2.0";
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+    window.fbq("init", id);
+    window.fbq("track", "PageView");
+  }
+
+  function ladeGa4(id) {
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () {
+      window.dataLayer.push(arguments);
+    };
+    window.gtag("js", new Date());
+    window.gtag("config", id, { anonymize_ip: true });
+  }
+
+  function starteTracking() {
+    if (pixelId) ladeMetaPixel(pixelId);
+    if (ga4Id) ladeGa4(ga4Id);
+  }
+
+  let gespeichert = null;
+  try {
+    gespeichert = localStorage.getItem(SCHLUESSEL);
+  } catch {
+    /* Speicher gesperrt: Banner erscheint dann bei jedem Besuch neu. */
+  }
+
+  if (gespeichert === "ja" && hatTracking) {
+    starteTracking();
+  } else if (!gespeichert) {
+    bar.hidden = false;
+  }
+
+  bar.querySelectorAll("[data-consent]").forEach((knopf) => {
+    knopf.addEventListener("click", () => {
+      const wahl = knopf.dataset.consent;
+      try {
+        localStorage.setItem(SCHLUESSEL, wahl);
+      } catch {
+        /* ohne Speicher erscheint das Banner beim naechsten Besuch erneut */
+      }
+      bar.hidden = true;
+      if (wahl === "ja") starteTracking();
+    });
+  });
+</script>
