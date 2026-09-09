@@ -24,7 +24,7 @@ export const SITE = {
     /* Meta-Pixel-ID (Events Manager) und GA4-Mess-ID (Format G-XXXXXXX).
        Sobald hier etwas steht, wird es nach Zustimmung wirklich geladen. */
     metaPixelId: "1059550730286880",
-    ga4Id: "",
+    ga4Id: "G-1P7LX41Z6D",
 
     /* Zeigt die Einwilligungs-Variante des Banners auch dann, wenn oben noch
        keine IDs stehen. So bleibt die Seite optisch unveraendert, wenn das
