@@ -1,5 +1,15 @@
 # Konfiguration der Editor-Oberfläche (Decap CMS)
 # Erreichbar unter /admin/ nach dem Login mit GitHub.
+#
+# Aufbau der Eingabemaske, von oben nach unten:
+#   1. Inhalt          – alles, was Leser sehen
+#   2. FAQ und CTA     – eigene Blöcke, damit sie nicht im Fließtext untergehen
+#   3. Quellen         – Belegbibliothek pro Artikel
+#   4. SEO             – steht nur im HTML, nicht auf der Seite
+#   5. GEO & Redaktion – sieht nur du, erscheint nirgends auf der Website
+#   6. Veröffentlichung
+#
+# Die Felder müssen zu src/content.config.ts passen.
 
 backend:
   name: github
@@ -22,52 +32,336 @@ collections:
     label_singular: Blogbeitrag
     folder: src/content/blog
     create: true
-    slug: "{{slug}}"
+    slug: "{{titel}}"
     extension: md
     format: frontmatter
     summary: "{{titel}} ({{datum | date('DD.MM.YYYY')}})"
-    sortable_fields: [datum, titel]
+    sortable_fields: [datum, titel, status]
     view_filters:
-      - label: Nur Entwürfe
-        field: entwurf
-        pattern: true
+      - label: Veröffentlicht
+        field: status
+        pattern: veroeffentlicht
+      - label: Entwürfe
+        field: status
+        pattern: entwurf
+      - label: Zur Prüfung
+        field: status
+        pattern: pruefung
     fields:
-      - label: Titel
+      # ---------------------------------------------------------------- Inhalt
+      - label: "Artikeltitel (H1)"
         name: titel
         widget: string
-        hint: Erscheint als Überschrift und im Google-Ergebnis.
+        hint: >-
+          Die sichtbare Überschrift des Artikels. Pro Beitrag gibt es genau eine H1,
+          deshalb lässt sie sich im Text unten nicht noch einmal setzen.
 
-      - label: Kurzbeschreibung
-        name: beschreibung
+      - label: URL-Slug
+        name: slug
+        widget: string
+        required: false
+        hint: >-
+          Leer lassen, dann wird der Slug aus dem Titel gebildet. Sonst zum Beispiel
+          vater-kind-beziehung-nach-trennung – die Adresse lautet dann
+          /blog/vater-kind-beziehung-nach-trennung/
+
+      - label: Teaser / Kurzbeschreibung
+        name: teaser
         widget: text
-        hint: Ein bis zwei Sätze. Stehen in der Übersicht und bei Google unter dem Titel.
+        hint: >-
+          Ein bis zwei Sätze für die Blogübersicht. Das ist nicht automatisch die
+          Meta Description, die steht weiter unten im Bereich SEO.
 
-      - label: Datum
+      - label: Beitragsbild
+        name: bild
+        widget: image
+        required: false
+        hint: Optional. Querformat wirkt am besten.
+
+      - label: Alt-Text
+        name: bildAlt
+        widget: string
+        required: false
+        hint: >-
+          Beschreibt, was auf dem Bild relevant zu sehen ist – für Screenreader und
+          Suchmaschinen. Kein Platz für Keywords.
+
+      - label: Bildunterschrift
+        name: bildUnterschrift
+        widget: string
+        required: false
+        hint: Optional. Erscheint sichtbar unter dem Bild.
+
+      - label: Bildquelle / Copyright
+        name: bildQuelle
+        widget: string
+        required: false
+        hint: Optional. Je nach Bildmaterial erforderlich.
+
+      - label: Quick Answer
+        name: quickAnswer
+        widget: text
+        required: false
+        hint: >-
+          Beantwortet die Hauptfrage des Artikels in zwei bis vier Sätzen. Erscheint
+          hervorgehoben ganz oben. Wichtigstes Feld für Antworten in KI-Suchsystemen.
+
+      - label: Artikelinhalt
+        name: body
+        widget: markdown
+        buttons:
+          - bold
+          - italic
+          - link
+          - heading-two
+          - heading-three
+          - heading-four
+          - quote
+          - bulleted-list
+          - numbered-list
+        editor_components: [image, code-block]
+        hint: >-
+          Überschriften ab H2. Tabellen und Trennlinien gehen im Markdown-Modus
+          (| Spalte | Spalte | und ---).
+
+      # ------------------------------------------------------------------- FAQ
+      - label: FAQ
+        name: faq
+        widget: list
+        required: false
+        collapsed: true
+        label_singular: Frage
+        summary: "{{fields.frage}}"
+        hint: >-
+          Erscheint sichtbar unter dem Artikel. Daraus entsteht automatisch das
+          FAQ-Markup für Suchmaschinen.
+        fields:
+          - { label: Frage, name: frage, widget: string }
+          - { label: Antwort, name: antwort, widget: text }
+
+      # ------------------------------------------------------------------- CTA
+      - label: CTA am Artikelende
+        name: cta
+        widget: object
+        required: false
+        collapsed: true
+        hint: >-
+          Ohne Eintrag erscheint automatisch der Standard-Aufruf zum kostenlosen
+          Guide. Einzelne Felder lassen sich überschreiben.
+        fields:
+          - label: CTA anzeigen
+            name: aktiv
+            widget: boolean
+            default: true
+          - { label: CTA Überschrift, name: ueberschrift, widget: string, required: false }
+          - { label: CTA Text, name: text, widget: text, required: false }
+          - { label: Button-Text, name: buttonText, widget: string, required: false }
+          - { label: Button-URL, name: buttonUrl, widget: string, required: false }
+
+      # --------------------------------------------------------------- Quellen
+      - label: Quellen und Belege
+        name: quellen
+        widget: list
+        required: false
+        collapsed: true
+        label_singular: Quelle
+        summary: "{{fields.name}}"
+        hint: Erscheint als Quellenverzeichnis unter dem Artikel.
+        fields:
+          - label: Quellenname
+            name: name
+            widget: string
+            hint: Zum Beispiel Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend
+          - { label: Titel der Quelle, name: titel, widget: string, required: false }
+          - { label: URL, name: url, widget: string, required: false }
+          - label: Quellenart
+            name: art
+            widget: select
+            default: sonstige
+            options:
+              - { label: Primärquelle, value: primaerquelle }
+              - { label: Behörde / Institution, value: behoerde }
+              - { label: Studie, value: studie }
+              - { label: Fachverband, value: fachverband }
+              - { label: Fachpublikation, value: fachpublikation }
+              - { label: Unternehmensquelle, value: unternehmensquelle }
+              - { label: Sekundärquelle, value: sekundaerquelle }
+              - { label: Community / Reddit, value: community }
+              - { label: Sonstige, value: sonstige }
+          - label: Abrufdatum
+            name: abgerufen
+            widget: datetime
+            required: false
+            date_format: DD.MM.YYYY
+            time_format: false
+            picker_utc: false
+          - label: Verwendung im Artikel
+            name: verwendung
+            widget: text
+            required: false
+            hint: Nur intern. Erscheint nicht auf der Website.
+
+      # ------------------------------------------------------------------- SEO
+      - label: SEO
+        name: seo
+        widget: object
+        collapsed: true
+        hint: Steht nur im HTML. Auf der Seite selbst ist davon nichts zu sehen.
+        fields:
+          - label: SEO-Titel
+            name: titel
+            widget: string
+            required: false
+            hint: >-
+              Darf vom Artikeltitel abweichen. Leer lassen, dann wird der Artikeltitel
+              genommen. Über etwa 60 Zeichen kürzt Google die Anzeige meist ab.
+          - label: Meta Description
+            name: beschreibung
+            widget: text
+            required: false
+            hint: >-
+              Leer lassen, dann wird der Teaser genommen. Etwa 150 bis 160 Zeichen
+              werden im Suchergebnis angezeigt.
+          - label: Hauptthema / Fokus-Keyword
+            name: fokus
+            widget: string
+            required: false
+            hint: Nur intern, zur redaktionellen Organisation. Google braucht das Feld nicht.
+          - label: Canonical URL
+            name: canonical
+            widget: string
+            required: false
+            hint: Leer lassen. Standard ist die eigene Artikel-URL.
+          - label: Indexierung
+            name: robots
+            widget: select
+            default: "index, follow"
+            options: ["index, follow", "noindex, follow", "noindex, nofollow"]
+            hint: Bei normalen Blogartikeln bleibt hier "index, follow" stehen.
+          - label: Schema manuell überschreiben
+            name: schemaManuell
+            widget: text
+            required: false
+            hint: >-
+              Nur für Sonderfälle. Normalerweise leer lassen – die strukturierten
+              Daten entstehen automatisch aus den Feldern oben.
+
+      # -------------------------------------------------------- GEO & Redaktion
+      - label: GEO & Redaktion
+        name: redaktion
+        widget: object
+        collapsed: true
+        hint: >-
+          Nur für dich. Nichts davon erscheint auf der Website oder im HTML. Hält
+          fest, warum es diesen Artikel gibt.
+        fields:
+          - label: Suchintention
+            name: suchintention
+            widget: select
+            required: false
+            options:
+              - { label: Informational, value: informational }
+              - { label: Commercial, value: commercial }
+              - { label: Transactional, value: transactional }
+              - { label: Navigational, value: navigational }
+          - { label: Zielgruppe, name: zielgruppe, widget: text, required: false }
+          - { label: Nutzerproblem, name: nutzerproblem, widget: text, required: false }
+          - { label: Gewünschtes Nutzerergebnis, name: ergebnis, widget: text, required: false }
+          - label: Content Angle
+            name: angle
+            widget: text
+            required: false
+            hint: >-
+              Der eigene Blickwinkel. Verhindert, dass zehn Artikel zum selben Thema
+              dasselbe erzählen.
+          - label: Wichtige Entitäten / Unterthemen
+            name: entitaeten
+            widget: list
+            required: false
+            hint: Mit Komma trennen.
+
+      # -------------------------------------------------------- Veröffentlichung
+      - label: Status
+        name: status
+        widget: select
+        default: entwurf
+        options:
+          - { label: Entwurf, value: entwurf }
+          - { label: Zur Prüfung, value: pruefung }
+          - { label: Geplant, value: geplant }
+          - { label: Veröffentlicht, value: veroeffentlicht }
+          - { label: Archiviert, value: archiviert }
+        hint: >-
+          Nur "Veröffentlicht" erscheint auf der Website. "Geplant" erscheint
+          automatisch, sobald das Veröffentlichungsdatum erreicht ist.
+
+      - label: Veröffentlichungsdatum
         name: datum
         widget: datetime
         date_format: DD.MM.YYYY
         time_format: false
         picker_utc: false
 
-      - label: Titelbild
-        name: bild
-        widget: image
+      - label: Letzte Aktualisierung
+        name: aktualisiert
+        widget: datetime
         required: false
-        hint: Optional. Querformat wirkt am besten.
+        date_format: DD.MM.YYYY
+        time_format: false
+        picker_utc: false
+        hint: >-
+          Bei überarbeiteten Artikeln setzen. Wird an Suchmaschinen weitergegeben,
+          auch wenn das Datum nicht sichtbar auf der Seite steht.
 
-      - label: Bildbeschreibung
-        name: bildAlt
-        widget: string
-        required: false
-        hint: Kurz beschreiben, was auf dem Bild zu sehen ist (für Screenreader und Google).
-
-      - label: Entwurf
-        name: entwurf
+      - label: Aktualisierungsdatum öffentlich anzeigen
+        name: aktualisiertZeigen
         widget: boolean
         default: false
-        hint: Solange angehakt, erscheint der Beitrag nicht auf der Website.
+        required: false
 
-      - label: Text
-        name: body
-        widget: markdown
-        hint: "Überschriften mit ## , Fettung mit **Text**, Zitate mit >"
+      - label: Autor
+        name: autor
+        widget: relation
+        collection: autoren
+        search_fields: [name]
+        value_field: "{{slug}}"
+        display_fields: [name]
+        default: jan-philip-berg
+
+      - label: Social-Bild (Open Graph)
+        name: ogBild
+        widget: image
+        required: false
+        hint: Optional. Leer lassen, dann wird das Beitragsbild verwendet.
+
+  - name: autoren
+    label: Autoren
+    label_singular: Autor
+    folder: src/content/autoren
+    create: true
+    slug: "{{name}}"
+    extension: md
+    format: frontmatter
+    summary: "{{name}}"
+    fields:
+      - { label: Name, name: name, widget: string }
+      - label: Rolle
+        name: rolle
+        widget: string
+        required: false
+        hint: Zum Beispiel Gründer von BLEIB PAPA
+      - label: Kurzvita
+        name: kurzvita
+        widget: text
+        hint: Zwei bis vier Sätze. Erscheint unter jedem Beitrag und auf der Autorenseite.
+      - label: Expertise
+        name: expertise
+        widget: list
+        required: false
+        hint: Themen, über die dieser Autor schreibt. Mit Komma trennen.
+      - { label: Foto, name: foto, widget: image, required: false }
+      - label: Profilseite
+        name: profil
+        widget: string
+        required: false
+        hint: Optional, zum Beispiel LinkedIn.

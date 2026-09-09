@@ -1,0 +1,106 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { SITE } from "../../site";
+import { beitraege, pfad, alsDatum } from "../../lib/blog";
+
+export async function getStaticPaths() {
+  const autoren = await getCollection("autoren");
+  return autoren.map((autor) => ({ params: { slug: autor.id }, props: { autor } }));
+}
+
+type Props = { autor: CollectionEntry<"autoren"> };
+const { autor } = Astro.props;
+const a = autor.data;
+
+const alle = await beitraege();
+const eigene = alle.filter((p) => p.data.autor === autor.id);
+
+const seitenPfad = `/autor/${autor.id}/`;
+
+/* Person-Markup: Wer schreibt hier, und woher kommt die Erfahrung. */
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: a.name,
+  url: new URL(seitenPfad, SITE.url).href,
+  description: a.kurzvita,
+  ...(a.rolle ? { jobTitle: a.rolle } : {}),
+  ...(a.foto ? { image: new URL(a.foto, SITE.url).href } : {}),
+  ...(a.expertise.length ? { knowsAbout: a.expertise } : {}),
+  ...(a.profil ? { sameAs: [a.profil] } : {}),
+  worksFor: { "@type": "Organization", name: SITE.name, url: SITE.url },
+};
+---
+
+<Base
+  title={`${a.name} | BLEIB PAPA`}
+  description={a.kurzvita.slice(0, 180)}
+  path={seitenPfad}
+  image={a.foto ?? "/assets/guide-mockup.jpg"}
+  jsonLd={[personLd]}
+>
+  <Header />
+
+  <main>
+    <section class="page-head bg-creme">
+      <div class="wrap-narrow">
+        <p class="label">Autor</p>
+        <h1 class="h1">{a.name}</h1>
+        {a.rolle && <p class="lead" style="margin-top:10px">{a.rolle}</p>}
+      </div>
+    </section>
+
+    <section class="section bg-white" style="padding-top:clamp(28px,3.4vw,44px)">
+      <div class="wrap-narrow">
+        <div class="autor-profil">
+          {a.foto && <img src={a.foto} alt={`Foto von ${a.name}`} decoding="async" />}
+          <div class="prose">
+            <p>{a.kurzvita}</p>
+            {
+              a.expertise.length > 0 && (
+                <>
+                  <h2>Worüber ich schreibe</h2>
+                  <ul>
+                    {a.expertise.map((e) => (
+                      <li>{e}</li>
+                    ))}
+                  </ul>
+                </>
+              )
+            }
+            {
+              a.profil && (
+                <p>
+                  <a href={a.profil} rel="me noopener" target="_blank">
+                    Profil ansehen
+                  </a>
+                </p>
+              )
+            }
+          </div>
+        </div>
+
+        {
+          eigene.length > 0 && (
+            <section class="autor-beitraege">
+              <h2>Beiträge von {a.name}</h2>
+              <ul>
+                {eigene.map((p) => (
+                  <li>
+                    <a href={pfad(p)}>{p.data.titel}</a>
+                    <time datetime={p.data.datum.toISOString()}>{alsDatum(p.data.datum)}</time>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )
+        }
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>

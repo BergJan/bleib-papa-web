@@ -1,26 +1,122 @@
 ---
-import { getCollection, render, type CollectionEntry } from "astro:content";
+import { render, type CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+import { SITE } from "../../site";
+import {
+  beitraege,
+  pfad,
+  seoTitel,
+  metaBeschreibung,
+  cta as ctaVon,
+  autorVon,
+  alsDatum,
+  alsDatumKurz,
+  QUELLENART_LABEL,
+} from "../../lib/blog";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }) => !data.entwurf);
-  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+  const posts = await beitraege();
+  return posts.map((post) => ({
+    params: { slug: post.data.slug?.trim() || post.id },
+    props: { post },
+  }));
 }
 
 type Props = { post: CollectionEntry<"blog"> };
 const { post } = Astro.props;
+const d = post.data;
 const { Content } = await render(post);
 
-const fmt = new Intl.DateTimeFormat("de-DE", { day: "2-digit", month: "long", year: "numeric" });
+const autor = await autorVon(post);
+const autorPfad = autor ? `/autor/${autor.id}/` : null;
+const cta = ctaVon(post);
+const faq = d.faq ?? [];
+const quellen = (d.quellen ?? []).filter((q) => q.name?.trim());
+
+const seite = new URL(pfad(post), SITE.url).href;
+const canonical = d.seo.canonical?.trim() || seite;
+const teilbild = d.ogBild?.trim() || d.bild?.trim() || SITE.blogCta.bild;
+const bildAbsolut = new URL(teilbild, SITE.url).href;
+
+/* Strukturierte Daten entstehen aus den Feldern oben. Von Hand muss dafuer
+   niemand JSON schreiben. Nur fuer Sonderfaelle gibt es das Feld
+   "Schema manuell", das dann alles ersetzt. */
+const artikelLd: Record<string, unknown> = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: d.titel,
+  description: metaBeschreibung(post),
+  image: [bildAbsolut],
+  datePublished: d.datum.toISOString(),
+  dateModified: (d.aktualisiert ?? d.datum).toISOString(),
+  inLanguage: "de-DE",
+  mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+  url: seite,
+  publisher: {
+    "@type": "Organization",
+    name: SITE.name,
+    url: SITE.url,
+    logo: { "@type": "ImageObject", url: new URL(SITE.logo, SITE.url).href },
+  },
+};
+if (autor && autorPfad) {
+  artikelLd.author = {
+    "@type": "Person",
+    name: autor.data.name,
+    url: new URL(autorPfad, SITE.url).href,
+    ...(autor.data.rolle ? { jobTitle: autor.data.rolle } : {}),
+  };
+}
+if (quellen.some((q) => q.url)) {
+  artikelLd.citation = quellen
+    .filter((q) => q.url)
+    .map((q) => ({
+      "@type": "CreativeWork",
+      name: q.titel?.trim() || q.name,
+      url: q.url,
+      publisher: { "@type": "Organization", name: q.name },
+    }));
+}
+
+/* FAQ-Markup nur, wenn die Fragen auch sichtbar auf der Seite stehen. */
+const faqLd =
+  faq.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faq.map((f) => ({
+          "@type": "Question",
+          name: f.frage,
+          acceptedAnswer: { "@type": "Answer", text: f.antwort },
+        })),
+      }
+    : null;
+
+let jsonLd: unknown[] = [artikelLd, faqLd].filter(Boolean);
+if (d.seo.schemaManuell?.trim()) {
+  try {
+    jsonLd = [JSON.parse(d.seo.schemaManuell)];
+  } catch {
+    console.warn(
+      `[blog] Ungueltiges JSON im Feld "Schema manuell" bei ${post.id}. Es gilt das automatische Schema.`,
+    );
+  }
+}
+
+const aktualisiert = d.aktualisiert && d.aktualisiertZeigen ? d.aktualisiert : null;
 ---
 
 <Base
-  title={`${post.data.titel} | BLEIB PAPA`}
-  description={post.data.beschreibung}
-  path={`/blog/${post.id}/`}
-  image={post.data.bild ?? "/assets/guide-mockup.jpg"}
+  title={seoTitel(post)}
+  description={metaBeschreibung(post)}
+  path={pfad(post)}
+  canonicalUrl={canonical}
+  robots={d.seo.robots}
+  image={teilbild}
+  ogType="article"
+  jsonLd={jsonLd}
 >
   <Header />
 
@@ -29,22 +125,37 @@ const fmt = new Intl.DateTimeFormat("de-DE", { day: "2-digit", month: "long", ye
       <section class="page-head bg-creme">
         <div class="wrap-narrow post-head">
           <p class="meta">
-            <time datetime={post.data.datum.toISOString()}>{fmt.format(post.data.datum)}</time>
+            <time datetime={d.datum.toISOString()}>{alsDatum(d.datum)}</time>
+            {autor && <span class="meta-sep">·</span>}
+            {autor && <a href={autorPfad}>{autor.data.name}</a>}
           </p>
-          <h1 class="h1">{post.data.titel}</h1>
+          <h1 class="h1">{d.titel}</h1>
         </div>
       </section>
 
       <section class="section bg-white" style="padding-top:clamp(28px,3.4vw,44px)">
         <div class="wrap-narrow">
           {
-            post.data.bild && (
-              <img
-                src={post.data.bild}
-                alt={post.data.bildAlt ?? ""}
-                style="border-radius:2px;margin-bottom:clamp(30px,3.6vw,46px)"
-                decoding="async"
-              />
+            d.bild && (
+              <figure class="post-bild">
+                <img src={d.bild} alt={d.bildAlt ?? ""} decoding="async" />
+                {(d.bildUnterschrift || d.bildQuelle) && (
+                  <figcaption>
+                    {d.bildUnterschrift}
+                    {d.bildUnterschrift && d.bildQuelle && <span class="meta-sep">·</span>}
+                    {d.bildQuelle && <span class="bildquelle">{d.bildQuelle}</span>}
+                  </figcaption>
+                )}
+              </figure>
+            )
+          }
+
+          {
+            d.quickAnswer && (
+              <aside class="quick-answer" aria-label="Kurze Antwort">
+                <p class="label">Kurz gesagt</p>
+                <p>{d.quickAnswer}</p>
+              </aside>
             )
           }
 
@@ -52,26 +163,105 @@ const fmt = new Intl.DateTimeFormat("de-DE", { day: "2-digit", month: "long", ye
             <Content />
           </div>
 
-          <div class="post-cta">
-            <figure class="post-cta-bild">
-              <img
-                src="/assets/guide-mockup.jpg"
-                width="1000"
-                height="1000"
-                alt="Der kostenlose Guide „21 Wege, deinem Kind nach der Trennung nah zu bleiben“ von BLEIB PAPA, aufgeschlagen mit mehreren Innenseiten."
-                loading="lazy"
-                decoding="async"
-              />
-            </figure>
-            <div class="post-cta-text">
-              <h2>Der kostenlose Guide</h2>
-              <p>
-                21 einfache Wege, wie du eure Verbindung auch zwischen euren gemeinsamen Tagen
-                stärkst. Kostenlos als PDF, direkt per E-Mail.
+          {
+            aktualisiert && (
+              <p class="post-stand">
+                Zuletzt aktualisiert am{" "}
+                <time datetime={aktualisiert.toISOString()}>{alsDatum(aktualisiert)}</time>
               </p>
-              <a class="btn" href="/">21 Wege ansehen</a>
-            </div>
-          </div>
+            )
+          }
+
+          {
+            faq.length > 0 && (
+              <section class="post-faq" aria-labelledby="faq-titel">
+                <h2 id="faq-titel">Häufige Fragen</h2>
+                {faq.map((f) => (
+                  <div class="faq-item">
+                    <h3>{f.frage}</h3>
+                    <p>{f.antwort}</p>
+                  </div>
+                ))}
+              </section>
+            )
+          }
+
+          {
+            quellen.length > 0 && (
+              <section class="post-quellen" aria-labelledby="quellen-titel">
+                <h2 id="quellen-titel">Quellen</h2>
+                <ol>
+                  {quellen.map((q) => (
+                    <li>
+                      <span class="quelle-name">{q.name}</span>
+                      {q.titel && q.url && (
+                        <>
+                          {": "}
+                          <a href={q.url} rel="nofollow noopener" target="_blank">
+                            {q.titel}
+                          </a>
+                        </>
+                      )}
+                      {q.titel && !q.url && <span>{": "}{q.titel}</span>}
+                      {!q.titel && q.url && (
+                        <>
+                          {": "}
+                          <a href={q.url} rel="nofollow noopener" target="_blank">
+                            {q.url}
+                          </a>
+                        </>
+                      )}
+                      <span class="quelle-meta">
+                        {QUELLENART_LABEL[q.art] ?? q.art}
+                        {q.abgerufen && `, abgerufen am ${alsDatumKurz(q.abgerufen)}`}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            )
+          }
+
+          {
+            cta && (
+              <div class="post-cta">
+                <figure class="post-cta-bild">
+                  <img
+                    src={cta.bild}
+                    width="1000"
+                    height="1000"
+                    alt={cta.bildAlt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+                <div class="post-cta-text">
+                  <h2>{cta.ueberschrift}</h2>
+                  <p>{cta.text}</p>
+                  <a class="btn" href={cta.buttonUrl}>
+                    {cta.buttonText}
+                  </a>
+                </div>
+              </div>
+            )
+          }
+
+          {
+            autor && (
+              <aside class="autor-box">
+                {autor.data.foto && (
+                  <img src={autor.data.foto} alt={`Foto von ${autor.data.name}`} loading="lazy" />
+                )}
+                <div>
+                  <p class="label">Über den Autor</p>
+                  <h2>
+                    <a href={autorPfad}>{autor.data.name}</a>
+                  </h2>
+                  <p>{autor.data.kurzvita}</p>
+                </div>
+              </aside>
+            )
+          }
         </div>
       </section>
     </article>

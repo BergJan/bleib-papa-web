@@ -38,6 +38,27 @@ export const SITE = {
     bannerImmerZeigen: true,
   },
 
+  /**
+   * Standard-Aufruf am Ende jedes Blogbeitrags.
+   * Einmal hier gepflegt, gilt er ueberall. Einzelne Beitraege koennen
+   * ihn im Redaktionssystem ueberschreiben oder ganz abschalten.
+   */
+  blogCta: {
+    ueberschrift: "Der kostenlose Guide",
+    text:
+      "21 einfache Wege, wie du eure Verbindung auch zwischen euren gemeinsamen Tagen " +
+      "stärkst. Kostenlos als PDF, direkt per E-Mail.",
+    buttonText: "21 Wege ansehen",
+    buttonUrl: "/",
+    bild: "/assets/guide-mockup.jpg",
+    bildAlt:
+      "Der kostenlose Guide „21 Wege, deinem Kind nach der Trennung nah zu bleiben“ von BLEIB PAPA, " +
+      "aufgeschlagen mit mehreren Innenseiten.",
+  },
+
+  /** Logo fuer strukturierte Daten (schema.org Publisher). */
+  logo: "/icon-512.png",
+
   /** Impressumsangaben – bitte prüfen und ergänzen. */
   betreiber: {
     name: "Jan Philip Berg",

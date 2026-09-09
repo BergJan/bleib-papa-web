@@ -44,11 +44,40 @@ mit „An active DOI template does not exist" abgelehnt.
 
 Unter `bleibpapa.de/admin/` mit GitHub anmelden. *Blogbeiträge → New Blogbeitrag*.
 
-- **Save** legt einen Entwurf an, den niemand sieht
-- **Publish** stellt ihn online, die Seite baut sich selbst neu
-- Das Häkchen **Entwurf** hält einen Beitrag zurück, auch wenn er schon veröffentlicht war
+Die Maske ist in drei Ebenen sortiert. Wer wissen will, wo ein Feld landet, geht danach:
+
+| Ebene | Felder | Wo es auftaucht |
+|---|---|---|
+| Sichtbar | Artikeltitel, Teaser, Quick Answer, Text, FAQ, CTA, Quellen, Bilder | auf der Seite |
+| Nur im HTML | SEO-Titel, Meta Description, Canonical, Indexierung, Schema | im Quelltext, für Suchmaschinen |
+| Nur intern | GEO & Redaktion, Fokus-Thema, „Verwendung im Artikel" bei Quellen | nirgends, nur im Backend |
+
+Die internen Felder erscheinen nachweislich nicht im ausgelieferten HTML.
+
+**Was automatisch passiert**
+
+- Aus Titel, Teaser, Autor, Datum, Bild und Quellen entsteht das `BlogPosting`-Markup
+- Aus den FAQ entsteht zusätzlich `FAQPage`-Markup, aber nur weil die Fragen auch sichtbar
+  unter dem Artikel stehen
+- SEO-Titel leer? Dann gilt der Artikeltitel. Meta Description leer? Dann gilt der Teaser
+- Canonical leer? Dann die eigene Artikel-URL
+- Der CTA am Artikelende kommt aus `src/site.ts` (`blogCta`). Einmal dort ändern wirkt in
+  allen Beiträgen. Ein einzelner Artikel darf ihn überschreiben oder abschalten
+
+**Status**
+
+Nur **Veröffentlicht** erscheint auf der Website. **Geplant** erscheint automatisch, sobald
+das Veröffentlichungsdatum erreicht ist und danach ein Build läuft. Entwurf, Zur Prüfung und
+Archiviert bleiben unsichtbar.
+
+**Autor**
+
+Autorenprofile liegen unter *Autoren* im Backend. Jedes Profil bekommt eine eigene Seite
+(`/autor/jan-philip-berg/`), die unter jedem Beitrag verlinkt ist. Das zahlt auf die Frage
+ein, warum ausgerechnet hier jemand über dieses Thema schreibt.
 
 Formatierung: `##` für Zwischenüberschriften, `**fett**`, `>` für ein hervorgehobenes Zitat.
+H1 gibt es im Editor absichtlich nicht, die kommt aus dem Titelfeld.
 
 Tipp: Mehrere Artikel sammeln und gemeinsam veröffentlichen — jedes „Publish" stößt einen
 Build an und verbraucht Netlify-Credits.

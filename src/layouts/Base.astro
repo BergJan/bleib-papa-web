@@ -12,6 +12,14 @@ interface Props {
   image?: string;
   /** Auf true setzen, um eine Seite aus Google herauszuhalten (z. B. Danke-Seite). */
   noindex?: boolean;
+  /** Feinere Steuerung als noindex, z. B. "noindex, nofollow". Schlaegt noindex. */
+  robots?: string;
+  /** Canonical von Hand setzen. Leer = eigene URL. */
+  canonicalUrl?: string;
+  /** "article" auf Blogbeitraegen, sonst "website". */
+  ogType?: string;
+  /** Strukturierte Daten. Jedes Objekt wird als eigenes JSON-LD ausgegeben. */
+  jsonLd?: unknown[];
 }
 
 const {
@@ -20,10 +28,15 @@ const {
   path = Astro.url.pathname,
   image = "/assets/guide-mockup.jpg",
   noindex = false,
+  robots,
+  canonicalUrl,
+  ogType = "website",
+  jsonLd = [],
 } = Astro.props;
 
-const canonical = new URL(path, SITE.url).href;
+const canonical = canonicalUrl?.trim() || new URL(path, SITE.url).href;
 const imageUrl = new URL(image, SITE.url).href;
+const robotsWert = robots ?? (noindex ? "noindex, follow" : null);
 ---
 
 <!DOCTYPE html>
@@ -34,9 +47,9 @@ const imageUrl = new URL(image, SITE.url).href;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex, follow" />}
+    {robotsWert && <meta name="robots" content={robotsWert} />}
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:locale" content="de_DE" />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={title} />
@@ -65,6 +78,16 @@ const imageUrl = new URL(image, SITE.url).href;
       type="font/woff2"
       crossorigin
     />
+
+    {
+      jsonLd.map((eintrag) => (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(eintrag)}
+        />
+      ))
+    }
 
     <!-- Platz für Meta-Pixel / GA4. Erst nach Cookie-Einwilligung laden. -->
     <slot name="head" />

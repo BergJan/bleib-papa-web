@@ -1,14 +1,10 @@
 ---
-import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+import { beitraege, pfad, alsDatum } from "../../lib/blog";
 
-const posts = (await getCollection("blog", ({ data }) => !data.entwurf)).sort(
-  (a, b) => b.data.datum.getTime() - a.data.datum.getTime()
-);
-
-const fmt = new Intl.DateTimeFormat("de-DE", { day: "2-digit", month: "long", year: "numeric" });
+const posts = await beitraege();
 
 const title = "Blog | BLEIB PAPA";
 const description =
@@ -30,13 +26,11 @@ const description =
       <div class="wrap">
         {
           posts.length === 0 ? (
-            <p class="lead measure">
-              Hier erscheinen bald die ersten Beiträge.
-            </p>
+            <p class="lead measure">Hier erscheinen bald die ersten Beiträge.</p>
           ) : (
             <div class="post-list">
               {posts.map((post) => (
-                <a class="post-card" href={`/blog/${post.id}/`}>
+                <a class="post-card" href={pfad(post)}>
                   {post.data.bild ? (
                     <img
                       src={post.data.bild}
@@ -49,10 +43,12 @@ const description =
                   )}
                   <div>
                     <p class="meta">
-                      <time datetime={post.data.datum.toISOString()}>{fmt.format(post.data.datum)}</time>
+                      <time datetime={post.data.datum.toISOString()}>
+                        {alsDatum(post.data.datum)}
+                      </time>
                     </p>
                     <h2>{post.data.titel}</h2>
-                    <p>{post.data.beschreibung}</p>
+                    <p>{post.data.teaser}</p>
                   </div>
                 </a>
               ))}

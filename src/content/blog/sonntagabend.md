@@ -1,10 +1,37 @@
 ---
 titel: "Sonntagabend, wenn die Tür zufällt"
-beschreibung: "Warum die Stille nach dem Abschied so laut ist, und was in den Tagen danach wirklich hilft."
+teaser: "Warum die Stille nach dem Abschied so laut ist, und was in den Tagen danach wirklich hilft."
+quickAnswer: "Die Leere nach dem Abschied ist normal und kein Zeichen dafür, dass etwas falsch läuft. Schwierig wird sie erst, wenn daraus Handlungen entstehen, die eher dir helfen als deinem Kind. Was trägt, ist nicht mehr Kontakt, sondern verlässlicher Kontakt: ein fester Moment in der Woche, echtes Erzählen statt Abfragen und ein warmer, klarer Abschied."
+faq:
+  - frage: "Ist es normal, dass mich der Abschied jedes Mal wieder trifft?"
+    antwort: "Ja. Dass dir die Stille auffällt, heißt nur, dass dir etwas fehlt, das dir wichtig ist. Viele Väter erzählen, dass sie sich dafür fast schämen, weil sie es nach ein paar Monaten im Griff haben müssten. Musst du nicht."
+  - frage: "Wie oft sollte ich mich zwischen den gemeinsamen Tagen melden?"
+    antwort: "Eine allgemeingültige Zahl gibt es nicht. Verlässlichkeit wirkt aber stärker als Häufigkeit: Ein kurzer Anruf am Mittwochabend, jede Woche zur gleichen Zeit, gibt deinem Kind mehr Halt als fünf spontane Nachrichten. Es muss nicht überlegen, wann du dich meldest, es weiß es."
+  - frage: "Mein Kind antwortet einsilbig. Was kann ich anders machen?"
+    antwort: "Erzähl statt abzufragen. „Wie war die Schule?“ führt bei den meisten Kindern zu „gut“. Wenn du kurz von deinem eigenen Tag erzählst, steigen Kinder leichter ein, weil sie nicht das Gefühl haben, Auskunft geben zu müssen."
 datum: 2026-09-08
+status: veroeffentlicht
+autor: jan-philip-berg
 bild: /assets/szene-abend.jpg
 bildAlt: "Ein Vater sitzt abends allein am Esstisch, auf dem noch eine Kinderzeichnung und ein Spielzeugauto liegen."
-entwurf: false
+seo:
+  titel: "Sonntagabend nach der Übergabe: Was in den Tagen danach hilft | BLEIB PAPA"
+  beschreibung: "Die Wohnung ist still, das Kind ist weg. Warum dieser Moment normal ist und wie du mit festen Momenten, echtem Erzählen und einem klaren Abschied verlässlich präsent bleibst."
+  fokus: "Abschied nach dem Umgangswochenende"
+  robots: "index, follow"
+redaktion:
+  suchintention: informational
+  zielgruppe: "Getrennte Väter kurz nach der Trennung, die ihr Kind im Wechsel- oder Wochenendmodell sehen und den Übergabetag als besonders schwer erleben."
+  nutzerproblem: "Der Vater erlebt den Abschied als Verlust und reagiert darauf mit mehr Kontakt, was die Beziehung eher belastet als stärkt."
+  ergebnis: "Der Leser versteht, dass sein Gefühl normal ist, und kennt drei konkrete Verhaltensweisen, die Nähe über Verlässlichkeit statt über Menge herstellen."
+  angle: "Nicht mehr Kontakt, sondern verlässlicher Kontakt. Der eigene Schmerz wird ernst genommen, aber nicht zum Maßstab für das Handeln gegenüber dem Kind gemacht."
+  entitaeten:
+    - Umgangswochenende
+    - Übergabe
+    - Verlässlichkeit
+    - Vater-Kind-Beziehung
+    - Kontakt über Distanz
+    - Trennungsfamilie
 ---
 
 Die Tasche steht gepackt im Flur. Ihr habt noch schnell die Zähne geputzt, die Jacke gesucht, das Kuscheltier eingepackt. Dann die Umarmung, die Tür, das Auto.
