@@ -449,7 +449,7 @@ const faq = [
       </div>
     </section>
 
-    <figure class="band">
+    <figure class="band band-voll">
       <img
         src="/assets/66-tage-mockup-breit.jpg"
         width="1800"
@@ -888,6 +888,16 @@ const faq = [
     font-size: 19px;
     margin: 0 0 8px;
     line-height: 1.2;
+  }
+
+  /* Produktbild vollstaendig zeigen statt auf feste Hoehe zuschneiden,
+     sonst fehlt unten das Workbook. */
+  .band-voll {
+    background: var(--creme);
+  }
+  .band-voll img {
+    height: auto;
+    object-fit: contain;
   }
 
   /* ---------- Phasen ---------- */
