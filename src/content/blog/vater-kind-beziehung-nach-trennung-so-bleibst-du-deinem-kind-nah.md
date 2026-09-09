@@ -77,7 +77,7 @@ redaktion:
     besonders sein“, sondern: Eine stabile Vater-Kind-Beziehung entsteht auch
     nach der Trennung durch Verlässlichkeit, Kontinuität, echten gemeinsamen
     Alltag und kleine Kontaktpunkte innerhalb des eigenen Einflussbereichs."
-status: veroeffentlicht
+status: entwurf
 datum: 09.09.2026
 aktualisiertZeigen: false
 autor: jan-philip-berg
