@@ -84,6 +84,24 @@ Build an und verbraucht Netlify-Credits.
 
 ---
 
+## Geplante Beiträge
+
+Ein Beitrag im Status **Geplant** erscheint automatisch, sobald sein
+Veröffentlichungsdatum erreicht ist. Dafür sorgt die Funktion
+`netlify/functions/geplant-pruefen.mjs`: Sie läuft jede Nacht um 4:30 Uhr UTC,
+liest die Terminliste unter `/geplant.json` und stößt nur dann einen Build an,
+wenn wirklich ein Beitrag fällig ist. An Tagen ohne Termin passiert nichts,
+das spart Credits.
+
+Einmalig nötig: In Netlify unter *Build & deploy -> Build hooks* einen Hook
+anlegen und seine Adresse als Umgebungsvariable `BUILD_HOOK_URL` hinterlegen.
+Fehlt sie, tut die Funktion nichts und schreibt das ins Protokoll.
+
+`/geplant.json` enthält absichtlich nur Datumsangaben, keine Titel und keine
+Texte. Über einen unveröffentlichten Beitrag steht dort nichts.
+
+---
+
 ## Tracking und Einwilligung
 
 Meta-Pixel und Google Analytics stehen in `src/site.ts` unter `tracking`. Sie werden
