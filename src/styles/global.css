@@ -536,8 +536,11 @@ p:last-child{margin-bottom:0}
 }
 
 /* ---------- Artikelseite mit Randspalte ---------- */
+/* Kopf und Artikel stehen in derselben Spalte: Beide sind 720 px breit und
+   liegen im selben aeusseren Rahmen. Sonst sitzt die Ueberschrift versetzt
+   ueber dem Text. */
 .artikel-raster{display:block}
-.artikel-haupt{max-width:720px}
+.artikel-haupt,.post-head{max-width:720px;margin-inline:auto}
 
 .artikel-spalte{display:none}
 @media (min-width:1100px){
@@ -546,6 +549,7 @@ p:last-child{margin-bottom:0}
     gap:clamp(40px,4.5vw,72px);align-items:start;
   }
   .artikel-spalte{display:block}
+  .artikel-haupt,.post-head{margin-inline:0}
   /* Der Weiterlesen-Block sagt dasselbe wie die Randspalte. Einmal reicht. */
   .artikel-raster .weiterlesen{display:none}
 }

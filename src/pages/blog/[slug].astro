@@ -147,13 +147,15 @@ const teile = cta ? teileFuerEinschub(post.rendered?.html ?? "", d.ctaImText) : 
   <main>
     <article>
       <section class="page-head bg-creme">
-        <div class="wrap-narrow post-head">
+        <div class="wrap">
+          <div class="post-head">
           <p class="meta">
             <time datetime={d.datum.toISOString()}>{alsDatum(d.datum)}</time>
             {autor && <span class="meta-sep">·</span>}
             {autor && <a href={autorPfad}>{autor.data.name}</a>}
           </p>
           <h1 class="h1">{d.titel}</h1>
+          </div>
         </div>
       </section>
 
