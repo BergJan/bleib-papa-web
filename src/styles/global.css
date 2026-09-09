@@ -463,11 +463,10 @@ p:last-child{margin-bottom:0}
 .faq-item h3{font-size:clamp(17px,1.8vw,19.5px);line-height:1.3;margin-bottom:9px;color:var(--ink);font-weight:600}
 .faq-item p{font-size:16.5px;line-height:1.72;margin:0}
 
-.post-quellen ol{margin:0;padding-left:22px;display:grid;gap:14px}
+.post-quellen ol{margin:0;padding-left:22px;display:grid;gap:11px}
 .post-quellen li{font-size:15px;line-height:1.6}
 .post-quellen .quelle-name{font-weight:600;color:var(--ink)}
 .post-quellen a{color:var(--rost);text-decoration:underline;text-underline-offset:2px}
-.post-quellen .quelle-meta{display:block;font-size:13px;color:var(--meta-text);margin-top:3px}
 
 .autor-box{
   max-width:720px;margin-top:clamp(40px,4.6vw,60px);padding-top:clamp(26px,3vw,34px);

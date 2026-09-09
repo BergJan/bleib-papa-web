@@ -75,8 +75,8 @@ redaktion:
     - "Bundesfamilienministerium"
     - "Jugendamt und Erziehungsberatung. Zentral sind außerdem Kindeswille"
     - "Kindeswohl und Kontakt außerhalb der persönlichen Umgangszeiten"
-status: veroeffentlicht
-datum: 2026-09-09
+status: geplant
+datum: 2026-09-10
 autor: jan-philip-berg
 ctaImText: auto
 ---

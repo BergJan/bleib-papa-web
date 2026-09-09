@@ -15,8 +15,6 @@ import {
   weitereBeitraege,
   autorVon,
   alsDatum,
-  alsDatumKurz,
-  QUELLENART_LABEL,
 } from "../../lib/blog";
 
 export async function getStaticPaths() {
@@ -244,10 +242,6 @@ const teile = cta ? teileFuerEinschub(post.rendered?.html ?? "", d.ctaImText) : 
                       ) : (
                         <span class={q.vorspann ? "" : "quelle-name"}>{q.text}</span>
                       )}
-                      <span class="quelle-meta">
-                        {QUELLENART_LABEL[q.art] ?? q.art}
-                        {q.abgerufen && `, abgerufen am ${alsDatumKurz(q.abgerufen)}`}
-                      </span>
                     </li>
                   ))}
                 </ol>

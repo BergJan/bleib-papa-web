@@ -51,5 +51,6 @@ export default async () => {
   return new Response("Build angestossen", { status: 200 });
 };
 
-/* Jede Nacht um 4:30 Uhr UTC, also 5:30 oder 6:30 Uhr deutscher Zeit. */
-export const config = { schedule: "30 4 * * *" };
+/* 4:00 Uhr UTC. In der Sommerzeit ist das 6:00 Uhr deutscher Zeit, im Winter
+   5:00 Uhr. Netlify kennt nur UTC, eine Zeitzone laesst sich nicht angeben. */
+export const config = { schedule: "0 4 * * *" };
