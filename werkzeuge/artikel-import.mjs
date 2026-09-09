@@ -16,8 +16,9 @@
  * Der Block NOTIZEN ist rein redaktionell und wird nicht uebernommen.
  */
 
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { inflateRawSync } from "node:zlib";
+import { execFileSync } from "node:child_process";
 import path from "node:path";
 
 /* ------------------------------------------------------------------ ZIP */
@@ -218,6 +219,13 @@ function nurUrl(s) {
     for (const p of [...url.searchParams.keys()]) {
       if (/^(utm_|fbclid|gclid|ref$|source$)/i.test(p)) url.searchParams.delete(p);
     }
+    /* Das Familienministerium heisst seit dem Ressortzuschnitt BMBFSFJ und
+       liegt auf einer neuen Domain. Sprachmodelle kennen meist noch die alte,
+       die zwar weiterleitet, aber als Quellenangabe veraltet ist. */
+    if (url.hostname === "www.bmfsfj.de" || url.hostname === "bmfsfj.de") {
+      url.hostname = "www.bmbfsfj.bund.de";
+      url.pathname = url.pathname.replace(/^\/bmfsfj\//, "/bmbfsfj/");
+    }
     return url.toString().replace(/\?$/, "");
   } catch {
     return roh;
@@ -244,9 +252,12 @@ function faqAus(zeilen) {
   return eintraege.filter((e) => e.frage && e.antwort);
 }
 
+/* Die Kopfzeile der Vorlage steht manchmal noch im Dokument. */
+const KOPFZEILE = /^\s*name\s*\|\s*titel( der quelle)?\s*\|\s*url\s*\|/i;
+
 function quellenAus(zeilen) {
   return zeilen
-    .filter((z) => z.includes("|"))
+    .filter((z) => z.includes("|") && !KOPFZEILE.test(z))
     .map((z) => {
       const [name, titel, url, art, datum] = z.split("|").map((t) => t.trim());
       return {
@@ -322,6 +333,51 @@ function frontmatter(daten) {
   return `---\n${z.join("\n")}\n---\n`;
 }
 
+/* ------------------------------------------------------------------ Bild */
+
+/**
+ * Verkleinert ein Bild und legt es als JPEG unter public/uploads/<slug>.jpg ab.
+ *
+ * Auf diesem Rechner gibt es kein ImageMagick, deshalb uebernimmt System.Drawing
+ * aus PowerShell die Arbeit. 2 MB PNG aus einem KI-Werkzeug werden so rund
+ * 170 KB, ohne sichtbaren Unterschied.
+ */
+function bildUebernehmen(quelle, slug) {
+  const ziel = path.join("public", "uploads", `${slug}.jpg`);
+  const skript = `
+Add-Type -AssemblyName System.Drawing
+$img = [System.Drawing.Image]::FromFile('${path.resolve(quelle).replace(/'/g, "''")}')
+$w = [Math]::Min(1600, $img.Width); $h = [int]($img.Height * ($w / $img.Width))
+$bmp = New-Object System.Drawing.Bitmap($w, $h)
+$g = [System.Drawing.Graphics]::FromImage($bmp)
+$g.InterpolationMode='HighQualityBicubic'; $g.SmoothingMode='HighQuality'; $g.PixelOffsetMode='HighQuality'
+$g.DrawImage($img, 0, 0, $w, $h)
+$codec = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq 'image/jpeg' }
+$ep = New-Object System.Drawing.Imaging.EncoderParameters(1)
+$ep.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter([System.Drawing.Imaging.Encoder]::Quality, 82L)
+$bmp.Save('${path.resolve(ziel).replace(/'/g, "''")}', $codec, $ep)
+$g.Dispose(); $bmp.Dispose(); $img.Dispose()
+Write-Output ("{0}x{1}" -f $w, $h)
+`;
+  const masse = execFileSync("powershell", ["-NoProfile", "-Command", skript], {
+    encoding: "utf8",
+  }).trim();
+  const vorher = Math.round(readFileSync(quelle).length / 1024);
+  const nachher = Math.round(readFileSync(ziel).length / 1024);
+  return { pfad: `/uploads/${slug}.jpg`, masse, vorher, nachher };
+}
+
+/** Findet das einzige Bild neben der Artikeldatei. */
+function bildImOrdner(artikelPfad) {
+  const ordner = path.dirname(artikelPfad);
+  const bilder = readdirSync(ordner).filter((d) => /\.(png|jpe?g|webp)$/i.test(d));
+  if (bilder.length === 1) return path.join(ordner, bilder[0]);
+  if (bilder.length > 1) {
+    console.log(`  Hinweis: ${bilder.length} Bilder im Ordner, keins automatisch gewaehlt.`);
+  }
+  return null;
+}
+
 /* ------------------------------------------------------------------ Lauf */
 
 const argumente = process.argv.slice(2);
@@ -331,7 +387,12 @@ if (!quelle) {
   process.exit(1);
 }
 const wunschDatum = argumente[argumente.indexOf("--datum") + 1];
-const bildPfad = argumente.includes("--bild") ? argumente[argumente.indexOf("--bild") + 1] : null;
+/* --bild nimmt einen fertigen Pfad ab Domainwurzel, --bildDatei eine lokale
+   Datei, die vorher verkleinert wird. Ohne beides sucht der Importer selbst. */
+const bildFertig = argumente.includes("--bild") ? argumente[argumente.indexOf("--bild") + 1] : null;
+const bildDatei = argumente.includes("--bildDatei")
+  ? argumente[argumente.indexOf("--bildDatei") + 1]
+  : null;
 
 const roh = quelle.toLowerCase().endsWith(".docx")
   ? docxAlsText(quelle)
@@ -357,6 +418,14 @@ const text = bloecke.TEXT.join("\n").replace(/\n{3,}/g, "\n\n").trim();
 const faq = faqAus(bloecke.FAQ);
 const quellen = quellenAus(bloecke.QUELLEN);
 
+let bild = bildFertig;
+let bildInfo = null;
+const rohbild = bildDatei ?? (bildFertig ? null : bildImOrdner(quelle));
+if (rohbild) {
+  bildInfo = bildUebernehmen(rohbild, slug);
+  bild = bildInfo.pfad;
+}
+
 const daten = {
   titel,
   slug,
@@ -374,7 +443,7 @@ const daten = {
     .split(/,(?![^(]*\))/)
     .map((e) => e.trim().replace(/\.$/, ""))
     .filter(Boolean),
-  bild: bildPfad,
+  bild,
   bildAlt: felder["BILD-ALT"],
   faq,
   quellen,
@@ -397,7 +466,7 @@ console.log(`${ziel}
   FAQ:          ${faq.length}
   Quellen:      ${quellen.length}${quellen.some((q) => !q.url) ? "  (ohne URL: " + quellen.filter((q) => !q.url).length + ")" : ""}
   Entitaeten:   ${daten.entitaeten.length}
-  Bild:         ${bildPfad ?? "keins"}`);
+  Bild:         ${bildInfo ? bildInfo.pfad + "  " + bildInfo.masse + ", " + bildInfo.nachher + " KB statt " + bildInfo.vorher + " KB" : (bild ?? "keins")}`);
 
 const fehlend = ["teaser", "quickAnswer", "seoTitel", "metaBeschreibung", "bildAlt"].filter(
   (f) => !daten[f],
