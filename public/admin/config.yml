@@ -162,6 +162,23 @@ collections:
           - { label: Button-Text, name: buttonText, widget: string, required: false }
           - { label: Button-URL, name: buttonUrl, widget: string, required: false }
 
+      - label: Einschub mitten im Text
+        name: ctaImText
+        widget: select
+        required: false
+        default: auto
+        options:
+          - { label: "Automatisch (mittig, ab drei Zwischenüberschriften)", value: auto }
+          - { label: "Aus", value: aus }
+          - { label: "Nach der 1. Zwischenüberschrift", value: "1" }
+          - { label: "Nach der 2. Zwischenüberschrift", value: "2" }
+          - { label: "Nach der 3. Zwischenüberschrift", value: "3" }
+          - { label: "Nach der 4. Zwischenüberschrift", value: "4" }
+          - { label: "Nach der 5. Zwischenüberschrift", value: "5" }
+        hint: >-
+          Ein zweiter, schlanker Aufruf mitten im Artikel. Sitzt immer direkt vor
+          einer Zwischenüberschrift, nie mitten in einem Gedanken.
+
       # --------------------------------------------------------------- Quellen
       - label: Quellen und Belege
         name: quellen

@@ -85,6 +85,9 @@ const blog = defineCollection({
       })
       .optional(),
 
+    /** Einschub mitten im Text: "auto", "aus" oder die Nummer einer Zwischenueberschrift. */
+    ctaImText: z.string().default("auto"),
+
     /* ---------- Quellen ---------- */
     quellen: z
       .array(

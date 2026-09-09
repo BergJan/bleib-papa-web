@@ -49,6 +49,10 @@ export const SITE = {
       "21 einfache Wege, wie du eure Verbindung auch zwischen euren gemeinsamen Tagen " +
       "stärkst. Kostenlos als PDF, direkt per E-Mail.",
     buttonText: "21 Wege ansehen",
+    /* Kuerzere Fassung fuer den Einschub mitten im Artikel. */
+    kurztext:
+      "21 einfache Wege, wie du eure Verbindung auch zwischen euren gemeinsamen " +
+      "Tagen stärkst. Kostenlos als PDF.",
     buttonUrl: "/",
     bild: "/assets/guide-mockup.jpg",
     bildAlt:

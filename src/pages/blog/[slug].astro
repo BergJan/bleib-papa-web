@@ -11,6 +11,8 @@ import {
   metaBeschreibung,
   cta as ctaVon,
   canonicalVon,
+  teileFuerEinschub,
+  weitereBeitraege,
   autorVon,
   alsDatum,
   alsDatumKurz,
@@ -29,8 +31,10 @@ type Props = { post: CollectionEntry<"blog"> };
 const { post } = Astro.props;
 const d = post.data;
 const { Content } = await render(post);
+console.log("TEST rendered:", typeof (post as any).rendered?.html, ((post as any).rendered?.html ?? "").length);
 
 const autor = await autorVon(post);
+const weitere = await weitereBeitraege(post);
 const autorPfad = autor ? `/autor/${autor.id}/` : null;
 const cta = ctaVon(post);
 /* Halb ausgefuellte Zeilen aus dem Redaktionssystem werden still uebersprungen,
@@ -124,6 +128,10 @@ if (d.seo.schemaManuell?.trim()) {
 }
 
 const aktualisiert = d.aktualisiert && d.aktualisiertZeigen ? d.aktualisiert : null;
+
+/* Fuer den Einschub wird der fertige Artikel an einer Zwischenueberschrift
+   geteilt. Klappt das nicht, bleibt es beim durchlaufenden Text. */
+const teile = cta ? teileFuerEinschub(post.rendered?.html ?? "", d.ctaImText) : null;
 ---
 
 <Base
@@ -178,7 +186,25 @@ const aktualisiert = d.aktualisiert && d.aktualisiertZeigen ? d.aktualisiert : n
           }
 
           <div class="prose">
-            <Content />
+            {
+              teile && cta ? (
+                <>
+                  <Fragment set:html={teile[0]} />
+                  <aside class="cta-einschub">
+                    <div>
+                      <p class="label">{cta.ueberschrift}</p>
+                      <p>{cta.kurztext}</p>
+                    </div>
+                    <a class="btn btn-sm" href={cta.buttonUrl} data-cta="einschub">
+                      {cta.buttonText}
+                    </a>
+                  </aside>
+                  <Fragment set:html={teile[1]} />
+                </>
+              ) : (
+                <Content />
+              )
+            }
           </div>
 
           {
@@ -251,6 +277,24 @@ const aktualisiert = d.aktualisiert && d.aktualisiertZeigen ? d.aktualisiert : n
                   </a>
                 </div>
               </div>
+            )
+          }
+
+          {
+            weitere.length > 0 && (
+              <section class="weiterlesen" aria-labelledby="weiterlesen-titel">
+                <h2 id="weiterlesen-titel">Weiterlesen</h2>
+                <ul>
+                  {weitere.map((w) => (
+                    <li>
+                      <a href={pfad(w)}>
+                        <span class="wl-titel">{w.data.titel}</span>
+                        <span class="wl-teaser">{w.data.teaser}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </section>
             )
           }
 

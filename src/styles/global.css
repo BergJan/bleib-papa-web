@@ -503,3 +503,35 @@ p:last-child{margin-bottom:0}
   .autor-profil{grid-template-columns:1fr}
   .autor-profil img{max-width:220px}
 }
+
+/* Einschub mitten im Artikel. Bewusst leiser als der Block am Ende:
+   nur zwei Haarlinien, kein Kasten, damit der Lesefluss nicht abreisst. */
+.cta-einschub{
+  display:grid;grid-template-columns:1fr auto;gap:clamp(18px,2.6vw,32px);align-items:center;
+  margin:clamp(38px,4.2vw,54px) 0;padding:clamp(20px,2.4vw,26px) 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.cta-einschub .label{margin-bottom:7px}
+.cta-einschub p:last-of-type{font-size:15.5px;line-height:1.55;margin:0;color:var(--body)}
+/* .prose a faerbt sonst auch den Button rostrot, also unsichtbar auf Rost. */
+.prose a.btn,.cta-einschub a.btn{color:#fff;text-decoration:none}
+.cta-einschub .btn{white-space:nowrap}
+
+.weiterlesen{max-width:720px;margin-top:clamp(46px,5.2vw,68px)}
+.weiterlesen h2{
+  font-size:clamp(21px,2.2vw,26px);line-height:1.2;
+  padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:0;
+}
+.weiterlesen ul{list-style:none;margin:0;padding:0}
+.weiterlesen li{border-bottom:1px solid var(--line)}
+.weiterlesen a{display:block;padding:16px 0;text-decoration:none}
+.weiterlesen .wl-titel{
+  display:block;font-family:var(--serif);font-size:clamp(17px,1.8vw,19.5px);
+  line-height:1.25;color:var(--ink);margin-bottom:5px;transition:color .16s ease;
+}
+.weiterlesen a:hover .wl-titel{color:var(--rost)}
+.weiterlesen .wl-teaser{display:block;font-size:14.5px;line-height:1.55;color:var(--body)}
+
+@media (max-width:640px){
+  .cta-einschub{grid-template-columns:1fr;gap:16px;justify-items:start}
+}
