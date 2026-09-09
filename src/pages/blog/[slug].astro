@@ -31,7 +31,6 @@ type Props = { post: CollectionEntry<"blog"> };
 const { post } = Astro.props;
 const d = post.data;
 const { Content } = await render(post);
-console.log("TEST rendered:", typeof (post as any).rendered?.html, ((post as any).rendered?.html ?? "").length);
 
 const autor = await autorVon(post);
 const weitere = await weitereBeitraege(post);

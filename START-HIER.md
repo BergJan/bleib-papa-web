@@ -84,6 +84,33 @@ Build an und verbraucht Netlify-Credits.
 
 ---
 
+## Artikel einpflegen
+
+Fertige Artikel liegen als `.docx`, `.md` oder `.txt` im Ordner
+`Desktop/BLEIB-PAPA-Artikel/` im vereinbarten Blockformat. Der Importer macht
+daraus einen Beitrag:
+
+```bash
+node werkzeuge/artikel-import.mjs "<Datei>" --bild /uploads/<name>.jpg
+```
+
+Optional `--datum TT.MM.JJJJ`. Liegt der Tag in der Zukunft, wird der Beitrag
+automatisch auf **Geplant** gesetzt statt sofort veröffentlicht.
+
+Aus `.docx` erkennt der Importer Zwischenüberschriften an den Word-Formatvorlagen
+(Heading2, Heading3), nicht am Text. Das ist der Grund für das Werkzeug: Beim
+Einfügen in den Rich-Text-Editor gingen die Überschriften einmal komplett verloren
+und standen als „H2: ..." im Fließtext.
+
+Er setzt außerdem Leerzeilen zwischen die Absätze, weil Word keine kennt und
+Markdown sie braucht, übernimmt Aufzählungen und Hyperlinks und entfernt
+Tracking-Parameter wie `utm_source` aus den Quellen-URLs.
+
+Bilder vorher verkleinern: 2 MB PNG aus einem KI-Werkzeug werden als JPEG mit
+1600 px Breite rund 170 KB, ohne sichtbaren Unterschied.
+
+---
+
 ## Geplante Beiträge
 
 Ein Beitrag im Status **Geplant** erscheint automatisch, sobald sein
