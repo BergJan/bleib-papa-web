@@ -23,7 +23,7 @@ export const SITE = {
   tracking: {
     /* Meta-Pixel-ID (Events Manager) und GA4-Mess-ID (Format G-XXXXXXX).
        Sobald hier etwas steht, wird es nach Zustimmung wirklich geladen. */
-    metaPixelId: "",
+    metaPixelId: "1059550730286880",
     ga4Id: "",
 
     /* Zeigt die Einwilligungs-Variante des Banners auch dann, wenn oben noch
