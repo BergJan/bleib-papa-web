@@ -1,0 +1,119 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE } from "../site";
+
+const title = "AGB | BLEIB PAPA";
+const description = "Allgemeine Geschäftsbedingungen für digitale Produkte von BLEIB PAPA.";
+const b = SITE.betreiber;
+const stand = new Intl.DateTimeFormat("de-DE", { month: "long", year: "numeric" }).format(new Date());
+---
+
+<Base title={title} description={description} path="/agb/" noindex>
+  <Header />
+
+  <main>
+    <section class="page-head bg-creme">
+      <div class="wrap-narrow">
+        <p class="label">Rechtliches</p>
+        <h1 class="h1">Allgemeine Geschäftsbedingungen</h1>
+      </div>
+    </section>
+
+    <section class="section bg-white" style="padding-top:clamp(28px,3.4vw,44px)">
+      <div class="wrap-narrow prose">
+        <h2>1. Anbieter und Geltungsbereich</h2>
+        <p>
+          Anbieter der über diese Website angebotenen digitalen Produkte ist {b.name},
+          {b.strasse}, {b.plz} {b.ort}, E-Mail <a href={`mailto:${b.email}`}>{b.email}</a>.
+        </p>
+        <p>
+          Diese Bedingungen gelten für alle Verträge über digitale Inhalte, die über diese Website
+          geschlossen werden, insbesondere für das Programm „BLEIB PAPA — 66 Tage für eure
+          Verbindung". Abweichende Bedingungen des Kunden werden nicht Vertragsbestandteil.
+        </p>
+
+        <h2>2. Vertragsgegenstand</h2>
+        <p>
+          Gegenstand des Vertrags ist die Bereitstellung eines digitalen Selbstlernprogramms. Es
+          umfasst 66 Audio-Impulse in sechs Phasen, ein Praxis-Workbook, Reflexions- und
+          Umsetzungsaufgaben, Zwischenreflexionen, eine Abschlussreflexion sowie einen
+          30-Tage-Check-in und einen 90-Tage-Check-in.
+        </p>
+        <p>
+          Nicht Bestandteil des Vertrags sind persönliche Begleitung, Einzelgespräche,
+          Live-Veranstaltungen oder ein Community-Zugang.
+        </p>
+        <p>
+          Das Programm ist ein Bildungs- und Reflexionsangebot. Es ersetzt keine
+          psychotherapeutische, psychologische, medizinische oder rechtliche Beratung. Ein
+          bestimmter Erfolg wird nicht geschuldet, insbesondere keine Veränderung des Verhaltens
+          Dritter.
+        </p>
+
+        <h2>3. Vertragsschluss</h2>
+        <p>
+          Die Darstellung der Produkte auf dieser Website ist kein bindendes Angebot. Mit dem
+          Absenden der Bestellung gibt der Kunde ein verbindliches Angebot ab. Der Vertrag kommt
+          mit der Bestätigung der Bestellung oder mit der Bereitstellung der Zugangsdaten zustande.
+        </p>
+
+        <h2>4. Preise und Zahlung</h2>
+        <p>
+          Der Preis beträgt 247 Euro als Einmalzahlung. Alle Preise verstehen sich inklusive der
+          gesetzlichen Umsatzsteuer. Es entsteht kein Abonnement und keine wiederkehrende Zahlung.
+          Die Zahlung erfolgt über die im Bestellvorgang angebotenen Zahlungsarten.
+        </p>
+
+        <h2>5. Bereitstellung und Nutzungsdauer</h2>
+        <p>
+          Der Zugang zu den Inhalten wird nach Zahlungseingang bereitgestellt. Der Kunde erhält die
+          Zugangsdaten per E-Mail an die im Bestellvorgang angegebene Adresse. Für den Zugriff sind
+          ein internetfähiges Gerät und ein aktueller Browser erforderlich.
+        </p>
+
+        <h2>6. Nutzungsrechte</h2>
+        <p>
+          Der Kunde erhält ein einfaches, nicht übertragbares Recht, die Inhalte für eigene,
+          private Zwecke zu nutzen. Die Weitergabe der Zugangsdaten, die Vervielfältigung,
+          Veröffentlichung oder gewerbliche Verwertung der Inhalte ist nicht gestattet.
+        </p>
+
+        <h2>7. Widerrufsrecht</h2>
+        <p>
+          Verbrauchern steht ein gesetzliches Widerrufsrecht zu. Einzelheiten und die Bedingungen,
+          unter denen es vorzeitig erlischt, stehen in der{" "}
+          <a href="/widerruf/">Widerrufsbelehrung</a>.
+        </p>
+
+        <h2>8. Haftung</h2>
+        <p>
+          Für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit sowie für
+          Schäden aus vorsätzlicher oder grob fahrlässiger Pflichtverletzung wird unbeschränkt
+          gehaftet. Im Übrigen wird nur für die Verletzung wesentlicher Vertragspflichten gehaftet,
+          und zwar begrenzt auf den vertragstypischen, vorhersehbaren Schaden.
+        </p>
+
+        <h2>9. Verbraucherstreitbeilegung</h2>
+        <p>
+          Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer
+          Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+
+        <h2>10. Schlussbestimmungen</h2>
+        <p>
+          Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts. Bei
+          Verbrauchern gilt diese Rechtswahl nur, soweit dadurch der Schutz zwingender
+          Verbraucherschutzvorschriften des Aufenthaltsstaates nicht entzogen wird. Sollte eine
+          Bestimmung unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.
+        </p>
+
+        <hr />
+        <p class="small">Stand: {stand}</p>
+      </div>
+    </section>
+  </main>
+
+  <Footer verkauf />
+</Base>

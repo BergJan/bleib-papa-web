@@ -1,45 +1,192 @@
 ---
 import Base from "../layouts/Base.astro";
-import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import OptInForm from "../components/OptInForm.astro";
+import { SITE } from "../site";
 
-const title = "Das 66-Tage-Programm | BLEIB PAPA";
+const title = "66 Tage für eure Verbindung | BLEIB PAPA";
 const description =
-  "66 kleine Schritte für eine Vaterrolle, die nicht davon abhängt, wie viele Tage ihr euch seht. Trag dich ein und erfahre, wenn es startet.";
+  "Das 66-Tage-Praxisprogramm für getrennte Väter: tägliche Audio-Impulse, Workbook und sechs Phasen für mehr Klarheit, Verbindung und Verlässlichkeit im neuen Vater-Alltag.";
+
+/* Solange kein Checkout hinterlegt ist, springen die Buttons zum Preisblock. */
+const kaufen = SITE.checkoutUrl || "#preis";
+const extern = Boolean(SITE.checkoutUrl);
+
+const phasen = [
+  {
+    nr: "Phase 1",
+    tage: "Tag 1–10",
+    titel: "Deine neue Vaterrolle",
+    ziel: "Klarheit darüber gewinnen, wer du unter den neuen Bedingungen als Vater sein willst.",
+    themen: ["alte Erwartungen", "Vaterbild", "eigener Einfluss", "Werte", "neue Orientierung"],
+  },
+  {
+    nr: "Phase 2",
+    tage: "Tag 11–22",
+    titel: "Die Tage dazwischen",
+    ziel: "Verbindung schaffen, ohne Kontakt zum Pflichtprogramm zu machen.",
+    themen: ["Kontakt", "Rituale", "Verlässlichkeit", "Interesse", "kleine Verbindungspunkte"],
+  },
+  {
+    nr: "Phase 3",
+    tage: "Tag 23–34",
+    titel: "Zuhause bei Papa",
+    ziel: "Aus Besuchszeit echten Papa-Alltag machen.",
+    themen: ["Ankommen", "Normalität", "Regeln", "gemeinsame Routinen", "Abschiede"],
+  },
+  {
+    nr: "Phase 4",
+    tage: "Tag 35–44",
+    titel: "Wenn dein Kind nicht da ist",
+    ziel: "Auch in der Zeit ohne dein Kind stabil und handlungsfähig bleiben.",
+    themen: ["Vermissen", "eigenes Leben", "Sorge", "Kontrolle", "emotionale Verantwortung"],
+  },
+  {
+    nr: "Phase 5",
+    tage: "Tag 45–54",
+    titel: "Eltern bleiben",
+    ziel: "Die Elternebene so behandeln, dass sie die Vater-Kind-Beziehung möglichst wenig belastet.",
+    themen: [
+      "Kommunikation",
+      "Konflikte",
+      "Kind nicht zum Vermittler machen",
+      "Verantwortung",
+      "eigener Einflussbereich",
+    ],
+  },
+  {
+    nr: "Phase 6",
+    tage: "Tag 55–66",
+    titel: "Eure Beziehung von morgen",
+    ziel: "Den Blick langfristig auf die gemeinsame Beziehung richten.",
+    themen: [
+      "Traditionen",
+      "gemeinsame Projekte",
+      "gemeinsame Geschichte",
+      "Zukunft",
+      "Vatersein mit einem älter werdenden Kind",
+    ],
+  },
+];
+
+const umfang = [
+  "66 tägliche Audio-Impulse",
+  "6 aufeinander aufbauende Phasen",
+  "vollständiges Praxis-Workbook",
+  "tägliche Reflexions- und Umsetzungsaufgaben",
+  "Zwischenreflexionen",
+  "Abschlussreflexion",
+  "30-Tage-Check-in",
+  "90-Tage-Check-in",
+  "digitaler Zugang",
+];
+
+const passt = [
+  "du Vater nach einer Trennung bist",
+  "du dein Kind nicht mehr täglich siehst",
+  "dir ein klarer Weg für deine neue Vaterrolle fehlt",
+  "du weniger kompensieren und bewusster gestalten möchtest",
+  "du wissen willst, was du selbst beeinflussen kannst",
+  "du bereit bist, regelmäßig zu reflektieren",
+  "du selbstständig arbeiten willst",
+  "du wenig Zeit hast und einen klaren Prozess statt Content-Masse suchst",
+];
+
+const passtNicht = [
+  "du Rechtsberatung suchst",
+  "du Psychotherapie benötigst",
+  "du eine akute Krise hast",
+  "du hauptsächlich den anderen Elternteil verändern möchtest",
+  "du erwartest, dass ein Programm die Reaktion deines Kindes kontrollieren kann",
+  "du persönliche 1:1-Begleitung erwartest",
+  "du eine Community suchst",
+];
+
+const faq = [
+  {
+    frage: "Wie viel Zeit brauche ich täglich?",
+    antwort:
+      "Das Programm ist bewusst für einen vollen Alltag gemacht. Du hörst den jeweiligen Audio-Impuls und nimmst dir anschließend so viel Zeit für das Workbook, wie du an diesem Tag brauchst. Entscheidend ist nicht die Dauer, sondern die Regelmäßigkeit.",
+  },
+  {
+    frage: "Muss ich jeden Tag perfekt durchziehen?",
+    antwort:
+      "Nein. Wenn ein Tag ausfällt, machst du weiter. Das Programm soll kein neues Pflichtprogramm werden.",
+  },
+  {
+    frage: "Kann ich schneller arbeiten?",
+    antwort:
+      "Technisch vielleicht. Sinnvoller ist ein Impuls pro Tag. Zwischen den Gedanken soll echtes Leben stattfinden.",
+  },
+  {
+    frage: "Bekomme ich persönliche Betreuung?",
+    antwort:
+      "Nein. Die 66 Tage sind bewusst ein Selbstlernprogramm. Persönliche Begleitung und Community gehören nicht zu diesem Produkt.",
+  },
+  {
+    frage: "Ist das Therapie?",
+    antwort:
+      "Nein. BLEIB PAPA ersetzt keine psychotherapeutische oder psychologische Behandlung.",
+  },
+  {
+    frage: "Ist das Rechtsberatung?",
+    antwort:
+      "Nein. Rechtliche Fragen zu Umgang, Sorgerecht oder Unterhalt gehören in professionelle juristische Beratung.",
+  },
+  {
+    frage: "Was, wenn bei uns viel von der Mutter abhängt?",
+    antwort:
+      "Äußere Bedingungen können deine Situation stark beeinflussen. Das Programm verspricht nicht, den anderen Elternteil zu verändern. Es setzt dort an, wo dein eigener Einfluss als Vater beginnt.",
+  },
+];
 ---
 
-<!-- noindex, solange das Programm noch nicht startet. Sobald es live geht,
-     das noindex hier entfernen und die Seite in die Sitemap aufnehmen
-     (Filter in astro.config.mjs). -->
-<Base title={title} description={description} path="/66-tage/" noindex>
-  <Header variant="landing" ctaHref="#warteliste" />
+<Base title={title} description={description} path="/66-tage/" image="/assets/66-tage-mockup.jpg">
+  <a class="skip" href="#preis">Direkt zum Preis</a>
+
+  <header class="header">
+    <div class="header-in">
+      <a class="brand" href="/">Bleib Papa<span class="dot">.</span></a>
+      <a class="btn btn-sm" href={kaufen} data-cta="header">66 Tage starten</a>
+    </div>
+  </header>
 
   <main>
-    <section class="section bg-creme">
-      <div class="wrap">
-        <div class="split" style="margin-top:0;align-items:center">
-          <div>
-            <p class="label">In Arbeit</p>
-            <h1 class="h1">Das 66-Tage-Programm.</h1>
-            <div class="prose" style="margin-top:clamp(20px,2.4vw,28px)">
-              <p>
-                66 kleine Schritte für eine Vaterrolle, die nicht davon abhängt, wie viele Tage
-                ihr euch seht. Jeden Tag ein Impuls, der in deinen Alltag passt.
-              </p>
-              <p>
-                Ich baue das Programm gerade auf. Wenn du wissen willst, wann es losgeht, trag
-                dich unten ein.
-              </p>
-            </div>
+    <!-- ============ HERO ============ -->
+    <section class="hero bg-creme">
+      <div class="wrap hero-grid">
+        <div class="hero-col">
+          <div class="hero-text">
+            <p class="label">Das 66-Tage-Praxisprogramm für Väter nach der Trennung</p>
+            <h1 class="h1">
+              66 Tage, um dein Vatersein nach der Trennung nicht länger dem Zufall zu überlassen.
+            </h1>
+            <p class="produktzeile">BLEIB PAPA — 66 Tage für eure Verbindung</p>
+            <p class="lead">
+              Ein klarer täglicher Weg mit 66 Audio-Impulsen und einem ausführlichen
+              Praxis-Workbook, damit du Schritt für Schritt herausfindest, wie du auch ohne
+              täglichen gemeinsamen Alltag verbunden, verlässlich und präsent Papa bleibst.
+            </p>
+            <p class="value-line">
+              66 Tage · 66 Audio-Impulse · 6 Phasen · Workbook · 30- und 90-Tage-Check-in
+            </p>
           </div>
 
-          <figure class="fig">
+          <div class="hero-kauf">
+            <p class="preis-gross">247 € <span>einmalig</span></p>
+            <p class="preis-klein">Das sind rund 3,74 € pro Programmtag.</p>
+            <a class="btn btn-full" href={kaufen} data-cta="hero">Jetzt meinen 66-Tage-Weg starten</a>
+            <p class="form-note">Einmalzahlung · inkl. MwSt. · kein Abo</p>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <figure class="mockup">
             <img
-              src="/assets/programm-mockup.jpg"
+              src="/assets/66-tage-mockup.jpg"
               width="1000"
-              height="750"
-              alt="Das 66-Tage-Programm von BLEIB PAPA: Workbook, Kursoberfläche am Bildschirm sowie auf Tablet und Smartphone."
+              height="1000"
+              alt="BLEIB PAPA, 66 Tage für eure Verbindung: Programmbox, Workbook, Kursoberfläche am Bildschirm sowie auf Tablet und Smartphone."
+              fetchpriority="high"
               decoding="async"
             />
           </figure>
@@ -47,30 +194,1033 @@ const description =
       </div>
     </section>
 
+    <!-- ============ WIEDERERKENNUNG ============ -->
     <section class="section bg-white">
-      <div class="wrap" id="warteliste" style="scroll-margin-top:96px">
-        <div class="split" style="margin-top:0;align-items:start">
-          <div>
-            <p class="label">Als Erster erfahren</p>
-            <h2 class="h2">Ich sage dir Bescheid, wenn es startet.</h2>
-            <div class="prose" style="margin-top:clamp(20px,2.4vw,28px)">
-              <p>
-                Trag dich ein, dann meldest du dich nicht umsonst: Du bekommst sofort den
-                kostenlosen Guide mit 21 Wegen, wie du deinem Kind auch zwischen euren
-                gemeinsamen Tagen nah bleibst. Und du erfährst als Erster, wenn das Programm
-                startet.
-              </p>
-              <p>Kein Verkaufsdruck. Wenn es nicht passt, meldest du dich mit einem Klick ab.</p>
-            </div>
-          </div>
+      <div class="wrap">
+        <p class="label">Du weißt längst, dass du Papa bleiben willst</p>
+        <h2 class="h2 measure-wide">
+          Die schwierigere Frage ist: Wie sieht das jetzt im echten Alltag aus?
+        </h2>
 
+        <div class="measure scenes" style="margin-top:clamp(26px,3.2vw,40px)">
+          <p>
+            Vielleicht hast du längst verstanden, dass weniger gemeinsame Zeit nicht automatisch
+            weniger Beziehung bedeuten muss. Aber zwischen Verstehen und Leben liegt ein
+            Unterschied.
+          </p>
+          <p>
+            Du nimmst dir vor, gelassener zu reagieren. Dann kommt eine Nachricht, die dich sofort
+            wieder aufwühlt.
+          </p>
+          <p>
+            Du willst die wenige gemeinsame Zeit genießen. Dann merkst du, wie du versuchst, jedes
+            Wochenende besonders zu machen.
+          </p>
+          <p>
+            Du willst zwischen euren gemeinsamen Tagen verbunden bleiben. Dann fragst du dich, ob
+            du zu viel schreibst, zu wenig anrufst oder überhaupt das Richtige tust.
+          </p>
+        </div>
+
+        <div class="pull">
+          <p class="serif">
+            Und irgendwann merkst du: Ich muss für mich erst herausfinden, wie mein Vatersein unter
+            diesen neuen Bedingungen eigentlich aussehen soll.
+          </p>
+          <p class="small">Genau dafür gibt es die 66 Tage.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 21 WEGE VS 66 TAGE ============ -->
+    <section class="section bg-creme">
+      <div class="wrap">
+        <p class="label">Der Unterschied</p>
+        <h2 class="h2 measure-wide">21 Wege geben dir Ideen. Die 66 Tage geben dir einen Weg.</h2>
+
+        <div class="split">
           <div>
-            <OptInForm id="warteliste-form" quelle="warteliste-66-tage" />
+            <p>
+              Mit den 21 Wegen kannst du einzelne Dinge sofort ausprobieren: kleine Rituale,
+              Kontaktpunkte und Momente von Verbindung. Das ist ein guter Anfang.
+            </p>
+            <p>
+              Aber eine neue Vaterrolle entsteht nicht aus einer immer längeren Liste guter Tipps.
+              Sie entsteht, wenn du dir über Wochen hinweg immer wieder die richtigen Fragen
+              stellst:
+            </p>
+          </div>
+          <ul class="fragen">
+            <li>Welcher Vater will ich jetzt sein?</li>
+            <li>Was kann ich wirklich beeinflussen?</li>
+            <li>Was braucht mein Kind von mir?</li>
+            <li>Wie bleiben wir zwischen unseren gemeinsamen Tagen verbunden?</li>
+            <li>Wie entsteht bei mir echter Papa-Alltag?</li>
+            <li>Wie gehe ich mit dem Vermissen um?</li>
+            <li>Wie halte ich Konflikte möglichst von meinem Kind fern?</li>
+            <li>Was soll langfristig zwischen uns bleiben?</li>
+          </ul>
+        </div>
+
+        <div class="pull">
+          <p class="serif">
+            66 Tage bedeutet nicht: 66 weitere Tipps. 66 Tage bedeutet: jeden Tag einen kleinen
+            Schritt weiter.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VALUE ============ -->
+    <section class="section bg-white">
+      <div class="wrap">
+        <p class="label">Du kaufst hier keine Audiodateien</p>
+        <h2 class="h2 measure-wide">Du bekommst einen vollständigen Weg für die nächsten 66 Tage.</h2>
+
+        <div class="measure" style="margin-top:clamp(24px,2.8vw,34px)">
+          <p>
+            Jeden Tag neu darüber nachzudenken, was du als Vater jetzt eigentlich tun solltest,
+            kostet Energie.
+          </p>
+          <p class="fragen-inline">
+            Soll ich mich melden? Soll ich mehr Abstand lassen? Bin ich zu streng? Bin ich zu
+            nachgiebig? Muss ich unsere gemeinsame Zeit besonderer machen? Tue ich genug?
+          </p>
+          <p>
+            Die 66 Tage nehmen dir diese Entscheidungen nicht ab. Aber sie geben dir jeden Tag
+            einen klaren Punkt, auf den du schauen kannst, statt dein Vatersein immer wieder von
+            vorne sortieren zu müssen.
+          </p>
+        </div>
+
+        <div class="topics">
+          <div class="topic">
+            <div class="num">01</div>
+            <h3 class="h3">66 Audio-Impulse</h3>
+            <p>Ein klarer Gedanke pro Tag.</p>
+          </div>
+          <div class="topic">
+            <div class="num">02</div>
+            <h3 class="h3">6 aufeinander aufbauende Phasen</h3>
+            <p>Keine zufällige Sammlung.</p>
+          </div>
+          <div class="topic">
+            <div class="num">03</div>
+            <h3 class="h3">Umfangreiches Praxis-Workbook</h3>
+            <p>Damit aus Hören eigene Entscheidungen werden.</p>
+          </div>
+          <div class="topic">
+            <div class="num">04</div>
+            <h3 class="h3">Zwischenreflexionen</h3>
+            <p>Damit Fortschritt sichtbar wird.</p>
+          </div>
+          <div class="topic">
+            <div class="num">05</div>
+            <h3 class="h3">Abschlussreflexion</h3>
+            <p>Damit Tag 66 nicht einfach endet.</p>
+          </div>
+          <div class="topic">
+            <div class="num">06</div>
+            <h3 class="h3">30- und 90-Tage-Check-in</h3>
+            <p>Damit das Gelernte weiterlebt.</p>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- ============ INFORMATIONSCHAOS ============ -->
+    <section class="section bg-creme">
+      <div class="wrap">
+        <p class="label">Warum ein klarer Weg?</p>
+        <h2 class="h2 measure-wide">
+          Du könntest dir all diese Antworten auch selbst zusammensuchen.
+        </h2>
+
+        <div class="measure" style="margin-top:clamp(24px,2.8vw,34px)">
+          <p class="aufzaehlung">
+            Podcasts hören. Artikel lesen. Videos speichern. Foren durchsuchen. Hundert
+            verschiedene Meinungen anhören.
+          </p>
+          <p>
+            Und danach immer noch überlegen: Was davon passt eigentlich zu mir, meinem Kind und
+            unserem Alltag?
+          </p>
+        </div>
+
+        <div class="pull">
+          <p class="serif">Oder du gehst 66 Tage lang einen Gedanken nach dem anderen.</p>
+          <p class="small">
+            BLEIB PAPA bringt die entscheidenden Fragen in eine klare Reihenfolge. Nicht mehr
+            Information. Mehr Klarheit.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TÄGLICHER RHYTHMUS ============ -->
+    <section class="section bg-white">
+      <div class="wrap">
+        <p class="label">Dein täglicher Rhythmus</p>
+        <h2 class="h2 measure-wide">Ein Gedanke. Eine Reflexion. Ein nächster Schritt.</h2>
+
+        <ol class="steps steps-4">
+          <li class="step">
+            <span class="num">01</span>
+            <h3 class="schritt-titel">Hören</h3>
+            <p>Du hörst deinen täglichen Audio-Impuls.</p>
+          </li>
+          <li class="step">
+            <span class="num">02</span>
+            <h3 class="schritt-titel">Reflektieren</h3>
+            <p>
+              Du öffnest die passende Workbook-Seite und überträgst den Gedanken auf deine
+              Situation.
+            </p>
+          </li>
+          <li class="step">
+            <span class="num">03</span>
+            <h3 class="schritt-titel">Umsetzen</h3>
+            <p>Du entscheidest, was davon in deinem Alltag relevant ist.</p>
+          </li>
+          <li class="step">
+            <span class="num">04</span>
+            <h3 class="schritt-titel">Dranbleiben</h3>
+            <p>Am nächsten Tag gehst du weiter.</p>
+          </li>
+        </ol>
+
+        <p class="small" style="margin-top:clamp(28px,3.2vw,40px)">
+          Nicht alles auf einmal. Nicht perfekt. 66 Tage lang.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ ZEITARGUMENT ============ -->
+    <section class="section bg-creme">
+      <div class="wrap">
+        <div class="split" style="margin-top:0;align-items:center">
+          <div>
+            <p class="label">Gemacht für einen vollen Alltag</p>
+            <h2 class="h2">
+              Du brauchst keinen zweiten Job namens Persönlichkeitsentwicklung.
+            </h2>
+          </div>
+          <div>
+            <p>
+              Du bekommst jeden Tag einen klaren Impuls und arbeitest anschließend genau so tief
+              damit, wie es für dich an diesem Tag sinnvoll ist.
+            </p>
+            <p>
+              Kein endloser Kurs. Keine Content-Bibliothek, die du irgendwann noch abarbeiten
+              musst.
+            </p>
+            <p class="betont">Ein Tag. Ein Gedanke. Ein nächster Schritt.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRODUKTPHILOSOPHIE ============ -->
+    <section class="section bg-navy">
+      <div class="wrap">
+        <h2 class="h2 measure-wide">
+          Du musst nicht jeden Tag bei deinem Kind sein, um jeden Tag sein Papa zu sein.
+        </h2>
+        <div class="measure" style="margin-top:clamp(26px,3.2vw,40px)">
+          <p>
+            BLEIB PAPA versucht nicht, den alten Familienalltag zurückzuholen. Die Situation hat
+            sich verändert.
+          </p>
+          <p>
+            Die Aufgabe ist deshalb nicht, das Alte künstlich nachzubauen. Die Aufgabe ist, etwas
+            Neues zu entwickeln, das unter euren heutigen Bedingungen funktioniert.
+          </p>
+        </div>
+        <div class="closing">
+          <p class="drei-begriffe">
+            <span>Bleib interessiert.</span>
+            <span>Bleib verlässlich.</span>
+            <span class="accent">Bleib verbunden.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6 PHASEN ============ -->
+    <section class="section bg-creme">
+      <div class="wrap">
+        <p class="label">Dein 66-Tage-Weg</p>
+        <h2 class="h2 measure-wide">Sechs Phasen. Eine neue Richtung für dein Vatersein.</h2>
+
+        <div class="phasen">
+          {
+            phasen.map((p) => (
+              <article class="phase">
+                <div class="phase-kopf">
+                  <span class="phase-nr">{p.nr}</span>
+                  <span class="phase-tage">{p.tage}</span>
+                </div>
+                <h3 class="h3">{p.titel}</h3>
+                <p class="phase-ziel">{p.ziel}</p>
+                <ul class="phase-themen">
+                  {p.themen.map((t) => (
+                    <li>{t}</li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <figure class="band">
+      <img
+        src="/assets/66-tage-mockup-breit.jpg"
+        width="1800"
+        height="600"
+        alt="Das 66-Tage-Programm: Box, Workbook, Kursoberfläche, Tablet und Smartphone mit Audio-Impuls."
+        loading="lazy"
+        decoding="async"
+      />
+    </figure>
+
+    <!-- ============ WORKBOOK ============ -->
+    <section class="section bg-white">
+      <div class="wrap">
+        <p class="label">Die zweite Hälfte des Programms</p>
+        <h2 class="h2 measure-wide">
+          Die Audios geben dir Perspektive. Das Workbook macht daraus deinen eigenen Weg.
+        </h2>
+
+        <div class="split">
+          <div>
+            <p>
+              Das Workbook ist kein Bonus. Es ist ein zentraler Teil des Programms.
+            </p>
+            <p>
+              Du hörst nicht nur, wie Vatersein funktionieren könnte. Du arbeitest heraus, wie es
+              bei dir funktionieren soll.
+            </p>
+          </div>
+          <ul class="check-list">
+            <li>tägliche Reflexionsfragen</li>
+            <li>Schreibflächen</li>
+            <li>konkrete nächste Schritte</li>
+            <li>Zwischenreflexionen</li>
+            <li>persönliche Rituale</li>
+            <li>Abschlussreflexion</li>
+            <li>30-Tage-Check-in</li>
+            <li>90-Tage-Check-in</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NACH TAG 66 ============ -->
+    <section class="section bg-creme">
+      <div class="wrap">
+        <p class="label">Danach</p>
+        <h2 class="h2 measure-wide">Tag 66 ist nicht das Ende.</h2>
+
+        <div class="measure" style="margin-top:clamp(24px,2.8vw,34px)">
+          <p>Nach 30 Tagen und noch einmal nach 90 Tagen kommst du zurück und schaust:</p>
+        </div>
+        <ul class="fragen" style="margin-top:20px">
+          <li>Was funktioniert?</li>
+          <li>Welche Rituale sind geblieben?</li>
+          <li>Wo bist du sicherer geworden?</li>
+          <li>Was ist wieder eingeschlafen?</li>
+          <li>Was möchtest du neu aufnehmen?</li>
+        </ul>
+
+        <div class="pull">
+          <p class="serif">
+            Das Ziel ist nicht, 66 Tage perfekt durchzuhalten. Das Ziel ist, etwas mitzunehmen,
+            das danach weiterlebt.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ERGEBNISSE ============ -->
+    <section class="section bg-white">
+      <div class="wrap">
+        <p class="label">Worauf du hinarbeitest</p>
+        <h2 class="h2 measure-wide">
+          Nicht auf Perfektion. Auf mehr Klarheit, Verbindung und Verlässlichkeit.
+        </h2>
+
+        <p class="lead measure" style="margin-top:clamp(24px,2.8vw,32px)">
+          Nach den 66 Tagen sollst du idealerweise:
+        </p>
+
+        <ul class="check-list check-list-breit">
+          <li>klarer wissen, welcher Vater du sein willst</li>
+          <li>weniger unter Event-Papa-Druck stehen</li>
+          <li>bewusster mit Kontakt zwischen Treffen umgehen</li>
+          <li>eigene Rituale aufgebaut haben</li>
+          <li>mehr Normalität im Papa-Alltag zulassen</li>
+          <li>besser zwischen Sorge und Kontrolle unterscheiden</li>
+          <li>Konflikte weniger stark deine Vaterrolle bestimmen lassen</li>
+          <li>klarer wissen, was langfristig zwischen dir und deinem Kind bleiben soll</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ MARKENSTATEMENT ============ -->
+    <section class="quote bg-creme">
+      <div class="wrap">
+        <blockquote>
+          Dein Kind braucht keinen Event-Papa. Es braucht einen Vater, der interessiert, präsent
+          und verlässlich bleibt.
+        </blockquote>
+        <p class="quote-nach">
+          Du musst verlorene Tage nicht mit spektakulären Wochenenden zurückkaufen. Nähe entsteht
+          oft in den kleinen Dingen, die sich wiederholen dürfen.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ WAS NICHT VERLANGT WIRD ============ -->
+    <section class="section bg-white">
+      <div class="wrap">
+        <h2 class="h2 measure-wide">Du musst dafür nicht dein ganzes Leben umkrempeln.</h2>
+
+        <p class="lead measure" style="margin-top:clamp(24px,2.8vw,32px)">
+          Die 66 Tage verlangen nicht, dass du:
+        </p>
+
+        <ul class="nicht-liste">
+          <li>jeden Abend eine Stunde lernst</li>
+          <li>alles perfekt machst</li>
+          <li>dein Kind ständig kontaktierst</li>
+          <li>jedes Wochenende besonders gestaltest</li>
+          <li>die Mutter deines Kindes verändern musst</li>
+          <li>zum Super-Papa wirst</li>
+        </ul>
+
+        <div class="pull">
+          <p class="serif">
+            Du musst nur bereit sein, regelmäßig hinzuschauen und kleine Dinge bewusst zu
+            verändern.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PREISBLOCK ============ -->
+    <section class="section bg-creme" id="preis" style="scroll-margin-top:80px">
+      <div class="wrap">
+        <p class="label">Das bekommst du</p>
+        <h2 class="h2 measure-wide">66 Tage. Ein klarer Weg. 247 €.</h2>
+
+        <div class="preis-grid">
+          <div class="preis-inhalt">
+            <p>Du bekommst den vollständigen Zugang zu deinem 66-Tage-Praxisprogramm.</p>
+            <ul class="check-list">
+              {umfang.map((u) => <li>{u}</li>)}
+            </ul>
+          </div>
+
+          <div class="preis-box">
+            <p class="preis-box-titel">BLEIB PAPA<span class="dot">.</span></p>
+            <p class="preis-box-name">66 Tage für eure Verbindung</p>
+            <p class="preis-gross">247 € <span>einmalig</span></p>
+            <p class="preis-klein">≈ 3,74 € pro Programmtag</p>
+            <a class="btn btn-full" href={kaufen} data-cta="preisblock">Ja, ich starte meine 66 Tage</a>
+            <p class="form-note">Kein Abo. Keine Mitgliedschaft.</p>
+            <p class="preis-meta">Einmalzahlung · inkl. MwSt. · sofortiger Zugang</p>
+          </div>
+        </div>
+
+        <div class="pull" style="max-width:820px">
+          <p class="serif">
+            Du brauchst keine weiteren 66 Ideen. Du brauchst 66 Tage, in denen aus Gedanken
+            Entscheidungen und aus Entscheidungen neue Gewohnheiten werden können.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FÜR WEN / FÜR WEN NICHT ============ -->
+    <section class="section bg-white">
+      <div class="wrap">
+        <h2 class="h2 measure-wide">Für wen die 66 Tage gedacht sind.</h2>
+
+        <div class="cols">
+          <div class="col is-for">
+            <h3>Die 66 Tage passen zu dir, wenn …</h3>
+            <div class="col-body">
+              <ul>{passt.map((p) => <li>{p}</li>)}</ul>
+            </div>
+          </div>
+          <div class="col is-not">
+            <h3>Die 66 Tage sind <em>nicht</em> das Richtige, wenn …</h3>
+            <div class="col-body">
+              <ul>{passtNicht.map((p) => <li>{p}</li>)}</ul>
+            </div>
+          </div>
+        </div>
+
+        <p class="small measure" style="margin-top:clamp(24px,2.8vw,32px)">
+          BLEIB PAPA konzentriert sich auf deine Vaterrolle, deine Beziehung zum Kind und deinen
+          eigenen Einflussbereich.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ JAN ============ -->
+    <section class="section bg-creme">
+      <div class="wrap about">
+        <div class="about-photo">
+          <img
+            src="/assets/jan-portrait.jpg"
+            width="860"
+            height="954"
+            alt="Porträt von Jan, Papa und Gründer von BLEIB PAPA."
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="about-name">
+            <strong>Jan</strong>
+            <span>Papa &amp; Gründer von BLEIB PAPA</span>
+          </div>
+        </div>
+
+        <div class="about-text">
+          <p class="label">Warum Bleib Papa</p>
+          <h2 class="h2">Ich kenne diese Frage nicht aus der Theorie.</h2>
+          <div style="margin-top:clamp(24px,2.8vw,32px);max-width:600px">
+            <p>
+              Ich bin selbst Vater nach einer Trennung und kenne die Situation, wenn gemeinsamer
+              Alltag plötzlich nicht mehr selbstverständlich ist. Und ich kenne die Frage: Wie
+              bleiben mein Sohn und ich verbunden, wenn wir uns nicht mehr jeden Tag sehen?
+            </p>
+            <p>
+              Ich habe für mich einen Weg gefunden, trotz Trennung und Entfernung eine stabile
+              Beziehung zu meinem Sohn zu erhalten. Aus genau dieser Erfahrung ist BLEIB PAPA
+              entstanden.
+            </p>
+            <p>
+              Nicht, weil ich jede Trennung erklären oder lösen kann. Sondern weil ich weiß, wie
+              sich dieser Weg anfühlt.
+            </p>
+            <p>
+              Die 66 Tage sind deshalb kein theoretischer Trennungsratgeber. Sie sind ein
+              Praxisweg für Väter, die ihren eigenen Teil bewusst gestalten wollen.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section bg-white">
+      <div class="wrap">
+        <p class="label">Häufige Fragen</p>
+        <h2 class="h2 measure-wide">Was du vor der Entscheidung wissen solltest.</h2>
+
+        <div class="faq">
+          {
+            faq.map((f) => (
+              <details class="faq-item">
+                <summary>
+                  <span>{f.frage}</span>
+                </summary>
+                <p>{f.antwort}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINALER CTA ============ -->
+    <section class="section bg-navy">
+      <div class="wrap">
+        <p class="label">Deine nächsten 66 Tage</p>
+        <h2 class="h2 measure-wide">
+          Die Trennung hat euren Alltag verändert. Jetzt kannst du gestalten, wie dein Vatersein
+          darin aussieht.
+        </h2>
+
+        <div class="final-kauf">
+          <p class="final-produkt">BLEIB PAPA — 66 Tage für eure Verbindung</p>
+          <p class="preis-gross hell">247 € <span>einmalig</span></p>
+          <p class="preis-klein hell">≈ 3,74 € pro Programmtag</p>
+          <a class="btn" href={kaufen} data-cta="final">Ich starte meine 66 Tage</a>
+          <p class="final-meta">66 Audio-Impulse · Workbook · 6 Phasen · kein Abo</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABSCHLUSS ============ -->
+    <section class="quote bg-creme">
+      <div class="wrap">
+        <blockquote>
+          Weniger gemeinsame Zeit muss nicht automatisch weniger Beziehung bedeuten.
+        </blockquote>
+        <p class="sig">Bleib Papa<span class="dot">.</span></p>
+      </div>
+    </section>
   </main>
 
-  <Footer />
+  <Footer verkauf />
 </Base>
+
+<style>
+  /* ---------- Hero ---------- */
+  .produktzeile {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--rost);
+    margin: 0 0 18px;
+  }
+  .value-line {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--meta-text);
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    margin: 0;
+  }
+  .hero-kauf {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: clamp(22px, 2.6vw, 28px);
+  }
+  .preis-gross {
+    font-family: var(--serif);
+    font-size: clamp(34px, 4vw, 44px);
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+  }
+  .preis-gross span {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--meta-text);
+    margin-left: 6px;
+  }
+  .preis-gross.hell {
+    color: var(--creme);
+  }
+  .preis-gross.hell span {
+    color: rgba(251, 247, 241, 0.7);
+  }
+  .preis-klein {
+    font-size: 13.5px;
+    color: var(--meta-text);
+    margin: 0 0 20px;
+  }
+  .preis-klein.hell {
+    color: rgba(251, 247, 241, 0.7);
+  }
+
+  /* ---------- Textbausteine ---------- */
+  .fragen {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .fragen li {
+    position: relative;
+    padding-left: 26px;
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.7vw, 20px);
+    line-height: 1.35;
+    color: var(--ink);
+  }
+  .fragen li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 14px;
+    height: 2px;
+    background: var(--orange);
+  }
+  .fragen-inline {
+    font-family: var(--serif);
+    font-size: clamp(18px, 1.9vw, 21px);
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  .aufzaehlung {
+    font-family: var(--serif);
+    font-size: clamp(18px, 1.9vw, 21px);
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .betont {
+    font-family: var(--serif);
+    font-size: clamp(19px, 2vw, 23px);
+    line-height: 1.3;
+    color: var(--ink);
+    margin-top: 22px;
+  }
+  .drei-begriffe {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.9vw, 32px);
+    line-height: 1.2;
+    color: var(--creme);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  /* ---------- Schritte ---------- */
+  .steps-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .schritt-titel {
+    font-size: 19px;
+    margin: 0 0 8px;
+    line-height: 1.2;
+  }
+
+  /* ---------- Phasen ---------- */
+  .phasen {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(18px, 2.4vw, 28px);
+    margin-top: clamp(38px, 4.6vw, 56px);
+  }
+  .phase {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--rost);
+    border-radius: 2px;
+    padding: clamp(22px, 2.4vw, 28px);
+  }
+  .phase-kopf {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .phase-nr {
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--rost);
+  }
+  .phase-tage {
+    font-size: 12.5px;
+    color: var(--meta-text);
+  }
+  .phase-ziel {
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 12px 0 16px;
+  }
+  .phase-themen {
+    list-style: none;
+    margin: 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+  .phase-themen li {
+    font-size: 12.5px;
+    color: var(--meta-text);
+  }
+  .phase-themen li:not(:last-child)::after {
+    content: " ·";
+    color: var(--line);
+  }
+
+  /* ---------- Listen ---------- */
+  .check-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 13px;
+  }
+  .check-list-breit {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px clamp(24px, 4vw, 56px);
+    margin-top: clamp(26px, 3vw, 36px);
+  }
+  .check-list li {
+    position: relative;
+    padding-left: 34px;
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .check-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.14em;
+    width: 18px;
+    height: 18px;
+    border-radius: 1px;
+    background: var(--rost);
+  }
+  .check-list li::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 0.42em;
+    width: 8px;
+    height: 4px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(-45deg);
+  }
+  .nicht-liste {
+    list-style: none;
+    margin: clamp(24px, 2.8vw, 32px) 0 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+    max-width: 660px;
+  }
+  .nicht-liste li {
+    position: relative;
+    padding-left: 30px;
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: var(--meta-text);
+  }
+  .nicht-liste li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 14px;
+    height: 1.5px;
+    background: var(--meta);
+  }
+
+  /* ---------- Preisblock ---------- */
+  .preis-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: var(--gap);
+    align-items: start;
+    margin-top: clamp(30px, 3.6vw, 44px);
+  }
+  .preis-box {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--rost);
+    border-radius: 2px;
+    padding: clamp(24px, 2.8vw, 32px);
+  }
+  .preis-box-titel {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin: 0 0 6px;
+  }
+  .preis-box-titel .dot {
+    color: var(--orange);
+  }
+  .preis-box-name {
+    font-family: var(--serif);
+    font-size: 21px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin: 0 0 22px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    letter-spacing: -0.01em;
+  }
+  .preis-meta {
+    font-size: 12px;
+    color: var(--meta-text);
+    text-align: center;
+    margin: 14px 0 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+  }
+
+  /* ---------- Zitat-Sektionen ---------- */
+  .quote-nach {
+    max-width: 640px;
+    margin: clamp(26px, 3vw, 36px) auto 0;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--meta-text);
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq {
+    margin-top: clamp(32px, 4vw, 48px);
+    border-top: 1px solid var(--line);
+    max-width: 820px;
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+  }
+  .faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 20px 44px 20px 0;
+    position: relative;
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.8vw, 20px);
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item summary::after {
+    content: "";
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    margin-top: -8px;
+    border-right: 2px solid var(--rost);
+    border-bottom: 2px solid var(--rost);
+    transform: rotate(45deg);
+    transition: transform 0.18s ease;
+  }
+  .faq-item[open] summary::after {
+    transform: rotate(-135deg);
+    margin-top: -2px;
+  }
+  .faq-item p {
+    margin: 0;
+    padding: 0 44px 24px 0;
+    font-size: 15.5px;
+    line-height: 1.7;
+  }
+
+  /* ---------- Finaler CTA ---------- */
+  .final-kauf {
+    margin-top: clamp(32px, 3.8vw, 46px);
+    padding-top: clamp(28px, 3.2vw, 38px);
+    border-top: 1px solid rgba(242, 164, 105, 0.32);
+  }
+  .final-produkt {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin: 0 0 16px;
+  }
+  .final-meta {
+    font-size: 13px;
+    color: rgba(251, 247, 241, 0.7);
+    margin: 16px 0 0;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1080px) {
+    .phasen {
+      grid-template-columns: 1fr 1fr;
+    }
+    .preis-grid {
+      grid-template-columns: 1fr;
+    }
+    .steps-4 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  /* Mobile Hero-Reihenfolge: Text, dann Mockup, dann Preis mit CTA.
+     display:contents loest die linke Spalte auf, damit sich alle drei
+     Bloecke einzeln sortieren lassen. */
+  @media (max-width: 960px) {
+    .hero-col {
+      display: contents;
+    }
+    .hero-text {
+      order: 1;
+    }
+    .hero-visual {
+      order: 2;
+    }
+    .hero-kauf {
+      order: 3;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .phasen {
+      grid-template-columns: 1fr;
+    }
+    .steps-4 {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .check-list-breit {
+      grid-template-columns: 1fr;
+    }
+    .drei-begriffe {
+      flex-direction: column;
+      gap: 6px;
+    }
+  }
+</style>
+
+<script>
+  /* Scrolltiefe und CTA-Klicks messen. Laeuft nur, wenn zugestimmt wurde,
+     denn ohne Einwilligung sind fbq und gtag gar nicht vorhanden. */
+  const w = window as any;
+
+  function melde(name: string, daten: Record<string, unknown> = {}) {
+    try {
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({ event: name, ...daten });
+      if (typeof w.gtag === "function") w.gtag("event", name, daten);
+      if (typeof w.fbq === "function" && name === "checkout_gestartet") {
+        w.fbq("track", "InitiateCheckout", { content_name: "66 Tage", value: 247, currency: "EUR" });
+      }
+    } catch {
+      /* Messung darf nie den Kauf blockieren */
+    }
+  }
+
+  document.querySelectorAll<HTMLAnchorElement>("a[data-cta]").forEach((a) => {
+    a.addEventListener("click", () => {
+      melde("checkout_gestartet", { position: a.dataset.cta });
+    });
+  });
+
+  const marken = [25, 50, 75, 100];
+  const erreicht = new Set<number>();
+  addEventListener(
+    "scroll",
+    () => {
+      const hoehe = document.body.scrollHeight - innerHeight;
+      if (hoehe <= 0) return;
+      const anteil = (scrollY / hoehe) * 100;
+      for (const m of marken) {
+        if (anteil >= m && !erreicht.has(m)) {
+          erreicht.add(m);
+          melde("scrolltiefe", { prozent: m });
+        }
+      }
+    },
+    { passive: true }
+  );
+</script>

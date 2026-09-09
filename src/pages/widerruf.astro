@@ -1,0 +1,104 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE } from "../site";
+
+const title = "Widerrufsbelehrung | BLEIB PAPA";
+const description = "Widerrufsrecht für digitale Inhalte.";
+const b = SITE.betreiber;
+---
+
+<Base title={title} description={description} path="/widerruf/" noindex>
+  <Header />
+
+  <main>
+    <section class="page-head bg-creme">
+      <div class="wrap-narrow">
+        <p class="label">Rechtliches</p>
+        <h1 class="h1">Widerruf</h1>
+      </div>
+    </section>
+
+    <section class="section bg-white" style="padding-top:clamp(28px,3.4vw,44px)">
+      <div class="wrap-narrow prose">
+        <h2>Widerrufsrecht</h2>
+        <p>
+          Du hast das Recht, binnen vierzehn Tagen ohne Angabe von Gründen diesen Vertrag zu
+          widerrufen. Die Widerrufsfrist beträgt vierzehn Tage ab dem Tag des Vertragsabschlusses.
+        </p>
+        <p>
+          Um dein Widerrufsrecht auszuüben, musst du mich
+        </p>
+        <p>
+          {b.name}<br />
+          {b.strasse}, {b.plz} {b.ort}<br />
+          E-Mail: <a href={`mailto:${b.email}`}>{b.email}</a>
+          {b.telefon && <><br />Telefon: {b.telefon}</>}
+        </p>
+        <p>
+          mittels einer eindeutigen Erklärung (zum Beispiel per Post oder E-Mail) über deinen
+          Entschluss informieren, diesen Vertrag zu widerrufen. Zur Wahrung der Widerrufsfrist
+          reicht es aus, dass du die Mitteilung über die Ausübung des Widerrufsrechts vor Ablauf
+          der Widerrufsfrist absendest.
+        </p>
+
+        <h2>Folgen des Widerrufs</h2>
+        <p>
+          Wenn du diesen Vertrag widerrufst, habe ich dir alle Zahlungen, die ich von dir erhalten
+          habe, unverzüglich und spätestens binnen vierzehn Tagen ab dem Tag zurückzuzahlen, an dem
+          die Mitteilung über deinen Widerruf bei mir eingegangen ist. Für die Rückzahlung verwende
+          ich dasselbe Zahlungsmittel, das du bei der ursprünglichen Transaktion eingesetzt hast,
+          es sei denn, wir haben ausdrücklich etwas anderes vereinbart. In keinem Fall werden dir
+          wegen dieser Rückzahlung Entgelte berechnet.
+        </p>
+
+        <h2>Vorzeitiges Erlöschen des Widerrufsrechts</h2>
+        <p>
+          Bei einem Vertrag über die Lieferung von digitalen Inhalten, die nicht auf einem
+          körperlichen Datenträger geliefert werden, erlischt dein Widerrufsrecht auch dann, wenn
+          ich mit der Ausführung des Vertrags begonnen habe, nachdem du
+        </p>
+        <ol>
+          <li>
+            ausdrücklich zugestimmt hast, dass ich mit der Ausführung des Vertrags vor Ablauf der
+            Widerrufsfrist beginne, und
+          </li>
+          <li>
+            deine Kenntnis davon bestätigt hast, dass du durch deine Zustimmung mit Beginn der
+            Ausführung des Vertrags dein Widerrufsrecht verlierst, und
+          </li>
+          <li>
+            ich dir eine Bestätigung des Vertrags nach § 312f BGB zur Verfügung gestellt habe.
+          </li>
+        </ol>
+        <p>
+          Da dir der Zugang zu den Programminhalten unmittelbar nach dem Kauf bereitgestellt wird,
+          hole ich diese Zustimmung im Bestellvorgang ausdrücklich ein.
+        </p>
+
+        <h2>Muster-Widerrufsformular</h2>
+        <p>
+          Wenn du den Vertrag widerrufen willst, kannst du dieses Formular ausfüllen und
+          zurücksenden. Notwendig ist das nicht, eine formlose Nachricht genügt.
+        </p>
+        <blockquote>
+          An {b.name}, {b.strasse}, {b.plz} {b.ort}, {b.email}
+          <br /><br />
+          Hiermit widerrufe ich den von mir abgeschlossenen Vertrag über den Kauf der folgenden
+          Ware / die Erbringung der folgenden Dienstleistung:
+          <br /><br />
+          Bestellt am / erhalten am:
+          <br />
+          Name des Verbrauchers:
+          <br />
+          Anschrift des Verbrauchers:
+          <br />
+          Datum, Unterschrift (nur bei Mitteilung auf Papier)
+        </blockquote>
+      </div>
+    </section>
+  </main>
+
+  <Footer verkauf />
+</Base>

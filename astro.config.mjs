@@ -13,7 +13,7 @@ export default defineConfig({
     sitemap({
       // Rechtsseiten sowie Danke- und Download-Seite gehören nicht in die Sitemap.
       filter: (page) =>
-        !["/danke", "/guide", "/66-tage", "/impressum", "/datenschutz"].some((p) => page.includes(p)),
+        !["/danke", "/guide", "/impressum", "/datenschutz", "/agb", "/widerruf"].some((p) => page.includes(p)),
     }),
   ],
 });

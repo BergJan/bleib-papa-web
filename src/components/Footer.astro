@@ -4,8 +4,10 @@ import { SITE } from "../site";
 interface Props {
   /** Auf der Landingpage bleibt der Blog-Link weg, damit nichts vom Opt-in ablenkt. */
   minimal?: boolean;
+  /** Auf Verkaufsseiten kommen AGB und Widerrufsbelehrung dazu (Pflicht). */
+  verkauf?: boolean;
 }
-const { minimal = false } = Astro.props;
+const { minimal = false, verkauf = false } = Astro.props;
 ---
 
 <footer class="footer">
@@ -15,9 +17,11 @@ const { minimal = false } = Astro.props;
       <p class="tag">{SITE.claim}</p>
     </div>
     <nav aria-label="Rechtliches">
-      {!minimal && <a href="/blog/">Blog</a>}
+      {!minimal && !verkauf && <a href="/blog/">Blog</a>}
       <a href="/impressum/">Impressum</a>
       <a href="/datenschutz/">Datenschutz</a>
+      {verkauf && <a href="/agb/">AGB</a>}
+      {verkauf && <a href="/widerruf/">Widerruf</a>}
       <a href="/kontakt/">Kontakt</a>
     </nav>
   </div>

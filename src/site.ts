@@ -15,6 +15,12 @@ export const SITE = {
   optinEndpoint: "/.netlify/functions/optin",
 
   /**
+   * Checkout des 66-Tage-Programms (Digistore24, Copecart, elopage, Stripe ...).
+   * Solange leer, springen die Kaufbuttons zum Preisblock auf der Seite.
+   */
+  checkoutUrl: "",
+
+  /**
    * Tracking. Solange beide Felder leer sind, wird nichts geladen und es
    * erscheint kein Einwilligungsbanner. Sobald eine ID eingetragen ist,
    * erscheint das Banner und das jeweilige Werkzeug wird erst nach
