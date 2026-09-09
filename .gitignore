@@ -4,3 +4,6 @@ dist/
 .netlify/
 .env
 .DS_Store
+
+# Lokale Entwicklungs-Einstellungen
+.claude/
