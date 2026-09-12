@@ -28,7 +28,7 @@ quellen:
     abgerufen: 2026-09-12
   - name: "STARK / Ludwig-Maximilians-Universität München"
     titel: "Belastungsreaktionen beim Umgang"
-    url: "https://www.stark-familie.info/media/filer_public/8e/f6/8ef6fed0-3b3b-42cb-bf7c-c643a3ec0f53/stark_belastungsreaktionen_beim_umgang.pdf"
+    url: "https://s3.fr-par.scw.cloud/stark-production-media-public/filer_public/8e/f6/8ef6fed0-3b3b-42cb-bf7c-c643a3ec0f53/stark_belastungsreaktionen_beim_umgang.pdf"
     art: fachpublikation
     abgerufen: 2026-09-12
   - name: "Bundesinstitut für Öffentliche Gesundheit"
