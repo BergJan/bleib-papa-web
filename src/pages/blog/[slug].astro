@@ -1,4 +1,6 @@
 ---
+import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
 import { render, type CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Header from "../../components/Header.astro";
@@ -32,7 +34,23 @@ const { Content } = await render(post);
 
 const autor = await autorVon(post);
 const weitere = await weitereBeitraege(post);
-const spalte = await weitereBeitraege(post, 5);
+/* Mit Vorschaubildern braucht jeder Eintrag mehr Platz. Vier passen neben den
+   Aufruf, ohne dass "Alle Beiträge" aus dem Blick rutscht. */
+const spalte = await weitereBeitraege(post, 4);
+
+/**
+ * Vorschaubild eines Beitrags, erzeugt von werkzeuge/vorschaubilder.mjs.
+ * Fehlt es, etwa weil jemand im Backend gerade ein neues Bild hochgeladen hat,
+ * bleibt der Eintrag einfach ohne Bild statt mit einem toten Kasten.
+ */
+const vorschau = (p: CollectionEntry<"blog">) => {
+  const adresse = `/uploads/vorschau/${p.id}.jpg`;
+  /* Gegen das Arbeitsverzeichnis zu pruefen geht schief, sobald der Befehl
+     woanders gestartet wird. Deshalb von dieser Datei aus rechnen. */
+  return existsSync(fileURLToPath(new URL(`../../../public${adresse}`, import.meta.url)))
+    ? adresse
+    : null;
+};
 const autorPfad = autor ? `/autor/${autor.id}/` : null;
 const cta = ctaVon(post);
 /* Halb ausgefuellte Zeilen aus dem Redaktionssystem werden still uebersprungen,
@@ -337,7 +355,22 @@ const teile = cta ? teileFuerEinschub(post.rendered?.html ?? "", d.ctaImText) : 
                   <ul>
                     {spalte.map((w) => (
                       <li>
-                        <a href={pfad(w)}>{w.data.titel}</a>
+                        <a href={pfad(w)}>
+                          {vorschau(w) && (
+                            /* alt bleibt leer: Der Titel daneben sagt schon, wohin
+                               der Link fuehrt. Ein zweiter Text waere fuer den
+                               Screenreader nur Wiederholung. */
+                            <img
+                              src={vorschau(w)}
+                              alt=""
+                              width="200"
+                              height="113"
+                              loading="lazy"
+                              decoding="async"
+                            />
+                          )}
+                          <span>{w.data.titel}</span>
+                        </a>
                       </li>
                     ))}
                   </ul>

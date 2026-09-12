@@ -20,6 +20,7 @@ import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { inflateRawSync } from "node:zlib";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
+import { vorschauErzeugen } from "./vorschaubilder.mjs";
 
 /* ------------------------------------------------------------------ ZIP */
 
@@ -433,10 +434,14 @@ const quellen = quellenAus(bloecke.QUELLEN);
 
 let bild = bildFertig;
 let bildInfo = null;
+let vorschauInfo = null;
 const rohbild = bildDatei ?? (bildFertig ? null : bildImOrdner(quelle));
 if (rohbild) {
   bildInfo = bildUebernehmen(rohbild, slug);
   bild = bildInfo.pfad;
+  /* Gleich mit erzeugen. Die Randspalte zeigt kleine Vorschaubilder, und das
+     grosse Bild dafuer herunterzuskalieren waere zwanzigmal so schwer. */
+  vorschauInfo = vorschauErzeugen(rohbild, slug);
 }
 
 const daten = {
@@ -479,6 +484,7 @@ console.log(`${ziel}
   FAQ:          ${faq.length}
   Quellen:      ${quellen.length}${quellen.some((q) => !q.url) ? "  (ohne URL: " + quellen.filter((q) => !q.url).length + ")" : ""}
   Entitaeten:   ${daten.entitaeten.length}
+  Vorschau:     ${vorschauInfo ? vorschauInfo.pfad + "  " + Math.round(vorschauInfo.groesse / 1024) + " KB" : "keine"}
   Bild:         ${bildInfo ? bildInfo.pfad + "  " + bildInfo.masse + ", " + bildInfo.nachher + " KB statt " + bildInfo.vorher + " KB" : (bild ?? "keins")}`);
 
 const fehlend = ["teaser", "quickAnswer", "seoTitel", "metaBeschreibung", "bildAlt"].filter(
