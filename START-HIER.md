@@ -18,7 +18,9 @@ bleib-papa-web/
 │  ├─ admin/               Editor-Oberfläche für den Blog
 │  └─ uploads/             Bilder, die du im Editor hochlädst
 ├─ netlify/functions/
-│  └─ optin.mjs            übergibt Anmeldungen an Brevo
+│  ├─ optin.mjs            übergibt Anmeldungen an Brevo
+│  ├─ geplant-pruefen.mjs  stößt nachts den Build an, wenn ein Beitrag fällig ist
+│  └─ deploy-succeeded.mjs meldet neue Beiträge nach dem Deploy bei IndexNow
 └─ brevo/doi-mail.html     Vorlage der Bestätigungsmail (zum Nachschlagen)
 ```
 
@@ -73,7 +75,7 @@ Archiviert bleiben unsichtbar.
 **Autor**
 
 Autorenprofile liegen unter *Autoren* im Backend. Jedes Profil bekommt eine eigene Seite
-(`/autor/jan-philip-berg/`), die unter jedem Beitrag verlinkt ist. Das zahlt auf die Frage
+(`/autor/jan/`), die unter jedem Beitrag verlinkt ist. Das zahlt auf die Frage
 ein, warum ausgerechnet hier jemand über dieses Thema schreibt.
 
 Formatierung: `##` für Zwischenüberschriften, `**fett**`, `>` für ein hervorgehobenes Zitat.
@@ -115,7 +117,7 @@ Bilder vorher verkleinern: 2 MB PNG aus einem KI-Werkzeug werden als JPEG mit
 
 Ein Beitrag im Status **Geplant** erscheint automatisch, sobald sein
 Veröffentlichungsdatum erreicht ist. Dafür sorgt die Funktion
-`netlify/functions/geplant-pruefen.mjs`: Sie läuft jede Nacht um 4:30 Uhr UTC,
+`netlify/functions/geplant-pruefen.mjs`: Sie läuft jede Nacht um 4:00 Uhr UTC,
 liest die Terminliste unter `/geplant.json` und stößt nur dann einen Build an,
 wenn wirklich ein Beitrag fällig ist. An Tagen ohne Termin passiert nichts,
 das spart Credits.
@@ -126,6 +128,24 @@ Fehlt sie, tut die Funktion nichts und schreibt das ins Protokoll.
 
 `/geplant.json` enthält absichtlich nur Datumsangaben, keine Titel und keine
 Texte. Über einen unveröffentlichten Beitrag steht dort nichts.
+
+---
+
+## Neue Beiträge bei Bing anmelden
+
+Sobald ein Deploy live ist, startet Netlify die Funktion
+`netlify/functions/deploy-succeeded.mjs`. Sie liest die frische Sitemap, nimmt
+alle Beiträge, deren `lastmod` auf den heutigen Tag fällt, und meldet sie bei
+IndexNow. Bing weiß dann innerhalb von Minuten Bescheid statt erst beim
+nächsten Besuch. An Tagen ohne neuen Beitrag passiert nichts.
+
+Nichts einzurichten, kein Konto, kein Schlüssel in Netlify. Die Echtheit
+belegt die Datei `public/5f3ffe7e303de1244b16c2cc7d652a7f.txt`, deren Name und
+Inhalt derselbe Wert sind wie `SCHLUESSEL` in der Funktion. **Ändert sich der
+eine, muss der andere mit**, sonst verwirft IndexNow die Meldung.
+
+Google macht bei IndexNow nicht mit. Dort bleibt es bei Sitemap und, in den
+ersten Wochen, der URL-Prüfung von Hand in der Search Console.
 
 ---
 
@@ -152,7 +172,7 @@ Um das Banner abzuschalten, sobald kein Tracking mehr läuft: beide IDs leeren u
 |---|---|
 | Netlify → Environment variables | `BREVO_API_KEY`, `BREVO_LIST_ID` (14), `BREVO_DOI_TEMPLATE_ID` (34), `BREVO_DOI_REDIRECT` |
 | Brevo → Sicherheit | IP-Beschränkung für API-Schlüssel ist **aus** (nötig, weil Netlify wechselnde IPs nutzt) |
-| Strato → DNS | A-Record auf `75.2.60.5`, `www` als CNAME, dazu SPF, DKIM und der Brevo-Code |
+| Strato → DNS | A-Record auf `75.2.60.5`, `www` als CNAME, dazu SPF, DKIM, der Brevo-Code und der `google-site-verification`-Eintrag der Search Console |
 | GitHub → OAuth App | `BLEIB PAPA CMS`, Callback `https://api.netlify.com/auth/done` |
 
 Beide Domains (`bleibpapa.de` und `bleib-papa.de`, jeweils mit und ohne `www`) leiten
