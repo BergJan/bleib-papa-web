@@ -44,7 +44,7 @@ quellen:
     art: behoerde
     abgerufen: 2026-09-12
 bild: "/uploads/praesenter-vater-vollzeitjob-nach-trennung.jpg"
-bildAlt: "Vater sitzt nach Feierabend mit seinem Kind am Küchentisch, während der geschlossene Arbeitslaptop danebenliegt."
+bildAlt: "Vater im Hemd sitzt nach der Arbeit mit seiner Tochter am Küchentisch und schaut ihr beim Schreiben zu, daneben der noch aufgeklappte Laptop und die Arbeitstasche am Stuhl."
 seo:
   titel: "Präsenter Vater trotz Vollzeitjob nach der Trennung"
   beschreibung: "Vollzeitjob und getrennt Vater sein: So bleibst du verlässlich präsent, kennst den Alltag deines Kindes und schützt eure gemeinsame Zeit vor dem Beruf."
