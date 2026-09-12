@@ -46,6 +46,18 @@ const ergebnisse = await Promise.all(
  */
 const GESPERRT = [203, 403, 401, 429];
 
+/**
+ * Haeuser, deren Sperre wir kennen und akzeptieren. Einmal von Hand angesehen
+ * reicht, sie jeden Lauf erneut als Aufgabe vorgelegt zu bekommen nicht. Was
+ * hier NICHT steht und trotzdem sperrt, ist neu und wird weiter gemeldet.
+ */
+const BEKANNTE_SPERREN = ["pubmed.ncbi.nlm.nih.gov", "doi.org", "tandfonline.com"];
+
+const istBekannt = (u) => {
+  const host = new URL(u).hostname.replace(/^www\./, "");
+  return BEKANNTE_SPERREN.some((h) => host === h || host.endsWith("." + h));
+};
+
 const ok = ergebnisse.filter((e) => e.status === 200);
 const gesperrt = ergebnisse.filter((e) => GESPERRT.includes(e.status));
 const kaputt = ergebnisse.filter((e) => e.status !== 200 && !GESPERRT.includes(e.status));
@@ -66,10 +78,19 @@ if (umleitung.length) {
   }
 }
 
-if (gesperrt.length) {
-  console.log("NICHT MASCHINELL PRUEFBAR (Bot-Sperre des Verlags), einmal von Hand ansehen:\n");
-  for (const e of gesperrt) console.log(`  ${e.status}  ${e.url}`);
-  console.log();
+const neuGesperrt = gesperrt.filter((e) => !istBekannt(e.url));
+
+if (neuGesperrt.length) {
+  console.log("NEUE BOT-SPERRE, einmal von Hand im Browser ansehen:\n");
+  for (const e of neuGesperrt) {
+    console.log(`  ${e.status}  ${e.url}`);
+    console.log(`        in: ${urls.get(e.url).join(", ")}\n`);
+  }
+}
+
+const bekannt = gesperrt.length - neuGesperrt.length;
+if (bekannt) {
+  console.log(`${bekannt} Adressen bei bekannten Bot-Sperren (${BEKANNTE_SPERREN.join(", ")}), abgehakt.\n`);
 }
 
 console.log(
