@@ -74,7 +74,7 @@ redaktion:
     - "gesund.bund"
 status: geplant
 datum: 2026-09-29
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

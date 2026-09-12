@@ -68,7 +68,7 @@ redaktion:
     - "PubMed"
 status: geplant
 datum: 2026-09-17
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

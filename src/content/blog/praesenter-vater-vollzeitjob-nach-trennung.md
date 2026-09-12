@@ -72,7 +72,7 @@ redaktion:
     - "Väterreport"
 status: geplant
 datum: 2026-09-30
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

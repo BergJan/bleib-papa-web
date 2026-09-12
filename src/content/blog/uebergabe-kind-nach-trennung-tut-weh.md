@@ -64,7 +64,7 @@ redaktion:
     - "Erziehungs- und Familienberatungsstellen"
 status: geplant
 datum: 2026-09-12
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

@@ -58,7 +58,7 @@ redaktion:
     - "Trennungsfamilien"
 status: veroeffentlicht
 datum: 2026-09-09
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

@@ -33,6 +33,12 @@
   status = 301
   force = true
 
+# Die Autorenseite lief frueher unter dem vollen Namen.
+[[redirects]]
+  from = "/autor/jan-philip-berg/*"
+  to = "/autor/jan/"
+  status = 301
+
 # Sicherheits-Header
 [[headers]]
   for = "/*"

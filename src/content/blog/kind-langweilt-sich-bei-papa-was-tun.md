@@ -79,7 +79,7 @@ redaktion:
     - "Bundesinstitut für Öffentliche Gesundheit"
 status: geplant
 datum: 2026-09-21
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

@@ -104,7 +104,7 @@ redaktion:
     - "klicksafe"
 status: geplant
 datum: 2026-09-20
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

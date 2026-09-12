@@ -67,7 +67,7 @@ redaktion:
     - "Kindeswille"
 status: geplant
 datum: 2026-09-13
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

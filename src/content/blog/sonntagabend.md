@@ -11,7 +11,7 @@ faq:
     antwort: "Erzähl statt abzufragen. „Wie war die Schule?“ führt bei den meisten Kindern zu „gut“. Wenn du kurz von deinem eigenen Tag erzählst, steigen Kinder leichter ein, weil sie nicht das Gefühl haben, Auskunft geben zu müssen."
 datum: 2026-09-08
 status: veroeffentlicht
-autor: jan-philip-berg
+autor: jan
 bild: /assets/szene-abend.jpg
 bildAlt: "Ein Vater sitzt abends allein am Esstisch, auf dem noch eine Kinderzeichnung und ein Spielzeugauto liegen."
 seo:

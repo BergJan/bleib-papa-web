@@ -70,7 +70,7 @@ redaktion:
     - "Familienberatung"
 status: geplant
 datum: 2026-09-24
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

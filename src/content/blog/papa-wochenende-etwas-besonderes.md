@@ -54,7 +54,7 @@ redaktion:
     - "Residenzmodell"
 status: geplant
 datum: 2026-09-11
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

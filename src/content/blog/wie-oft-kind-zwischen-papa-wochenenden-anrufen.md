@@ -77,7 +77,7 @@ redaktion:
     - "Kindeswohl und Kontakt außerhalb der persönlichen Umgangszeiten"
 status: geplant
 datum: 2026-09-10
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

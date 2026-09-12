@@ -66,7 +66,7 @@ redaktion:
     - "Familienportal des Bundes"
 status: geplant
 datum: 2026-09-16
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

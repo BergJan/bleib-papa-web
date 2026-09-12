@@ -77,7 +77,7 @@ redaktion:
     - "Jugendamt"
 status: geplant
 datum: 2026-09-14
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

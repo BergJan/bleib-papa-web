@@ -146,7 +146,7 @@ const blog = defineCollection({
     aktualisiert: datumsfeld.optional(),
     aktualisiertZeigen: z.boolean().default(false),
     /** Dateiname eines Profils aus src/content/autoren/, ohne .md */
-    autor: z.string().default("jan-philip-berg"),
+    autor: z.string().default("jan"),
   }),
 });
 

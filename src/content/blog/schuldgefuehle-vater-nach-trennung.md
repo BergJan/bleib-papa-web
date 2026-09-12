@@ -80,7 +80,7 @@ redaktion:
     - "Erziehungs- und Familienberatung"
 status: geplant
 datum: 2026-09-22
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 
