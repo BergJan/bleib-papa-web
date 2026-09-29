@@ -24,3 +24,19 @@ const { aktiv } = Astro.props;
     ))
   }
 </nav>
+
+<script>
+  /**
+   * Auf dem Handy ist die Leiste eine Zeile zum Wischen. Die hinteren Welten
+   * liegen dann rechts ausserhalb des Bildes. Wer auf "Deine Rolle als Vater"
+   * landet, saehe sonst eine Leiste, in der nichts ausgewaehlt aussieht.
+   * Deshalb wird der aktive Knopf hereingeholt, ohne die Seite zu bewegen.
+   */
+  for (const leiste of document.querySelectorAll<HTMLElement>(".themenleiste")) {
+    const aktiv = leiste.querySelector<HTMLElement>(".ist-hier");
+    if (!aktiv || leiste.scrollWidth <= leiste.clientWidth) continue;
+
+    const mitte = aktiv.offsetLeft - (leiste.clientWidth - aktiv.offsetWidth) / 2;
+    leiste.scrollLeft = Math.max(0, mitte);
+  }
+</script>

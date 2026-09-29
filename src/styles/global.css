@@ -329,7 +329,7 @@ p:last-child{margin-bottom:0}
 .band-blog img{height:clamp(200px,30vw,400px);object-position:50% 58%}
 /* ---------- Themenwelten ---------- */
 .themenleiste{
-  display:flex;flex-wrap:wrap;gap:8px;
+  display:flex;flex-wrap:wrap;gap:8px;position:relative;
   margin-bottom:clamp(28px,3.4vw,42px);
 }
 .thema-knopf{
@@ -352,6 +352,13 @@ p:last-child{margin-bottom:0}
   }
   .themenleiste::-webkit-scrollbar{display:none}
   .thema-knopf{white-space:nowrap;flex:0 0 auto}
+}
+
+/* Groessere Flaechen zum Antippen, bis hinauf zum Tablet. Ab 1100 Pixel steht
+   die Randspalte, dort sitzt in aller Regel eine Maus davor. Mit dem Daumen
+   trifft man eine 37 Pixel hohe Flaeche schlecht, 44 sind das Mass. */
+@media (max-width:1099px){
+  .thema-knopf{padding:12px 16px}
 }
 
 /* Die Themenwelt neben dem Datum im Artikelkopf. */
@@ -645,9 +652,14 @@ p:last-child{margin-bottom:0}
 .inhalt-klapp summary::-webkit-details-marker{display:none}
 .inhalt-klapp summary::after{content:"+";font-size:16px;letter-spacing:0;line-height:1}
 .inhalt-klapp[open] summary::after{content:"–"}
-.inhalt-klapp ol{margin:0 0 16px;padding:0 0 0 22px;display:grid;gap:9px}
+.inhalt-klapp ol{margin:0 0 10px;padding:0 0 0 22px;display:grid;gap:0}
 .inhalt-klapp li{font-size:15.5px;line-height:1.4;color:var(--meta-text)}
-.inhalt-klapp a{color:var(--body);text-decoration:none;border-bottom:1px solid transparent}
+/* Als Block mit Polsterung, damit jede Zeile mit dem Daumen zu treffen ist.
+   Neunzehn Pixel hohe Textzeilen sind auf dem Handy zu wenig. */
+.inhalt-klapp a{
+  display:block;padding:9px 0;
+  color:var(--body);text-decoration:none;border-bottom:1px solid transparent;
+}
 .inhalt-klapp a:hover{color:var(--ink);border-bottom-color:var(--line)}
 
 /* In der Randspalte, ohne Nummern: Dort zaehlt der Ueberblick, nicht die
@@ -740,7 +752,14 @@ p:last-child{margin-bottom:0}
 .blaettern-zahlen .ist-hier{background:var(--navy);color:var(--creme)}
 .blaettern-luecke{align-items:center;color:var(--meta);padding:0 2px}
 
+/* Zum Antippen gross genug, bis hinauf zum Tablet. Der Textlink war zwanzig
+   Pixel hoch, die Zahlen vierunddreissig. */
+@media (max-width:1099px){
+  .blaettern-pfeil{padding:12px 4px}
+  .blaettern-zahlen a,.blaettern-zahlen .ist-hier{min-width:42px;height:42px}
+}
+
 @media (max-width:560px){
-  .blaettern{flex-direction:column;gap:16px}
-  .blaettern-zahlen{order:-1}
+  .blaettern{flex-direction:column;gap:6px}
+  .blaettern-zahlen{order:-1;margin-bottom:10px}
 }
