@@ -438,7 +438,7 @@ Jede freie Stunde anbieten.
 
 Das ist nicht nötig.
 
-Auch die RoleDNA von BLEIB PAPA zieht hier eine klare Grenze: Ein Vater darf arbeiten, Freunde haben, Interessen verfolgen und ein eigenes Leben führen. Das Kind darf ein wichtiger Teil seines Lebens sein, ohne sein gesamtes Leben sein zu müssen.
+Auch BLEIB PAPA zieht hier eine klare Grenze: Ein Vater darf arbeiten, Freunde haben, Interessen verfolgen und ein eigenes Leben führen. Das Kind darf ein wichtiger Teil seines Lebens sein, ohne sein gesamtes Leben sein zu müssen.
 
 Das ist auch für dein Kind gesund.
 

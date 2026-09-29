@@ -604,9 +604,16 @@ p:last-child{margin-bottom:0}
   border-top:1px solid var(--line);
 }
 .blaettern-pfeil{
+  display:inline-flex;align-items:center;gap:8px;
   font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
   color:var(--rost);text-decoration:none;white-space:nowrap;
 }
+/* Der Pfeil sitzt optisch etwas hoeher als die Versalien, deshalb leicht groesser
+   und ohne die Sperrung der Schrift. */
+.blaettern-pfeil .pfeil{font-size:16px;letter-spacing:0;line-height:1;transition:transform .16s ease}
+.blaettern-pfeil:hover .pfeil{transform:translateX(var(--weg,0))}
+.blaettern-pfeil:first-child:hover .pfeil{--weg:-3px}
+.blaettern-pfeil:last-child:hover .pfeil{--weg:3px}
 .blaettern-pfeil:hover{text-decoration:underline;text-underline-offset:3px}
 .blaettern-pfeil.ist-aus{color:var(--meta);pointer-events:none}
 

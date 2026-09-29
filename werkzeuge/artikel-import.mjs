@@ -141,6 +141,19 @@ const INLINE_ZITAT = /\s*\(\[[^\]]*\]\(https?:\/\/[^)\s]*\)\)/g;
 const MD_LINK = /\[([^\]]*)\]\(https?:\/\/[^)\s]*\)/g;
 const TRACKING = /([?&])(utm_[a-z]+|fbclid|gclid)=[^&)\s"]*/gi;
 
+/**
+ * Das Modell kennt noch eine zweite Form: Es haengt den Beleg ans Satzende,
+ * oft als leeren Link mit Namen dahinter, " [ ](https://...)[Stark Familie](https://...)".
+ * MD_LINK faengt beides, denn im Fliesstext soll ohnehin kein Link stehen.
+ *
+ * Und eine dritte, unangenehmere: Es schreibt den Dateinamen seiner eigenen
+ * Wissensdokumente an den Absatz, etwa "21_Wege" oder "RoleDNA für BLEIB PAPA (1)".
+ * Die stehen immer allein am Zeilenende und gehoeren niemals in einen Text,
+ * den ein Leser sieht.
+ */
+const DOKUMENTNAME =
+  /[ \t]+(21_Wege|RoleDNA für BLEIB PAPA( \(\d\))?|Bleibpapa_66_Impulse|Botschaften Playbook|Nischen Blueprint|Positionierungsdokument( \(\d\))?|Tiefenschmerz Landkarte|ZIELGRUPPEN-Tiefenanalyse( \(\d\))?)[ \t]*$/gm;
+
 /* Zeilenweise, damit die fuehrende Einrueckung stehen bleibt. Sonst frisst die
    Leerzeichen-Bereinigung die Einrueckung von Listen und Codebloecken. */
 const aufraeumen = (t) =>
@@ -162,9 +175,18 @@ const aufraeumen = (t) =>
 /** Fuer Felder: gar keine Links, nur der Linktext bleibt stehen. */
 const feldText = (t) => aufraeumen(String(t ?? "").replace(INLINE_ZITAT, "").replace(MD_LINK, "$1"));
 
-/** Fuer den Fliesstext: nur die Quellen-Klammern raus, echte Links bleiben. */
+/**
+ * Fuer den Fliesstext. Quellen stehen bei uns im Quellenblock, im Text steht
+ * kein einziger Link: weder in Klammern noch als Beleg am Satzende. Vom
+ * Linktext bleibt nichts stehen, denn es waren immer nur Quellennamen.
+ */
 const fliessText = (t) =>
-  aufraeumen(String(t ?? "").replace(INLINE_ZITAT, "")).replace(TRACKING, "");
+  aufraeumen(
+    String(t ?? "")
+      .replace(INLINE_ZITAT, "")
+      .replace(MD_LINK, "")
+      .replace(DOKUMENTNAME, ""),
+  ).replace(TRACKING, "");
 
 const MARKER = ["=== TEXT ===", "=== FAQ ===", "=== QUELLEN ===", "=== NOTIZEN ==="];
 const FELDZEILE = /^([A-ZÄÖÜ][A-ZÄÖÜ0-9 .\-\/]{1,30}):\s*(.*)$/;

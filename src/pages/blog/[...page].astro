@@ -107,10 +107,14 @@ const seitenPfad = (n: number) => (n === 1 ? "/blog/" : `/blog/${n}/`);
             <nav class="blaettern" aria-label="Seiten">
               {page.url.prev ? (
                 <a class="blaettern-pfeil" href={page.url.prev} rel="prev">
+                  <span class="pfeil" aria-hidden="true">←</span>
                   Neuere Beiträge
                 </a>
               ) : (
-                <span class="blaettern-pfeil ist-aus">Neuere Beiträge</span>
+                <span class="blaettern-pfeil ist-aus">
+                  <span class="pfeil" aria-hidden="true">←</span>
+                  Neuere Beiträge
+                </span>
               )}
 
               <ol class="blaettern-zahlen">
@@ -131,9 +135,13 @@ const seitenPfad = (n: number) => (n === 1 ? "/blog/" : `/blog/${n}/`);
               {page.url.next ? (
                 <a class="blaettern-pfeil" href={page.url.next} rel="next">
                   Ältere Beiträge
+                  <span class="pfeil" aria-hidden="true">→</span>
                 </a>
               ) : (
-                <span class="blaettern-pfeil ist-aus">Ältere Beiträge</span>
+                <span class="blaettern-pfeil ist-aus">
+                  Ältere Beiträge
+                  <span class="pfeil" aria-hidden="true">→</span>
+                </span>
               )}
             </nav>
           )
