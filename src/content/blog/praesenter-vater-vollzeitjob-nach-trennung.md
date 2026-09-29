@@ -2,6 +2,7 @@
 titel: "Wie kann ich trotz Vollzeitjob nach der Trennung ein präsenter Vater bleiben?"
 slug: "praesenter-vater-vollzeitjob-nach-trennung"
 teaser: "Ein Vollzeitjob verschwindet nach der Trennung nicht. Der gemeinsame Familienalltag dagegen oft schon. Präsenz entsteht deshalb weniger durch ständig freie Zeit als durch verlässliche Zeiten, echtes Interesse und Verantwortung, die auch zwischen euren gemeinsamen Tagen bestehen bleibt."
+thema: "deine-vaterrolle"
 quickAnswer: "Du kannst trotz Vollzeitjob nach der Trennung ein präsenter Vater bleiben, wenn dein Kind nicht nur deine freie Restzeit bekommt. Plane gemeinsame Zeiten genauso verbindlich wie berufliche Termine, bleib an wichtigen Dingen im Alltag deines Kindes dran und übernimm auch normale Vateraufgaben statt nur Freizeit. Entscheidend ist nicht, rund um die Uhr erreichbar zu sein, sondern dass dein Kind dich wiederholt als interessiert, aufmerksam und verlässlich erlebt."
 faq:
   - frage: "Kann ich mit einem Vollzeitjob überhaupt ein präsenter Vater sein?"

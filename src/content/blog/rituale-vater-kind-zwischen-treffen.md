@@ -2,6 +2,7 @@
 titel: "Welche Rituale helfen Vater und Kind zwischen den Treffen?"
 slug: "rituale-vater-kind-zwischen-treffen"
 teaser: "Ein gutes Ritual hält nicht ständig Kontakt. Es schafft einen kleinen, verlässlichen Moment, der immer wieder sagt: Wir gehören zusammen, auch wenn wir uns gerade nicht sehen."
+thema: "kontakt-halten"
 quickAnswer: "Zwischen den Treffen helfen vor allem Rituale, die klein, verlässlich und leicht wiederholbar sind: eine feste Sprachnachricht, ein gemeinsamer Insider, ein bestimmter Telefontermin oder etwas, das ihr beim nächsten Treffen fortsetzt. Entscheidend ist nicht, wie oft ihr Kontakt habt. Ein Ritual trägt dann, wenn es zu eurem Alltag passt und dein Kind dabei nichts leisten muss."
 faq:
   - frage: "Wie oft sollte ich mein Kind zwischen den Treffen kontaktieren?"

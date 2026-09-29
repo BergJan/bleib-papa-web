@@ -74,6 +74,23 @@ collections:
           Ein bis zwei Sätze für die Blogübersicht. Das ist nicht automatisch die
           Meta Description, die steht weiter unten im Bereich SEO.
 
+      - label: Themenwelt
+        name: thema
+        widget: select
+        required: false
+        default: ""
+        hint: >-
+          Ordnet den Beitrag einer der fünf Welten zu. Er erscheint dann auf der
+          passenden Themenseite und verlinkt von dort aus die verwandten Artikel.
+          Leer lassen geht, dann steht er nur in der Gesamtliste.
+        options:
+          - { label: "— keine —", value: "" }
+          - { label: "Kontakt zwischen den Tagen", value: "kontakt-halten" }
+          - { label: "Eure gemeinsame Zeit", value: "gemeinsame-zeit" }
+          - { label: "Abschied und Vermissen", value: "abschied-und-vermissen" }
+          - { label: "Ex-Partnerin und neue Partner", value: "ex-und-neue-partner" }
+          - { label: "Deine Rolle als Vater", value: "deine-vaterrolle" }
+
       - label: Beitragsbild
         name: bild
         widget: image

@@ -2,6 +2,7 @@
 titel: "Wie gestalte ich ein gutes Wochenende mit meinem Kind nach der Trennung?"
 slug: "gutes-wochenende-mit-kind-nach-trennung"
 teaser: "Ein gutes Papa-Wochenende muss nicht vollgepackt sein. Dein Kind braucht bei dir nicht jedes Mal ein besonderes Erlebnis, sondern einen Platz, an dem es ankommen, Alltag erleben und selbstverständlich mit dir zusammen sein kann."
+thema: "gemeinsame-zeit"
 quickAnswer: "Ein gutes Wochenende mit deinem Kind nach der Trennung entsteht nicht dadurch, dass du jede Stunde optimal nutzt. Plane einen einfachen Rahmen, lass dein Kind ankommen, beziehe seine Wünsche ein und gib auch normalem Alltag, Freunden und Langeweile Platz. Entscheidend ist nicht, ob am Sonntag alles perfekt war, sondern ob dein Kind erlebt: Bei Papa darf ich einfach sein und ich gehöre hierher."
 faq:
   - frage: "Was kann ich am Papa-Wochenende mit meinem Kind unternehmen?"

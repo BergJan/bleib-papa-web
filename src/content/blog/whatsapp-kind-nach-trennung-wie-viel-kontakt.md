@@ -2,6 +2,7 @@
 titel: "WhatsApp mit dem Kind nach der Trennung – wie viel Kontakt ist sinnvoll?"
 slug: "whatsapp-kind-nach-trennung-wie-viel-kontakt"
 teaser: "WhatsApp kann zwischen Papa-Tagen Verbindung schaffen. Zu viel Kontakt kann sich für dein Kind aber schnell wie Kontrolle anfühlen. Entscheidend ist nicht eine feste Zahl, sondern ob euer Kontakt leicht, verlässlich und passend zu seinem Alltag bleibt."
+thema: "kontakt-halten"
 quickAnswer: "Es gibt keine allgemeingültige Zahl, wie oft du deinem Kind nach der Trennung per WhatsApp schreiben solltest. Sinnvoll ist digitaler Kontakt, wenn er zu Alter, Alltag und Wünschen deines Kindes passt, persönliche Begegnungen ergänzt und nicht ständig eine Antwort verlangt. Eine aktuelle deutsche Studie zeigt, dass häufiger digitaler Kontakt zwischen Kindern und dem getrennt lebenden Elternteil verbreitet ist, sie liefert aber keine optimale Nachrichtenfrequenz und beweist nicht, dass mehr Nachrichten automatisch eine bessere Beziehung schaffen."
 faq:
   - frage: "Soll ich meinem Kind nach der Trennung jeden Tag auf WhatsApp schreiben?"

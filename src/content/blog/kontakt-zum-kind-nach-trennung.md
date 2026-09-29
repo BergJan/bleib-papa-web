@@ -2,6 +2,7 @@
 titel: "Kontakt zum Kind nach der Trennung: So bleibt ihr zwischen euren Tagen verbunden"
 slug: "kontakt-zum-kind-nach-trennung"
 teaser: "Nach der Trennung fehlt plötzlich der selbstverständliche Alltag mit deinem Kind. Kleine, verlässliche Kontaktpunkte können helfen, verbunden zu bleiben, ohne aus jeder Nachricht ein Gespräch machen zu müssen."
+thema: "kontakt-halten"
 quickAnswer: "Kontakt zum Kind nach der Trennung muss nicht ständig oder lang sein, um wertvoll zu sein. Entscheidend ist, dass er zum Alter, Alltag und Wunsch deines Kindes passt und nicht wie Kontrolle wirkt. Kleine, verlässliche Kontaktpunkte können helfen, gemeinsame Geschichte und Alltagsnähe auch zwischen persönlichen Treffen zu erhalten."
 faq:
   - frage: "Wie oft sollte ich mein Kind nach der Trennung anrufen?"

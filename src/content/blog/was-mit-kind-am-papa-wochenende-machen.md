@@ -2,6 +2,7 @@
 titel: "Was kann ich mit meinem Kind am Papa-Wochenende machen?"
 slug: "was-mit-kind-am-papa-wochenende-machen"
 teaser: "Ein gutes Papa-Wochenende braucht weder Freizeitpark noch einen durchgetakteten Plan. Entscheidend ist eine Mischung aus gemeinsamer Aktivität, normalem Alltag, eigener Zeit und Dingen, die beim nächsten Treffen weitergehen."
+thema: "gemeinsame-zeit"
 quickAnswer: "Am Papa-Wochenende kannst du mit deinem Kind etwas unternehmen, gemeinsam kochen oder spielen, draußen aktiv sein oder an einem Projekt weiterarbeiten. Wichtiger als die spektakulärste Aktivität ist, dass sie zu Alter, Interessen und Stimmung deines Kindes passt und daneben Platz für normalen Alltag bleibt. Fachinformationen zu Trennungsfamilien empfehlen ausdrücklich, Kinder an der Planung zu beteiligen und gemeinsame Zeit nicht ständig mit besonderen Unternehmungen zu füllen."
 faq:
   - frage: "Was kann ich am Papa-Wochenende machen, wenn wenig Geld da ist?"

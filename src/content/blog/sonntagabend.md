@@ -1,6 +1,7 @@
 ---
 titel: "Sonntagabend, wenn die Tür zufällt"
 teaser: "Warum die Stille nach dem Abschied so laut ist, und was in den Tagen danach wirklich hilft."
+thema: "abschied-und-vermissen"
 quickAnswer: "Die Leere nach dem Abschied ist normal und kein Zeichen dafür, dass etwas falsch läuft. Schwierig wird sie erst, wenn daraus Handlungen entstehen, die eher dir helfen als deinem Kind. Was trägt, ist nicht mehr Kontakt, sondern verlässlicher Kontakt: ein fester Moment in der Woche, echtes Erzählen statt Abfragen und ein warmer, klarer Abschied."
 faq:
   - frage: "Ist es normal, dass mich der Abschied jedes Mal wieder trifft?"

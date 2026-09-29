@@ -2,6 +2,7 @@
 titel: "Mein Kind wohnt weit weg – wie bleibe ich trotzdem ein präsenter Vater?"
 slug: "kind-wohnt-weit-weg-praesenter-vater"
 teaser: "Wenn zwischen dir und deinem Kind viele Kilometer liegen, fehlt nicht nur gemeinsame Zeit, sondern vor allem spontaner Alltag. Präsenz auf Distanz bedeutet deshalb nicht, möglichst oft anzurufen, sondern im Leben deines Kindes verlässlich erkennbar zu bleiben."
+thema: "kontakt-halten"
 quickAnswer: "Auch wenn dein Kind weit weg wohnt, kannst du ein präsenter Vater bleiben. Entscheidend ist nicht, die Entfernung mit Dauertelefonaten zu kompensieren, sondern den Alltag deines Kindes zu kennen, kleine verlässliche Kontaktpunkte zu schaffen und eure gemeinsame Geschichte zwischen den Treffen weiterzuführen. Digitale Nähe kann persönliche Zeit nicht ersetzen, aber sie kann helfen, dass Papa nicht nur an den Besuchswochenenden vorkommt."
 faq:
   - frage: "Wie oft sollte ich mein Kind anrufen, wenn es weit weg wohnt?"

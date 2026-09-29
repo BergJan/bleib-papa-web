@@ -2,6 +2,7 @@
 titel: "Meine Ex hat einen neuen Partner: Verliere ich meinen Platz als Vater?"
 slug: "ex-neuer-partner-platz-als-vater"
 teaser: "Ein neuer Mann im Alltag deines Kindes kann genau die Sorge treffen, die nach einer Trennung ohnehin da ist: Werde ich irgendwann weniger wichtig? Dein Kind kann zu einem neuen Partner eine gute Beziehung entwickeln, ohne dass eure Vater-Kind-Beziehung deshalb kleiner werden muss."
+thema: "ex-und-neue-partner"
 quickAnswer: "Nein, ein neuer Partner deiner Ex bedeutet nicht automatisch, dass du deinen Platz als Vater verlierst. Dein Kind kann zu ihm Vertrauen und Nähe entwickeln und gleichzeitig eine enge Beziehung zu dir haben. Entscheidend ist weniger, welche Rolle der neue Mann bekommt, sondern ob du selbst interessiert, verlässlich und präsent Teil des Lebens deines Kindes bleibst."
 faq:
   - frage: "Kann der neue Partner meiner Ex mich als Vater ersetzen?"

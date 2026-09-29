@@ -1,0 +1,91 @@
+---
+import type { GetStaticPaths } from "astro";
+import type { CollectionEntry } from "astro:content";
+import Base from "../../../layouts/Base.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import Themenleiste from "../../../components/Themenleiste.astro";
+import { beitraegeZumThema, pfad, alsDatum } from "../../../lib/blog";
+import { THEMEN, type Themenwelt } from "../../../themen";
+
+/**
+ * Eine Seite je Themenwelt.
+ *
+ * Ohne Blaettern: Eine Welt umfasst ein paar Dutzend Beiträge, nicht Hunderte.
+ * Wer gezielt auf ein Thema klickt, will die Auswahl sehen, nicht wieder
+ * weiterblättern.
+ */
+export const getStaticPaths: GetStaticPaths = async () => {
+  const seiten = await Promise.all(
+    THEMEN.map(async (welt) => ({
+      params: { thema: welt.schluessel },
+      props: { welt, posts: await beitraegeZumThema(welt.schluessel) },
+    })),
+  );
+  return seiten;
+};
+
+type Props = { welt: Themenwelt; posts: CollectionEntry<"blog">[] };
+const { welt, posts } = Astro.props;
+---
+
+<Base
+  title={`${welt.name} | BLEIB PAPA`}
+  description={welt.beschreibung}
+  path={`/blog/thema/${welt.schluessel}/`}
+>
+  <Header />
+
+  <main>
+    <section class="page-head bg-creme">
+      <div class="wrap">
+        <p class="label">Themenwelt</p>
+        <h1 class="h1 measure-wide">{welt.name}</h1>
+        <p class="lead measure">{welt.beschreibung}</p>
+      </div>
+    </section>
+
+    <section class="section bg-white" style="padding-top:clamp(20px,2.6vw,36px)">
+      <div class="wrap">
+        <Themenleiste aktiv={welt.schluessel} />
+
+        {
+          posts.length === 0 ? (
+            <p class="lead measure">
+              Zu diesem Thema ist noch nichts erschienen.{" "}
+              <a href="/blog/">Alle Beiträge ansehen</a>
+            </p>
+          ) : (
+            <div class="post-list">
+              {posts.map((post) => (
+                <a class="post-card" href={pfad(post)}>
+                  {post.data.bild ? (
+                    <img
+                      src={post.data.bild}
+                      alt={post.data.bildAlt ?? ""}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div />
+                  )}
+                  <div>
+                    <p class="meta">
+                      <time datetime={post.data.datum.toISOString()}>
+                        {alsDatum(post.data.datum)}
+                      </time>
+                    </p>
+                    <h2>{post.data.titel}</h2>
+                    <p>{post.data.teaser}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>

@@ -2,6 +2,7 @@
 titel: "Kann eine Vater-Kind-Beziehung trotz wenig Kontakt eng bleiben?"
 slug: "vater-kind-beziehung-trotz-wenig-kontakt"
 teaser: "Wenig gemeinsame Zeit verändert eine Vater-Kind-Beziehung, aber sie entscheidet nicht allein darüber, wie nah ihr euch bleibt. Entscheidend ist, ob zwischen euren Treffen Verlässlichkeit, Interesse und eine gemeinsame Geschichte weiterleben."
+thema: "deine-vaterrolle"
 quickAnswer: "Ja, eine Vater-Kind-Beziehung kann trotz wenig Kontakt eng bleiben. Forschung spricht dagegen, die Stärke der Beziehung allein an der Zahl gemeinsamer Tage festzumachen: Beziehungsqualität und positive Formen väterlicher Beteiligung spielen eine wichtige Rolle. Gleichzeitig ist wenig Kontakt nicht bedeutungslos, denn besonders lange Kontaktpausen und fehlende Verlässlichkeit können es schwerer machen, Nähe aufrechtzuerhalten."
 faq:
   - frage: "Wie oft muss ich mein Kind sehen, damit unsere Beziehung eng bleibt?"

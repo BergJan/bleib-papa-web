@@ -2,6 +2,7 @@
 titel: "Bin ich ein schlechter Vater, wenn ich mein Kind nur jedes zweite Wochenende sehe?"
 slug: "schlechter-vater-kind-jedes-zweite-wochenende"
 teaser: "Zwei gemeinsame Wochenenden im Monat können sich erschreckend wenig anfühlen. Aber die Zahl der Tage allein entscheidet nicht darüber, welcher Vater du bist und welche Beziehung zwischen dir und deinem Kind entsteht."
+thema: "deine-vaterrolle"
 quickAnswer: "Nein. Dass du dein Kind nur jedes zweite Wochenende siehst, macht dich nicht automatisch zu einem schlechten Vater. Die Zahl der gemeinsamen Tage ist ein wichtiger Rahmen, aber kein Urteil über deine Vaterrolle: Entscheidend ist auch, ob du interessiert, verlässlich und zugewandt bleibst und dein Kind erlebt, dass es selbstverständlich zu deinem Leben gehört."
 faq:
   - frage: "Reichen zwei Wochenenden im Monat für eine enge Beziehung zu meinem Kind?"

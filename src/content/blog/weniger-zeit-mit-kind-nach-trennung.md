@@ -2,6 +2,7 @@
 titel: "Wie komme ich mit weniger Zeit mit meinem Kind klar?"
 slug: "weniger-zeit-mit-kind-nach-trennung"
 teaser: "Weniger Zeit mit deinem Kind tut weh, weil nicht nur Stunden fehlen, sondern ein Stück selbstverständlicher Alltag. Damit klarzukommen heißt nicht, das gut finden zu müssen. Es heißt, den Verlust anzuerkennen und dein Vatersein nicht nur daran zu messen, wie viele Tage ihr zusammen seid."
+thema: "abschied-und-vermissen"
 quickAnswer: "Mit weniger Zeit mit deinem Kind klarzukommen beginnt damit, zwei Dinge gleichzeitig gelten zu lassen: Du darfst den verlorenen Alltag vermissen und trotzdem ein wichtiger Papa bleiben. Versuch nicht, jede fehlende Stunde zu kompensieren. Richte deinen Blick stattdessen darauf, wie dein Kind dich in eurer gemeinsamen Zeit und dazwischen erlebt: interessiert, verlässlich und selbstverständlich als Teil seines Lebens."
 faq:
   - frage: "Warum fällt mir die Zeit ohne mein Kind so schwer?"

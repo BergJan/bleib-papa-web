@@ -2,6 +2,7 @@
 titel: "Ich vermisse mein Kind nach der Trennung – was hilft?"
 slug: "kind-vermissen-nach-trennung-was-hilft"
 teaser: "Nach dem Abschied fehlt oft nicht nur dein Kind. Es fehlt ein ganzer Vater-Alltag, der früher selbstverständlich war. Du musst dieses Vermissen nicht wegdrücken, aber dein Kind sollte es auch nicht für dich lösen müssen."
+thema: "abschied-und-vermissen"
 quickAnswer: "Dass du dein Kind nach der Trennung stark vermisst, ist zunächst kein Zeichen dafür, dass du mit der neuen Situation falsch umgehst. Hilfreich ist, das Gefühl zuzulassen und gleichzeitig wieder einen eigenen Alltag für die Tage ohne dein Kind aufzubauen: mit Menschen, Bewegung, Routinen und Dingen, die dir guttun. Wichtig ist außerdem, aus deinem Vermissen keinen Kontakt- oder Trostdruck für dein Kind zu machen."
 faq:
   - frage: "Ist es normal, mein Kind nach der Trennung so stark zu vermissen?"

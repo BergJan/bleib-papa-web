@@ -2,6 +2,7 @@
 titel: "Mein Kind möchte am Wochenende nicht zu mir: Wie gehe ich damit um?"
 slug: "kind-will-nicht-zum-vater-wochenende"
 teaser: "Wenn dein Kind plötzlich nicht zu dir kommen möchte, trifft das schnell genau die Sorge, die du ohnehin kennst: Verliere ich meinen Platz? Nimm das Nein ernst, aber mach daraus nicht vorschnell ein Urteil über eure Beziehung."
+thema: "gemeinsame-zeit"
 quickAnswer: "Wenn dein Kind am Wochenende nicht zu dir möchte, hör zuerst zu und versuche herauszufinden, was hinter dem Nein steckt, ohne es zu verhören oder eine Seite verantwortlich zu machen. Ein einzelnes „Ich will nicht zu Papa“ kann viele Gründe haben und bedeutet nicht automatisch, dass eure Beziehung schlechter geworden ist. Tritt die Ablehnung wiederholt oder stark belastend auf, sollte die Ursache gemeinsam mit dem anderen Elternteil und bei Bedarf mit einer Beratungsstelle oder dem Jugendamt geklärt werden."
 faq:
   - frage: "Bedeutet es, dass mein Kind mich nicht mehr liebt, wenn es nicht zu mir kommen möchte?"

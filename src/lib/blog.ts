@@ -21,6 +21,12 @@ export async function beitraege(): Promise<Beitrag[]> {
   return alle.filter(istOeffentlich).sort((a, b) => b.data.datum.getTime() - a.data.datum.getTime());
 }
 
+/** Alle sichtbaren Beitraege einer Themenwelt, neueste zuerst. */
+export async function beitraegeZumThema(schluessel: string): Promise<Beitrag[]> {
+  const alle = await beitraege();
+  return alle.filter((p) => p.data.thema === schluessel);
+}
+
 /** URL des Beitrags. Das Feld "slug" schlaegt den Dateinamen. */
 export function pfad(p: Beitrag): string {
   return `/blog/${p.data.slug?.trim() || p.id}/`;
@@ -132,6 +138,42 @@ const datumKurz = new Intl.DateTimeFormat("de-DE", {
 export const alsDatum = (d: Date) => datum.format(d);
 export const alsDatumKurz = (d: Date) => datumKurz.format(d);
 
+export type Kapitel = { id: string; titel: string };
+
+/** Nur die Entitaeten, die Markdown ueberhaupt erzeugt. */
+const ZEICHEN: Record<string, string> = {
+  "&amp;": "&",
+  "&lt;": "<",
+  "&gt;": ">",
+  "&quot;": '"',
+  "&#39;": "'",
+  "&nbsp;": " ",
+};
+
+/**
+ * Zwischenueberschriften eines fertigen Beitrags fuer das Inhaltsverzeichnis.
+ *
+ * Die Kennungen setzt Astro beim Rendern selbst an jede Ueberschrift, wir
+ * lesen sie nur aus. Ueberschriften ohne Kennung werden uebersprungen: Ein
+ * Eintrag, der nirgendwohin springt, ist schlimmer als gar keiner.
+ */
+export function kapitel(html: string): Kapitel[] {
+  const raus: Kapitel[] = [];
+  const suche = /<h2\b[^>]*\sid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/gi;
+  let treffer: RegExpExecArray | null;
+
+  while ((treffer = suche.exec(html)) !== null) {
+    const titel = treffer[2]
+      .replace(/<[^>]+>/g, "")
+      .replace(/&[a-z]+;|&#\d+;/gi, (z) => ZEICHEN[z.toLowerCase()] ?? z)
+      .replace(/\s+/g, " ")
+      .trim();
+    if (titel) raus.push({ id: treffer[1], titel });
+  }
+
+  return raus;
+}
+
 /**
  * Teilt den fertigen Artikel fuer den Einschub mitten im Text.
  *
@@ -165,8 +207,19 @@ export function teileFuerEinschub(html: string, wunsch: string): [string, string
   return [html.slice(0, stelle), html.slice(stelle)];
 }
 
-/** Weitere Beitraege fuer den Weiterlesen-Block, ohne den aktuellen. */
+/**
+ * Weitere Beitraege fuer den Weiterlesen-Block, ohne den aktuellen.
+ *
+ * Zuerst die aus derselben Themenwelt, danach die neuesten uebrigen. Vorher
+ * standen dort immer nur die neuesten Beitraege, obwohl "Mehr zum Thema"
+ * darueber stand. Jetzt stimmt die Ueberschrift.
+ */
 export async function weitereBeitraege(aktuell: Beitrag, anzahl = 3): Promise<Beitrag[]> {
-  const alle = await beitraege();
-  return alle.filter((p) => p.id !== aktuell.id).slice(0, anzahl);
+  const alle = (await beitraege()).filter((p) => p.id !== aktuell.id);
+  const welt = aktuell.data.thema;
+
+  const passend = welt ? alle.filter((p) => p.data.thema === welt) : [];
+  const rest = alle.filter((p) => !passend.includes(p));
+
+  return [...passend, ...rest].slice(0, anzahl);
 }

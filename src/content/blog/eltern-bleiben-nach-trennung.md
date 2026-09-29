@@ -2,6 +2,7 @@
 titel: "Wie bleiben wir Eltern, obwohl wir kein Paar mehr sind?"
 slug: "eltern-bleiben-nach-trennung"
 teaser: "Als Paar könnt ihr getrennte Wege gehen. Als Eltern bleibt ihr über euer Kind miteinander verbunden. Dafür müsst ihr keine Freunde werden, sondern eine Elternebene finden, auf der Informationen, Entscheidungen und Übergaben funktionieren, ohne euer Kind zwischen euch zu stellen."
+thema: "ex-und-neue-partner"
 quickAnswer: "Nach der Trennung Eltern zu bleiben bedeutet nicht, weiterhin wie ein Paar zusammenzuarbeiten oder in allem einer Meinung zu sein. Entscheidend ist, Paarkonflikte und Elternaufgaben möglichst voneinander zu trennen, notwendige Informationen zuverlässig auszutauschen und Konflikte nicht über das Kind auszutragen. Euer Kind braucht keine perfekte Harmonie, sondern Eltern, bei denen es beide lieben darf und nicht für deren Zusammenarbeit verantwortlich wird."
 faq:
   - frage: "Müssen wir uns nach der Trennung gut verstehen, um gute Eltern zu sein?"

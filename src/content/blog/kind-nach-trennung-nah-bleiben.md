@@ -2,6 +2,7 @@
 titel: "Wie kann ich meinem Kind nach der Trennung nah bleiben?"
 slug: "kind-nach-trennung-nah-bleiben"
 teaser: "Nach der Trennung fehlt plötzlich viel gemeinsamer Alltag. Nähe kann trotzdem bleiben, wenn dein Kind erlebt: Papa kennt mein Leben, Papa ist verlässlich und bei Papa darf Alltag ganz normal sein."
+thema: "kontakt-halten"
 quickAnswer: "Du kannst deinem Kind nach der Trennung nah bleiben, indem du nicht versuchst, verlorene Zeit durch möglichst viel Kontakt oder besondere Erlebnisse auszugleichen. Wichtiger sind verlässliche kleine Kontaktpunkte, echtes Interesse am Alltag deines Kindes, gemeinsame Rituale und normale Zeit miteinander. Dein Kind soll erleben: Papa ist nicht nur an bestimmten Tagen da, sondern gehört selbstverständlich zu meinem Leben."
 faq:
   - frage: "Wie oft sollte ich mein Kind zwischen unseren gemeinsamen Tagen anrufen?"

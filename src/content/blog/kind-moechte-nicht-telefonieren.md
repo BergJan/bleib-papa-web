@@ -2,6 +2,7 @@
 titel: "Mein Kind möchte nicht telefonieren – was kann ich tun?"
 slug: "kind-moechte-nicht-telefonieren"
 teaser: "Wenn dein Kind beim Telefonieren kaum redet oder gar nicht erst ans Telefon möchte, fühlt sich das schnell wie Ablehnung an. Oft ist die wichtigere Frage aber nicht, wie du mehr Telefonate bekommst, sondern welche Form von Kontakt für dein Kind überhaupt gut funktioniert."
+thema: "kontakt-halten"
 quickAnswer: "Wenn dein Kind nicht telefonieren möchte, dräng es nicht sofort zu längeren oder häufigeren Gesprächen und werte sein Nein nicht automatisch als Ablehnung deiner Person. Finde zuerst heraus, ob Zeitpunkt, Länge, Gesprächsform oder das Telefonieren selbst unangenehm sind und probiert bei Bedarf andere kleine Kontaktformen wie Sprachnachrichten, Fotos oder kurze Texte. Wenn dein Kind über längere Zeit jeden Kontakt ablehnt oder deutlich belastet wirkt, sollte genauer nach den Gründen geschaut und bei Bedarf fachliche Unterstützung einbezogen werden."
 faq:
   - frage: "Soll ich mein Kind zum Telefonieren zwingen, wenn es keine Lust hat?"

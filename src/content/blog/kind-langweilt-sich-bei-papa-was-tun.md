@@ -2,6 +2,7 @@
 titel: "Kind langweilt sich bei Papa – was tun?"
 slug: "kind-langweilt-sich-bei-papa-was-tun"
 teaser: "„Bei Papa ist es langweilig“ kann einen getrennten Vater härter treffen, als der Satz klingt. Du musst daraus aber kein Wochenendprogramm machen: Wichtiger ist herauszufinden, was deinem Kind bei dir gerade fehlt und wie es sich bei dir selbstverständlich zuhause fühlen kann."
+thema: "gemeinsame-zeit"
 quickAnswer: "Wenn sich dein Kind bei dir langweilt, musst du nicht sofort mehr Ausflüge, Geschenke oder Programm organisieren. Langeweile kann normal sein und Kindern Raum geben, selbst Ideen zu entwickeln; nach einer Trennung kann sie aber auch darauf hinweisen, dass Interessen, Freunde, vertraute Dinge oder ein Gefühl von Alltag bei dir noch fehlen. Hör deshalb zuerst genau hin, lass dein Kind mitgestalten und schaffe bei dir normalen Alltag statt permanenten Eventdruck."
 faq:
   - frage: "Ist es schlimm, wenn sich mein Kind bei mir langweilt?"

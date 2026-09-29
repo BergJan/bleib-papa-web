@@ -6,6 +6,7 @@ import Base from "../../layouts/Base.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import { SITE } from "../../site";
+import { themenwelt, themenPfad } from "../../themen";
 import {
   beitraege,
   pfad,
@@ -14,6 +15,7 @@ import {
   cta as ctaVon,
   canonicalVon,
   teileFuerEinschub,
+  kapitel,
   weitereBeitraege,
   autorVon,
   alsDatum,
@@ -148,6 +150,19 @@ const aktualisiert = d.aktualisiert && d.aktualisiertZeigen ? d.aktualisiert : n
 /* Fuer den Einschub wird der fertige Artikel an einer Zwischenueberschrift
    geteilt. Klappt das nicht, bleibt es beim durchlaufenden Text. */
 const teile = cta ? teileFuerEinschub(post.rendered?.html ?? "", d.ctaImText) : null;
+
+/* Inhaltsverzeichnis. Unter drei Kapiteln lohnt es nicht, da sieht der Leser
+   den ganzen Artikel ohnehin mit einem Blick. Die haeufigen Fragen haengen
+   hinten dran, weil viele genau dorthin wollen. */
+const kapitelListe = kapitel(post.rendered?.html ?? "");
+if (faq.length > 0 && kapitelListe.length > 0) {
+  kapitelListe.push({ id: "faq-titel", titel: "Häufige Fragen" });
+}
+const zeigeInhalt = kapitelListe.length >= 3;
+
+/* Themenwelt. Steht als Link neben dem Datum, damit ein Leser vom Artikel
+   direkt zu den verwandten Beitraegen kommt. */
+const welt = themenwelt(d.thema);
 ---
 
 <Base
@@ -171,6 +186,16 @@ const teile = cta ? teileFuerEinschub(post.rendered?.html ?? "", d.ctaImText) : 
               Autorenbox, nicht schon ueber der Ueberschrift. */}
           <p class="meta">
             <time datetime={d.datum.toISOString()}>{alsDatum(d.datum)}</time>
+            {
+              welt && (
+                <>
+                  <span class="meta-sep">·</span>
+                  <a class="meta-thema" href={themenPfad(welt.schluessel)}>
+                    {welt.name}
+                  </a>
+                </>
+              )
+            }
           </p>
           <h1 class="h1">{d.titel}</h1>
           </div>
@@ -201,6 +226,23 @@ const teile = cta ? teileFuerEinschub(post.rendered?.html ?? "", d.ctaImText) : 
                 <p class="label">Kurz gesagt</p>
                 <p>{d.quickAnswer}</p>
               </aside>
+            )
+          }
+
+          {
+            /* Auf schmalen Geraeten gibt es keine Randspalte. Zugeklappt, damit
+               das Verzeichnis den Einstieg in den Text nicht wegdrueckt. */
+            zeigeInhalt && (
+              <details class="inhalt-klapp">
+                <summary>Inhalt</summary>
+                <ol>
+                  {kapitelListe.map((k) => (
+                    <li>
+                      <a href={`#${k.id}`}>{k.titel}</a>
+                    </li>
+                  ))}
+                </ol>
+              </details>
             )
           }
 
@@ -336,6 +378,21 @@ const teile = cta ? teileFuerEinschub(post.rendered?.html ?? "", d.ctaImText) : 
         <aside class="artikel-spalte" aria-label="Mehr von BLEIB PAPA">
           <div class="spalte-innen">
             {
+              zeigeInhalt && (
+                <nav class="spalte-inhalt" aria-labelledby="inhalt-titel">
+                  <p class="label" id="inhalt-titel">Inhalt</p>
+                  <ol>
+                    {kapitelListe.map((k) => (
+                      <li>
+                        <a href={`#${k.id}`}>{k.titel}</a>
+                      </li>
+                    ))}
+                  </ol>
+                </nav>
+              )
+            }
+
+            {
               cta && (
                 <div class="spalte-cta">
                   <img src={cta.bild} alt={cta.bildAlt} loading="lazy" decoding="async" />
@@ -386,4 +443,60 @@ const teile = cta ? teileFuerEinschub(post.rendered?.html ?? "", d.ctaImText) : 
   </main>
 
   <Footer />
+
+  <script>
+    /**
+     * Markiert im Inhaltsverzeichnis das Kapitel, in dem der Leser gerade
+     * steht. Ohne Randspalte, also auf schmalen Geraeten, passiert nichts.
+     */
+    const eintraege = [...document.querySelectorAll<HTMLAnchorElement>(".spalte-inhalt a")];
+
+    if (eintraege.length > 0) {
+      const ziele = eintraege
+        .map((a) => ({
+          a,
+          ueberschrift: document.getElementById(decodeURIComponent(a.hash.slice(1))),
+        }))
+        .filter((z): z is { a: HTMLAnchorElement; ueberschrift: HTMLElement } =>
+          Boolean(z.ueberschrift),
+        );
+
+      /* Die Grenze liegt knapp unter dem klebenden Kopf. Was darueber
+         hinausgescrollt ist, gilt als gelesen. */
+      const GRENZE = 140;
+      const liste = eintraege[0].closest("ol");
+      let wartet = false;
+
+      const pruefen = () => {
+        wartet = false;
+        let aktiv: (typeof ziele)[number] | null = null;
+        for (const z of ziele) {
+          if (z.ueberschrift.getBoundingClientRect().top <= GRENZE) aktiv = z;
+        }
+        for (const z of ziele) z.a.classList.toggle("ist-hier", z === aktiv);
+
+        /* Bei langen Artikeln hat die Liste eine eigene Leiste. Dann wird die
+           Markierung nachgefuehrt, ohne die Seite selbst zu bewegen. */
+        if (!aktiv || !liste) return;
+        const oben = aktiv.a.offsetTop;
+        const unten = oben + aktiv.a.offsetHeight;
+        if (oben < liste.scrollTop) liste.scrollTop = oben;
+        else if (unten > liste.scrollTop + liste.clientHeight) {
+          liste.scrollTop = unten - liste.clientHeight;
+        }
+      };
+
+      addEventListener(
+        "scroll",
+        () => {
+          if (wartet) return;
+          wartet = true;
+          requestAnimationFrame(pruefen);
+        },
+        { passive: true },
+      );
+
+      pruefen();
+    }
+  </script>
 </Base>

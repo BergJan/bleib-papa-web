@@ -2,6 +2,7 @@
 titel: "Vater sein auf Distanz: Was ist wirklich wichtig?"
 slug: "vater-sein-auf-distanz"
 teaser: "Wenn zwischen dir und deinem Kind viele Kilometer liegen, fehlt nicht nur gemeinsame Zeit, sondern viel spontaner Alltag. Nähe auf Distanz entsteht deshalb nicht durch möglichst viel digitalen Kontakt, sondern dadurch, dass dein Kind erlebt: Papa kennt mein Leben, bleibt verlässlich und unsere gemeinsame Geschichte geht weiter."
+thema: "kontakt-halten"
 quickAnswer: "Als Vater auf Distanz sind vor allem Verlässlichkeit, echtes Interesse am Alltag deines Kindes und eine Verbindung wichtig, die zwischen persönlichen Treffen nicht jedes Mal abreißt. Telefonate und Nachrichten können dabei helfen, ersetzen gemeinsame Zeit aber nicht. Entscheidend ist, dass dein Kind dich trotz Entfernung als selbstverständlichen Teil seines Lebens erlebt und bei euren Treffen nicht immer wieder bei null anfangen muss."
 faq:
   - frage: "Wie oft sollte ich mein Kind anrufen, wenn wir weit voneinander entfernt wohnen?"

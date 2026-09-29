@@ -2,6 +2,7 @@
 titel: "Wie verändert sich die Vaterrolle nach der Trennung?"
 slug: "vaterrolle-nach-trennung"
 teaser: "Du bleibst nach der Trennung Vater, aber Vatersein funktioniert nicht mehr unter denselben Bedingungen. Vieles, was früher nebenbei passiert ist, wird eigenständiger, planungsabhängiger und muss bewusster gestaltet werden."
+thema: "deine-vaterrolle"
 quickAnswer: "Die Vaterrolle endet mit der Trennung nicht, aber ihr Rahmen verändert sich. Aus einer Vaterrolle im gemeinsamen Familienalltag wird je nach Betreuungsmodell eine eigenständigere Rolle: Während deiner Zeit bist du für Alltag, Nähe, Regeln und Versorgung verantwortlich, zwischen euren gemeinsamen Tagen muss Verbindung bewusster entstehen. Gleichzeitig endet die Paarbeziehung, während die Elternverantwortung bestehen bleibt."
 faq:
   - frage: "Bin ich nach der Trennung nur noch ein Wochenendvater?"

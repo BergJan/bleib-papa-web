@@ -2,6 +2,7 @@
 titel: "Kind antwortet nicht auf Nachrichten – wie sollte ich als Vater reagieren?"
 slug: "kind-antwortet-nicht-auf-nachrichten-vater"
 teaser: "Du schreibst deinem Kind, siehst vielleicht sogar die zwei blauen Haken und bekommst keine Antwort. Gerade nach einer Trennung kann aus dieser kleinen Funkstille schnell eine große Frage werden: Wie wichtig bin ich meinem Kind noch?"
+thema: "kontakt-halten"
 quickAnswer: "Wenn dein Kind nicht auf deine Nachrichten antwortet, schick nicht automatisch immer mehr hinterher und werte die Funkstille nicht sofort als Zeichen für eure Beziehung. Kinder können beschäftigt sein, nicht wissen, was sie antworten sollen oder gerade schlicht keine Lust auf Nachrichten haben. Bleib interessiert und verlässlich, aber gib deinem Kind die Freiheit, nicht jeden Kontakt bestätigen zu müssen."
 faq:
   - frage: "Wie lange sollte ich warten, bevor ich meinem Kind noch einmal schreibe?"

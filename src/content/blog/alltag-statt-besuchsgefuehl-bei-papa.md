@@ -1,7 +1,8 @@
 ---
 titel: "Wie schaffe ich Alltag statt Besuchsgefühl bei Papa?"
 slug: "alltag-statt-besuchsgefuehl-bei-papa"
-teaser: "Wenn dein Kind nur an bestimmten Tagen bei dir ist, kann sich selbst dein Zuhause schnell wie ein Besuchsort anfühlen. Alltag entsteht nicht durch mehr Programm, sondern durch eigene Dinge, normale Aufgaben, verlässliche Routinen und das Gefühl: Auch hier gehöre ich hin."
+teaser: "Wenn dein Kind nur an bestimmten Tagen bei dir ist, kann sich selbst dein Zuhause schnell wie ein Besuchsort anfühlen. Alltag entsteht nicht durch mehr Programm, sondern durch eigene Dinge, normale Aufgaben, verlässliche Routinen und das Gefühl: Auch hier gehöre ich hin."
+thema: "gemeinsame-zeit"
 quickAnswer: "Damit sich dein Kind bei dir zuhause statt zu Besuch fühlt, braucht es nicht zwingend ein eigenes Kinderzimmer oder besonders aufregende Papa-Tage. Wichtiger sind ein dauerhafter eigener Platz, vertraute Sachen, normale Alltagsaufgaben, Regeln, wiederkehrende Abläufe und die Möglichkeit, sein echtes Leben auch bei dir weiterzuführen. Fachinformationen zu Trennungsfamilien empfehlen ausdrücklich, Kinder Alltag bei beiden Eltern erleben zu lassen und ihren Bereich im neuen Zuhause gemeinsam mit ihnen zu gestalten."
 faq:
   - frage: "Braucht mein Kind bei mir ein eigenes Zimmer, damit es sich zuhause fühlt?"

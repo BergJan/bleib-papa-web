@@ -2,6 +2,7 @@
 titel: "Muss jedes Papa-Wochenende etwas Besonderes sein?"
 slug: "papa-wochenende-etwas-besonderes"
 teaser: "Wenn du dein Kind nur an einzelnen Tagen siehst, kann schnell das Gefühl entstehen, diese Zeit müsse besonders schön sein. Doch ein gutes Papa-Wochenende braucht nicht ständig Programm, sondern auch Alltag, Verlässlichkeit und Raum zum einfachen Zusammensein."
+thema: "gemeinsame-zeit"
 quickAnswer: "Nein. Dein Kind braucht am Papa-Wochenende nicht jedes Mal Freizeitpark, Kino oder ein volles Programm. Besondere Erlebnisse dürfen dazugehören, aber Beziehung wächst auch beim Frühstück, Einkaufen, Hausaufgabenmachen, Quatsch auf dem Sofa und durch Verlässlichkeit. Entscheidend ist weniger, wie außergewöhnlich das Wochenende war, sondern ob dein Kind bei dir erlebt: Ich gehöre hier selbstverständlich dazu."
 faq:
   - frage: "Sind besondere Ausflüge am Papa-Wochenende schlecht?"

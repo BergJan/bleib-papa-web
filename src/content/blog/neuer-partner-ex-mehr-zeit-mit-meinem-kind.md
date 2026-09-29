@@ -2,6 +2,7 @@
 titel: "Der neue Partner meiner Ex verbringt mehr Zeit mit meinem Kind als ich – wie gehe ich damit um?"
 slug: "neuer-partner-ex-mehr-zeit-mit-meinem-kind"
 teaser: "Wenn ein anderer Mann mehr Alltag mit deinem Kind erlebt als du, trifft das schnell genau dort, wo die Trennung am meisten wehtut. Entscheidend ist, daraus keinen Wettbewerb um dein Kind zu machen, sondern deinen eigenen Platz als Papa bewusst zu gestalten."
+thema: "ex-und-neue-partner"
 quickAnswer: "Dass der neue Partner deiner Ex mehr Zeit mit deinem Kind verbringt als du, kann weh tun, bedeutet aber nicht automatisch, dass er deinen Platz als Papa übernimmt. Kinder können eigenständige Beziehungen zu mehreren wichtigen Erwachsenen aufbauen, ohne dass Nähe zu einem Stiefelternteil zwangsläufig weniger Nähe zum leiblichen Vater bedeutet. Hilfreicher als der Vergleich ist deshalb die Frage, wie du selbst interessiert, verlässlich und selbstverständlich Teil des Lebens deines Kindes bleibst."
 faq:
   - frage: "Wird mein Kind den neuen Partner meiner Ex irgendwann lieber haben als mich?"

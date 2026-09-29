@@ -2,6 +2,7 @@
 titel: "Wie oft sollte ich mein Kind zwischen den Papa-Wochenenden anrufen?"
 slug: "wie-oft-kind-zwischen-papa-wochenenden-anrufen"
 teaser: "Zwischen zwei Papa-Wochenenden können sich zwei Wochen verdammt lang anfühlen. Entscheidend ist aber nicht, möglichst oft anzurufen, sondern einen Kontakt zu finden, der für dein Kind verlässlich ist und sich nicht nach Pflicht anfühlt."
+thema: "kontakt-halten"
 quickAnswer: "Es gibt keine allgemeingültige Zahl dafür, wie oft du dein Kind zwischen den Papa-Wochenenden anrufen solltest. Bei einem 14-Tage-Rhythmus ist ein fester, kurzer Kontakt in der Zwischenwoche ein guter Ausgangspunkt, den du an Alter, Persönlichkeit und Wünsche deines Kindes anpasst. Jüngere Kinder können von kürzeren und häufigeren Kontakten profitieren, während ältere Kinder vielleicht lieber schreiben oder sich spontaner melden. Entscheidend ist nicht die Zahl der Anrufe, sondern ob dein Kind dabei erlebt: Papa ist da, interessiert und verlässlich, ohne dass ich etwas liefern muss."
 faq:
   - frage: "Soll ich mein Kind jeden Tag anrufen, wenn wir uns nur alle zwei Wochen sehen?"

@@ -2,6 +2,7 @@
 titel: "Wie bleibe ich ein wichtiger Papa, wenn ich mein Kind nur jedes zweite Wochenende sehe?"
 slug: "wichtiger-papa-jedes-zweite-wochenende"
 teaser: "Wenn Vatersein sich auf jedes zweite Wochenende konzentriert, entsteht schnell der Druck, diese wenigen Tage besonders machen zu müssen. Wichtiger bleibst du nicht durch mehr Programm, sondern indem dein Kind dich als verlässlichen Teil seines echten Lebens erlebt."
+thema: "deine-vaterrolle"
 quickAnswer: "Du kannst für dein Kind ein wichtiger Papa bleiben, auch wenn ihr euch nur jedes zweite Wochenende seht. Entscheidend ist nicht nur, wie viele Stunden ihr zusammen verbringt, sondern ob dein Kind erlebt, dass du sein Leben kennst, Verantwortung übernimmst, verlässlich bist und zwischen euren Treffen nicht innerlich verschwindest. Wenig gemeinsame Zeit sollte trotzdem nicht zum Ideal erklärt werden: Wenn mehr passender Alltag möglich ist und den Bedürfnissen deines Kindes entspricht, darfst du ihn anstreben."
 faq:
   - frage: "Kann ich trotz nur jedes zweitem Wochenende eine enge Beziehung zu meinem Kind haben?"

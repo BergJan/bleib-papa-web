@@ -63,6 +63,13 @@ const blog = defineCollection({
     /** Ueberschreibt den Dateinamen als URL. Leer lassen = Dateiname. */
     slug: z.string().optional(),
     teaser: z.string().default(""),
+    /**
+     * Themenwelt, eine von fuenf, siehe src/themen.ts. Leer ist erlaubt: Der
+     * Beitrag erscheint dann nur in der Gesamtliste. Ein unbekannter Wert
+     * wird stillschweigend zu leer, damit ein Tippfehler im Backend nicht
+     * den ganzen Seitenaufbau anhaelt.
+     */
+    thema: z.string().default(""),
     /** Kurze Antwort auf die Hauptfrage. Steht sichtbar ganz oben im Artikel. */
     quickAnswer: z.string().optional(),
 

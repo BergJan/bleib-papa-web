@@ -1,0 +1,26 @@
+---
+import { THEMEN, themenPfad } from "../themen";
+
+interface Props {
+  /** Schluessel der Welt, auf der der Leser gerade steht. */
+  aktiv?: string;
+}
+const { aktiv } = Astro.props;
+---
+
+{/* Die Leiste steht auf der Blogübersicht und auf jeder Themenseite. Damit
+    kommt ein Leser von jeder Welt in jede andere, ohne den Zurück-Knopf. */}
+<nav class="themenleiste" aria-label="Themenwelten">
+  <a class:list={["thema-knopf", !aktiv && "ist-hier"]} href="/blog/">Alle Beiträge</a>
+  {
+    THEMEN.map((t) => (
+      <a
+        class:list={["thema-knopf", aktiv === t.schluessel && "ist-hier"]}
+        href={themenPfad(t.schluessel)}
+        aria-current={aktiv === t.schluessel ? "page" : undefined}
+      >
+        {t.name}
+      </a>
+    ))
+  }
+</nav>

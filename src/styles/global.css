@@ -327,6 +327,61 @@ p:last-child{margin-bottom:0}
 /* Bild unter der Blog-Ueberschrift. Etwas hoeher als die uebrigen Baender,
    weil es hier den Auftakt der Seite traegt. */
 .band-blog img{height:clamp(200px,30vw,400px);object-position:50% 58%}
+/* ---------- Themenwelten ---------- */
+.themenleiste{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-bottom:clamp(28px,3.4vw,42px);
+}
+.thema-knopf{
+  display:inline-block;padding:8px 15px;border:1px solid var(--line);border-radius:2px;
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--meta-text);text-decoration:none;background:var(--white);
+  transition:color .16s ease,border-color .16s ease,background-color .16s ease;
+}
+.thema-knopf:hover{color:var(--ink);border-color:var(--meta)}
+.thema-knopf.ist-hier{background:var(--ink);border-color:var(--ink);color:#fff}
+.thema-knopf.ist-hier:hover{color:#fff}
+
+/* Auf dem Handy wuerden sechs Knoepfe sechs Zeilen fuellen und den ersten
+   Beitrag nach unten schieben. Deshalb eine Zeile zum Wischen, bis an den
+   Bildschirmrand, damit sichtbar ist, dass es rechts weitergeht. */
+@media (max-width:760px){
+  .themenleiste{
+    flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;
+    margin-inline:-24px;padding-inline:24px;
+  }
+  .themenleiste::-webkit-scrollbar{display:none}
+  .thema-knopf{white-space:nowrap;flex:0 0 auto}
+}
+
+/* Die Themenwelt neben dem Datum im Artikelkopf. */
+.meta-thema{color:var(--rost);text-decoration:none;border-bottom:1px solid transparent}
+.meta-thema:hover{border-bottom-color:var(--rost)}
+
+/* Der neueste Beitrag, gross. Das Bild nimmt mehr Platz als in der Liste, die
+   Ueberschrift ist deutlich groesser. Damit sieht ein Leser beim Ankommen
+   sofort, was zuletzt geschrieben wurde. */
+.post-gross{
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+  gap:clamp(24px,3.4vw,48px);align-items:center;
+  padding-bottom:clamp(34px,4vw,52px);text-decoration:none;
+}
+.post-gross img{width:100%;border-radius:2px;display:block}
+.post-gross .label{margin-bottom:12px}
+.post-gross h2{
+  font-family:var(--serif);font-size:clamp(27px,3.4vw,40px);line-height:1.12;
+  margin-bottom:14px;transition:color .16s ease;
+}
+.post-gross:hover h2{color:var(--rost)}
+.post-gross-teaser{font-size:clamp(16px,1.5vw,17.5px);line-height:1.6;margin-bottom:16px}
+.post-gross .meta{
+  font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--meta-text);margin:0;
+}
+@media (max-width:760px){
+  .post-gross{grid-template-columns:1fr;gap:clamp(18px,4vw,24px)}
+}
+
 .post-list{display:grid;gap:0;border-top:1px solid var(--line)}
 .post-card{
   display:grid;grid-template-columns:260px 1fr;gap:clamp(22px,3.4vw,44px);
@@ -548,16 +603,72 @@ p:last-child{margin-bottom:0}
     display:grid;grid-template-columns:minmax(0,720px) 280px;
     gap:clamp(40px,4.5vw,72px);align-items:start;
   }
-  .artikel-spalte{display:block}
+  /* Die Spalte reicht ueber den ganzen Artikel. Nur so kann der Inhalt darin
+     wirklich kleben. Vorher war sie so hoch wie ihr Inhalt, dadurch war das
+     Verzeichnis nach ein paar Absaetzen aus dem Bild. */
+  .artikel-spalte{display:block;align-self:stretch}
   .artikel-haupt,.post-head{margin-inline:0}
   /* Der Weiterlesen-Block sagt dasselbe wie die Randspalte. Einmal reicht. */
   .artikel-raster .weiterlesen{display:none}
+  /* Ab hier steht das Verzeichnis in der Randspalte, zweimal waere es doppelt. */
+  .inhalt-klapp{display:none}
 }
 @media (min-width:1240px){
   .artikel-raster{grid-template-columns:minmax(0,720px) 320px}
 }
 
-.spalte-innen{position:sticky;top:96px;display:grid;gap:clamp(26px,2.6vw,34px)}
+.spalte-innen{
+  position:sticky;top:96px;display:grid;gap:clamp(26px,2.6vw,34px);
+  /* Verzeichnis, Aufruf und Beitragsliste zusammen sind auf flachen Bildschirmen
+     hoeher als das Fenster. Dann bekommt die Spalte eine eigene Leiste, statt
+     unten abgeschnitten zu werden. */
+  max-height:calc(100vh - 120px);overflow-y:auto;
+  scrollbar-width:thin;
+}
+
+/* ---------- Inhaltsverzeichnis ---------- */
+/* Der Kopf der Seite klebt oben. Ohne diesen Abstand landet die angesprungene
+   Ueberschrift dahinter und der Leser sieht mitten in einen Absatz. */
+.prose h2,.post-faq{scroll-margin-top:96px}
+
+/* Im Lesefluss, nur auf schmalen Geraeten. */
+.inhalt-klapp{
+  margin:0 0 clamp(26px,3vw,34px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.inhalt-klapp summary{
+  cursor:pointer;list-style:none;padding:13px 0;
+  font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.inhalt-klapp summary::-webkit-details-marker{display:none}
+.inhalt-klapp summary::after{content:"+";font-size:16px;letter-spacing:0;line-height:1}
+.inhalt-klapp[open] summary::after{content:"–"}
+.inhalt-klapp ol{margin:0 0 16px;padding:0 0 0 22px;display:grid;gap:9px}
+.inhalt-klapp li{font-size:15.5px;line-height:1.4;color:var(--meta-text)}
+.inhalt-klapp a{color:var(--body);text-decoration:none;border-bottom:1px solid transparent}
+.inhalt-klapp a:hover{color:var(--ink);border-bottom-color:var(--line)}
+
+/* In der Randspalte, ohne Nummern: Dort zaehlt der Ueberblick, nicht die
+   Reihenfolge. Der Strich links zeigt, wo der Leser gerade steht. */
+/* Ein Artikel mit zwanzig Zwischenueberschriften wuerde die ganze Spalte
+   fuellen und den Guide aus dem Bild draengen. Ab hier bekommt das Verzeichnis
+   eine eigene Leiste, der Aufruf bleibt sichtbar. */
+.spalte-inhalt ol{
+  list-style:none;margin:0;padding:0;position:relative;
+  max-height:min(44vh,360px);overflow-y:auto;scrollbar-width:thin;
+}
+.spalte-inhalt li{border-top:1px solid var(--line)}
+.spalte-inhalt li:last-child{border-bottom:1px solid var(--line)}
+.spalte-inhalt a{
+  display:block;padding:9px 0 9px 13px;
+  border-left:2px solid transparent;
+  font-size:13.5px;line-height:1.35;color:var(--body);text-decoration:none;
+  transition:color .16s ease,border-color .16s ease;
+}
+.spalte-inhalt a:hover{color:var(--ink)}
+.spalte-inhalt a.ist-hier{color:var(--ink);border-left-color:var(--rost)}
 
 .spalte-cta{
   padding:20px;background:var(--creme);border-radius:2px;

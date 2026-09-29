@@ -4,6 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+import Themenleiste from "../../components/Themenleiste.astro";
 import { beitraege, pfad, alsDatum } from "../../lib/blog";
 
 /**
@@ -38,6 +39,12 @@ const zahlen = Array.from({ length: page.lastPage }, (_, i) => i + 1).filter(
     Math.abs(n - page.currentPage) <= 1,
 );
 const seitenPfad = (n: number) => (n === 1 ? "/blog/" : `/blog/${n}/`);
+
+/* Der neueste Beitrag bekommt auf der ersten Seite den grossen Platz. Auf den
+   Folgeseiten nicht: Dort ist kein Beitrag neuer als die anderen, und wer
+   blaettert, will vergleichen statt gefuehrt zu werden. */
+const gross = ersteSeite && page.data.length > 1 ? page.data[0] : null;
+const liste = gross ? page.data.slice(1) : page.data;
 ---
 
 <Base title={title} description={description} path={page.url.current}>
@@ -70,12 +77,37 @@ const seitenPfad = (n: number) => (n === 1 ? "/blog/" : `/blog/${n}/`);
 
     <section class="section bg-white" style="padding-top:clamp(20px,2.6vw,36px)">
       <div class="wrap">
+        <Themenleiste />
+
         {
           page.data.length === 0 ? (
             <p class="lead measure">Hier erscheinen bald die ersten Beiträge.</p>
           ) : (
+            <>
+            {gross && (
+              <a class="post-gross" href={pfad(gross)}>
+                {gross.data.bild && (
+                  <img
+                    src={gross.data.bild}
+                    alt={gross.data.bildAlt ?? ""}
+                    decoding="async"
+                  />
+                )}
+                <div>
+                  <p class="label">Neuester Beitrag</p>
+                  <h2>{gross.data.titel}</h2>
+                  <p class="post-gross-teaser">{gross.data.teaser}</p>
+                  <p class="meta">
+                    <time datetime={gross.data.datum.toISOString()}>
+                      {alsDatum(gross.data.datum)}
+                    </time>
+                  </p>
+                </div>
+              </a>
+            )}
+
             <div class="post-list">
-              {page.data.map((post) => (
+              {liste.map((post) => (
                 <a class="post-card" href={pfad(post)}>
                   {post.data.bild ? (
                     <img
@@ -99,6 +131,7 @@ const seitenPfad = (n: number) => (n === 1 ? "/blog/" : `/blog/${n}/`);
                 </a>
               ))}
             </div>
+            </>
           )
         }
 

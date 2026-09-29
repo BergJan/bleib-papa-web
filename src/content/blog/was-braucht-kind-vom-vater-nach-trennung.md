@@ -2,6 +2,7 @@
 titel: "Was braucht ein Kind von seinem Vater nach der Trennung?"
 slug: "was-braucht-kind-vom-vater-nach-trennung"
 teaser: "Nach der Trennung braucht dein Kind keinen perfekten Papa und auch keinen, der verlorene Zeit ständig ausgleicht. Es braucht einen Vater, der verlässlich bleibt, sich für sein Leben interessiert, Gefühle aushält und ihm erlaubt, beide Eltern zu lieben."
+thema: "deine-vaterrolle"
 quickAnswer: "Ein Kind braucht von seinem Vater nach der Trennung vor allem die Erfahrung: Papa bleibt da, interessiert sich für mein Leben und ich kann mich auf ihn verlassen. Dazu gehören gemeinsame Zeit, echtes Zuhören, verlässliche Absprachen und ein Alltag bei Papa, der nicht ständig etwas Besonderes sein muss. Ebenso wichtig ist, dass das Kind nicht für die Gefühle des Vaters verantwortlich wird und seine Beziehung zur Mutter frei leben darf."
 faq:
   - frage: "Braucht mein Kind nach der Trennung möglichst viel Zeit mit mir?"

@@ -2,6 +2,7 @@
 titel: "Wann sollte ich meinem Kind meine neue Partnerin vorstellen?"
 slug: "neue-partnerin-kind-vorstellen"
 teaser: "Eine neue Beziehung darf zu deinem Leben nach der Trennung gehören. Für dein Kind ist sie trotzdem eine weitere Veränderung. Deshalb entscheidet weniger eine feste Zahl von Monaten als die Frage, ob deine Beziehung schon stabil genug ist und dein Kind die nächste Veränderung verkraften kann."
+thema: "ex-und-neue-partner"
 quickAnswer: "Es gibt keine allgemeingültige Wartezeit, nach der du deinem Kind deine neue Partnerin vorstellen solltest. Sinnvoll ist das Kennenlernen, wenn eure Beziehung nicht mehr nur aus ersten Dates besteht, du dir eine gemeinsame Zukunft ernsthaft vorstellen kannst und dein Kind nicht gleichzeitig von zu vielen anderen Veränderungen überrollt wird. Das erste Treffen sollte wenig Erwartungen erzeugen; der Aufbau einer eigenen Beziehung zwischen deinem Kind und deiner Partnerin darf anschließend Monate oder sogar Jahre dauern."
 faq:
   - frage: "Wie viele Monate sollte ich warten, bevor mein Kind meine neue Partnerin kennenlernt?"

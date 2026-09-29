@@ -2,6 +2,7 @@
 titel: "Wie bleibt die Vater-Kind-Beziehung nach einer Trennung stark?"
 slug: "vater-kind-beziehung-nach-trennung-staerken"
 teaser: "Nach einer Trennung fällt viel von der Nähe weg, die früher nebenbei entstanden ist. Eine starke Vater-Kind-Beziehung braucht deshalb nicht ständig besondere Momente, sondern einen neuen Alltag aus Interesse, Verlässlichkeit und Verbindung."
+thema: "deine-vaterrolle"
 quickAnswer: "Eine Vater-Kind-Beziehung kann nach einer Trennung stark bleiben, wenn dein Kind weiterhin erlebt: Papa kennt mich, Papa interessiert sich für mein Leben und Papa ist verlässlich da. Forschung und aktuelle Fachinformationen sprechen dafür, nicht nur auf die Menge gemeinsamer Zeit zu schauen, sondern auch auf Beziehungsqualität, regelmäßigen Kontakt, kindbezogene Beteiligung und möglichst geringe Belastung durch Elternkonflikte."
 faq:
   - frage: "Was ist nach einer Trennung das Wichtigste für eine starke Vater-Kind-Beziehung?"

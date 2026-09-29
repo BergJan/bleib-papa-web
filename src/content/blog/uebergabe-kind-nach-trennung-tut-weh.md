@@ -2,6 +2,7 @@
 titel: "Warum tut die Übergabe meines Kindes nach der Trennung so weh?"
 slug: "uebergabe-kind-nach-trennung-tut-weh"
 teaser: "Die gemeinsame Zeit ist vorbei, die Tasche steht im Flur und wenige Minuten später ist dein Kind wieder weg. Warum gerade die Übergabe nach einer Trennung so schmerzen kann und wie du den Abschied tragen kannst, ohne ihn deinem Kind aufzubürden."
+thema: "abschied-und-vermissen"
 quickAnswer: "Die Übergabe tut oft so weh, weil sie den Verlust des gemeinsamen Alltags in einem einzigen Moment spürbar macht: Gerade war dein Kind noch bei dir, kurz danach beginnt wieder die Zeit ohne es. Dazu können Vermissen, Ohnmacht und die Sorge kommen, im Leben deines Kindes an Bedeutung zu verlieren. Dieser Schmerz bedeutet aber nicht automatisch, dass mit eurer Beziehung oder der Übergabe etwas nicht stimmt."
 faq:
   - frage: "Ist es normal, dass ich nach jeder Übergabe meines Kindes traurig bin?"

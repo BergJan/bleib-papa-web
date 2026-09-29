@@ -2,6 +2,7 @@
 titel: "Wie halte ich Kontakt zu meinem Kind, wenn es nicht bei mir ist?"
 slug: "kontakt-zum-kind-wenn-es-nicht-bei-mir-ist"
 teaser: "Wenn dein Kind nicht bei dir ist, möchtest du trotzdem Teil seines Lebens bleiben. Dafür braucht es weder Dauertelefonate noch tägliche Nachrichten, sondern Kontakt, der leicht, verlässlich und nah an seinem wirklichen Alltag bleibt."
+thema: "kontakt-halten"
 quickAnswer: "Halte Kontakt zu deinem Kind so, dass es Verbindung erlebt, aber keinen Druck. Ein kurzer Anruf, eine Sprachnachricht, ein Foto, ein Insider oder ein fester kleiner Kontaktpunkt können reichen, wenn sie zu Alter und Alltag deines Kindes passen. Entscheidend ist nicht, wie oft du dich meldest, sondern dass dein Kontakt echtes Interesse zeigt und dein Kind nicht mit einer Antwort beweisen muss, wie wichtig du ihm bist."
 faq:
   - frage: "Wie oft sollte ich mein Kind kontaktieren, wenn es nicht bei mir ist?"

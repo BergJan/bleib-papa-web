@@ -2,6 +2,7 @@
 titel: "Wie gehe ich als Vater mit Schuldgefühlen nach der Trennung um?"
 slug: "schuldgefuehle-vater-nach-trennung"
 teaser: "Vielleicht weißt du rational, warum die Trennung passiert ist und fühlst dich deinem Kind gegenüber trotzdem schuldig. Der Ausweg liegt nicht darin, dir einzureden, dass nichts passiert ist, sondern Schuldgefühle in konkrete Verantwortung für dein heutiges Vatersein zu übersetzen."
+thema: "deine-vaterrolle"
 quickAnswer: "Schuldgefühle nach einer Trennung sind auch bei Eltern verbreitet, die die Trennung selbst angestoßen haben. Sie sind aber kein zuverlässiges Urteil darüber, ob du als Vater versagt hast. Hilfreicher ist zu unterscheiden: Was bedauerst du, wofür trägst du tatsächlich Verantwortung und was kannst du heute noch verändern? Dein Kind braucht dabei nicht deine Selbstbestrafung, sondern einen Papa, der seine Fehler ehrlich anschaut und unter den neuen Bedingungen verlässlich bleibt."
 faq:
   - frage: "Sind Schuldgefühle nach der Trennung als Vater normal?"

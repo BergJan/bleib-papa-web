@@ -2,6 +2,7 @@
 titel: "Wie halte ich Konflikte mit meiner Ex von meinem Kind fern?"
 slug: "konflikte-mit-ex-vom-kind-fernhalten"
 teaser: "Nach einer Trennung verschwinden Konflikte nicht automatisch. Entscheidend ist, dass dein Kind weder Bote noch Verbündeter noch Richter zwischen euch werden muss."
+thema: "ex-und-neue-partner"
 quickAnswer: "Du hältst Konflikte mit deiner Ex von deinem Kind fern, indem du Paar- und Elternebene konsequent trennst: Streitpunkte klärst du direkt mit der Mutter deines Kindes, nicht über euer Kind. Sprich vor deinem Kind nicht abwertend über sie, frage es nicht aus und zwinge es nicht, Partei zu ergreifen. Du kannst nicht kontrollieren, wie der andere Elternteil handelt, aber du kannst dafür sorgen, dass dein Kind bei dir aus dem Konflikt herausbleiben darf."
 faq:
   - frage: "Soll ich meinem Kind erklären, warum meine Ex und ich streiten?"
