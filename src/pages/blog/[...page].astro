@@ -1,0 +1,146 @@
+---
+import type { GetStaticPaths, Page } from "astro";
+import type { CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { beitraege, pfad, alsDatum } from "../../lib/blog";
+
+/**
+ * Blogübersicht mit Blättern. Zehn Beiträge je Seite.
+ *
+ * Die erste Seite bleibt unter /blog/, weitere liegen unter /blog/2/ usw.
+ * Dadurch ändert sich keine bestehende Adresse.
+ */
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const posts = await beitraege();
+  return paginate(posts, { pageSize: 10 });
+};
+
+type Props = { page: Page<CollectionEntry<"blog">> };
+const { page } = Astro.props;
+
+const ersteSeite = page.currentPage === 1;
+
+const title = ersteSeite
+  ? "Blog | BLEIB PAPA"
+  : `Blog, Seite ${page.currentPage} | BLEIB PAPA`;
+
+const description = ersteSeite
+  ? "Gedanken und praktische Impulse rund um Vatersein nach der Trennung: Nähe, Verlässlichkeit und gemeinsame Zeit."
+  : `Weitere Beiträge für Väter nach der Trennung, Seite ${page.currentPage} von ${page.lastPage}.`;
+
+/** Seitenzahlen fürs Blättern, bei vielen Seiten gekürzt. */
+const zahlen = Array.from({ length: page.lastPage }, (_, i) => i + 1).filter(
+  (n) =>
+    n === 1 ||
+    n === page.lastPage ||
+    Math.abs(n - page.currentPage) <= 1,
+);
+const seitenPfad = (n: number) => (n === 1 ? "/blog/" : `/blog/${n}/`);
+---
+
+<Base title={title} description={description} path={page.url.current}>
+  <Header />
+
+  <main>
+    <section class="page-head bg-creme">
+      <div class="wrap">
+        <p class="label">Blog{!ersteSeite && ` · Seite ${page.currentPage} von ${page.lastPage}`}</p>
+        <h1 class="h1 measure-wide">Gedanken für Väter zwischen den gemeinsamen Tagen.</h1>
+      </div>
+    </section>
+
+    {
+      /* Das große Bild trägt den Auftakt. Auf den Folgeseiten will der Leser
+         weiterlesen, nicht noch einmal begrüßt werden. */
+      ersteSeite && (
+        <figure class="band band-blog">
+          <img
+            src="/assets/band-blog.jpg"
+            width="1800"
+            height="1013"
+            alt="Ein Schreibtisch am Fenster: eine Tasse Kaffee, ein aufgeschlagenes Notizbuch und daneben zwei Fotos von einem Vater mit seinem Kind."
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+      )
+    }
+
+    <section class="section bg-white" style="padding-top:clamp(20px,2.6vw,36px)">
+      <div class="wrap">
+        {
+          page.data.length === 0 ? (
+            <p class="lead measure">Hier erscheinen bald die ersten Beiträge.</p>
+          ) : (
+            <div class="post-list">
+              {page.data.map((post) => (
+                <a class="post-card" href={pfad(post)}>
+                  {post.data.bild ? (
+                    <img
+                      src={post.data.bild}
+                      alt={post.data.bildAlt ?? ""}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div />
+                  )}
+                  <div>
+                    <p class="meta">
+                      <time datetime={post.data.datum.toISOString()}>
+                        {alsDatum(post.data.datum)}
+                      </time>
+                    </p>
+                    <h2>{post.data.titel}</h2>
+                    <p>{post.data.teaser}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          )
+        }
+
+        {
+          page.lastPage > 1 && (
+            <nav class="blaettern" aria-label="Seiten">
+              {page.url.prev ? (
+                <a class="blaettern-pfeil" href={page.url.prev} rel="prev">
+                  Neuere Beiträge
+                </a>
+              ) : (
+                <span class="blaettern-pfeil ist-aus">Neuere Beiträge</span>
+              )}
+
+              <ol class="blaettern-zahlen">
+                {zahlen.map((n, i) => (
+                  <>
+                    {i > 0 && zahlen[i - 1] !== n - 1 && <li class="blaettern-luecke">…</li>}
+                    <li>
+                      {n === page.currentPage ? (
+                        <span class="ist-hier" aria-current="page">{n}</span>
+                      ) : (
+                        <a href={seitenPfad(n)}>{n}</a>
+                      )}
+                    </li>
+                  </>
+                ))}
+              </ol>
+
+              {page.url.next ? (
+                <a class="blaettern-pfeil" href={page.url.next} rel="next">
+                  Ältere Beiträge
+                </a>
+              ) : (
+                <span class="blaettern-pfeil ist-aus">Ältere Beiträge</span>
+              )}
+            </nav>
+          )
+        }
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>

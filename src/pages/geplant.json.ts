@@ -12,9 +12,15 @@ import { getCollection } from "astro:content";
  * hier nichts stehen außer dem Tag, an dem er erscheinen soll.
  */
 export const GET: APIRoute = async () => {
+  /* Nur Beitraege, deren Tag noch bevorsteht. Ein Beitrag behaelt den Status
+     "geplant" auch nach dem Erscheinen, denn niemand schreibt ihn um. Ohne den
+     Datumsfilter bliebe er deshalb fuer immer in der Liste, die naechtliche
+     Funktion faende jede Nacht etwas "Faelliges" und wuerde taeglich einen
+     Build anstossen. */
+  const jetzt = Date.now();
   const alle = await getCollection("blog");
   const termine = alle
-    .filter((p) => p.data.status === "geplant")
+    .filter((p) => p.data.status === "geplant" && p.data.datum.getTime() > jetzt)
     .map((p) => p.data.datum.toISOString().slice(0, 10))
     .sort();
 

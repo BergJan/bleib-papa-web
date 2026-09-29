@@ -132,6 +132,40 @@ function docxAlsText(pfad) {
 
 /* -------------------------------------------------------------- Zerlegen */
 
+/**
+ * Sprachmodelle setzen Quellenangaben gern mitten in den Satz, in der Form
+ * " ([Name](https://...))". Bei uns stehen Quellen im Quellenblock, im Text
+ * haben sie nichts zu suchen. Ausserdem haengen sie Tracking-Parameter an.
+ */
+const INLINE_ZITAT = /\s*\(\[[^\]]*\]\(https?:\/\/[^)\s]*\)\)/g;
+const MD_LINK = /\[([^\]]*)\]\(https?:\/\/[^)\s]*\)/g;
+const TRACKING = /([?&])(utm_[a-z]+|fbclid|gclid)=[^&)\s"]*/gi;
+
+/* Zeilenweise, damit die fuehrende Einrueckung stehen bleibt. Sonst frisst die
+   Leerzeichen-Bereinigung die Einrueckung von Listen und Codebloecken. */
+const aufraeumen = (t) =>
+  String(t ?? "")
+    .split("\n")
+    .map((zeile) => {
+      const einzug = zeile.match(/^[ \t]*/)[0];
+      return (
+        einzug +
+        zeile
+          .slice(einzug.length)
+          .replace(/ +([.,;:!?])/g, "$1")
+          .replace(/[ \t]{2,}/g, " ")
+          .replace(/[ \t]+$/, "")
+      );
+    })
+    .join("\n");
+
+/** Fuer Felder: gar keine Links, nur der Linktext bleibt stehen. */
+const feldText = (t) => aufraeumen(String(t ?? "").replace(INLINE_ZITAT, "").replace(MD_LINK, "$1"));
+
+/** Fuer den Fliesstext: nur die Quellen-Klammern raus, echte Links bleiben. */
+const fliessText = (t) =>
+  aufraeumen(String(t ?? "").replace(INLINE_ZITAT, "")).replace(TRACKING, "");
+
 const MARKER = ["=== TEXT ===", "=== FAQ ===", "=== QUELLEN ===", "=== NOTIZEN ==="];
 const FELDZEILE = /^([A-ZÄÖÜ][A-ZÄÖÜ0-9 .\-\/]{1,30}):\s*(.*)$/;
 
@@ -165,6 +199,7 @@ function zerlegen(roh) {
       felder[feld] = (felder[feld] + " " + zeile.trim()).trim();
     }
   }
+  for (const k of Object.keys(felder)) felder[k] = feldText(felder[k]);
   return { felder, bloecke };
 }
 
@@ -250,7 +285,9 @@ function faqAus(zeilen) {
       letzter[feld] = (letzter[feld] + " " + zeile.trim()).trim();
     }
   }
-  return eintraege.filter((e) => e.frage && e.antwort);
+  return eintraege
+    .map((e) => ({ frage: feldText(e.frage), antwort: feldText(e.antwort) }))
+    .filter((e) => e.frage && e.antwort);
 }
 
 /* Die Kopfzeile der Vorlage steht manchmal noch im Dokument. */
@@ -428,7 +465,7 @@ const datum =
   new Date().toISOString().slice(0, 10);
 const status = datum > new Date().toISOString().slice(0, 10) ? "geplant" : "veroeffentlicht";
 
-const text = bloecke.TEXT.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+const text = fliessText(bloecke.TEXT.join("\n").replace(/\n{3,}/g, "\n\n").trim());
 const faq = faqAus(bloecke.FAQ);
 const quellen = quellenAus(bloecke.QUELLEN);
 
