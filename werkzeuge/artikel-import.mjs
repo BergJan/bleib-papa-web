@@ -387,7 +387,10 @@ function frontmatter(daten) {
 
   z.push(`status: ${daten.status}`);
   z.push(`datum: ${daten.datum}`);
-  z.push(`autor: jan-philip-berg`);
+  /* Der Dateiname des Profils in src/content/autoren/, nicht der volle Name.
+     Stand hier "jan-philip-berg", fand der Seitenaufbau kein Profil: keine
+     Autorenbox, kein Person-Schema, nur eine Warnung im Build. */
+  z.push(`autor: jan`);
   z.push(`ctaImText: auto`);
 
   return `---\n${z.join("\n")}\n---\n`;

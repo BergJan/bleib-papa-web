@@ -76,7 +76,7 @@ redaktion:
     - "BMFSFJ"
 status: geplant
 datum: 2026-10-07
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

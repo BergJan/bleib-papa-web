@@ -80,7 +80,7 @@ redaktion:
     - "Bürgerliches Gesetzbuch"
 status: geplant
 datum: 2026-10-06
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 

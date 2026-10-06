@@ -1,9 +1,18 @@
 /**
  * Veröffentlicht geplante Beiträge von selbst.
  *
- * Läuft jede Nacht, liest die Terminliste unter /geplant.json und stößt nur
- * dann einen neuen Build an, wenn ein Beitrag fällig ist. An Tagen ohne
- * fälligen Beitrag passiert nichts, das spart Netlify-Credits.
+ * Läuft montags, liest die Terminliste unter /geplant.json und stößt nur dann
+ * einen neuen Build an, wenn mindestens ein Beitrag fällig ist.
+ *
+ * Warum wöchentlich und nicht täglich: Netlify rechnet pauschal mit 15 Credits
+ * je Production Deploy, nicht nach Bauzeit. Eine tägliche Veröffentlichung
+ * kostet damit etwa 450 Credits im Monat. Der Personal-Plan hat 1.000. Im
+ * Oktober 2026 stand die Seite deshalb still. Wöchentlich sind es vier bis
+ * fünf Deploys, also rund 70 Credits.
+ *
+ * Die Beiträge behalten ihr eigenes Datum. Ein Artikel wird sichtbar, sobald
+ * sein Tag vorbei ist und der nächste Build läuft. Am Montag erscheint also
+ * die Woche auf einmal, jeder Beitrag mit seinem richtigen Datum.
  *
  * Benötigte Variable (Netlify: Site configuration -> Environment variables):
  *   BUILD_HOOK_URL   Die Adresse aus Build & deploy -> Build hooks.
@@ -51,6 +60,8 @@ export default async () => {
   return new Response("Build angestossen", { status: 200 });
 };
 
-/* 4:00 Uhr UTC. In der Sommerzeit ist das 6:00 Uhr deutscher Zeit, im Winter
-   5:00 Uhr. Netlify kennt nur UTC, eine Zeitzone laesst sich nicht angeben. */
-export const config = { schedule: "0 4 * * *" };
+/* Montags 4:00 Uhr UTC. In der Sommerzeit ist das 6:00 Uhr deutscher Zeit, im
+   Winter 5:00 Uhr. Netlify kennt nur UTC, eine Zeitzone laesst sich nicht
+   angeben. Die fuenf Sterne stehen fuer Minute, Stunde, Tag, Monat, Wochentag:
+   die 1 am Ende ist der Montag. */
+export const config = { schedule: "0 4 * * 1" };

@@ -4,9 +4,9 @@ import { getCollection } from "astro:content";
 /**
  * Termine der geplanten Beiträge, nur die Daten, keine Titel.
  *
- * Die nächtliche Netlify-Funktion liest diese Liste und stößt einen neuen Build
- * nur dann an, wenn wirklich ein Beitrag fällig ist. So kostet die Automatik
- * an den meisten Tagen keinen Build.
+ * Die wöchentliche Netlify-Funktion liest diese Liste und stößt einen neuen
+ * Build nur dann an, wenn wirklich ein Beitrag fällig ist. So kostet die
+ * Automatik in Wochen ohne neuen Beitrag keinen Deploy.
  *
  * Absichtlich ohne Titel und Texte: Über einen unveröffentlichten Beitrag soll
  * hier nichts stehen außer dem Tag, an dem er erscheinen soll.

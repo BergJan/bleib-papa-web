@@ -5,9 +5,12 @@ export type Beitrag = CollectionEntry<"blog">;
 
 /**
  * Sichtbar ist ein Beitrag nur im Status "veroeffentlicht".
- * "geplant" erscheint automatisch, sobald das Datum erreicht ist und die
- * Seite danach neu gebaut wird (jeder Speichervorgang im Redaktionssystem
- * loest einen Build aus, spaetestens der naechste Beitrag also).
+ *
+ * "geplant" erscheint automatisch, sobald das Datum vorbei ist und die Seite
+ * danach neu gebaut wird. Gebaut wird montags, siehe
+ * netlify/functions/geplant-pruefen.mjs. Ein Beitrag vom Mittwoch wird also
+ * am Montag darauf sichtbar, mit dem Mittwoch als Datum. Taeglich zu bauen
+ * waere ehrlicher, kostet bei Netlify aber 15 Credits pro Tag.
  */
 export function istOeffentlich(p: Beitrag): boolean {
   if (p.data.status === "veroeffentlicht") return true;

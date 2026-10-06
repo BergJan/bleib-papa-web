@@ -81,7 +81,7 @@ redaktion:
     - "Bundesfamilienministerium"
 status: geplant
 datum: 2026-10-08
-autor: jan-philip-berg
+autor: jan
 ctaImText: auto
 ---
 
