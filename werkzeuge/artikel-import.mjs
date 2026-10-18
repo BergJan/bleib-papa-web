@@ -508,7 +508,29 @@ const datum =
   new Date().toISOString().slice(0, 10);
 const status = datum > new Date().toISOString().slice(0, 10) ? "geplant" : "veroeffentlicht";
 
-const text = fliessText(bloecke.TEXT.join("\n").replace(/\n{3,}/g, "\n\n").trim());
+/**
+ * Schliesst Fettauszeichnung, die ueber einen Absatzumbruch hinweglaeuft.
+ *
+ * Das GPT oeffnet gelegentlich "**" im einen Absatz und schliesst erst im
+ * naechsten. Markdown macht das nicht mit: Auf der Seite stuenden dann zwei
+ * Sternchen mitten im Text. Hier wird im ersten Absatz geschlossen und im
+ * zweiten neu geoeffnet, der Satz bleibt also fett, so wie gemeint.
+ */
+function fettSchliessen(roh) {
+  const absaetze = roh.split("\n\n");
+  const offen = (a) => ((a.match(/\*\*/g) ?? []).length) % 2 === 1;
+
+  for (let i = 0; i < absaetze.length - 1; i++) {
+    if (!offen(absaetze[i]) || !offen(absaetze[i + 1])) continue;
+    absaetze[i] = absaetze[i].replace(/\s*$/, "**");
+    absaetze[i + 1] = "**" + absaetze[i + 1].replace(/^\s*/, "");
+  }
+  return absaetze.join("\n\n");
+}
+
+const text = fettSchliessen(
+  fliessText(bloecke.TEXT.join("\n").replace(/\n{3,}/g, "\n\n").trim()),
+);
 const faq = faqAus(bloecke.FAQ);
 const quellen = quellenAus(bloecke.QUELLEN);
 
