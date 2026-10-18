@@ -293,12 +293,30 @@ function nurUrl(s) {
 function faqAus(zeilen) {
   const eintraege = [];
   let feld = null;
-  for (const zeile of zeilen) {
+  for (const roh of zeilen) {
+    /* Im Word-Dokument sind die Fragen oft als Ueberschrift formatiert, dann
+       steht hier "## F: ...". Fett ist auch moeglich. Beides weg, sonst
+       passt das Muster nicht und der ganze Block verschwindet stillschweigend. */
+    const zeile = roh
+      .replace(/^\s*#{1,6}\s*/, "")
+      .replace(/^\s*[-*]\s+/, "")
+      .replace(/\*\*/g, "")
+      .trim();
+
     const f = zeile.match(/^F:\s*(.*)$/);
     const a = zeile.match(/^A:\s*(.*)$/);
     if (f) {
-      eintraege.push({ frage: f[1].trim(), antwort: "" });
-      feld = "frage";
+      /* Mal steht die Antwort in der naechsten Zeile, mal in derselben:
+         "F: Frage? A: Antwort." Beide Formen kommen aus dem GPT, deshalb
+         hier trennen statt die halbe Lieferung stillschweigend zu verlieren. */
+      const zusammen = f[1].match(/^(.*?)\s+A:\s*(.+)$/);
+      if (zusammen) {
+        eintraege.push({ frage: zusammen[1].trim(), antwort: zusammen[2].trim() });
+        feld = "antwort";
+      } else {
+        eintraege.push({ frage: f[1].trim(), antwort: "" });
+        feld = "frage";
+      }
     } else if (a && eintraege.length) {
       eintraege[eintraege.length - 1].antwort = a[1].trim();
       feld = "antwort";
@@ -494,6 +512,20 @@ const text = fliessText(bloecke.TEXT.join("\n").replace(/\n{3,}/g, "\n\n").trim(
 const faq = faqAus(bloecke.FAQ);
 const quellen = quellenAus(bloecke.QUELLEN);
 
+/* Abbruch vor dem ersten Schreibvorgang. Die Pruefung stand frueher erst am
+   Ende, hinter dem Bild: Lieferte das GPT versehentlich denselben Slug wie ein
+   bestehender Beitrag, war dessen Bild schon ueberschrieben, bevor der
+   Importer den Abbruch meldete. Genau das ist am 18.10.2026 passiert. */
+const zielDatei = path.join("src", "content", "blog", `${slug}.md`);
+if (existsSync(zielDatei)) {
+  console.error(
+    `${zielDatei} gibt es schon. Nichts geschrieben, auch kein Bild.\n` +
+      `Entweder ist es eine Dublette, oder der Beitrag soll ersetzt werden:\n` +
+      `dann die Datei vorher loeschen.`,
+  );
+  process.exit(1);
+}
+
 let bild = bildFertig;
 let bildInfo = null;
 let vorschauInfo = null;
@@ -531,11 +563,8 @@ const daten = {
   datum,
 };
 
-const ziel = path.join("src", "content", "blog", `${slug}.md`);
-if (existsSync(ziel)) {
-  console.error(`${ziel} gibt es schon. Erst pruefen, dann von Hand entscheiden.`);
-  process.exit(1);
-}
+/* Geprueft wurde schon vor dem Bild, siehe oben. */
+const ziel = zielDatei;
 writeFileSync(ziel, frontmatter(daten) + "\n" + text + "\n", "utf8");
 
 const ueberschriften = (text.match(/^## /gm) ?? []).length;
