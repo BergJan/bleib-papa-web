@@ -254,8 +254,9 @@ Erstes Angebot.*
 > Genau das ist es nicht. Es geht um Orientierung für eure Beziehung, um
 > Präsenz, Haltung und Kommunikation als Vater. Nicht um Therapie, nicht um
 > Recht, nicht um die Aufarbeitung jedes Konflikts. Wenn du gerade in einer
-> Krise steckst, such dir bitte echte Hilfe. Die 66 Tage sind etwas für danach
-> oder daneben.
+> akuten Krise steckst, gehört das in andere Hände, etwa zu einer
+> Erziehungsberatungsstelle, einem Therapeuten oder der Telefonseelsorge. Die
+> 66 Tage sind etwas für danach oder daneben.
 >
 > Falls noch etwas offen ist: Auf der Programmseite stehen die häufigsten
 > Fragen samt Antworten, dazu der genaue Umfang und die Garantie.
