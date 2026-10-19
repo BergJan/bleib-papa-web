@@ -1657,20 +1657,20 @@ const initialen = (name: string) =>
      den Hero stützen, nicht mit ihm um Aufmerksamkeit ringen. Deshalb auch ein
      flacherer Schatten, die Karten sollen nicht schweben, sondern mitlaufen. */
   .stimme.ist-klein {
-    padding: 16px 18px;
+    padding: 14px 16px;
     box-shadow: 0 1px 2px rgba(23, 39, 61, 0.04);
   }
   .stimme.ist-klein p {
-    margin-bottom: 13px;
-    font-size: 14px;
-    line-height: 1.55;
+    margin-bottom: 11px;
+    font-size: 13px;
+    line-height: 1.5;
   }
   /* Monogramm und Name links, Sterne rechtsbündig. Die dritte Spalte bleibt
      leer, solange keine Bewertung hinterlegt ist. */
   .stimme.ist-klein footer {
-    padding-top: 11px;
-    grid-template-columns: 26px minmax(0, 1fr) auto;
-    gap: 9px;
+    padding-top: 9px;
+    grid-template-columns: 22px minmax(0, 1fr) auto;
+    gap: 8px;
   }
   .sterne {
     display: inline-flex;
@@ -1686,12 +1686,16 @@ const initialen = (name: string) =>
     fill: var(--orange);
   }
   .stimme.ist-klein .monogramm {
-    width: 26px;
-    height: 26px;
-    font-size: 10px;
+    width: 22px;
+    height: 22px;
+    font-size: 9px;
   }
   .stimme.ist-klein .stimme-name {
-    font-size: 12.5px;
+    font-size: 11.5px;
+  }
+  .stimme.ist-klein .stern {
+    width: 10px;
+    height: 10px;
   }
 
   /* ---------- Laufband ---------- */
@@ -1724,7 +1728,7 @@ const initialen = (name: string) =>
   /* Im Band feste Breite, in der Wand nicht: Dort sollen die Spalten die
      Breite bestimmen. */
   .band-spur .stimme {
-    flex: 0 0 clamp(250px, 72vw, 310px);
+    flex: 0 0 clamp(228px, 64vw, 282px);
     margin-right: clamp(18px, 2vw, 26px);
   }
 
