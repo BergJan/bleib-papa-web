@@ -350,6 +350,7 @@ const initialen = (name: string) =>
          als dessen Fuß, getrennt nur durch eine Haarlinie. */
       bandStimmen.length > 0 && (
         <section class="band-stimmen bg-creme naht-oben" aria-label="Stimmen von Vätern">
+          <div class="wrap">
           <div class="laufband" id="stimmenband">
             <div class="band-spur nach-links">
               {[false, true].map((kopie) =>
@@ -382,6 +383,7 @@ const initialen = (name: string) =>
                 )),
               )}
             </div>
+          </div>
           </div>
         </section>
       )
@@ -1745,7 +1747,6 @@ const initialen = (name: string) =>
      nicht abgeschnitten wirken, sondern aus dem Bild heraus- und
      hineinwandern. */
   .laufband {
-    margin-inline: calc(50% - 50vw);
     overflow: hidden;
     /* Schatten brauchen oben und unten Luft, sonst beschneidet sie der Rahmen. */
     padding-block: 8px;
