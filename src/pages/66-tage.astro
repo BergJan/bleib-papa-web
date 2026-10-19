@@ -244,10 +244,14 @@ const faq = [
 
 const kaufen = SITE.checkoutUrl || "#starten";
 
-/* Zwei gegenläufige Reihen. Die Aufteilung bleibt stabil, egal wie viele
-   Stimmen dazukommen: erste Hälfte oben, zweite unten. */
-const reiheOben = stimmen.slice(0, Math.ceil(stimmen.length / 2));
-const reiheUnten = stimmen.slice(Math.ceil(stimmen.length / 2));
+/**
+ * Fürs Laufband direkt unter dem Hero: ein paar Stimmen, nicht alle.
+ *
+ * Ausgewählt nach Kürze, denn die Höhe des Bandes richtet sich nach der
+ * längsten Karte darin, und direkt unter dem Hero soll es schmal bleiben.
+ * Alle zehn stehen weiter unten in Abschnitt 8.
+ */
+const bandStimmen = [...stimmen].sort((a, b) => a.zitat.length - b.zitat.length).slice(0, 5);
 
 /** "Martin S." wird zu "MS". Gibt jeder Stimme ein Gesicht, ohne Stockfoto. */
 const initialen = (name: string) =>
@@ -309,6 +313,38 @@ const initialen = (name: string) =>
         </div>
       </div>
     </section>
+
+    <!-- ============ 1b · STIMMENBAND ============ -->
+    {
+      /* Schmaler Vertrauensbeweis direkt unter dem Hero, damit ein Besucher
+         aus einem Reel sofort sieht, dass andere das schon gemacht haben.
+         Steht auf demselben warmen Grund wie der Hero und liest sich dadurch
+         als dessen Fuß, getrennt nur durch eine Haarlinie. */
+      bandStimmen.length > 0 && (
+        <section class="band-stimmen bg-creme naht-oben" aria-label="Stimmen von Vätern">
+          <div class="laufband" id="stimmenband">
+            <div class="band-spur nach-links">
+              {[false, true].map((kopie) =>
+                bandStimmen.map((s) => (
+                  <blockquote class="stimme ist-klein" aria-hidden={kopie ? "true" : undefined}>
+                    <p>{s.zitat}</p>
+                    <footer>
+                      <span class="monogramm" aria-hidden="true">{initialen(s.name)}</span>
+                      <span class="stimme-name">{s.name}</span>
+                    </footer>
+                  </blockquote>
+                )),
+              )}
+            </div>
+          </div>
+          <div class="wrap band-fuss">
+            <button class="band-schalter" type="button" aria-pressed="false" data-band-schalter>
+              Bewegung anhalten
+            </button>
+          </div>
+        </section>
+      )
+    }
 
     <!-- ============ 2 · SCHMERZ ============ -->
     <section class="section bg-white">
@@ -549,41 +585,25 @@ const initialen = (name: string) =>
         <section class="section bg-creme naht-oben">
           <div class="wrap">
             <h2 class="h2 measure-wide">Was andere Väter zum 66-Tage-Programm sagen</h2>
-            {/* Zwei gegenläufige Laufbänder. Jede Spur enthält ihre Karten
-                zweimal, dadurch kann sie um genau die halbe Breite wandern und
-                beginnt nahtlos von vorn. Der zweite Satz ist für Screenreader
-                ausgeblendet, sonst läse er jedes Zitat doppelt vor. */}
-            <div class="laufbaender" id="laufbaender">
-              {[reiheOben, reiheUnten].map((reihe, nr) => (
-                <div class="laufband">
-                  <div class:list={["band-spur", nr === 0 ? "nach-links" : "nach-rechts"]}>
-                    {[false, true].map((kopie) =>
-                      reihe.map((s) => (
-                        <blockquote class="stimme" aria-hidden={kopie ? "true" : undefined}>
-                          <p>{s.zitat}</p>
-                          <footer>
-                            <span class="monogramm" aria-hidden="true">{initialen(s.name)}</span>
-                            <span>
-                              <span class="stimme-name">{s.name}</span>
-                              {s.situation && <span class="stimme-lage">{s.situation}</span>}
-                            </span>
-                          </footer>
-                        </blockquote>
-                      )),
-                    )}
-                  </div>
-                </div>
+            {/* Alle Stimmen, als Wand aus Spalten. Die Karten fließen und füllen
+                gleichmäßig, egal wie viele es sind. Ein starres Dreierraster
+                ließe bei zehn Karten eine angebrochene Zeile stehen. */}
+            <div class="stimmen">
+              {stimmen.map((s) => (
+                <blockquote class="stimme">
+                  <p>{s.zitat}</p>
+                  <footer>
+                    <span class="monogramm" aria-hidden="true">{initialen(s.name)}</span>
+                    <span>
+                      <span class="stimme-name">{s.name}</span>
+                      {s.situation && <span class="stimme-lage">{s.situation}</span>}
+                    </span>
+                  </footer>
+                </blockquote>
               ))}
             </div>
 
-            <div class="stimmen-fuss">
-              <p class="stimmen-hinweis">Nachnamen aus Rücksicht auf die Privatsphäre abgekürzt.</p>
-              {/* Ohne Maus gibt es kein Überfahren. Ein Knopf ist die einzige
-                  Möglichkeit, die Bewegung auch am Telefon anzuhalten. */}
-              <button class="band-schalter" type="button" aria-pressed="false" data-band-schalter>
-                Bewegung anhalten
-              </button>
-            </div>
+            <p class="stimmen-hinweis">Nachnamen aus Rücksicht auf die Privatsphäre abgekürzt.</p>
             <KaufCta name="stimmen" />
           </div>
         </section>
@@ -817,7 +837,7 @@ const initialen = (name: string) =>
   /* Ohne Maus gibt es kein Überfahren, und Dauerbewegung ohne Halt ist eine
      Barriere. Deshalb ein Knopf, der für beide Reihen gilt. */
   const schalter = document.querySelector<HTMLButtonElement>("[data-band-schalter]");
-  const baender = document.getElementById("laufbaender");
+  const baender = document.getElementById("stimmenband");
 
   schalter?.addEventListener("click", () => {
     const angehalten = baender?.classList.toggle("ist-angehalten") ?? false;
@@ -1335,18 +1355,45 @@ const initialen = (name: string) =>
     border-top: 1px solid var(--line);
   }
 
-  /* ---------- 8 · Stimmen ---------- */
-  /* Zwei Laufbänder, über die volle Fensterbreite und gegenläufig. Die Ränder
-     werden ausgeblendet, damit die Karten nicht abgeschnitten wirken, sondern
-     aus dem Bild heraus- und hineinwandern. */
-  .laufbaender {
-    display: grid;
-    gap: clamp(14px, 1.6vw, 20px);
-    margin-top: clamp(22px, 2.6vw, 32px);
-    /* Aus dem Textrahmen heraus bis an beide Fensterkanten. */
-    margin-inline: calc(50% - 50vw);
+  /* ---------- 1b · Stimmenband unter dem Hero ---------- */
+  .band-stimmen {
+    padding: clamp(18px, 2vw, 26px) 0 clamp(12px, 1.4vw, 16px);
   }
+  .band-fuss {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 6px;
+  }
+  /* Im Band kleiner als in der Wand: Es soll den Hero stützen, nicht mit ihm
+     um Aufmerksamkeit ringen. */
+  .stimme.ist-klein {
+    padding: clamp(18px, 2vw, 22px);
+  }
+  .stimme.ist-klein p {
+    margin-bottom: 16px;
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+  .stimme.ist-klein footer {
+    padding-top: 14px;
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 10px;
+  }
+  .stimme.ist-klein .monogramm {
+    width: 32px;
+    height: 32px;
+    font-size: 11.5px;
+  }
+  .stimme.ist-klein .stimme-name {
+    font-size: 13.5px;
+  }
+
+  /* ---------- Laufband ---------- */
+  /* Über die volle Fensterbreite, die Ränder ausgeblendet, damit die Karten
+     nicht abgeschnitten wirken, sondern aus dem Bild heraus- und
+     hineinwandern. */
   .laufband {
+    margin-inline: calc(50% - 50vw);
     overflow: hidden;
     /* Schatten brauchen oben und unten Luft, sonst beschneidet sie der Rahmen. */
     padding-block: 8px;
@@ -1368,8 +1415,35 @@ const initialen = (name: string) =>
     width: max-content;
     align-items: stretch;
   }
+  /* Im Band feste Breite, in der Wand nicht: Dort sollen die Spalten die
+     Breite bestimmen. */
   .band-spur .stimme {
+    flex: 0 0 clamp(270px, 78vw, 340px);
     margin-right: clamp(14px, 1.6vw, 20px);
+  }
+
+  /* ---------- 8 · Stimmen als Wand ---------- */
+  /* Handy eine Spalte, Tablet zwei, Rechner drei. Spalten statt Raster, damit
+     unterschiedlich lange Karten gleichmäßig füllen und am Ende keine
+     angebrochene Zeile steht. */
+  .stimmen {
+    margin-top: clamp(22px, 2.6vw, 32px);
+    columns: 1;
+    column-gap: clamp(16px, 1.8vw, 22px);
+  }
+  @media (min-width: 680px) {
+    .stimmen {
+      columns: 2;
+    }
+  }
+  @media (min-width: 1020px) {
+    .stimmen {
+      columns: 3;
+    }
+  }
+  .stimmen .stimme {
+    break-inside: avoid;
+    margin-bottom: clamp(16px, 1.8vw, 22px);
   }
   .band-spur.nach-links {
     animation: lauf-links 72s linear infinite;
@@ -1398,7 +1472,7 @@ const initialen = (name: string) =>
   /* Anhalten beim Lesen: Maus darüber, Tastaturfokus darin, oder per Knopf. */
   .laufband:hover .band-spur,
   .laufband:focus-within .band-spur,
-  .laufbaender.ist-angehalten .band-spur {
+  .laufband.ist-angehalten .band-spur {
     animation-play-state: paused;
   }
 
@@ -1438,7 +1512,6 @@ const initialen = (name: string) =>
     box-shadow:
       0 1px 2px rgba(23, 39, 61, 0.04),
       0 10px 28px rgba(23, 39, 61, 0.055);
-    flex: 0 0 clamp(270px, 78vw, 340px);
     transition:
       transform 0.18s ease,
       box-shadow 0.18s ease;
