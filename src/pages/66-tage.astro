@@ -358,7 +358,7 @@ const kaufen = SITE.checkoutUrl || "#starten";
             für ihn jetzt nur noch der Papa vom Wochenende?
           </p>
           <p>
-            Am Anfang habe ich vieles gut gemeint und falsch gemacht. Jedes Wochenende musste etwas
+            Am Anfang habe ich vieles gut gemeint und falsch gemacht. Jedes Treffen musste etwas
             Besonderes sein. Ich habe angerufen, wenn er lieber spielen wollte, und mich zu selten
             gemeldet, wenn es wirklich zählte. Ich wollte Zeit zurückkaufen, die man nicht
             zurückkaufen kann.
@@ -375,6 +375,15 @@ const kaufen = SITE.checkoutUrl || "#starten";
           </p>
 
           <p class="signatur">Jan, Papa und Gründer von BLEIB PAPA</p>
+
+          {/* Als Nachsatz, nicht als Hinweiskasten: Die Haltung wirkt stärker,
+              wenn sie beiläufig kommt statt als Regelwerk. */}
+          <p class="ps">
+            <strong>PS:</strong> Dir ist vielleicht aufgefallen, dass du meinen Sohn hier nirgends siehst.
+            Kein Foto, kein Name. Er ist der Grund für alles auf dieser Seite, und genau deshalb
+            zeige ich ihn nicht. Wer die Privatsphäre seines Kindes ernst nimmt, fängt bei der
+            eigenen Website an.
+          </p>
         </div>
       </div>
     </section>
@@ -991,7 +1000,7 @@ const kaufen = SITE.checkoutUrl || "#starten";
     border-radius: 2px;
     display: block;
   }
-  .geschichte-text p:not(.label):not(.signatur) {
+  .geschichte-text p:not(.label):not(.signatur):not(.ps) {
     max-width: 640px;
     margin: 0 0 16px;
     line-height: 1.7;
@@ -1004,6 +1013,24 @@ const kaufen = SITE.checkoutUrl || "#starten";
     font-family: var(--serif);
     font-size: 16px;
     color: var(--meta-text);
+  }
+  .ps {
+    max-width: 580px;
+    margin: clamp(20px, 2.4vw, 28px) 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-family: var(--serif);
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--body);
+  }
+  .ps strong {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--rost);
+    margin-right: 4px;
   }
   @media (max-width: 899px) {
     .portrait {
