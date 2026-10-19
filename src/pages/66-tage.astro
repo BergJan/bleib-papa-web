@@ -1182,6 +1182,33 @@ const initialen = (name: string) =>
     }
   }
 
+  /* Sobald der Hero gestapelt ist, steht das Produktbild vor dem Button.
+     960 ist die Breite, bei der .hero-grid in global.css einspaltig wird.
+     display:contents loest den Textblock auf, dadurch werden Dachzeile,
+     Ueberschrift, Fliesstext, Bild und Button zu Geschwistern in einer
+     Reihe, und der Button laesst sich mit order ans Ende schieben. */
+  @media (max-width: 960px) {
+    .hero-grid {
+      display: flex;
+      flex-direction: column;
+      /* Als Raster galt der gap aus global.css nur zwischen Text und Bild.
+         Als Flex-Spalte wirkt er zwischen allen fuenf Elementen und addiert
+         sich zu deren Eigenabstaenden. */
+      gap: 0;
+    }
+    .hero-col {
+      display: contents;
+    }
+    .hero-visual {
+      margin-top: 22px;
+    }
+    /* 3, weil .hero-visual in global.css schon order: 2 traegt. */
+    .hero-grid :global(.kauf-cta) {
+      order: 3;
+      margin-top: 24px;
+    }
+  }
+
   @media (max-width: 640px) {
     .hero {
       padding-top: 26px;
@@ -1196,28 +1223,10 @@ const initialen = (name: string) =>
       font-size: 15.5px;
       line-height: 1.55;
     }
-    /* Auf dem Telefon steht das Produktbild vor dem Button.
-       display:contents loest den Textblock auf, dadurch werden Dachzeile,
-       Ueberschrift, Fliesstext, Bild und Button zu Geschwistern in einer
-       Reihe, und der Button laesst sich mit order ans Ende schieben. */
-    .hero-grid {
-      display: flex;
-      flex-direction: column;
-      /* Als Raster galt der gap aus global.css nur zwischen Text und Bild.
-         Als Flex-Spalte wirkt er zwischen allen fuenf Elementen und addiert
-         sich zu deren Eigenabstaenden. Deshalb hier aus, die Abstaende
-         kommen von den Elementen selbst. */
-      gap: 0;
-    }
-    .hero-col {
-      display: contents;
-    }
     .hero-visual {
       margin-top: 13px;
     }
-    /* 3, weil .hero-visual in global.css schon order: 2 traegt. */
     .hero-grid :global(.kauf-cta) {
-      order: 3;
       margin-top: 18px;
     }
   }

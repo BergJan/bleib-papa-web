@@ -37,7 +37,7 @@ const umfang = [
   <main>
     <section class="section bg-creme">
       <div class="wrap">
-        <div class="split guide-kopf" style="margin-top:0;align-items:center">
+        <div class="split guide-kopf" style="margin-top:0">
           <div>
             <p class="label">Dein Guide</p>
             <h1 class="h1">Da ist er.</h1>
@@ -91,7 +91,7 @@ const umfang = [
     <section class="section bg-creme">
       <div class="wrap">
         <p class="label">Der nächste Schritt</p>
-        <h2 class="h2 measure-wide">21 Wege geben dir Ideen. Die 66 Tage geben dir einen Weg.</h2>
+        <h2 class="h2 measure-wide">21 Wege geben dir Ideen. Das 66-Tage-Programm gibt dir einen Weg.</h2>
 
         <div class="bruecke">
           <div class="bruecke-text">
@@ -153,6 +153,12 @@ const umfang = [
 </Base>
 
 <style>
+  @media (min-width: 961px) {
+    .guide-kopf {
+      align-items: center;
+    }
+  }
+
   .guide-aktion {
     margin-top: clamp(24px, 2.8vw, 32px);
   }
@@ -163,7 +169,11 @@ const umfang = [
   /* Auf dem Telefon steht das Produktbild vor dem Download-Knopf, so wie im
      Hero der Verkaufsseite. display:contents loest den Textblock auf, dann
      lassen sich Bild und Knopf mit order sortieren. */
-  @media (max-width: 860px) {
+  /* 960 und nicht weniger: Bei genau dieser Breite wird .split in global.css
+     einspaltig. Lag die Grenze darunter, war die Seite dazwischen schon
+     gestapelt, die Umsortierung aber noch aus, und das Bild stand wieder
+     hinter dem Knopf. */
+  @media (max-width: 960px) {
     .guide-kopf {
       display: flex;
       flex-direction: column;
@@ -175,6 +185,10 @@ const umfang = [
     .guide-kopf .fig {
       order: 1;
       margin-top: 18px;
+    }
+    .guide-kopf .fig img {
+      max-width: 320px;
+      margin-inline: auto;
     }
     .guide-kopf .guide-aktion {
       order: 2;
