@@ -24,7 +24,7 @@ const fragen = [
 ];
 
 const umfang = [
-  "66 Audio-Impulse à ca. 10 Minuten, zusammen rund 11 Stunden",
+  "66 Audio-Dateien à ca. 10 Minuten, zusammen rund 11 Stunden",
   "Praxis-Workbook mit 157 Seiten im A4-Format",
   "Sechs Phasen, 30- und 90-Tage-Check-in",
   "Sofortiger digitaler Zugang",
@@ -37,7 +37,7 @@ const umfang = [
   <main>
     <section class="section bg-creme">
       <div class="wrap">
-        <div class="split" style="margin-top:0;align-items:center">
+        <div class="split guide-kopf" style="margin-top:0;align-items:center">
           <div>
             <p class="label">Dein Guide</p>
             <h1 class="h1">Da ist er.</h1>
@@ -48,10 +48,10 @@ const umfang = [
               </p>
             </div>
 
-            <p style="margin-top:clamp(24px,2.8vw,32px)">
+            <p class="guide-aktion">
               <a class="btn" href={pdf} download>21 Wege als PDF herunterladen</a>
             </p>
-            <p class="small" style="margin-top:12px">
+            <p class="small guide-hinweis">
               Den Link findest du auch in deinem Postfach. Du kannst den Guide also jederzeit
               wieder öffnen.
             </p>
@@ -153,6 +153,37 @@ const umfang = [
 </Base>
 
 <style>
+  .guide-aktion {
+    margin-top: clamp(24px, 2.8vw, 32px);
+  }
+  .guide-hinweis {
+    margin-top: 12px;
+  }
+
+  /* Auf dem Telefon steht das Produktbild vor dem Download-Knopf, so wie im
+     Hero der Verkaufsseite. display:contents loest den Textblock auf, dann
+     lassen sich Bild und Knopf mit order sortieren. */
+  @media (max-width: 860px) {
+    .guide-kopf {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .guide-kopf > div:first-child {
+      display: contents;
+    }
+    .guide-kopf .fig {
+      order: 1;
+      margin-top: 18px;
+    }
+    .guide-kopf .guide-aktion {
+      order: 2;
+      margin-top: 20px;
+    }
+    .guide-kopf .guide-hinweis {
+      order: 3;
+    }
+  }
   .bruecke {
     display: grid;
     gap: clamp(30px, 4vw, 56px);
