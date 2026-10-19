@@ -650,6 +650,20 @@ const initialen = (name: string) =>
               ))}
             </div>
 
+            {/* Auf dem Telefon stehen zehn Karten untereinander, das sind viele
+                Bildschirmlängen. Der Knopf klappt sie auf. Er ist zunächst
+                versteckt und wird erst vom Skript eingeblendet: Ohne
+                JavaScript bleiben alle zehn sichtbar, statt unerreichbar. */}
+            <button
+              class="stimmen-mehr"
+              type="button"
+              aria-expanded="false"
+              data-stimmen-mehr
+              hidden
+            >
+              Alle {stimmen.length} Stimmen lesen
+            </button>
+
             <p class="stimmen-hinweis">Nachnamen aus Rücksicht auf die Privatsphäre abgekürzt.</p>
             <KaufCta name="stimmen" />
           </div>
@@ -1024,6 +1038,34 @@ const initialen = (name: string) =>
     );
     addEventListener("resize", nachfuehren, { passive: true });
     nachfuehren();
+  }
+
+  /**
+   * Stimmen in Abschnitt 8 auf dem Telefon aufklappen.
+   *
+   * Erst hier bekommt die Liste die Klasse, die das Kuerzen erlaubt, und erst
+   * hier erscheint der Knopf. Ohne JavaScript stehen damit alle Stimmen da,
+   * statt hinter einem Knopf zu verschwinden, der nichts tut.
+   */
+  const wand = document.querySelector(".stimmen");
+  const mehr = document.querySelector<HTMLButtonElement>("[data-stimmen-mehr]");
+
+  if (wand && mehr) {
+    wand.classList.add("kann-klappen");
+    mehr.hidden = false;
+    const beschriftung = mehr.textContent?.trim() ?? "";
+
+    mehr.addEventListener("click", () => {
+      const offen = wand.classList.toggle("ist-offen");
+      mehr.setAttribute("aria-expanded", String(offen));
+      mehr.textContent = offen ? "Weniger anzeigen" : beschriftung;
+
+      /* Beim Zuklappen zurueck zum Anfang des Abschnitts, sonst steht der
+         Leser ploetzlich im naechsten Kapitel. */
+      if (!offen) {
+        wand.closest("section")?.scrollIntoView({ block: "start", behavior: "smooth" });
+      }
+    });
   }
 
   /* ---------- Laufband anhalten ---------- */
@@ -1888,6 +1930,57 @@ const initialen = (name: string) =>
     }
     .stimme {
       scroll-snap-align: center;
+    }
+  }
+
+  /* Nur auf dem Telefon, und nur wenn das Skript gelaufen ist: drei Karten
+     als Vorschau, der Rest hinter dem Knopf. Ab 680 Pixeln stehen die Karten
+     in Spalten, dort ist die Liste ohnehin kurz genug. */
+  @media (max-width: 679px) {
+    .stimmen.kann-klappen:not(.ist-offen) .stimme:nth-child(n + 4) {
+      display: none;
+    }
+    /* Die dritte Karte laeuft nach unten aus, damit sichtbar ist, dass da
+       noch mehr kommt. */
+    .stimmen.kann-klappen:not(.ist-offen) .stimme:nth-child(3) {
+      -webkit-mask-image: linear-gradient(180deg, #000 48%, transparent 100%);
+      mask-image: linear-gradient(180deg, #000 48%, transparent 100%);
+    }
+  }
+  .stimmen-mehr {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    width: 100%;
+    margin-top: 6px;
+    padding: 12px 20px;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--rost);
+    cursor: pointer;
+    transition:
+      background-color 0.16s ease,
+      color 0.16s ease,
+      border-color 0.16s ease;
+  }
+  .stimmen-mehr:hover {
+    background: var(--rost);
+    border-color: var(--rost);
+    color: #fff;
+  }
+  .stimmen-mehr[hidden] {
+    display: none;
+  }
+  @media (min-width: 680px) {
+    .stimmen-mehr {
+      display: none;
     }
   }
 
