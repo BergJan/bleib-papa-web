@@ -1,0 +1,139 @@
+---
+import { SITE } from "../site";
+
+/**
+ * Der Kauf-Button samt Vertrauenszeile.
+ *
+ * Steht auf der Salespage viermal. Als Komponente, damit Text, Ziel und
+ * Vertrauenszeile garantiert überall gleich sind: Vier Varianten desselben
+ * Buttons wären vier Stellen, an denen eine Änderung vergessen wird.
+ */
+interface Props {
+  /** Name fürs Tracking, z. B. "hero". Landet als data-kauf im Markup. */
+  name: string;
+  /** Auf dunklem Grund wird die Vertrauenszeile hell. */
+  hell?: boolean;
+}
+const { name, hell = false } = Astro.props;
+
+/* Solange kein Checkout hinterlegt ist, springt der Button zum Kaufblock. */
+const kaufen = SITE.checkoutUrl || "#starten";
+---
+
+<div class:list={["kauf-cta", hell && "ist-hell"]}>
+  <div class="kauf-reihe">
+    <a class="btn btn-kauf" href={kaufen} data-kauf={name}>Jetzt starten – 247 € einmalig</a>
+    {/* Platz für einen Nebenbutton, im Hero die Hörprobe. */}
+    <slot />
+  </div>
+  <p class="trust">
+    {
+      ["Einmaliger Kauf", "Kein Abo", "14 Tage Geld-zurück-Garantie"].map((t) => (
+        <span class="trust-punkt">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M3 8.5l3.2 3.2L13 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          {t}
+        </span>
+      ))
+    }
+  </p>
+</div>
+
+<style>
+  .kauf-cta {
+    margin-top: clamp(24px, 3vw, 34px);
+  }
+  .kauf-reihe {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Der Nebenbutton trägt dieselbe Höhe, aber nur eine Kontur: Zwei gefüllte
+     Buttons nebeneinander würden um dieselbe Aufmerksamkeit kämpfen. */
+  .kauf-reihe :global(.btn-kontur) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 52px;
+    padding: 15px 26px;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--rost);
+    background: transparent;
+    border: 1px solid var(--rost);
+    border-radius: 2px;
+    text-decoration: none;
+    transition:
+      background-color 0.16s ease,
+      color 0.16s ease;
+  }
+  .kauf-reihe :global(.btn-kontur:hover) {
+    background: var(--rost);
+    color: #fff;
+  }
+
+  /* Mindestens 52 px hoch, auf dem Handy volle Breite: Der Button ist das
+     einzige, was auf dieser Seite wirklich angeklickt werden soll. */
+  .btn-kauf {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 15px 30px;
+    font-size: 14px;
+  }
+
+  .trust {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin: 14px 0 0;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--meta-text);
+  }
+  .trust-punkt {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .trust-punkt svg {
+    width: 13px;
+    height: 13px;
+    flex: 0 0 auto;
+    color: var(--rost);
+  }
+
+  .ist-hell .trust {
+    color: rgba(251, 247, 241, 0.72);
+  }
+  .ist-hell .trust-punkt svg {
+    color: var(--sand);
+  }
+
+  @media (max-width: 640px) {
+    .kauf-reihe {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+    .btn-kauf,
+    .kauf-reihe :global(.btn-kontur) {
+      display: flex;
+      width: 100%;
+    }
+    /* Untereinander statt umbrechend: drei halbe Zeilen lesen sich schlecht. */
+    .trust {
+      flex-direction: column;
+      gap: 7px;
+    }
+  }
+</style>
