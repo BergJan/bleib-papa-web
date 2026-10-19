@@ -18,7 +18,7 @@ export const SITE = {
    * Checkout des 66-Tage-Programms (Digistore24, Copecart, elopage, Stripe ...).
    * Solange leer, springen die Kaufbuttons zum Preisblock auf der Seite.
    */
-  checkoutUrl: "",
+  checkoutUrl: "https://buy.stripe.com/00w4gA8QL7HPauq7OD8Vi00",
 
   /**
    * Tracking. Solange beide Felder leer sind, wird nichts geladen und es
