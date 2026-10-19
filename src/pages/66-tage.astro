@@ -38,8 +38,65 @@ const tagEins = { datei: "", titel: "" };
 /** Zielseite für den Hinweis auf Krisenhilfe. Leer = Text ohne Link. */
 const krisenSeite = "";
 
-/** Echte Stimmen von Vätern. Leer = der ganze Abschnitt entfällt. */
-const stimmen: { zitat: string; name: string; situation: string }[] = [];
+/**
+ * Stimmen von Vätern. Leer = der ganze Abschnitt entfällt.
+ *
+ * Die Situationszeile aus dem Briefing ("Wochenend-Papa, Sohn 7") liegt nicht
+ * vor und bleibt deshalb weg, statt erfunden zu werden. Sie lässt sich je
+ * Eintrag nachtragen, ohne dass sich am Rest etwas ändert.
+ */
+const stimmen: { zitat: string; name: string; situation?: string }[] = [
+  {
+    zitat:
+      "Ich habe lange gedacht, dass ich die verlorene Zeit mit meinem Kind irgendwie ausgleichen muss. Durch das Programm habe ich verstanden, dass es viel mehr darauf ankommt, wie wir unsere gemeinsame Zeit gestalten. Das hat bei mir wirklich etwas verändert.",
+    name: "Martin S.",
+  },
+  {
+    zitat:
+      "Das schlechte Gewissen war nach der Trennung eigentlich immer dabei. Die 66 Tage haben mir geholfen, anders damit umzugehen und unsere gemeinsame Zeit wieder mehr zu genießen.",
+    name: "Tim L.",
+  },
+  {
+    zitat:
+      "Ich hatte keine Lust auf irgendwelche theoretischen Ratschläge. Hier bekomme ich jeden Tag einen Gedanken oder eine konkrete Idee, die ich tatsächlich in meinem Alltag als Papa umsetzen kann.",
+    name: "Jonathan H.",
+  },
+  {
+    zitat:
+      "Besonders geholfen haben mir die Impulse für die Tage, an denen mein Sohn bei seiner Mutter ist. Ich habe jetzt viel mehr Ideen, wie ich unsere Verbindung auch zwischen den Treffen pflegen kann.",
+    name: "Roland T.",
+  },
+  {
+    zitat:
+      "Was mir besonders gefallen hat: Hier erzählt mir keiner, dass nach einer Trennung alles einfach ist. Die Themen sind ehrlich, alltagsnah und ich habe mich an vielen Stellen wiedererkannt.",
+    name: "Sven K.",
+  },
+  {
+    zitat:
+      "Manchmal waren es nur fünf Minuten am Tag. Aber einige dieser Gedanken haben mich noch tagelang beschäftigt. Gerade die kleinen Veränderungen machen bei uns inzwischen einen Unterschied.",
+    name: "Chris E.",
+  },
+  {
+    zitat:
+      "Nach der Trennung musste ich meine Rolle als Vater irgendwie neu finden. Das Programm hat mir geholfen, meinen eigenen Weg zu entwickeln und wieder mehr Sicherheit im Umgang mit der Situation zu bekommen.",
+    name: "Carsten S.",
+  },
+  {
+    zitat:
+      "Früher wollte ich an unseren Wochenenden immer möglichst viel unternehmen. Heute weiß ich, dass auch ein ganz normaler Samstag auf dem Sofa wertvolle Papa-Zeit sein kann. Das hat uns beiden viel Druck genommen.",
+    name: "Sascha L.",
+  },
+  {
+    zitat:
+      "Man merkt, dass hinter BLEIB PAPA jemand steckt, der selbst weiß, wie sich diese Situation anfühlt. Genau das macht die Impulse für mich glaubwürdig. Es geht um das echte Leben und die Herausforderungen, die man als getrennter Vater hat.",
+    name: "Tobias C.",
+  },
+  {
+    zitat:
+      "Ich hätte mir dieses Programm direkt nach unserer Trennung gewünscht. Es hätte mir viele Grübeleien erspart. Für jeden Papa, der auch nach der Trennung eine enge Beziehung zu seinem Kind gestalten möchte, sind die 66 Tage eine echte Bereicherung.",
+    name: "Ricardo F.",
+  },
+];
 
 if (!sohnAlter) {
   console.warn('[66-tage] Feld "sohnAlter" ist leer, im Text steht ein Platzhalter.');
@@ -480,17 +537,23 @@ const kaufen = SITE.checkoutUrl || "#starten";
         <section class="section bg-white">
           <div class="wrap">
             <h2 class="h2 measure-wide">Was Väter nach den 66 Tagen sagen</h2>
+            {/* Auf dem Handy eine Reihe zum Wischen, am Rechner eine Wand aus
+                Spalten. Beides kommt mit jeder Anzahl zurecht, zehn Karten
+                ergeben in einem starren Raster sonst eine angebrochene Zeile. */}
             <div class="stimmen">
               {stimmen.map((s) => (
                 <blockquote class="stimme">
-                  <p>{s.zitat}</p>
+                  <p>„{s.zitat}“</p>
                   <footer>
                     <span class="stimme-name">{s.name}</span>
-                    <span class="stimme-lage">{s.situation}</span>
+                    {s.situation && <span class="stimme-lage">{s.situation}</span>}
                   </footer>
                 </blockquote>
               ))}
             </div>
+            <p class="stimmen-hinweis">
+              Nachnamen aus Rücksicht auf die Privatsphäre abgekürzt.
+            </p>
             <KaufCta name="stimmen" />
           </div>
         </section>
@@ -1224,27 +1287,37 @@ const kaufen = SITE.checkoutUrl || "#starten";
   }
 
   /* ---------- 8 · Stimmen ---------- */
+  /* Handy: eine Reihe zum Wischen, bis an den Bildschirmrand, damit sichtbar
+     ist, dass es rechts weitergeht. */
   .stimmen {
-    display: grid;
-    gap: 18px;
+    display: flex;
+    gap: 14px;
     margin-top: clamp(22px, 2.6vw, 32px);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin-inline: -24px;
+    padding-inline: 24px;
+    padding-bottom: 4px;
   }
-  @media (min-width: 860px) {
-    .stimmen {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  .stimmen::-webkit-scrollbar {
+    display: none;
   }
+
   .stimme {
     margin: 0;
     padding: clamp(20px, 2.2vw, 26px);
     background: var(--creme);
     border-radius: 2px;
+    border-top: 2px solid var(--rost);
+    scroll-snap-align: start;
+    flex: 0 0 82%;
   }
   .stimme p {
-    margin: 0 0 14px;
+    margin: 0 0 16px;
     font-family: var(--serif);
     font-size: 16.5px;
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--ink);
   }
   .stimme footer {
@@ -1252,11 +1325,38 @@ const kaufen = SITE.checkoutUrl || "#starten";
     gap: 2px;
   }
   .stimme-name {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
-    color: var(--ink);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--rost);
   }
   .stimme-lage {
+    font-size: 12.5px;
+    color: var(--meta-text);
+  }
+
+  /* Rechner: eine Wand aus Spalten. Die Karten fließen und füllen gleichmäßig,
+     egal wie viele es sind. Ein starres Raster ließe bei zehn Stück eine
+     angebrochene Zeile stehen. */
+  @media (min-width: 900px) {
+    .stimmen {
+      display: block;
+      columns: 3;
+      column-gap: clamp(16px, 1.8vw, 22px);
+      overflow: visible;
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+    .stimme {
+      break-inside: avoid;
+      margin-bottom: clamp(16px, 1.8vw, 22px);
+      flex: none;
+    }
+  }
+
+  .stimmen-hinweis {
+    margin: clamp(14px, 1.8vw, 20px) 0 0;
     font-size: 12.5px;
     color: var(--meta-text);
   }
