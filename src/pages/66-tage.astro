@@ -318,8 +318,16 @@ const initialen = (name: string) =>
 
         <div class="hero-visual">
           <figure class="mockup">
+            {/* Vier Größen. Das Mockup ist das größte Bild über der Falz und
+                bestimmt damit die Ladezeit. Die 700er-Stufe ist die wichtigste:
+                Ein übliches Telefon mit doppelter Pixeldichte braucht rund 620
+                Pixel und zöge sonst die 1000er-Fassung, also 77 statt 46 KB. */}
             <picture>
-              <source srcset="/assets/66-tage-mockup.webp" type="image/webp" />
+              <source
+                type="image/webp"
+                srcset="/assets/66-tage-mockup-400.webp 400w, /assets/66-tage-mockup-600.webp 600w, /assets/66-tage-mockup-700.webp 700w, /assets/66-tage-mockup.webp 1000w"
+                sizes="(min-width: 900px) 480px, calc(100vw - 48px)"
+              />
               <img
                 src="/assets/66-tage-mockup.jpg"
                 width="1000"
@@ -555,33 +563,62 @@ const initialen = (name: string) =>
           Kein zweiter Job, keine Video-Bibliothek. Ein Tag, ein Gedanke, ein nächster Schritt.
         </p>
 
-        <div class:list={["hoeren", tagEins.datei && "mit-player"]}>
-          {
-            tagEins.datei && (
-              <div class="player" id="tag-1" style="scroll-margin-top:84px">
-                <p class="label">Hör rein: Tag 1 – {tagEins.titel}</p>
-                <audio controls preload="none" src={tagEins.datei} data-hoerprobe>
-                  Dein Browser kann diese Audiodatei nicht abspielen.
-                  <a href={tagEins.datei}>Zum Herunterladen</a>
-                </audio>
-                <p class="player-hinweis">Direkt abspielbar, ohne E-Mail-Adresse.</p>
-              </div>
-            )
-          }
+        {
+          tagEins.datei && (
+            <div class="player" id="tag-1" style="scroll-margin-top:84px">
+              <p class="label">Hör rein: Tag 1 – {tagEins.titel}</p>
+              <audio controls preload="none" src={tagEins.datei} data-hoerprobe>
+                Dein Browser kann diese Audiodatei nicht abspielen.
+                <a href={tagEins.datei}>Zum Herunterladen</a>
+              </audio>
+              <p class="player-hinweis">Direkt abspielbar, ohne E-Mail-Adresse.</p>
+            </div>
+          )
+        }
 
-          <figure class="fig">
-            <picture>
-              <source srcset="/assets/szene-kalender.webp" type="image/webp" />
-              <img
-                src="/assets/szene-kalender.jpg"
-                width="1000"
-                height="667"
-                alt="Ein Kalender auf dem Küchentisch, daneben Kopfhörer und eine Tasse Kaffee."
-                loading="lazy"
-                decoding="async"
-              />
-            </picture>
-          </figure>
+        {/* Drei echte Szenen statt eines Mockups. Ein Mockup zeigt, dass es ein
+            Produkt gibt, diese Bilder zeigen, was man damit tut. */}
+        <div class="einblick">
+          {
+            [
+              {
+                bild: "szene-workbook",
+                breite: 1000,
+                hoehe: 667,
+                alt: "Aufgeschlagene Workbook-Seite mit der Überschrift „Meine Tage dazwischen“ auf einem Holztisch, daneben Kaffee und ein gerahmtes Foto.",
+                text: "Die Workbook-Seite zum Impuls des Tages.",
+              },
+              {
+                bild: "szene-sprachnachricht",
+                breite: 1000,
+                hoehe: 563,
+                alt: "Ein Vater sitzt am Abend auf dem Sofa und spricht eine Sprachnachricht auf sein Telefon.",
+                text: "Ein kleiner Schritt, abends in zwei Minuten getan.",
+              },
+              {
+                bild: "szene-kalender",
+                breite: 1000,
+                hoehe: 667,
+                alt: "Ein Vater markiert gemeinsam mit seinem Sohn einen Termin im Kalender an der Wand.",
+                text: "Woraus mit der Zeit ein Ritual wird.",
+              },
+            ].map((b) => (
+              <figure class="einblick-bild">
+                <picture>
+                  <source srcset={`/assets/${b.bild}.webp`} type="image/webp" />
+                  <img
+                    src={`/assets/${b.bild}.jpg`}
+                    width={b.breite}
+                    height={b.hoehe}
+                    alt={b.alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+                <figcaption>{b.text}</figcaption>
+              </figure>
+            ))
+          }
         </div>
       </div>
     </section>
@@ -1395,21 +1432,34 @@ const initialen = (name: string) =>
     color: var(--body);
   }
 
-  .hoeren {
+  /* Drei Szenen nebeneinander, auf dem Handy untereinander. */
+  .einblick {
     display: grid;
-    gap: clamp(22px, 2.8vw, 36px);
+    gap: clamp(16px, 2vw, 24px);
     margin-top: clamp(28px, 3.4vw, 44px);
-    align-items: center;
   }
-  /* Nebeneinander nur, wenn der Player da ist. Sonst stünde das Bild allein
-     auf halber Breite und sähe aus, als fehle etwas. */
-  @media (min-width: 900px) {
-    .hoeren.mit-player {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  @media (min-width: 760px) {
+    .einblick {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
-  .hoeren:not(.mit-player) .fig {
-    max-width: 640px;
+  .einblick-bild {
+    margin: 0;
+  }
+  /* Ein Bild ist 16:9, die anderen 3:2. Ohne einheitliches Verhaeltnis
+     stuenden die Bildunterschriften auf drei verschiedenen Hoehen. */
+  .einblick-bild img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    display: block;
+    border-radius: 3px;
+  }
+  .einblick-bild figcaption {
+    margin-top: 10px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--meta-text);
   }
   .player {
     background: var(--creme);
