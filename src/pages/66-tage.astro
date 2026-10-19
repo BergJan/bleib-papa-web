@@ -1159,17 +1159,22 @@ const initialen = (name: string) =>
     .hero-grid {
       display: flex;
       flex-direction: column;
+      /* Als Raster galt der gap aus global.css nur zwischen Text und Bild.
+         Als Flex-Spalte wirkt er zwischen allen fuenf Elementen und addiert
+         sich zu deren Eigenabstaenden. Deshalb hier aus, die Abstaende
+         kommen von den Elementen selbst. */
+      gap: 0;
     }
     .hero-col {
       display: contents;
     }
     .hero-visual {
-      margin-top: 18px;
+      margin-top: 13px;
     }
     /* 3, weil .hero-visual in global.css schon order: 2 traegt. */
     .hero-grid :global(.kauf-cta) {
       order: 3;
-      margin-top: 24px;
+      margin-top: 18px;
     }
   }
 
