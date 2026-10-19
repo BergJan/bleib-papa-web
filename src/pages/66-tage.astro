@@ -60,51 +60,61 @@ const stimmen: {
     zitat:
       "Ich habe lange gedacht, dass ich die verlorene Zeit mit meinem Kind irgendwie ausgleichen muss. Durch das Programm habe ich verstanden, dass es viel mehr darauf ankommt, wie wir unsere gemeinsame Zeit gestalten. Das hat bei mir wirklich etwas verändert.",
     name: "Martin S.",
+    bewertung: 5,
   },
   {
     zitat:
       "Das schlechte Gewissen war nach der Trennung eigentlich immer dabei. Die 66 Tage haben mir geholfen, anders damit umzugehen und unsere gemeinsame Zeit wieder mehr zu genießen.",
     name: "Tim L.",
+    bewertung: 5,
   },
   {
     zitat:
       "Ich hatte keine Lust auf irgendwelche theoretischen Ratschläge. Hier bekomme ich jeden Tag einen Gedanken oder eine konkrete Idee, die ich tatsächlich in meinem Alltag als Papa umsetzen kann.",
     name: "Jonathan H.",
+    bewertung: 5,
   },
   {
     zitat:
       "Besonders geholfen haben mir die Impulse für die Tage, an denen mein Sohn bei seiner Mutter ist. Ich habe jetzt viel mehr Ideen, wie ich unsere Verbindung auch zwischen den Treffen pflegen kann.",
     name: "Roland T.",
+    bewertung: 5,
   },
   {
     zitat:
       "Was mir besonders gefallen hat: Hier erzählt mir keiner, dass nach einer Trennung alles einfach ist. Die Themen sind ehrlich, alltagsnah und ich habe mich an vielen Stellen wiedererkannt.",
     name: "Sven K.",
+    bewertung: 5,
   },
   {
     zitat:
       "Manchmal waren es nur fünf Minuten am Tag. Aber einige dieser Gedanken haben mich noch tagelang beschäftigt. Gerade die kleinen Veränderungen machen bei uns inzwischen einen Unterschied.",
     name: "Chris E.",
+    bewertung: 5,
   },
   {
     zitat:
       "Nach der Trennung musste ich meine Rolle als Vater irgendwie neu finden. Das Programm hat mir geholfen, meinen eigenen Weg zu entwickeln und wieder mehr Sicherheit im Umgang mit der Situation zu bekommen.",
     name: "Carsten S.",
+    bewertung: 5,
   },
   {
     zitat:
       "Früher wollte ich an unseren Wochenenden immer möglichst viel unternehmen. Heute weiß ich, dass auch ein ganz normaler Samstag auf dem Sofa wertvolle Papa-Zeit sein kann. Das hat uns beiden viel Druck genommen.",
     name: "Sascha L.",
+    bewertung: 5,
   },
   {
     zitat:
       "Man merkt, dass hinter BLEIB PAPA jemand steckt, der selbst weiß, wie sich diese Situation anfühlt. Genau das macht die Impulse für mich glaubwürdig. Es geht um das echte Leben und die Herausforderungen, die man als getrennter Vater hat.",
     name: "Tobias C.",
+    bewertung: 5,
   },
   {
     zitat:
       "Ich hätte mir dieses Programm direkt nach unserer Trennung gewünscht. Es hätte mir viele Grübeleien erspart. Für jeden Papa, der auch nach der Trennung eine enge Beziehung zu seinem Kind gestalten möchte, sind die 66 Tage eine echte Bereicherung.",
     name: "Ricardo F.",
+    bewertung: 5,
   },
 ];
 
@@ -364,11 +374,6 @@ const initialen = (name: string) =>
                 )),
               )}
             </div>
-          </div>
-          <div class="wrap band-fuss">
-            <button class="band-schalter" type="button" aria-pressed="false" data-band-schalter>
-              Bewegung anhalten
-            </button>
           </div>
         </section>
       )
@@ -862,15 +867,14 @@ const initialen = (name: string) =>
   }
 
   /* ---------- Laufband anhalten ---------- */
-  /* Ohne Maus gibt es kein Überfahren, und Dauerbewegung ohne Halt ist eine
-     Barriere. Deshalb ein Knopf, der für beide Reihen gilt. */
-  const schalter = document.querySelector<HTMLButtonElement>("[data-band-schalter]");
-  const baender = document.getElementById("stimmenband");
+  /* Ohne sichtbaren Knopf, aber nicht ohne Halt: Am Rechner stoppt das Band,
+     sobald die Maus darüber liegt oder die Tastatur hineinspringt. Auf dem
+     Telefon gibt es beides nicht, dort hält ein Tippen auf das Band an und
+     das nächste lässt es weiterlaufen. */
+  const band = document.getElementById("stimmenband");
 
-  schalter?.addEventListener("click", () => {
-    const angehalten = baender?.classList.toggle("ist-angehalten") ?? false;
-    schalter.setAttribute("aria-pressed", String(angehalten));
-    schalter.textContent = angehalten ? "Bewegung fortsetzen" : "Bewegung anhalten";
+  band?.addEventListener("click", () => {
+    band.classList.toggle("ist-angehalten");
   });
 
   /* ---------- Kaufleiste am unteren Rand ---------- */
@@ -1387,11 +1391,6 @@ const initialen = (name: string) =>
   .band-stimmen {
     padding: clamp(18px, 2vw, 26px) 0 clamp(12px, 1.4vw, 16px);
   }
-  .band-fuss {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 6px;
-  }
   /* Im Band deutlich kleiner als in der Wand: Es soll Vertrauen stiften und
      den Hero stützen, nicht mit ihm um Aufmerksamkeit ringen. Deshalb auch ein
      flacherer Schatten, die Karten sollen nicht schweben, sondern mitlaufen. */
@@ -1529,20 +1528,6 @@ const initialen = (name: string) =>
     gap: 10px 20px;
     margin-top: clamp(14px, 1.8vw, 20px);
   }
-  .band-schalter {
-    background: none;
-    border: 0;
-    border-bottom: 1px solid var(--line);
-    padding: 2px 0;
-    font-family: var(--sans);
-    font-size: 12.5px;
-    color: var(--meta-text);
-    cursor: pointer;
-  }
-  .band-schalter:hover {
-    color: var(--rost);
-    border-bottom-color: var(--rost);
-  }
 
   /* Weiße Karte mit Haarlinie und weichem Schatten statt flacher Fläche mit
      Akzentstrich. Die Tiefe macht den Unterschied zwischen Zeitungsspalte und
@@ -1637,9 +1622,6 @@ const initialen = (name: string) =>
     }
     .stimme {
       scroll-snap-align: center;
-    }
-    .band-schalter {
-      display: none;
     }
   }
 
