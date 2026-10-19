@@ -27,7 +27,12 @@ const description =
 /** Alter des Sohnes zum Zeitpunkt der Trennung, als Satzteil nach "war mein Sohn". */
 const sohnAlter = "zwei Jahre alt";
 
-/** Tag 1 als Hörprobe. Ohne Datei entfallen Player und Hörproben-Button. */
+/**
+ * Tag 1 als Hörprobe. Am 19.10.2026 bewusst abgewählt: Die Seite läuft ohne.
+ * Der Bauplan bleibt stehen, falls das später anders entschieden wird. Sobald
+ * hier eine Datei steht, erscheinen der Player in Abschnitt 6 und der
+ * Hörproben-Button im Hero von selbst.
+ */
 const tagEins = { datei: "", titel: "" };
 
 /** Zielseite für den Hinweis auf Krisenhilfe. Leer = Text ohne Link. */
@@ -38,9 +43,6 @@ const stimmen: { zitat: string; name: string; situation: string }[] = [];
 
 if (!sohnAlter) {
   console.warn('[66-tage] Feld "sohnAlter" ist leer, im Text steht ein Platzhalter.');
-}
-if (!tagEins.datei) {
-  console.warn('[66-tage] Keine Hörprobe hinterlegt, Audio-Player und Hörproben-Button entfallen.');
 }
 if (stimmen.length === 0) {
   console.warn('[66-tage] Keine Stimmen hinterlegt, Abschnitt 8 entfaellt samt drittem Kauf-Button.');
