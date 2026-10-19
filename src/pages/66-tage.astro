@@ -657,8 +657,60 @@ const initialen = (name: string) =>
       )
     }
 
+    <!-- ============ 8b · DAS WORKBOOK ============ -->
+    {/* Zeigt, was die Leistungsliste nur behauptet. Steht bewusst direkt vor
+        dem Preis: Wer 157 Seiten gesehen hat, liest 247 Euro anders. */}
+    <section class="section bg-white">
+      <div class="wrap workbook">
+        <div class="workbook-bild">
+          <figure class="wb-doppelseite">
+            <picture>
+              <source srcset="/assets/workbook-doppelseite.webp" type="image/webp" />
+              <img
+                src="/assets/workbook-doppelseite.jpg"
+                width="1171"
+                height="830"
+                alt="Aufgeschlagene Doppelseite des Workbooks zu Tag 1: links der Kerngedanke mit Platz für Notizen und zwei Reflexionsfragen, rechts die Aufgabe „Schreib diesen Satz fertig“ mit Schreiblinien."
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          </figure>
+          <figure class="wb-cover">
+            <picture>
+              <source srcset="/assets/workbook-cover.webp" type="image/webp" />
+              <img
+                src="/assets/workbook-cover.jpg"
+                width="586"
+                height="830"
+                alt="Das Cover des Workbooks: ein Vater sitzt mit seinem Sohn am Steg und schaut auf den See, darüber der Titel BLEIB PAPA."
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
+          </figure>
+        </div>
+
+        <div class="workbook-text">
+          <p class="label">Das Workbook</p>
+          <h2 class="h2">Kein Beiheft. Ein Arbeitsbuch, in dem am Ende deine Handschrift steht.</h2>
+          <p>
+            Zu jedem der 66 Impulse gehören zwei Seiten: links der Kerngedanke, Platz für deine
+            Notizen und zwei Fragen, die dich weiterbringen. Rechts eine Aufgabe, die du an diesem
+            Tag tatsächlich umsetzen kannst, und ein Kästchen zum Abhaken.
+          </p>
+
+          <ul class="wb-fakten">
+            <li><strong>157 Seiten</strong> im A4-Format</li>
+            <li><strong>Zwei Seiten</strong> je Impuls</li>
+            <li><strong>Sechs Phasen</strong> mit eigenem Auftakt</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ 9 · ANGEBOT + GARANTIE ============ -->
-    <section class="section bg-creme naht-oben" id="starten" style="scroll-margin-top:70px">
+    <section class="section bg-creme" id="starten" style="scroll-margin-top:70px">
       <div class="wrap">
         <p class="label">Das Programm</p>
         <h2 class="h2 measure-wide">Alles für deine 66 Tage</h2>
@@ -1814,6 +1866,93 @@ const initialen = (name: string) =>
     margin: clamp(14px, 1.8vw, 20px) 0 0;
     font-size: 12.5px;
     color: var(--meta-text);
+  }
+
+  /* ---------- 8b · Workbook ---------- */
+  .workbook {
+    display: grid;
+    gap: clamp(28px, 3.6vw, 56px);
+    align-items: center;
+  }
+  @media (min-width: 960px) {
+    .workbook {
+      grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+    }
+  }
+
+  /* Die Doppelseite trägt den Abschnitt, das Cover legt sich davor. Position
+     relativ, damit das Cover daran andocken kann. */
+  .workbook-bild {
+    position: relative;
+    padding-bottom: 26px;
+  }
+  .wb-doppelseite,
+  .wb-cover {
+    margin: 0;
+  }
+  .wb-doppelseite img {
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+    /* Zwei Schatten: ein harter Ansatz an der Kante, ein weicher darunter.
+       So liegt das Heft auf der Fläche, statt darüber zu schweben. */
+    box-shadow:
+      0 1px 2px rgba(23, 39, 61, 0.1),
+      0 18px 40px rgba(23, 39, 61, 0.14);
+  }
+  .wb-cover {
+    position: absolute;
+    left: -8px;
+    bottom: 0;
+    width: 29%;
+    max-width: 180px;
+  }
+  .wb-cover img {
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+    box-shadow:
+      0 1px 2px rgba(23, 39, 61, 0.12),
+      0 14px 30px rgba(23, 39, 61, 0.2);
+  }
+  /* Unter 560 px wird das Cover zu klein, um etwas zu zeigen, und verdeckt
+     dann nur die Doppelseite. */
+  @media (max-width: 560px) {
+    .wb-cover {
+      position: static;
+      width: 46%;
+      max-width: 160px;
+      margin-top: 18px;
+    }
+    .workbook-bild {
+      padding-bottom: 0;
+    }
+  }
+
+  .workbook-text p:not(.label) {
+    max-width: 560px;
+    margin: 0;
+    line-height: 1.7;
+  }
+  .workbook-text .h2 {
+    margin-bottom: 18px;
+  }
+  .wb-fakten {
+    list-style: none;
+    margin: clamp(22px, 2.4vw, 28px) 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .wb-fakten li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+    color: var(--meta-text);
+  }
+  .wb-fakten strong {
+    color: var(--ink);
   }
 
   /* ---------- 9 · Angebot ---------- */
