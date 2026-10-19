@@ -2,10 +2,34 @@
 import Base from "../layouts/Base.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import KaufCta from "../components/KaufCta.astro";
 
 const title = "Dein Guide | BLEIB PAPA";
 const description = "Die 21 Wege als PDF zum Herunterladen.";
 const pdf = "/downloads/21-wege-bleib-papa.pdf";
+
+/**
+ * Die Fragen und die Ueberschrift darunter standen urspruenglich auf der
+ * Verkaufsseite. Dort sind sie beim Umbau geflogen, weil sie den Leadmagneten
+ * voraussetzen und einen fremden Besucher verwirren. Hier hat ihn gerade jeder
+ * Leser heruntergeladen, deshalb gehoeren sie genau hierher.
+ */
+const fragen = [
+  "Welcher Vater möchte ich jetzt sein?",
+  "Was kann ich wirklich beeinflussen?",
+  "Was braucht mein Kind von mir?",
+  "Wie bleiben wir zwischen unseren gemeinsamen Tagen verbunden?",
+  "Wie entsteht bei mir echter Papa-Alltag?",
+  "Wie gehe ich mit dem Vermissen um?",
+  "Was soll langfristig zwischen uns bleiben?",
+];
+
+const umfang = [
+  "66 Audio-Impulse à ca. 10 Minuten, zusammen rund 11 Stunden",
+  "Praxis-Workbook mit 157 Seiten im A4-Format",
+  "Sechs Phasen, 30- und 90-Tage-Check-in",
+  "247 € einmalig, kein Abo, 14 Tage Geld-zurück-Garantie",
+];
 ---
 
 <Base title={title} description={description} path="/guide/" noindex>
@@ -66,7 +90,157 @@ const pdf = "/downloads/21-wege-bleib-papa.pdf";
         </div>
       </div>
     </section>
+
+    <!-- ============ BRÜCKE ZUM PROGRAMM ============ -->
+    <section class="section bg-creme">
+      <div class="wrap">
+        <p class="label">Der nächste Schritt</p>
+        <h2 class="h2 measure-wide">21 Wege geben dir Ideen. Die 66 Tage geben dir einen Weg.</h2>
+
+        <div class="bruecke">
+          <div class="bruecke-text">
+            <p>
+              Mit den 21 Wegen kannst du einzelne Dinge sofort ausprobieren: kleine Rituale,
+              Kontaktpunkte und Momente von Verbindung. Das ist ein guter Anfang.
+            </p>
+            <p>
+              Aber eine neue Form von Vatersein entsteht nicht aus einer immer längeren Liste guter
+              Ideen. Sie entsteht aus Fragen wie:
+            </p>
+
+            <ul class="fragen">
+              {fragen.map((f) => <li>{f}</li>)}
+            </ul>
+
+            <p class="bruecke-pointe">
+              66 Tage bedeutet nicht: 66 weitere Tipps. 66 Tage bedeutet: jeden Tag einen kleinen
+              Schritt weiter.
+            </p>
+          </div>
+
+          <div class="bruecke-produkt">
+            <figure class="bruecke-bild">
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="/assets/66-tage-mockup-400.webp 400w, /assets/66-tage-mockup-600.webp 600w, /assets/66-tage-mockup-700.webp 700w, /assets/66-tage-mockup.webp 1000w"
+                  sizes="(min-width: 900px) 400px, calc(100vw - 48px)"
+                />
+                <img
+                  src="/assets/66-tage-mockup.jpg"
+                  width="1000"
+                  height="1000"
+                  alt="BLEIB PAPA, 66 Tage für eure Verbindung: Programmbox, Workbook und Kursoberfläche auf Bildschirm, Tablet und Smartphone."
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+            </figure>
+
+            <ul class="umfang">
+              {umfang.map((u) => <li>{u}</li>)}
+            </ul>
+
+            {/* Wer schon weiß, dass er will, geht direkt zur Kasse. Wer erst
+                lesen will, nimmt den zweiten Weg. */}
+            <KaufCta name="guide">
+              <a class="btn-kontur" href="/66-tage/">Erst alles ansehen</a>
+            </KaufCta>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <Footer />
 </Base>
+
+<style>
+  .bruecke {
+    display: grid;
+    gap: clamp(30px, 4vw, 56px);
+    margin-top: clamp(22px, 2.6vw, 32px);
+    align-items: start;
+  }
+  @media (min-width: 900px) {
+    .bruecke {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    }
+  }
+  .bruecke-text p {
+    max-width: 560px;
+    margin: 0 0 16px;
+    line-height: 1.7;
+  }
+
+  .fragen {
+    list-style: none;
+    margin: clamp(18px, 2vw, 24px) 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .fragen li {
+    position: relative;
+    padding-left: 20px;
+    font-family: var(--serif);
+    font-size: clamp(16px, 1.7vw, 17.5px);
+    line-height: 1.45;
+    color: var(--ink);
+  }
+  /* Ein Strich statt eines Punktes: Es sind Fragen, keine Aufzählung von
+     Leistungen. */
+  .fragen li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 10px;
+    height: 1px;
+    background: var(--rost);
+  }
+  .bruecke-pointe {
+    max-width: 560px;
+    margin: clamp(20px, 2.4vw, 26px) 0 0 !important;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.9vw, 19px);
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  .bruecke-produkt {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    box-shadow:
+      0 1px 2px rgba(23, 39, 61, 0.04),
+      0 12px 30px rgba(23, 39, 61, 0.06);
+    padding: clamp(22px, 2.6vw, 30px);
+  }
+  .bruecke-bild {
+    margin: 0 0 20px;
+  }
+  .bruecke-bild img {
+    width: 100%;
+    max-width: 380px;
+    margin-inline: auto;
+    display: block;
+  }
+  .umfang {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line);
+  }
+  .umfang li {
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--body);
+  }
+</style>
