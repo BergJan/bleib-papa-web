@@ -592,7 +592,10 @@ const initialen = (name: string) =>
         <p class="label">Der Weg</p>
         <h2 class="h2 measure-wide">Sechs Phasen. Ein Weg.</h2>
 
-        <div class="zeitstrahl">
+        <div class="zeitstrahl" id="zeitstrahl">
+          {/* Läuft beim Scrollen mit, siehe Skript. Rein dekorativ, deshalb
+              aus der Vorlesereihenfolge genommen. */}
+          <span class="lauf-punkt" aria-hidden="true"></span>
           {
             phasen.map((p, i) => (
               <details class="phase" open={i === 0}>
@@ -917,6 +920,48 @@ const initialen = (name: string) =>
     );
 
     for (const b of bloecke) beobachter.observe(b);
+  }
+
+  /**
+   * Der Punkt auf dem Zeitstrahl läuft beim Scrollen mit.
+   *
+   * Maßstab ist die Mitte des Fensters: Was darüber liegt, gilt als gelesen.
+   * Der Punkt wandert von der ersten bis zur letzten Phase, die Linie dahinter
+   * färbt sich mit, und jede passierte Phase behält ihre Markierung.
+   */
+  const strahl = document.getElementById("zeitstrahl");
+
+  if (strahl && !ruhig) {
+    const phasen = [...strahl.querySelectorAll<HTMLElement>(".phase")];
+    let wartet = false;
+
+    const nachfuehren = () => {
+      wartet = false;
+      const rahmen = strahl.getBoundingClientRect();
+      const mitte = window.innerHeight / 2;
+
+      /* 10 Pixel Versatz: Dort beginnt und endet die gezeichnete Linie. */
+      const weg = Math.min(Math.max(mitte - rahmen.top - 10, 0), rahmen.height - 20);
+      strahl.style.setProperty("--fortschritt", `${weg}px`);
+      strahl.classList.toggle("laeuft", rahmen.top < mitte && rahmen.bottom > mitte);
+
+      for (const p of phasen) {
+        const punkt = p.getBoundingClientRect().top + 24 - rahmen.top;
+        p.classList.toggle("ist-erreicht", weg >= punkt - 10);
+      }
+    };
+
+    addEventListener(
+      "scroll",
+      () => {
+        if (wartet) return;
+        wartet = true;
+        requestAnimationFrame(nachfuehren);
+      },
+      { passive: true },
+    );
+    addEventListener("resize", nachfuehren, { passive: true });
+    nachfuehren();
   }
 
   /* ---------- Laufband anhalten ---------- */
@@ -1426,11 +1471,50 @@ const initialen = (name: string) =>
       background-color 0.2s ease,
       border-color 0.2s ease;
   }
-  /* Die offene Phase markiert, wo der Leser gerade steht. */
+  /* Schon durchlaufene Phasen bleiben markiert. Der Weg, den man hinter sich
+     hat, soll sichtbar sein, nicht nur der Punkt, an dem man steht. */
+  .phase.ist-erreicht::before {
+    background: var(--sand);
+    border-color: var(--rost);
+  }
+
+  /* Die offene Phase markiert, wo der Leser gerade steht. Steht nach
+     .ist-erreicht, damit sie bei gleicher Gewichtung gewinnt. */
   .phase[open]::before {
     background: var(--rost);
     border-color: var(--rost);
     box-shadow: 0 0 0 3px rgba(196, 85, 26, 0.14);
+  }
+
+  /* Der mitlaufende Punkt und die Linie, die er hinter sich zieht. Beides
+     hängt an --fortschritt, das vom Skript gesetzt wird. */
+  .zeitstrahl::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    width: 1px;
+    height: var(--fortschritt, 0px);
+    background: var(--rost);
+    opacity: 0.55;
+  }
+  .lauf-punkt {
+    position: absolute;
+    left: 1px;
+    top: calc(10px + var(--fortschritt, 0px));
+    width: 9px;
+    height: 9px;
+    margin-top: -4px;
+    border-radius: 50%;
+    background: var(--rost);
+    box-shadow: 0 0 0 4px rgba(196, 85, 26, 0.16);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  /* Erst sichtbar, wenn der Strahl im Bild ist, sonst klebt er oben am Rand. */
+  .zeitstrahl.laeuft .lauf-punkt {
+    opacity: 1;
   }
   .phase summary {
     cursor: pointer;
