@@ -2,7 +2,6 @@
 import Base from "../layouts/Base.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import KaufCta from "../components/KaufCta.astro";
 
 const title = "Dein Guide | BLEIB PAPA";
 const description = "Die 21 Wege als PDF zum Herunterladen.";
@@ -28,7 +27,7 @@ const umfang = [
   "66 Audio-Impulse à ca. 10 Minuten, zusammen rund 11 Stunden",
   "Praxis-Workbook mit 157 Seiten im A4-Format",
   "Sechs Phasen, 30- und 90-Tage-Check-in",
-  "247 € einmalig, kein Abo, 14 Tage Geld-zurück-Garantie",
+  "Sofortiger digitaler Zugang",
 ];
 ---
 
@@ -141,11 +140,12 @@ const umfang = [
               {umfang.map((u) => <li>{u}</li>)}
             </ul>
 
-            {/* Wer schon weiß, dass er will, geht direkt zur Kasse. Wer erst
-                lesen will, nimmt den zweiten Weg. */}
-            <KaufCta name="guide">
-              <a class="btn-kontur" href="/66-tage/">Erst alles ansehen</a>
-            </KaufCta>
+            {/* Bewusst ohne Preis und ohne Kasse: Wer gerade etwas Kostenloses
+                herunterlaedt, soll nicht im selben Moment eine Zahl sehen, der
+                das Argument fehlt. Das steht alles auf der Verkaufsseite. */}
+            <p class="bruecke-aktion">
+              <a class="btn btn-full" href="/66-tage/">Das 66-Tage-Programm ansehen</a>
+            </p>
           </div>
         </div>
       </div>
@@ -235,6 +235,9 @@ const umfang = [
     display: grid;
     gap: 0;
     border-top: 1px solid var(--line);
+  }
+  .bruecke-aktion {
+    margin: clamp(22px, 2.6vw, 28px) 0 0;
   }
   .umfang li {
     padding: 11px 0;
