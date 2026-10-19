@@ -91,7 +91,10 @@ const umfang = [
     <section class="section bg-creme">
       <div class="wrap">
         <p class="label">Der nächste Schritt</p>
-        <h2 class="h2 measure-wide">21 Wege geben dir Ideen. Das 66-Tage-Programm gibt dir einen Weg.</h2>
+        <h2 class="h2 measure-wide">
+          21 Wege geben dir Ideen. Das <span class="marke">66-Tage-Programm</span> gibt dir einen
+          Weg.
+        </h2>
 
         <div class="bruecke">
           <div class="bruecke-text">
@@ -153,6 +156,21 @@ const umfang = [
 </Base>
 
 <style>
+  /* Der Produktname hebt sich ab: Farbe plus ein weicher Strich, der unter
+     der Grundlinie liegt. Als Verlauf im Hintergrund, nicht als Rahmen,
+     damit er bei einem Zeilenumbruch auf beiden Zeilen mitlaeuft. */
+  .marke {
+    color: var(--rost);
+    background-image: linear-gradient(
+      transparent 72%,
+      rgba(238, 130, 54, 0.3) 72%,
+      rgba(238, 130, 54, 0.3) 94%,
+      transparent 94%
+    );
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
   @media (min-width: 961px) {
     .guide-kopf {
       align-items: center;
