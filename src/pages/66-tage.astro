@@ -45,7 +45,17 @@ const krisenSeite = "";
  * vor und bleibt deshalb weg, statt erfunden zu werden. Sie lässt sich je
  * Eintrag nachtragen, ohne dass sich am Rest etwas ändert.
  */
-const stimmen: { zitat: string; name: string; situation?: string }[] = [
+const stimmen: {
+  zitat: string;
+  name: string;
+  situation?: string;
+  /**
+   * Bewertung von 1 bis 5. Nur eintragen, wenn der Vater wirklich bewertet
+   * hat: Die Sterne sind eine Tatsachenbehauptung, keine Dekoration. Ohne
+   * Wert erscheinen bei dieser Stimme keine Sterne.
+   */
+  bewertung?: number;
+}[] = [
   {
     zitat:
       "Ich habe lange gedacht, dass ich die verlorene Zeit mit meinem Kind irgendwie ausgleichen muss. Durch das Programm habe ich verstanden, dass es viel mehr darauf ankommt, wie wir unsere gemeinsame Zeit gestalten. Das hat bei mir wirklich etwas verändert.",
@@ -331,6 +341,24 @@ const initialen = (name: string) =>
                     <footer>
                       <span class="monogramm" aria-hidden="true">{initialen(s.name)}</span>
                       <span class="stimme-name">{s.name}</span>
+                      {s.bewertung && (
+                        <span
+                          class="sterne"
+                          role="img"
+                          aria-label={`${s.bewertung} von 5 Sternen`}
+                        >
+                          {[1, 2, 3, 4, 5].map((i) => (
+                            <svg
+                              class:list={["stern", i <= s.bewertung! && "ist-voll"]}
+                              viewBox="0 0 20 19"
+                              aria-hidden="true"
+                              focusable="false"
+                            >
+                              <path d="M10 0l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L10 15.2 3.9 18.6l1.4-6.8L.2 7.1l6.9-.8z" />
+                            </svg>
+                          ))}
+                        </span>
+                      )}
                     </footer>
                   </blockquote>
                 )),
@@ -1364,28 +1392,45 @@ const initialen = (name: string) =>
     justify-content: flex-end;
     margin-top: 6px;
   }
-  /* Im Band kleiner als in der Wand: Es soll den Hero stützen, nicht mit ihm
-     um Aufmerksamkeit ringen. */
+  /* Im Band deutlich kleiner als in der Wand: Es soll Vertrauen stiften und
+     den Hero stützen, nicht mit ihm um Aufmerksamkeit ringen. Deshalb auch ein
+     flacherer Schatten, die Karten sollen nicht schweben, sondern mitlaufen. */
   .stimme.ist-klein {
-    padding: clamp(18px, 2vw, 22px);
+    padding: 16px 18px;
+    box-shadow: 0 1px 2px rgba(23, 39, 61, 0.04);
   }
   .stimme.ist-klein p {
-    margin-bottom: 16px;
-    font-size: 15.5px;
-    line-height: 1.6;
+    margin-bottom: 13px;
+    font-size: 14px;
+    line-height: 1.55;
   }
+  /* Monogramm und Name links, Sterne rechtsbündig. Die dritte Spalte bleibt
+     leer, solange keine Bewertung hinterlegt ist. */
   .stimme.ist-klein footer {
-    padding-top: 14px;
-    grid-template-columns: 32px minmax(0, 1fr);
-    gap: 10px;
+    padding-top: 11px;
+    grid-template-columns: 26px minmax(0, 1fr) auto;
+    gap: 9px;
+  }
+  .sterne {
+    display: inline-flex;
+    gap: 2px;
+    justify-self: end;
+  }
+  .stern {
+    width: 12px;
+    height: 12px;
+    fill: var(--line);
+  }
+  .stern.ist-voll {
+    fill: var(--orange);
   }
   .stimme.ist-klein .monogramm {
-    width: 32px;
-    height: 32px;
-    font-size: 11.5px;
+    width: 26px;
+    height: 26px;
+    font-size: 10px;
   }
   .stimme.ist-klein .stimme-name {
-    font-size: 13.5px;
+    font-size: 12.5px;
   }
 
   /* ---------- Laufband ---------- */
@@ -1418,8 +1463,8 @@ const initialen = (name: string) =>
   /* Im Band feste Breite, in der Wand nicht: Dort sollen die Spalten die
      Breite bestimmen. */
   .band-spur .stimme {
-    flex: 0 0 clamp(270px, 78vw, 340px);
-    margin-right: clamp(14px, 1.6vw, 20px);
+    flex: 0 0 clamp(250px, 72vw, 310px);
+    margin-right: clamp(18px, 2vw, 26px);
   }
 
   /* ---------- 8 · Stimmen als Wand ---------- */
