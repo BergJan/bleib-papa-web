@@ -303,16 +303,57 @@ Erstes Angebot.*
 
 ## Einrichtung in Brevo
 
+**Ein Sendeschritt lässt sich erst abschließen, wenn die Mail Inhalt hat.**
+Brevo meldet sonst „Die E-Mail muss einen Inhalt haben". Es gibt zwei Wege
+dorthin, beide funktionieren:
+
+- **Im Schritt selbst:** „Eine E-Mail senden" öffnen, im Fenster *Neue Nachricht
+  erstellen* auf **Neu erstellen** gehen und die Mail dort schreiben.
+- **Vorher als Vorlage:** Alle sieben unter **Kampagnen → Vorlagen** anlegen und
+  im Schritt über *Deine Templates* auswählen.
+
+Für sieben Mails ist der zweite Weg der ruhigere: Du schreibst am Stück, statt
+siebenmal zwischen Automation und Editor zu springen.
+
+### Schritt 1: Die sieben Mails anlegen
+
+Je Mail brauchst du Betreff, Vorschautext und Text aus diesem Dokument.
+
+**Benenne sie mit Marke und Nummer.** Deine Vorlagenliste ist
+projektübergreifend, dort stehen auch die Mails von einstellen mit system. Ohne
+Präfix greifst du in der Auswahlliste irgendwann daneben:
+
+```
+BLEIB PAPA – Strecke 1 · Guide
+BLEIB PAPA – Strecke 2 · Der Satz
+BLEIB PAPA – Strecke 3 · Einfluss
+BLEIB PAPA – Strecke 4 · Event-Papa
+BLEIB PAPA – Strecke 5 · Zwölf Tage
+BLEIB PAPA – Strecke 6 · Einwände
+BLEIB PAPA – Strecke 7 · Entscheidung
+```
+
+**Absender:** bei allen sieben derselbe wie bei der Bestätigungsmail. Ein
+anderer Absender erhöht die Wahrscheinlichkeit, im Spam zu landen.
+
+**Abmeldelink:** Brevo hängt ihn automatisch an. Prüfe nach der ersten Mail
+einmal in der Vorschau, ob er wirklich auftaucht.
+
+### Schritt 2: Die Automation bauen
+
 1. **Automations → Neue Automation → Von Grund auf.**
 2. **Auslöser:** „Ein Kontakt wird einer Liste hinzugefügt", die Liste aus
    `BREVO_LIST_ID`. Die Bestätigung ist zu diesem Zeitpunkt schon erfolgt, denn
    `optin.mjs` nutzt den Double-Opt-in-Endpunkt von Brevo.
-3. **Schritte:** Mail 1 senden, dann abwechselnd „Warten" und „E-Mail senden"
-   mit den Abständen 2, 2, 2, 2, 3, 3 Tage.
+3. **Schritte:** „Eine E-Mail senden" mit Mail 1, dann abwechselnd „Warten" und
+   „Eine E-Mail senden" mit den Abständen 2, 2, 2, 2, 3, 3 Tagen und den Mails 2
+   bis 7.
 4. **Versandzeit:** Bei den Wartenschritten morgens zustellen, falls Brevo das
    anbietet. Diese Mails werden früh gelesen, nicht abends.
-5. **Absender:** derselbe wie bei der Bestätigungsmail, sonst steigt die
-   Wahrscheinlichkeit, im Spam zu landen.
+5. **Vor dem Aktivieren:** Über **Testen** oben rechts einmal durchlaufen lassen
+   oder dich selbst mit einer zweiten Adresse eintragen. Für den Durchlauf die
+   Wartezeiten vorübergehend auf wenige Minuten setzen und danach wieder auf
+   Tage stellen. Das vergisst man leicht.
 
 ### Was noch fehlt: Käufer ausschließen
 
