@@ -244,6 +244,11 @@ const faq = [
 
 const kaufen = SITE.checkoutUrl || "#starten";
 
+/* Zwei gegenläufige Reihen. Die Aufteilung bleibt stabil, egal wie viele
+   Stimmen dazukommen: erste Hälfte oben, zweite unten. */
+const reiheOben = stimmen.slice(0, Math.ceil(stimmen.length / 2));
+const reiheUnten = stimmen.slice(Math.ceil(stimmen.length / 2));
+
 /** "Martin S." wird zu "MS". Gibt jeder Stimme ein Gesicht, ohne Stockfoto. */
 const initialen = (name: string) =>
   name
@@ -544,26 +549,41 @@ const initialen = (name: string) =>
         <section class="section bg-creme naht-oben">
           <div class="wrap">
             <h2 class="h2 measure-wide">Was andere Väter zum 66-Tage-Programm sagen</h2>
-            {/* Auf dem Handy eine Reihe zum Wischen, am Rechner eine Wand aus
-                Spalten. Beides kommt mit jeder Anzahl zurecht, zehn Karten
-                ergeben in einem starren Raster sonst eine angebrochene Zeile. */}
-            <div class="stimmen">
-              {stimmen.map((s) => (
-                <blockquote class="stimme">
-                  <p>{s.zitat}</p>
-                  <footer>
-                    <span class="monogramm" aria-hidden="true">{initialen(s.name)}</span>
-                    <span>
-                      <span class="stimme-name">{s.name}</span>
-                      {s.situation && <span class="stimme-lage">{s.situation}</span>}
-                    </span>
-                  </footer>
-                </blockquote>
+            {/* Zwei gegenläufige Laufbänder. Jede Spur enthält ihre Karten
+                zweimal, dadurch kann sie um genau die halbe Breite wandern und
+                beginnt nahtlos von vorn. Der zweite Satz ist für Screenreader
+                ausgeblendet, sonst läse er jedes Zitat doppelt vor. */}
+            <div class="laufbaender" id="laufbaender">
+              {[reiheOben, reiheUnten].map((reihe, nr) => (
+                <div class="laufband">
+                  <div class:list={["band-spur", nr === 0 ? "nach-links" : "nach-rechts"]}>
+                    {[false, true].map((kopie) =>
+                      reihe.map((s) => (
+                        <blockquote class="stimme" aria-hidden={kopie ? "true" : undefined}>
+                          <p>{s.zitat}</p>
+                          <footer>
+                            <span class="monogramm" aria-hidden="true">{initialen(s.name)}</span>
+                            <span>
+                              <span class="stimme-name">{s.name}</span>
+                              {s.situation && <span class="stimme-lage">{s.situation}</span>}
+                            </span>
+                          </footer>
+                        </blockquote>
+                      )),
+                    )}
+                  </div>
+                </div>
               ))}
             </div>
-            <p class="stimmen-hinweis">
-              Nachnamen aus Rücksicht auf die Privatsphäre abgekürzt.
-            </p>
+
+            <div class="stimmen-fuss">
+              <p class="stimmen-hinweis">Nachnamen aus Rücksicht auf die Privatsphäre abgekürzt.</p>
+              {/* Ohne Maus gibt es kein Überfahren. Ein Knopf ist die einzige
+                  Möglichkeit, die Bewegung auch am Telefon anzuhalten. */}
+              <button class="band-schalter" type="button" aria-pressed="false" data-band-schalter>
+                Bewegung anhalten
+              </button>
+            </div>
             <KaufCta name="stimmen" />
           </div>
         </section>
@@ -792,6 +812,18 @@ const initialen = (name: string) =>
     });
     audio.addEventListener("ended", () => melden("hoerprobe_ende"), { once: true });
   }
+
+  /* ---------- Laufband anhalten ---------- */
+  /* Ohne Maus gibt es kein Überfahren, und Dauerbewegung ohne Halt ist eine
+     Barriere. Deshalb ein Knopf, der für beide Reihen gilt. */
+  const schalter = document.querySelector<HTMLButtonElement>("[data-band-schalter]");
+  const baender = document.getElementById("laufbaender");
+
+  schalter?.addEventListener("click", () => {
+    const angehalten = baender?.classList.toggle("ist-angehalten") ?? false;
+    schalter.setAttribute("aria-pressed", String(angehalten));
+    schalter.textContent = angehalten ? "Bewegung fortsetzen" : "Bewegung anhalten";
+  });
 
   /* ---------- Kaufleiste am unteren Rand ---------- */
   const leiste = document.getElementById("sticky-kauf");
@@ -1304,22 +1336,93 @@ const initialen = (name: string) =>
   }
 
   /* ---------- 8 · Stimmen ---------- */
-  /* Handy: eine Reihe zum Wischen, bis an den Bildschirmrand, damit sichtbar
-     ist, dass es rechts weitergeht. */
-  .stimmen {
-    display: flex;
-    gap: 14px;
+  /* Zwei Laufbänder, über die volle Fensterbreite und gegenläufig. Die Ränder
+     werden ausgeblendet, damit die Karten nicht abgeschnitten wirken, sondern
+     aus dem Bild heraus- und hineinwandern. */
+  .laufbaender {
+    display: grid;
+    gap: clamp(14px, 1.6vw, 20px);
     margin-top: clamp(22px, 2.6vw, 32px);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    margin-inline: -24px;
-    padding-inline: 24px;
-    /* Luft oben und unten, sonst schneidet der Überlauf die Schatten ab. */
-    padding-block: 6px 18px;
+    /* Aus dem Textrahmen heraus bis an beide Fensterkanten. */
+    margin-inline: calc(50% - 50vw);
   }
-  .stimmen::-webkit-scrollbar {
-    display: none;
+  .laufband {
+    overflow: hidden;
+    /* Schatten brauchen oben und unten Luft, sonst beschneidet sie der Rahmen. */
+    padding-block: 8px;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 7%,
+      #000 93%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+  }
+  /* Abstand als Rand an der Karte, nicht als gap der Spur. Bei zehn Karten
+     sind zehn Ränder enthalten, dadurch ist die halbe Spurbreite exakt eine
+     Runde. Mit gap wären es nur neun Zwischenräume, und das Band würde bei
+     jedem Durchlauf um einen halben Abstand springen. */
+  .band-spur {
+    display: flex;
+    width: max-content;
+    align-items: stretch;
+  }
+  .band-spur .stimme {
+    margin-right: clamp(14px, 1.6vw, 20px);
+  }
+  .band-spur.nach-links {
+    animation: lauf-links 72s linear infinite;
+  }
+  .band-spur.nach-rechts {
+    animation: lauf-rechts 72s linear infinite;
+  }
+  /* Die Spur enthält ihre Karten zweimal, deshalb sind 50 Prozent genau eine
+     volle Runde und der Übergang ist unsichtbar. */
+  @keyframes lauf-links {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes lauf-rechts {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  /* Anhalten beim Lesen: Maus darüber, Tastaturfokus darin, oder per Knopf. */
+  .laufband:hover .band-spur,
+  .laufband:focus-within .band-spur,
+  .laufbaender.ist-angehalten .band-spur {
+    animation-play-state: paused;
+  }
+
+  .stimmen-fuss {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px 20px;
+    margin-top: clamp(14px, 1.8vw, 20px);
+  }
+  .band-schalter {
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 2px 0;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    color: var(--meta-text);
+    cursor: pointer;
+  }
+  .band-schalter:hover {
+    color: var(--rost);
+    border-bottom-color: var(--rost);
   }
 
   /* Weiße Karte mit Haarlinie und weichem Schatten statt flacher Fläche mit
@@ -1335,8 +1438,7 @@ const initialen = (name: string) =>
     box-shadow:
       0 1px 2px rgba(23, 39, 61, 0.04),
       0 10px 28px rgba(23, 39, 61, 0.055);
-    scroll-snap-align: start;
-    flex: 0 0 84%;
+    flex: 0 0 clamp(270px, 78vw, 340px);
     transition:
       transform 0.18s ease,
       box-shadow 0.18s ease;
@@ -1392,23 +1494,7 @@ const initialen = (name: string) =>
     color: var(--meta-text);
   }
 
-  /* Rechner: eine Wand aus Spalten. Die Karten fließen und füllen gleichmäßig,
-     egal wie viele es sind. Ein starres Raster ließe bei zehn Stück eine
-     angebrochene Zeile stehen. */
-  @media (min-width: 900px) {
-    .stimmen {
-      display: block;
-      columns: 3;
-      column-gap: clamp(16px, 1.8vw, 22px);
-      overflow: visible;
-      margin-inline: 0;
-      padding-inline: 0;
-    }
-    .stimme {
-      break-inside: avoid;
-      margin-bottom: clamp(18px, 2vw, 24px);
-      flex: none;
-    }
+  @media (hover: hover) {
     .stimme:hover {
       transform: translateY(-2px);
       box-shadow:
@@ -1416,9 +1502,26 @@ const initialen = (name: string) =>
         0 16px 38px rgba(23, 39, 61, 0.09);
     }
   }
+
+  /* Wer Bewegung abbestellt hat, bekommt keine. Dann stehen die Karten still
+     und lassen sich von Hand schieben, statt von selbst zu laufen. */
   @media (prefers-reduced-motion: reduce) {
     .stimme:hover {
       transform: none;
+    }
+    .band-spur {
+      animation: none !important;
+      transform: none !important;
+    }
+    .laufband {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+    }
+    .stimme {
+      scroll-snap-align: center;
+    }
+    .band-schalter {
+      display: none;
     }
   }
 
