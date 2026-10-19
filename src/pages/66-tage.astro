@@ -576,50 +576,19 @@ const initialen = (name: string) =>
           )
         }
 
-        {/* Drei echte Szenen statt eines Mockups. Ein Mockup zeigt, dass es ein
-            Produkt gibt, diese Bilder zeigen, was man damit tut. */}
-        <div class="einblick">
-          {
-            [
-              {
-                bild: "szene-workbook",
-                breite: 1000,
-                hoehe: 667,
-                alt: "Aufgeschlagene Workbook-Seite mit der Überschrift „Meine Tage dazwischen“ auf einem Holztisch, daneben Kaffee und ein gerahmtes Foto.",
-                text: "Die Workbook-Seite zum Impuls des Tages.",
-              },
-              {
-                bild: "szene-sprachnachricht",
-                breite: 1000,
-                hoehe: 563,
-                alt: "Ein Vater sitzt am Abend auf dem Sofa und spricht eine Sprachnachricht auf sein Telefon.",
-                text: "Ein kleiner Schritt, abends in zwei Minuten getan.",
-              },
-              {
-                bild: "szene-kalender",
-                breite: 1000,
-                hoehe: 667,
-                alt: "Ein Vater markiert gemeinsam mit seinem Sohn einen Termin im Kalender an der Wand.",
-                text: "Woraus mit der Zeit ein Ritual wird.",
-              },
-            ].map((b) => (
-              <figure class="einblick-bild">
-                <picture>
-                  <source srcset={`/assets/${b.bild}.webp`} type="image/webp" />
-                  <img
-                    src={`/assets/${b.bild}.jpg`}
-                    width={b.breite}
-                    height={b.hoehe}
-                    alt={b.alt}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </picture>
-                <figcaption>{b.text}</figcaption>
-              </figure>
-            ))
-          }
-        </div>
+        <figure class="fig fig-schmal">
+          <picture>
+            <source srcset="/assets/szene-kalender.webp" type="image/webp" />
+            <img
+              src="/assets/szene-kalender.jpg"
+              width="1000"
+              height="667"
+              alt="Ein Vater markiert gemeinsam mit seinem Sohn einen Termin im Kalender an der Wand."
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+        </figure>
       </div>
     </section>
 
@@ -1430,55 +1399,6 @@ const initialen = (name: string) =>
     margin: clamp(24px, 2.8vw, 32px) 0 0;
     max-width: 640px;
     color: var(--body);
-  }
-
-  /* Drei Szenen nebeneinander, auf dem Handy untereinander. */
-  .einblick {
-    display: grid;
-    gap: clamp(16px, 2vw, 24px);
-    margin-top: clamp(28px, 3.4vw, 44px);
-  }
-  @media (min-width: 760px) {
-    .einblick {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  .einblick-bild {
-    margin: 0;
-  }
-  /* Ein Bild ist 16:9, die anderen 3:2. Ohne einheitliches Verhaeltnis
-     stuenden die Bildunterschriften auf drei verschiedenen Hoehen. */
-  .einblick-bild img {
-    width: 100%;
-    aspect-ratio: 3 / 2;
-    object-fit: cover;
-    display: block;
-    border-radius: 3px;
-  }
-  .einblick-bild figcaption {
-    margin-top: 10px;
-    font-size: 13.5px;
-    line-height: 1.5;
-    color: var(--meta-text);
-  }
-  .player {
-    background: var(--creme);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--rost);
-    border-radius: 2px;
-    padding: clamp(20px, 2.4vw, 28px);
-  }
-  .player .label {
-    margin-bottom: 14px;
-  }
-  .player audio {
-    width: 100%;
-    display: block;
-  }
-  .player-hinweis {
-    margin: 12px 0 0;
-    font-size: 12.5px;
-    color: var(--meta-text);
   }
 
   /* ---------- 7 · Phasen ---------- */
