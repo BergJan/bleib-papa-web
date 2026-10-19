@@ -29,6 +29,10 @@ bei dem, was der Vater beeinflussen kann.
 Kein Rabatt, keine Knappheit, kein Countdown. Das Programm kostet in jeder Mail
 dasselbe.
 
+**Vor jedem Link steht, wohin er führt und was den Leser dort erwartet.** Ein
+Titel allein verrät nicht, ob dahinter ein Artikel, eine Verkaufsseite oder ein
+Download liegt, und niemand klickt auf etwas, von dem er das nicht weiß.
+
 **Anrede:** `{{ contact.VORNAME }}`, das Feld, das `optin.mjs` anlegt. In Brevo
 einen Ersatzwert hinterlegen, zum Beispiel „du".
 
@@ -102,7 +106,11 @@ Beziehung bedeuten.*
 > nicht folgen. Das ist kein Trost, sondern der Unterschied, um den es in den
 > nächsten Mails geht.
 >
-> **[Sonntagabend, wenn die Tür zufällt](https://bleibpapa.de/blog/sonntagabend/)**
+> Ich habe dazu etwas Kurzes geschrieben, zwei Minuten zu lesen: warum diese
+> Leere normal ist und woran du merkst, dass sie kippt. Nämlich dann, wenn
+> daraus Dinge entstehen, die eher dir helfen als deinem Kind.
+>
+> **[Artikel lesen: Sonntagabend, wenn die Tür zufällt](https://bleibpapa.de/blog/sonntagabend/)**
 >
 > Jan
 
@@ -136,7 +144,11 @@ Kind dich als Vater erlebt.*
 > Wichtig dabei: Es geht nicht gegen die Mutter deines Kindes und nicht gegen
 > ihr neues Leben. Es geht um die Beziehung zwischen dir und deinem Kind.
 >
-> **[Wie halte ich Konflikte mit meiner Ex von meinem Kind fern?](https://bleibpapa.de/blog/konflikte-mit-ex-vom-kind-fernhalten/)**
+> Falls dich das Thema gerade beschäftigt: Im Blog steht ausführlich, wie du
+> Paar- und Elternebene trennst. Mit dem Filter, der mir am meisten geholfen
+> hat, nämlich der Frage, welche Aufgabe dein Kind gerade von dir bekommt.
+>
+> **[Artikel lesen: Wie halte ich Konflikte mit meiner Ex von meinem Kind fern?](https://bleibpapa.de/blog/konflikte-mit-ex-vom-kind-fernhalten/)**
 >
 > Jan
 
@@ -167,7 +179,11 @@ Kind dich als Vater erlebt.*
 > neu beweist, wie wichtig es ihm ist. Es braucht einen, der interessiert,
 > präsent und verlässlich bleibt.
 >
-> **[Wie schaffe ich Alltag statt Besuchsgefühl bei Papa?](https://bleibpapa.de/blog/alltag-statt-besuchsgefuehl-bei-papa/)**
+> Woran dein Kind merkt, ob es bei dir wohnt oder zu Besuch ist, sind meist
+> Kleinigkeiten: ein Platz, der nicht jedes Mal verschwindet, eigene Sachen,
+> ganz normale Aufgaben. Darüber habe ich einen längeren Artikel geschrieben.
+>
+> **[Artikel lesen: Wie schaffe ich Alltag statt Besuchsgefühl bei Papa?](https://bleibpapa.de/blog/alltag-statt-besuchsgefuehl-bei-papa/)**
 >
 > Jan
 
@@ -203,6 +219,10 @@ Erstes Angebot.*
 >
 > 247 Euro einmalig, kein Abo, 14 Tage Geld-zurück-Garantie.
 >
+> Auf der Seite siehst du alles im Einzelnen: die sechs Phasen, das Workbook
+> mit seinen 157 Seiten, was andere Väter berichten und wie die Garantie
+> funktioniert. Kaufen kannst du dort auch, musst du aber nicht.
+>
 > **[Das 66-Tage-Programm ansehen](https://bleibpapa.de/66-tage/)**
 >
 > Jan
@@ -237,7 +257,10 @@ Erstes Angebot.*
 > Krise steckst, such dir bitte echte Hilfe. Die 66 Tage sind etwas für danach
 > oder daneben.
 >
-> **[Alle Details zum Programm](https://bleibpapa.de/66-tage/)**
+> Falls noch etwas offen ist: Auf der Programmseite stehen die häufigsten
+> Fragen samt Antworten, dazu der genaue Umfang und die Garantie.
+>
+> **[Zur Programmseite mit allen Fragen](https://bleibpapa.de/66-tage/)**
 >
 > Jan
 
@@ -264,6 +287,9 @@ Erstes Angebot.*
 > sie bewusst führt. Auf deiner Seite kann das nur einer tun.
 >
 > Die 66 Tage sind der Weg, den ich mir damals gewünscht hätte.
+>
+> Auf der Seite kannst du in Ruhe nachlesen, was dich erwartet, und dich
+> danach entscheiden.
 >
 > **[Das 66-Tage-Programm ansehen](https://bleibpapa.de/66-tage/)**
 >
