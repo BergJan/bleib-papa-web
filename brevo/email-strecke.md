@@ -319,6 +319,16 @@ siebenmal zwischen Automation und Editor zu springen.
 
 Je Mail brauchst du Betreff, Vorschautext und Text aus diesem Dokument.
 
+**Welchen Editor:** den **Einfachen Editor**, nicht Drag-and-Drop. Diese sieben
+sind Briefe, keine Newsletter, und sie wirken nur, wenn sie aussehen wie eine
+normale Mail von einem Menschen. Eine gestaltete Kampagne mit Kopfgrafik verraet
+nach zwei Sekunden, dass gleich etwas verkauft wird. Absaetze, Fettungen und
+Links kann der Einfache Editor, mehr steht in den Mails nicht drin.
+
+Willst du spaeter die Optik der Bestaetigungsmail, geht das ueber *Angepasster
+HTML-Code* mit Dateien im Stil von . Das lohnt sich aber
+erst, wenn du Zahlen zu den Texten hast.
+
 **Benenne sie mit Marke und Nummer.** Deine Vorlagenliste ist
 projektübergreifend, dort stehen auch die Mails von einstellen mit system. Ohne
 Präfix greifst du in der Auswahlliste irgendwann daneben:
