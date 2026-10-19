@@ -382,6 +382,7 @@ const initialen = (name: string) =>
     <!-- ============ 2 · SCHMERZ ============ -->
     <section class="section bg-white">
       <div class="wrap">
+        <p class="label">Woran es hakt</p>
         <h2 class="h2 measure-wide">
           Du weißt, dass du Papa bleiben willst. Aber wie sieht das jetzt im echten Alltag aus?
         </h2>
@@ -433,6 +434,7 @@ const initialen = (name: string) =>
     <!-- ============ 4 · VORHER / NACHHER ============ -->
     <section class="section bg-white">
       <div class="wrap">
+        <p class="label">Der Unterschied</p>
         <h2 class="h2 measure-wide">Was sich in 66 Tagen verändern kann</h2>
 
         <div class="wandel" role="list">
@@ -531,6 +533,7 @@ const initialen = (name: string) =>
     <!-- ============ 6 · SO FUNKTIONIERT'S ============ -->
     <section class="section bg-white" id="so-funktioniert" style="scroll-margin-top:70px">
       <div class="wrap">
+        <p class="label">So läuft es ab</p>
         <h2 class="h2 measure-wide">10 Minuten am Tag. Mehr braucht es nicht.</h2>
 
         <ol class="schritte">
@@ -586,6 +589,7 @@ const initialen = (name: string) =>
     <!-- ============ 7 · DIE 6 PHASEN ============ -->
     <section class="section bg-creme">
       <div class="wrap">
+        <p class="label">Der Weg</p>
         <h2 class="h2 measure-wide">Sechs Phasen. Ein Weg.</h2>
 
         <div class="zeitstrahl">
@@ -617,6 +621,7 @@ const initialen = (name: string) =>
       stimmen.length > 0 && (
         <section class="section bg-creme naht-oben">
           <div class="wrap">
+            <p class="label">Stimmen</p>
             <h2 class="h2 measure-wide">Was andere Väter zum 66-Tage-Programm sagen</h2>
             {/* Alle Stimmen, als Wand aus Spalten. Die Karten fließen und füllen
                 gleichmäßig, egal wie viele es sind. Ein starres Dreierraster
@@ -646,6 +651,7 @@ const initialen = (name: string) =>
     <!-- ============ 9 · ANGEBOT + GARANTIE ============ -->
     <section class="section bg-creme naht-oben" id="starten" style="scroll-margin-top:70px">
       <div class="wrap">
+        <p class="label">Das Programm</p>
         <h2 class="h2 measure-wide">Alles für deine 66 Tage</h2>
 
         <div class="angebot">
@@ -726,6 +732,7 @@ const initialen = (name: string) =>
     <!-- ============ 10 · FÜR WEN ============ -->
     <section class="section bg-white">
       <div class="wrap">
+        <p class="label">Ehrlich gesagt</p>
         <h2 class="h2 measure-wide">Für wen die 66 Tage gedacht sind</h2>
 
         <div class="fuer-wen">
@@ -784,6 +791,7 @@ const initialen = (name: string) =>
     <!-- ============ 11 · FAQ ============ -->
     <section class="section bg-creme">
       <div class="wrap">
+        <p class="label">Noch offen?</p>
         <h2 class="h2 measure-wide">Häufige Fragen</h2>
         <div class="faq">
           {
@@ -866,6 +874,51 @@ const initialen = (name: string) =>
     audio.addEventListener("ended", () => melden("hoerprobe_ende"), { once: true });
   }
 
+  /**
+   * Abschnitte blenden sich beim Scrollen auf.
+   *
+   * Die Klasse wird erst hier vergeben, nicht im Markup: Ohne JavaScript oder
+   * ohne IntersectionObserver steht alles sofort sichtbar da, statt unsichtbar
+   * zu bleiben. Wer Bewegung abbestellt hat, bekommt gar keine.
+   */
+  const ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!ruhig && "IntersectionObserver" in window) {
+    const bloecke: HTMLElement[] = [];
+
+    for (const bereich of document.querySelectorAll("main > section")) {
+      /* Der Hero blendet nicht ein: Er ist das Erste, was ein Besucher sieht,
+         und soll sofort stehen, nicht nach einer halben Sekunde. Das Laufband
+         bewegt sich ohnehin und braucht keinen zweiten Auftritt. */
+      if (bereich.classList.contains("hero")) continue;
+      if (bereich.classList.contains("band-stimmen")) continue;
+
+      const rahmen = bereich.querySelector(":scope > .wrap, :scope > .band-text");
+      const kinder = rahmen ? [...rahmen.children] : [...bereich.children];
+
+      kinder.forEach((kind, i) => {
+        const el = kind as HTMLElement;
+        el.classList.add("zeigt-sich");
+        /* Höchstens drei Stufen, sonst wirkt es wie eine Diashow. */
+        el.style.transitionDelay = `${Math.min(i, 2) * 90}ms`;
+        bloecke.push(el);
+      });
+    }
+
+    const beobachter = new IntersectionObserver(
+      (eintraege) => {
+        for (const e of eintraege) {
+          if (!e.isIntersecting) continue;
+          e.target.classList.add("ist-da");
+          beobachter.unobserve(e.target);
+        }
+      },
+      { rootMargin: "0px 0px -12% 0px", threshold: 0 },
+    );
+
+    for (const b of bloecke) beobachter.observe(b);
+  }
+
   /* ---------- Laufband anhalten ---------- */
   /* Ohne sichtbaren Knopf, aber nicht ohne Halt: Am Rechner stoppt das Band,
      sobald die Maus darüber liegt oder die Tastatur hineinspringt. Auf dem
@@ -912,6 +965,21 @@ const initialen = (name: string) =>
 </script>
 
 <style>
+  /* ---------- Auftritt beim Scrollen ---------- */
+  /* Zurückhaltend: vierzehn Pixel Weg, eine halbe Sekunde, einmalig. Mehr
+     wirkt schnell nach Effekt statt nach Wertigkeit. */
+  .zeigt-sich {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 0.55s ease,
+      transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .zeigt-sich.ist-da {
+    opacity: 1;
+    transform: none;
+  }
+
   /* ---------- 1 · Hero ---------- */
   /* Auf dem Telefon müssen Überschrift, Text und beide Buttons ohne Scrollen
      sichtbar sein. Deshalb hier engere Abstände als im Standard-Hero. */
@@ -923,6 +991,31 @@ const initialen = (name: string) =>
   }
   .hero-col .lead {
     margin-bottom: 0;
+  }
+
+  /* Warmer Lichtschein hinter dem Mockup. Gibt dem Hero Tiefe, ohne ein
+     weiteres Element einzuführen. */
+  .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -14%;
+    right: -8%;
+    width: min(760px, 68vw);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(238, 130, 54, 0.16) 0%,
+      rgba(238, 130, 54, 0.06) 42%,
+      transparent 68%
+    );
+    pointer-events: none;
   }
 
   .kopf-kauf {
@@ -1294,12 +1387,50 @@ const initialen = (name: string) =>
   }
 
   /* ---------- 7 · Phasen ---------- */
+  /* Ein echter Zeitstrahl statt einer Liste: eine durchgehende Linie und je
+     Phase ein Punkt darauf. Der Abschnitt heißt so, jetzt sieht er auch so aus. */
   .zeitstrahl {
+    position: relative;
     margin-top: clamp(22px, 2.6vw, 32px);
-    border-top: 1px solid var(--line);
+    padding-left: 26px;
+  }
+  .zeitstrahl::before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      var(--line) 0,
+      var(--line) 88%,
+      transparent 100%
+    );
   }
   .phase {
+    position: relative;
     border-bottom: 1px solid var(--line);
+  }
+  .phase::before {
+    content: "";
+    position: absolute;
+    left: -26px;
+    top: 24px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--creme);
+    border: 1px solid var(--meta);
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  /* Die offene Phase markiert, wo der Leser gerade steht. */
+  .phase[open]::before {
+    background: var(--rost);
+    border-color: var(--rost);
+    box-shadow: 0 0 0 3px rgba(196, 85, 26, 0.14);
   }
   .phase summary {
     cursor: pointer;
