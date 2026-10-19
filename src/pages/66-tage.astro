@@ -677,17 +677,21 @@ const initialen = (name: string) =>
             </picture>
           </figure>
           <figure class="wb-cover">
-            <picture>
-              <source srcset="/assets/workbook-cover.webp" type="image/webp" />
-              <img
-                src="/assets/workbook-cover.jpg"
-                width="586"
-                height="830"
-                alt="Das Cover des Workbooks: ein Vater sitzt mit seinem Sohn am Steg und schaut auf den See, darüber der Titel BLEIB PAPA."
-                loading="lazy"
-                decoding="async"
-              />
-            </picture>
+            {/* Der innere Rahmen traegt die Drehung, den Ruecken und das Licht.
+                Ohne das bleibt das Cover eine flache Flaeche. */}
+            <div class="wb-buch">
+              <picture>
+                <source srcset="/assets/workbook-cover.webp" type="image/webp" />
+                <img
+                  src="/assets/workbook-cover.jpg"
+                  width="586"
+                  height="830"
+                  alt="Das Cover des Workbooks: ein Vater sitzt mit seinem Sohn am Steg und schaut auf den See, darüber der Titel BLEIB PAPA."
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+            </div>
           </figure>
         </div>
 
@@ -703,7 +707,7 @@ const initialen = (name: string) =>
           <ul class="wb-fakten">
             <li><strong>157 Seiten</strong> im A4-Format</li>
             <li><strong>Zwei Seiten</strong> je Impuls</li>
-            <li><strong>Sechs Phasen</strong> mit eigenem Auftakt</li>
+            <li><strong>Sechs Phasen</strong>, jede mit eigener Einleitung</li>
           </ul>
         </div>
       </div>
@@ -1902,18 +1906,62 @@ const initialen = (name: string) =>
   }
   .wb-cover {
     position: absolute;
-    left: -8px;
+    left: -4px;
     bottom: 0;
-    width: 29%;
-    max-width: 180px;
+    width: 30%;
+    max-width: 186px;
+    /* Fluchtpunkt für die leichte Drehung des Hefts. */
+    perspective: 1600px;
   }
-  .wb-cover img {
+
+  /* Aus der flachen Fläche wird ein Heft: leicht gedreht, mit Rücken links,
+     einem Hauch Blockschnitt rechts und Licht von links oben. */
+  .wb-buch {
+    position: relative;
+    transform: rotateY(-15deg) rotate(-1deg);
+    transform-origin: left center;
+  }
+  .wb-buch img {
     width: 100%;
     display: block;
-    border-radius: 2px;
+    border-radius: 1px 3px 3px 1px;
     box-shadow:
-      0 1px 2px rgba(23, 39, 61, 0.12),
-      0 14px 30px rgba(23, 39, 61, 0.2);
+      0 1px 2px rgba(23, 39, 61, 0.14),
+      0 16px 34px rgba(23, 39, 61, 0.24);
+  }
+  /* Der Rücken. Dunkel, weil er im Schatten der Drehung liegt. */
+  .wb-buch::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 0.8%;
+    bottom: 0.8%;
+    width: 8px;
+    border-radius: 2px 0 0 2px;
+    background: linear-gradient(
+      90deg,
+      rgba(10, 22, 40, 0.55) 0%,
+      rgba(16, 35, 63, 0.95) 45%,
+      rgba(16, 35, 63, 1) 100%
+    );
+  }
+  /* Licht von links oben plus ein schmaler heller Streifen am offenen Rand,
+     der den Papierblock andeutet. */
+  .wb-buch::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 1px 3px 3px 1px;
+    pointer-events: none;
+    background:
+      linear-gradient(100deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 34%),
+      linear-gradient(270deg, rgba(255, 255, 255, 0.5) 0 2px, rgba(0, 0, 0, 0.12) 2px 4px, transparent 4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wb-buch {
+      transform: none;
+    }
   }
   /* Unter 560 px wird das Cover zu klein, um etwas zu zeigen, und verdeckt
      dann nur die Doppelseite. */
