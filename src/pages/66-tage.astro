@@ -1152,8 +1152,24 @@ const initialen = (name: string) =>
       font-size: 15.5px;
       line-height: 1.55;
     }
+    /* Auf dem Telefon steht das Produktbild vor dem Button.
+       display:contents loest den Textblock auf, dadurch werden Dachzeile,
+       Ueberschrift, Fliesstext, Bild und Button zu Geschwistern in einer
+       Reihe, und der Button laesst sich mit order ans Ende schieben. */
+    .hero-grid {
+      display: flex;
+      flex-direction: column;
+    }
+    .hero-col {
+      display: contents;
+    }
     .hero-visual {
-      margin-top: 26px;
+      margin-top: 18px;
+    }
+    /* 3, weil .hero-visual in global.css schon order: 2 traegt. */
+    .hero-grid :global(.kauf-cta) {
+      order: 3;
+      margin-top: 24px;
     }
   }
 
