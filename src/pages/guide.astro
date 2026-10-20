@@ -52,13 +52,16 @@ const umfang = [
               <a class="btn" href={pdf} download>21 Wege als PDF herunterladen</a>
             </p>
             {/* Mail 1 der Strecke laeuft ueber Brevos Marketing-Pool und wird von GMX
-                und web.de bei neuen Absendern haeufig einsortiert. Der Leser ist genau
-                jetzt hier, also bitten wir ihn jetzt darum, sie herauszuholen. Bewusst
-                leise gehalten, damit der Stopper darunter die Aufmerksamkeit behaelt. */}
-            <p class="small guide-hinweis">
-              Den Link bekommst du gleich auch per Mail. Falls sie nicht im Posteingang liegt,
-              schau bitte im <strong>Spam-Ordner</strong> nach und zieh sie rüber. Dann landen
-              auch die nächsten dort, wo sie hingehören.
+                und web.de bei neuen Absendern haeufig einsortiert. Deshalb steht das
+                hier als Kasten und nicht als Hilfstext: Ein Leser, der die Mail nie
+                sieht, ist dauerhaft weg, waehrend einer, der den Stopper darunter
+                uebergeht, das Programm in Mail 5 noch einmal angeboten bekommt.
+                Gestaltung bewusst wie der Kasten in brevo/doi-mail.html, damit der
+                Leser sie wiedererkennt, wenn die Mail kurz darauf ankommt. */}
+            <p class="guide-hinweis">
+              <strong>Kurz noch:</strong> Den Link bekommst du gleich auch per Mail. Falls sie
+              nicht im Posteingang liegt, schau bitte im <strong>Spam-Ordner</strong> nach und
+              zieh sie rüber. Dann landen auch die nächsten dort, wo sie hingehören.
             </p>
           </div>
 
@@ -186,7 +189,15 @@ const umfang = [
     margin-top: clamp(24px, 2.8vw, 32px);
   }
   .guide-hinweis {
-    margin-top: 12px;
+    margin-top: 18px;
+    background: #fff;
+    border-left: 3px solid var(--rost);
+    padding: 15px 18px;
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+  .guide-hinweis strong {
+    color: var(--navy);
   }
 
   /* Auf dem Telefon steht das Produktbild vor dem Download-Knopf, so wie im
