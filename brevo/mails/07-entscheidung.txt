@@ -1,0 +1,38 @@
+MAIL 7 · versendet an Tag 9
+
+=== BETREFF ===
+Du musst dich nicht heute entscheiden
+
+=== VORSCHAUTEXT ===
+Eine Frage zum Schluss.
+
+=== TEXT · ab hier bis zur nächsten Linie kopieren ===
+
+Hallo {{ contact.VORNAME }},
+
+das ist meine letzte Mail zu den 66 Tagen. Danach schreibe ich dir nur noch, wenn es etwas Neues zu lesen gibt.
+
+Eine Frage zum Schluss, und die meine ich ernst: Wo willst du in einem Jahr stehen, was die Beziehung zu deinem Kind angeht?
+
+Wenn die Antwort lautet „ungefähr da, wo ich jetzt bin, und das ist in Ordnung", dann ist das eine gute Antwort. Dann brauchst du kein Programm.
+
+Wenn sie anders lautet, passiert das nicht von selbst. Eine Vater-Kind- Beziehung verändert sich nach einer Trennung in die Richtung, in die jemand sie bewusst führt. Auf deiner Seite kann das nur einer tun.
+
+Die 66 Tage sind der Weg, den ich mir damals gewünscht hätte.
+
+Auf der Seite kannst du in Ruhe nachlesen, was dich erwartet, und dich danach entscheiden.
+
+Das 66-Tage-Programm ansehen
+
+Jan
+
+PS: Die 14 Tage Geld-zurück-Garantie gelten weiterhin. Du kannst also anfangen und wieder aussteigen, falls es nicht passt.
+
+=== ENDE TEXT ===
+
+=== LINKS, in Brevo von Hand setzen ===
+„Das 66-Tage-Programm ansehen"
+   https://bleibpapa.de/66-tage/
+
+=== FETT SETZEN ===
+• Das 66-Tage-Programm ansehen

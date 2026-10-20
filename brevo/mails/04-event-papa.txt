@@ -1,0 +1,34 @@
+MAIL 4 · versendet an Tag 3
+
+=== BETREFF ===
+Dein Kind braucht keinen Event-Papa
+
+=== VORSCHAUTEXT ===
+Weniger Programm, mehr Alltag.
+
+=== TEXT · ab hier bis zur nächsten Linie kopieren ===
+
+Hallo {{ contact.VORNAME }},
+
+der häufigste Fehler nach einer Trennung ist gut gemeint: Man versucht, fehlende Zeit durch besondere Zeit auszugleichen. Freizeitpark, Kino, jedes Wochenende ein Höhepunkt.
+
+Ich habe das ein halbes Jahr lang gemacht. Was ich dabei gelernt habe: Mein Sohn hat sich an keines dieser Wochenenden besonders erinnert. Er hat sich daran erinnert, dass wir samstags zusammen eingekauft und dabei immer dieselbe Packung Kekse mitgenommen haben.
+
+Kinder messen Nähe nicht an Erlebnissen. Sie messen sie an Wiederholung.
+
+Das Unangenehme daran: Du kannst verlorene Zeit nicht zurückkaufen. Das Gute: Du musst es auch nicht. Dein Kind braucht keinen Papa, der jedes Wochenende neu beweist, wie wichtig es ihm ist. Es braucht einen, der interessiert, präsent und verlässlich bleibt.
+
+Woran dein Kind merkt, ob es bei dir wohnt oder zu Besuch ist, sind meist Kleinigkeiten: ein Platz, der nicht jedes Mal verschwindet, eigene Sachen, ganz normale Aufgaben. Darüber habe ich einen längeren Artikel geschrieben.
+
+Artikel lesen: Wie schaffe ich Alltag statt Besuchsgefühl bei Papa?
+
+Jan
+
+=== ENDE TEXT ===
+
+=== LINKS, in Brevo von Hand setzen ===
+„Artikel lesen: Wie schaffe ich Alltag statt Besuchsgefühl bei Papa?"
+   https://bleibpapa.de/blog/alltag-statt-besuchsgefuehl-bei-papa/
+
+=== FETT SETZEN ===
+• Artikel lesen: Wie schaffe ich Alltag statt Besuchsgefühl bei Papa?

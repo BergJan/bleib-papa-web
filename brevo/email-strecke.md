@@ -1,6 +1,6 @@
 # E-Mail-Strecke nach dem Leadmagneten
 
-Sieben Mails über vierzehn Tage, vom Guide zum 66-Tage-Programm.
+Sieben Mails über neun Tage, vom Guide zum 66-Tage-Programm.
 Stand: 19.10.2026
 
 Die Strecke beginnt **nach** der Bestätigung. Die Bestätigungsmail selbst liegt
@@ -43,25 +43,34 @@ einen Ersatzwert hinterlegen, zum Beispiel „du".
 | # | Tag | Betreff | Kernbotschaft |
 |---|-----|---------|---------------|
 | 1 | 0 | Hier sind deine 21 Wege | — (Lieferung) |
-| 2 | 2 | Der Satz, den kaum ein Vater ausspricht | 1 · Weniger Zeit ≠ weniger Beziehung |
-| 3 | 4 | Was du nicht beeinflussen kannst, und was doch | 2 · Dein Einfluss |
-| 4 | 6 | Dein Kind braucht keinen Event-Papa | 3 · Kein Kompensationsdruck |
-| 5 | 8 | Zwölf Tage zwischen zwei Wochenenden | 4 · Selbstverständlich dazugehören |
-| 6 | 11 | Drei Sätze, die ich oft höre | Einwände |
-| 7 | 14 | Du musst dich nicht heute entscheiden | Entscheidung |
+| 2 | 1 | Der Satz, den kaum ein Vater ausspricht | 1 · Weniger Zeit ≠ weniger Beziehung |
+| 3 | 2 | Was du nicht beeinflussen kannst, und was doch | 2 · Dein Einfluss |
+| 4 | 3 | Dein Kind braucht keinen Event-Papa | 3 · Kein Kompensationsdruck |
+| 5 | 4 | Zwölf Tage zwischen zwei Wochenenden | 4 · Selbstverständlich dazugehören |
+| 6 | 6 | Drei Sätze, die ich oft höre | Einwände |
+| 7 | 9 | Du musst dich nicht heute entscheiden | Entscheidung |
 
-Mail 1 geht sofort raus. Danach Wartezeiten von 2, 2, 2, 2, 3 und 3 Tagen.
+Mail 1 geht sofort raus. Danach Wartezeiten von 1, 1, 1, 1, 2 und 3 Tagen.
+
+**Warum die erste Woche täglich läuft.** Der Leser hat sich gerade etwas zu
+seinem Thema heruntergeladen, das Interesse ist in diesem Moment am größten
+und nicht in zehn Tagen. Bei zwei Tagen Abstand hätte er erst an Tag 8 vom
+Programm gehört, und bis dahin ist der Anlass verblasst. Deshalb kommen die
+vier inhaltlichen Mails an vier aufeinanderfolgenden Tagen, das Angebot steht
+an Tag 4. Erst danach wird der Takt ruhiger, weil ab dort nichts Neues mehr
+dazukommt und tägliches Nachfassen nur noch drängen würde.
 
 ---
 
 ## Mail 1 · Tag 0
 
 **Betreff:** Hier sind deine 21 Wege
-**Vorschautext:** Damit du den Link jederzeit wiederfindest.
+**Vorschautext:** Damit du den Link wiederfindest.
 
 > Hallo {{ contact.VORNAME }},
 >
-> hier ist dein Guide, damit du ihn nicht in der Bestätigungsmail suchen musst:
+> hier ist dein Guide noch einmal als Link. Dann hast du ihn im Postfach, auch
+> wenn der Tab von vorhin längst zu ist:
 >
 > **[21 Wege als PDF herunterladen](https://bleibpapa.de/downloads/21-wege-bleib-papa.pdf)**
 >
@@ -69,21 +78,24 @@ Mail 1 geht sofort raus. Danach Wartezeiten von 2, 2, 2, 2, 3 und 3 Tagen.
 > drei Ideen aus, die zu euch passen. Nicht mehr. Einundzwanzig Dinge
 > gleichzeitig zu ändern funktioniert bei niemandem, und es muss auch nicht.
 >
-> In den nächsten zwei Wochen schreibe ich dir ein paar Mal. Es geht um die
-> Fragen, die bleiben, wenn die ersten Wochen nach der Trennung vorbei sind.
+> In den nächsten Tagen schreibe ich dir noch ein paar Mal. Jede Mail nimmt sich
+> eine Frage vor, die ich von getrennten Vätern immer wieder höre. Warum weniger
+> Zeit nicht weniger Beziehung heißt. Was du beeinflussen kannst und was nicht.
+> Und was in den Tagen passiert, an denen ihr euch gar nicht seht.
+>
 > Wenn dir das zu viel wird, trägst du dich unten mit einem Klick aus.
 >
 > Jan
 
 ---
 
-## Mail 2 · Tag 2
+## Mail 2 · Tag 1
 
 *Kernbotschaft 1: Weniger gemeinsame Zeit muss nicht automatisch weniger
 Beziehung bedeuten.*
 
 **Betreff:** Der Satz, den kaum ein Vater ausspricht
-**Vorschautext:** Es geht nicht darum, das Kind seltener zu sehen.
+**Vorschautext:** Ich habe ihn jahrelang gedacht.
 
 > Hallo {{ contact.VORNAME }},
 >
@@ -116,7 +128,7 @@ Beziehung bedeuten.*
 
 ---
 
-## Mail 3 · Tag 4
+## Mail 3 · Tag 2
 
 *Kernbotschaft 2: Du kannst nicht alles beeinflussen, aber sehr wohl, wie dein
 Kind dich als Vater erlebt.*
@@ -154,12 +166,12 @@ Kind dich als Vater erlebt.*
 
 ---
 
-## Mail 4 · Tag 6
+## Mail 4 · Tag 3
 
 *Kernbotschaft 3: Dein Kind braucht keinen Event-Papa.*
 
 **Betreff:** Dein Kind braucht keinen Event-Papa
-**Vorschautext:** Warum das beste Wochenende nicht das vollste ist.
+**Vorschautext:** Weniger Programm, mehr Alltag.
 
 > Hallo {{ contact.VORNAME }},
 >
@@ -189,13 +201,13 @@ Kind dich als Vater erlebt.*
 
 ---
 
-## Mail 5 · Tag 8
+## Mail 5 · Tag 4
 
 *Kernbotschaft 4: Papa soll selbstverständlich zum Leben des Kindes gehören.
 Erstes Angebot.*
 
 **Betreff:** Zwölf Tage zwischen zwei Wochenenden
-**Vorschautext:** Was in der Zeit passiert, in der ihr euch nicht seht.
+**Vorschautext:** Was zwischen den Treffen passiert.
 
 > Hallo {{ contact.VORNAME }},
 >
@@ -229,7 +241,7 @@ Erstes Angebot.*
 
 ---
 
-## Mail 6 · Tag 11
+## Mail 6 · Tag 6
 
 *Die drei Einwände aus dem Botschaften Playbook, Antworten nah am Original.*
 
@@ -267,7 +279,7 @@ Erstes Angebot.*
 
 ---
 
-## Mail 7 · Tag 14
+## Mail 7 · Tag 9
 
 **Betreff:** Du musst dich nicht heute entscheiden
 **Vorschautext:** Eine Frage zum Schluss.
@@ -317,37 +329,93 @@ siebenmal zwischen Automation und Editor zu springen.
 
 ### Schritt 1: Die sieben Mails anlegen
 
-Je Mail brauchst du Betreff, Vorschautext und Text aus diesem Dokument.
+Die Texte liegen fertig in `brevo/mails/`, eine Datei je Mail. Darin stehen
+Betreff, Vorschautext, der Text zum Kopieren und darunter die Linkziele und die
+Fettstellen.
 
-**Welchen Editor:** den **Einfachen Editor**, nicht Drag-and-Drop. Diese sieben
-sind Briefe, keine Newsletter, und sie wirken nur, wenn sie aussehen wie eine
-normale Mail von einem Menschen. Eine gestaltete Kampagne mit Kopfgrafik verrät
-nach zwei Sekunden, dass gleich etwas verkauft wird. Absätze, Fettungen und
-Links kann der Einfache Editor, mehr steht in den Mails nicht drin.
+**Welchen Editor:** den **Rich-Text-Editor**, in manchen Brevo-Versionen
+„Einfacher Editor" genannt. Nicht Drag-and-Drop. Diese sieben sind Briefe, keine
+Newsletter, und sie wirken nur, wenn sie aussehen wie eine normale Mail von einem
+Menschen. Eine gestaltete Kampagne mit Kopfgrafik verrät nach zwei Sekunden, dass
+gleich etwas verkauft wird. Absätze, Fettungen und Links kann der Rich-Text-Editor,
+mehr steht in den Mails nicht drin.
 
 Willst du später die Optik der Bestätigungsmail, geht das über *Angepasster
 HTML-Code* mit Dateien im Stil von brevo/doi-mail.html. Das lohnt sich aber
 erst, wenn du Zahlen zu den Texten hast.
 
-**Benenne sie mit Marke und Nummer.** Deine Vorlagenliste ist
-projektübergreifend, dort stehen auch die Mails von einstellen mit system. Ohne
-Präfix greifst du in der Auswahlliste irgendwann daneben:
+#### Einmal vorab
+
+Lege den Absender fest, den du bei allen sieben nimmst: denselben wie bei der
+Bestätigungsmail. Ein anderer Absender erhöht die Wahrscheinlichkeit, im Spam zu
+landen.
+
+#### Je Mail, siebenmal identisch
+
+Beispiel ist Mail 1, Datei `brevo/mails/01-guide.txt`.
+
+1. Im linken Menü **Marketing** aufklappen und auf **Templates** klicken. Der
+   Punkt heißt Templates, nicht Vorlagen, und liegt unter Statistiken.
+2. Oben rechts den schwarzen Knopf zum Anlegen, an derselben Stelle wie
+   *Kampagne erstellen* auf der Kampagnenseite.
+3. Im Schritt **Einstellungen** vier Felder füllen:
+   - **Template-Name:** `BLEIB PAPA – Mail 1 · Guide`. Den sieht nur du.
+   - **Betreff:** aus der Datei, Abschnitt `=== BETREFF ===`.
+   - **Vorschautext:** aus der Datei, Abschnitt `=== VORSCHAUTEXT ===`.
+   - **Absender und Antwort-an:** der festgelegte Absender. Bei Antwort-an deine
+     eigene Adresse, sonst gehen Antworten ins Leere. Es werden welche kommen.
+4. Auf **Weiter** und als Editor **Rich-Text-Editor** wählen.
+5. Im Editor den vorhandenen Beispieltext mit `Strg+A` markieren und löschen.
+6. Die Textdatei öffnen, den Block zwischen `=== TEXT ===` und `=== ENDE TEXT ===`
+   markieren, `Strg+C`.
+7. In den Editor klicken und mit **`Strg+Shift+V`** einfügen, also ohne
+   Formatierung. Danach prüfen, ob zwischen den Absätzen je eine Leerzeile steht.
+8. **Fett setzen:** die Stellen aus `=== FETT SETZEN ===` markieren, `Strg+B`.
+9. **Link setzen:** die im Abschnitt `=== LINKS ===` genannten Worte markieren,
+   `Strg+K`, die dort stehende Adresse einfügen, bestätigen.
+10. **Anrede prüfen:** `{{ contact.VORNAME }}` muss genau so dastehen, mit den
+    Leerzeichen innerhalb der Klammern. Sicherer als Tippen ist der Knopf
+    **Personalisieren** im Editor, dort *Kontaktattribut → VORNAME*. Das
+    Attribut existiert, `optin.mjs` schreibt es bei jeder Anmeldung, und ohne
+    Vornamen kommt niemand durchs Formular. Ein Standardwert ist also nicht nötig.
+11. **Speichern und beenden.**
+12. **Das Template aktivieren.** In der Template-Liste gibt es je Zeile einen
+    Schalter. Steht er auf inaktiv, erscheint das Template in der Automation
+    nicht zur Auswahl, und du suchst es später vergeblich.
+
+Dann dasselbe mit `02-der-satz.txt` bis `07-entscheidung.txt`.
+
+#### Die Namen
+
+Deine Template-Liste ist projektübergreifend, dort stehen auch die Mails von
+einstellen mit system. Ohne Präfix greifst du in der Auswahlliste irgendwann
+daneben:
 
 ```
-BLEIB PAPA – Strecke 1 · Guide
-BLEIB PAPA – Strecke 2 · Der Satz
-BLEIB PAPA – Strecke 3 · Einfluss
-BLEIB PAPA – Strecke 4 · Event-Papa
-BLEIB PAPA – Strecke 5 · Zwölf Tage
-BLEIB PAPA – Strecke 6 · Einwände
-BLEIB PAPA – Strecke 7 · Entscheidung
+BLEIB PAPA – Mail 1 · Guide
+BLEIB PAPA – Mail 2 · Der Satz
+BLEIB PAPA – Mail 3 · Einfluss
+BLEIB PAPA – Mail 4 · Event-Papa
+BLEIB PAPA – Mail 5 · Zwölf Tage
+BLEIB PAPA – Mail 6 · Einwände
+BLEIB PAPA – Mail 7 · Entscheidung
 ```
 
-**Absender:** bei allen sieben derselbe wie bei der Bestätigungsmail. Ein
-anderer Absender erhöht die Wahrscheinlichkeit, im Spam zu landen.
+#### Nach dem ersten Template einmal kontrollieren
 
-**Abmeldelink:** Brevo hängt ihn automatisch an. Prüfe nach der ersten Mail
-einmal in der Vorschau, ob er wirklich auftaucht.
+Schick dir aus der Template-Liste über **Eine Testmail senden** Mail 1 an deine
+eigene Adresse und sieh im Postfach nach:
+
+- Steht in der Anrede dein Vorname oder ein leeres Feld?
+- Führt der Link auf das PDF?
+- Ist der Abmeldelink unten vorhanden? Brevo hängt ihn automatisch an, aber
+  gesehen haben ist besser als angenommen.
+
+Passt das, laufen die anderen sechs genauso durch.
+
+Prüfe vorher oben rechts, in welchem Konto du bist. Dort steht der
+Kontoumschalter, in deinem Fall *Einstellen mit Sy…*. BLEIB PAPA und einstellen
+mit system teilen sich dieses Konto, deshalb das Präfix in den Namen.
 
 ### Schritt 2: Die Automation bauen
 
@@ -356,8 +424,16 @@ einmal in der Vorschau, ob er wirklich auftaucht.
    `BREVO_LIST_ID`. Die Bestätigung ist zu diesem Zeitpunkt schon erfolgt, denn
    `optin.mjs` nutzt den Double-Opt-in-Endpunkt von Brevo.
 3. **Schritte:** „Eine E-Mail senden" mit Mail 1, dann abwechselnd „Warten" und
-   „Eine E-Mail senden" mit den Abständen 2, 2, 2, 2, 3, 3 Tagen und den Mails 2
+   „Eine E-Mail senden" mit den Abständen 1, 1, 1, 1, 2, 3 Tagen und den Mails 2
    bis 7.
+
+   **Wichtig: Der Sendeschritt bietet die Templates nicht direkt an.** Die
+   Automation legt je Schritt eine eigene Automations-Nachricht an, und das
+   Template ist nur deren Ausgangspunkt. Deshalb im Abschnitt *Inhalt* auf
+   **Nachricht hinzufügen**, dann **Neue Nachricht erstellen**, und erst dort
+   erscheint die Auswahl mit den sieben Templates. Danach unten auf *Dieses
+   Design in der Automation verwenden*. Inhalt und Einstellungen werden aus dem
+   Template übernommen, nur der interne Titel nicht.
 4. **Versandzeit:** Bei den Wartenschritten morgens zustellen, falls Brevo das
    anbietet. Diese Mails werden früh gelesen, nicht abends.
 5. **Vor dem Aktivieren:** Über **Testen** oben rechts einmal durchlaufen lassen

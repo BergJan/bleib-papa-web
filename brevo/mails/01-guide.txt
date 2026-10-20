@@ -1,0 +1,32 @@
+MAIL 1 · versendet an Tag 0
+
+=== BETREFF ===
+Hier sind deine 21 Wege
+
+=== VORSCHAUTEXT ===
+Damit du den Link wiederfindest.
+
+=== TEXT · ab hier bis zur nächsten Linie kopieren ===
+
+Hallo {{ contact.VORNAME }},
+
+hier ist dein Guide noch einmal als Link. Dann hast du ihn im Postfach, auch wenn der Tab von vorhin längst zu ist:
+
+21 Wege als PDF herunterladen
+
+Ein Hinweis, bevor du anfängst: Lies ihn einmal durch und such dir zwei oder drei Ideen aus, die zu euch passen. Nicht mehr. Einundzwanzig Dinge gleichzeitig zu ändern funktioniert bei niemandem, und es muss auch nicht.
+
+In den nächsten Tagen schreibe ich dir noch ein paar Mal. Jede Mail nimmt sich eine Frage vor, die ich von getrennten Vätern immer wieder höre. Warum weniger Zeit nicht weniger Beziehung heißt. Was du beeinflussen kannst und was nicht. Und was in den Tagen passiert, an denen ihr euch gar nicht seht.
+
+Wenn dir das zu viel wird, trägst du dich unten mit einem Klick aus.
+
+Jan
+
+=== ENDE TEXT ===
+
+=== LINKS, in Brevo von Hand setzen ===
+„21 Wege als PDF herunterladen"
+   https://bleibpapa.de/downloads/21-wege-bleib-papa.pdf
+
+=== FETT SETZEN ===
+• 21 Wege als PDF herunterladen

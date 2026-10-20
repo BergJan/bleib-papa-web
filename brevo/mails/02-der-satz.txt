@@ -1,0 +1,39 @@
+MAIL 2 · versendet an Tag 1
+
+=== BETREFF ===
+Der Satz, den kaum ein Vater ausspricht
+
+=== VORSCHAUTEXT ===
+Ich habe ihn jahrelang gedacht.
+
+=== TEXT · ab hier bis zur nächsten Linie kopieren ===
+
+Hallo {{ contact.VORNAME }},
+
+wenn getrennte Väter erzählen, was ihnen am meisten zusetzt, sagen die wenigsten „ich sehe mein Kind zu selten". Das ist nur die Oberfläche.
+
+Darunter liegt ein Satz, den kaum jemand laut ausspricht:
+
+Was, wenn aus weniger gemeinsamer Zeit langsam weniger Beziehung wird?
+
+Und noch eine Stufe tiefer die Angst, irgendwann nur noch Besucher im Leben des eigenen Kindes zu sein. Nicht mehr der selbstverständliche Papa, sondern der Vater, den man alle paar Tage sieht.
+
+Ich schreibe dir das nicht, um dir Angst zu machen. Ich schreibe es, weil diese Angst oft lange da ist, bevor tatsächlich etwas verloren gegangen ist. Und weil sie etwas Gutes bedeutet: Sie zeigt, wie wichtig dir dein Kind ist.
+
+Weniger gemeinsamer Alltag ist eine Tatsache. Weniger Beziehung muss daraus nicht folgen. Das ist kein Trost, sondern der Unterschied, um den es in den nächsten Mails geht.
+
+Ich habe dazu etwas Kurzes geschrieben, zwei Minuten zu lesen: warum diese Leere normal ist und woran du merkst, dass sie kippt. Nämlich dann, wenn daraus Dinge entstehen, die eher dir helfen als deinem Kind.
+
+Artikel lesen: Sonntagabend, wenn die Tür zufällt
+
+Jan
+
+=== ENDE TEXT ===
+
+=== LINKS, in Brevo von Hand setzen ===
+„Artikel lesen: Sonntagabend, wenn die Tür zufällt"
+   https://bleibpapa.de/blog/sonntagabend/
+
+=== FETT SETZEN ===
+• Was, wenn aus weniger gemeinsamer Zeit langsam weniger Beziehung wird?
+• Artikel lesen: Sonntagabend, wenn die Tür zufällt

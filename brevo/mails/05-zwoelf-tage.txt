@@ -1,0 +1,37 @@
+MAIL 5 · versendet an Tag 4
+
+=== BETREFF ===
+Zwölf Tage zwischen zwei Wochenenden
+
+=== VORSCHAUTEXT ===
+Was zwischen den Treffen passiert.
+
+=== TEXT · ab hier bis zur nächsten Linie kopieren ===
+
+Hallo {{ contact.VORNAME }},
+
+rechne es einmal nach. Wer sein Kind jedes zweite Wochenende sieht, hat zwischen zwei Treffen zwölf Tage, an denen nichts stattfindet. Über das Jahr sind das mehr als dreihundert.
+
+In diesen Tagen entscheidet sich, ob du ein selbstverständlicher Teil vom Leben deines Kindes bist oder jemand, der alle zwei Wochen wieder auftaucht.
+
+Die meisten Väter versuchen, die Lücke mit Kontakt zu füllen: anrufen, schreiben, nachfragen, wie der Tag war. Und wundern sich über einsilbige Antworten. Der Unterschied liegt nicht in der Menge, sondern darin, ob dein Kind weiß, wann du dich meldest. Ein fester Anruf am Mittwochabend, jede Woche zur gleichen Zeit, trägt mehr als fünf spontane Nachrichten.
+
+Genau darum geht es in Phase 2 der 66 Tage, dem Programm, aus dem auch die 21 Wege stammen. Jeden Tag ein Audio-Impuls von etwa zehn Minuten und eine Seite im Workbook. Sechs Phasen, von deiner Vaterrolle über die Tage dazwischen bis zu der Frage, was zwischen euch in fünf Jahren sein soll.
+
+247 Euro einmalig, kein Abo, 14 Tage Geld-zurück-Garantie.
+
+Auf der Seite siehst du alles im Einzelnen: die sechs Phasen, das Workbook mit seinen 157 Seiten, was andere Väter berichten und wie die Garantie funktioniert. Kaufen kannst du dort auch, musst du aber nicht.
+
+Das 66-Tage-Programm ansehen
+
+Jan
+
+=== ENDE TEXT ===
+
+=== LINKS, in Brevo von Hand setzen ===
+„Das 66-Tage-Programm ansehen"
+   https://bleibpapa.de/66-tage/
+
+=== FETT SETZEN ===
+• 66 Tage
+• Das 66-Tage-Programm ansehen

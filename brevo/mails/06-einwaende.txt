@@ -1,0 +1,37 @@
+MAIL 6 · versendet an Tag 6
+
+=== BETREFF ===
+Drei Sätze, die ich oft höre
+
+=== VORSCHAUTEXT ===
+Und was ich darauf antworte.
+
+=== TEXT · ab hier bis zur nächsten Linie kopieren ===
+
+Hallo {{ contact.VORNAME }},
+
+drei Dinge kommen fast immer, wenn ich Vätern von den 66 Tagen erzähle.
+
+„Ich sehe mein Kind so selten, was soll ich da groß verändern können?" Die Anzahl eurer gemeinsamen Tage kannst du oft nicht bestimmen. Wie präsent, interessiert und verlässlich dein Kind dich erlebt, in dieser Zeit und dazwischen, sehr wohl.
+
+„Bei uns hängt sowieso alles davon ab, wie die Mutter mitspielt." Ihr Verhalten kannst du nicht kontrollieren. Deshalb setzt das Programm dort an, wo dein eigener Einfluss anfängt, und das ist mehr, als es sich gerade anfühlt.
+
+„Ich will keine Therapie und keinen Trennungsratgeber." Genau das ist es nicht. Es geht um Orientierung für eure Beziehung, um Präsenz, Haltung und Kommunikation als Vater. Nicht um Therapie, nicht um Recht, nicht um die Aufarbeitung jedes Konflikts. Wenn du gerade in einer akuten Krise steckst, gehört das in andere Hände, etwa zu einer Erziehungsberatungsstelle, einem Therapeuten oder der Telefonseelsorge. Die 66 Tage sind etwas für danach oder daneben.
+
+Falls noch etwas offen ist: Auf der Programmseite stehen die häufigsten Fragen samt Antworten, dazu der genaue Umfang und die Garantie.
+
+Zur Programmseite mit allen Fragen
+
+Jan
+
+=== ENDE TEXT ===
+
+=== LINKS, in Brevo von Hand setzen ===
+„Zur Programmseite mit allen Fragen"
+   https://bleibpapa.de/66-tage/
+
+=== FETT SETZEN ===
+• „Ich sehe mein Kind so selten, was soll ich da groß verändern können?"
+• „Bei uns hängt sowieso alles davon ab, wie die Mutter mitspielt."
+• „Ich will keine Therapie und keinen Trennungsratgeber."
+• Zur Programmseite mit allen Fragen

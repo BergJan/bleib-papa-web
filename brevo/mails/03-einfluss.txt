@@ -1,0 +1,37 @@
+MAIL 3 · versendet an Tag 2
+
+=== BETREFF ===
+Was du nicht beeinflussen kannst, und was doch
+
+=== VORSCHAUTEXT ===
+Die Trennlinie, die alles verändert.
+
+=== TEXT · ab hier bis zur nächsten Linie kopieren ===
+
+Hallo {{ contact.VORNAME }},
+
+es gibt nach einer Trennung eine Menge, das nicht in deiner Hand liegt. Wie oft ihr euch seht. Was im anderen Zuhause passiert. Wie Absprachen laufen. Ob jemand weiter wegzieht.
+
+Diese Liste zu lesen macht ohnmächtig, und ich will sie dir nicht schönreden. Sie stimmt.
+
+Daneben steht aber eine zweite Liste, über die viel seltener gesprochen wird: wie dein Kind dich erlebt, wenn du da bist. Und ob es sich zwischen euren Tagen auf dich verlassen kann. Dazu braucht es niemandes Zustimmung.
+
+Mir hat es geholfen, das einmal sauber zu trennen. Alles, was in die erste Liste gehört, kostet Energie und bringt selten etwas. Alles aus der zweiten wirkt, und zwar sofort.
+
+Wichtig dabei: Es geht nicht gegen die Mutter deines Kindes und nicht gegen ihr neues Leben. Es geht um die Beziehung zwischen dir und deinem Kind.
+
+Falls dich das Thema gerade beschäftigt: Im Blog steht ausführlich, wie du Paar- und Elternebene trennst. Mit dem Filter, der mir am meisten geholfen hat, nämlich der Frage, welche Aufgabe dein Kind gerade von dir bekommt.
+
+Artikel lesen: Wie halte ich Konflikte mit meiner Ex von meinem Kind fern?
+
+Jan
+
+=== ENDE TEXT ===
+
+=== LINKS, in Brevo von Hand setzen ===
+„Artikel lesen: Wie halte ich Konflikte mit meiner Ex von meinem Kind fern?"
+   https://bleibpapa.de/blog/konflikte-mit-ex-vom-kind-fernhalten/
+
+=== FETT SETZEN ===
+• wie dein Kind dich erlebt, wenn du da bist. Und ob es sich zwischen euren Tagen auf dich verlassen kann.
+• Artikel lesen: Wie halte ich Konflikte mit meiner Ex von meinem Kind fern?
